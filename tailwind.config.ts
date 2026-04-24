@@ -8,9 +8,36 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "system-ui"],
+        mono: ["ui-monospace", "monospace"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#0a0a0f",
+        foreground: "#f8fafc",
+        card: {
+          DEFAULT: "#111118",
+          alt: "#151520",
+          hover: "rgba(255,255,255,0.05)",
+        },
+        primary: {
+          DEFAULT: "#f59e0b",
+          foreground: "#0a0a0f",
+        },
+        secondary: "#a78bfa",
+        accent: "#22d3ee",
+      },
+      borderRadius: {
+        DEFAULT: "1rem",
+      },
+      boxShadow: {
+        soft: "0 8px 30px -12px rgba(0, 0, 0, 0.75)",
+        "soft-glow":
+          "0 0 36px -10px rgba(245, 158, 11, 0.35), 0 0 60px -24px rgba(34, 211, 238, 0.12)",
+      },
+      transitionDuration: {
+        DEFAULT: "200ms",
       },
     },
   },
