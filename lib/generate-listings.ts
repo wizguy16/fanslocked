@@ -1,5 +1,7 @@
 import type { Listing } from "@/types/listing";
 import { CATEGORIES } from "@/lib/categories";
+import { buildAffiliateRedirectUrl } from "@/lib/affiliate-url";
+import { buildCuratedFreeTubeListings } from "@/lib/curated-free-tubes";
 
 const LISTINGS_PER_CATEGORY = 25;
 
@@ -194,13 +196,6 @@ function logoFor(seed: number) {
   return `https://images.unsplash.com/${id}?w=160&q=80&fit=crop`;
 }
 
-function affiliateUrl(slug: string) {
-  const base =
-    process.env.NEXT_PUBLIC_AFFILIATE_BASE?.replace(/\/$/, "") ??
-    "https://fanslocked.example/out";
-  return `${base}?site=${encodeURIComponent(slug)}`;
-}
-
 function websiteUrl(slug: string) {
   return `https://www.${slug.replace(/[^a-z0-9-]/gi, "")}.example`;
 }
@@ -242,7 +237,7 @@ function buildReview(
 function tagsFor(rand: () => number, categorySlug: string): string[] {
   const base = ["hd", "streaming", "verified", "editor-pick", "ai"];
   const extras: Record<string, string[]> = {
-    "free-tubes": ["free", "trending", "ads"],
+    "free-tube": ["free", "trending", "ads"],
     "premium-porn": ["premium", "4k", "exclusive"],
     "live-cams": ["live", "tokens", "interactive"],
     vr: ["vr", "immersive", "headset"],
@@ -268,6 +263,12 @@ export function generateAllListings(): Listing[] {
   const out: Listing[] = [];
   let global = 0;
   for (const cat of CATEGORIES) {
+    if (cat.slug === "free-tube") {
+      const curated = buildCuratedFreeTubeListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
     for (let i = 0; i < LISTINGS_PER_CATEGORY; i++) {
       global += 1;
       const seed = global * 977 + i * 131 + cat.slug.length * 17;
@@ -294,7 +295,7 @@ export function generateAllListings(): Listing[] {
         cons,
         image: imageFor(seed),
         logo: logoFor(seed + 3),
-        affiliate_url: affiliateUrl(slug),
+        affiliate_url: buildAffiliateRedirectUrl(slug),
         website_url: websiteUrl(slug),
         rating,
         added_date: addedDate(seed),

@@ -1,28 +1,59 @@
 "use client";
 
+/**
+ * FEATURED ROW (HORIZONTAL SCROLL RAIL)
+ * ----------------------------------------
+ * Displays the top picks in a horizontal scroll layout.
+ *
+ * Behavior:
+ * - Drag scroll (desktop + mobile)
+ * - Snap scrolling
+ * - Edge fade gradients
+ * - 3 cards visible + partial 4th (desktop)
+ */
+
 import type { Listing } from "@/types/listing";
-import { Reveal } from "@/components/motion/reveal";
 import { FlCardFeatured } from "@/components/fanslocked-home/fl-card-featured";
+import { useDragScroll } from "@/components/home/use-drag-scroll";
 
 type Props = {
   items: Listing[];
 };
 
 export function FlFeaturedRow({ items }: Props) {
-  const slice = items.slice(0, 4);
-  if (slice.length === 0) return null;
+  const { ref: dragRef, dragScrollProps } =
+    useDragScroll<HTMLDivElement>();
+
+  if (items.length === 0) return null;
+
   return (
-    <section aria-label="Featured picks" className="px-6">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="flex gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {slice.map((l, i) => (
-            <Reveal
+    <section aria-label="Featured picks" className="relative px-6">
+      <div className="relative mx-auto max-w-[1600px]">
+
+        {/* ----------------------------------------
+            LEFT FADE (visual polish)
+        ---------------------------------------- */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-10 bg-gradient-to-r from-[#0A0B10] to-transparent" />
+
+        {/* ----------------------------------------
+            RIGHT FADE
+        ---------------------------------------- */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-10 bg-gradient-to-l from-[#0A0B10] to-transparent" />
+
+        {/* ----------------------------------------
+            SCROLL CONTAINER
+        ---------------------------------------- */}
+        <div
+          ref={dragRef}
+          {...dragScrollProps}
+          className="scroll-momentum flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing"
+        >
+          {items.map((l, i) => (
+            <FlCardFeatured
               key={l.id}
-              delay={Math.min(i * 0.05, 0.2)}
-              className="shrink-0"
-            >
-              <FlCardFeatured listing={l} showTopBadge={i === 0} />
-            </Reveal>
+              listing={l}
+              rank={i + 1}
+            />
           ))}
         </div>
       </div>

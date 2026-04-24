@@ -1,64 +1,82 @@
 "use client";
 
+/**
+ * FEATURED CARD — horizontal top-picks rail.
+ * Whole card opens the affiliate destination; “Enter →” is label-only on hover (lg+).
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { cn, clampTagline } from "@/lib/utils";
-import { IconFlameBadge, IconStarTiny } from "@/components/icons/mini-icons";
+import { IconStarTiny } from "@/components/icons/mini-icons";
 import type { Listing } from "@/types/listing";
 
 type Props = {
   listing: Listing;
-  showTopBadge?: boolean;
+  rank: number;
 };
 
-export function FlCardFeatured({ listing, showTopBadge }: Props) {
+export function FlCardFeatured({ listing, rank }: Props) {
   return (
     <Link
       href={listing.affiliate_url}
       target="_blank"
       rel="sponsored noopener noreferrer"
+      aria-label={`${listing.name}, rank ${rank}. Opens partner site.`}
       className={cn(
-        "group relative flex min-h-[140px] max-h-[160px] w-[min(100%,300px)] shrink-0 flex-col overflow-hidden rounded-xl border border-[rgba(255,255,255,0.04)] bg-[#161922] p-4 outline-none transition-all duration-200 ease-out",
-        "hover:-translate-y-0.5 hover:border-[rgba(255,255,255,0.08)] hover:bg-[#1a1d28]",
-        "focus-visible:ring-2 focus-visible:ring-[#FF7A00]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B10]",
+        "group relative flex h-[132px] w-[85%] shrink-0 snap-start items-center gap-4 overflow-hidden rounded-[16px] border border-[rgba(255,255,255,0.06)] bg-[var(--bg-card)] px-5 py-4 no-underline outline-none",
+        "sm:w-[calc((100%-1rem)/2.2)] lg:w-[calc((100%-2rem)/3.2)]",
+        "shadow-[0_2px_18px_-6px_rgba(0,0,0,0.45)]",
+        "transition-[transform,box-shadow,border-color] duration-200 ease-out",
+        "hover:-translate-y-0.5 hover:border-[rgba(255,122,0,0.45)]",
+        "hover:shadow-[0_0_28px_-14px_rgba(255,122,0,0.1)]",
+        "focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
       )}
     >
-      {showTopBadge ? (
-        <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-md bg-[#11131A] px-2 py-0.5 text-[10px] font-semibold text-[#A0A6B1] ring-1 ring-[rgba(255,255,255,0.04)]">
-          <IconFlameBadge />
-          Top
+      <span
+        className="w-10 shrink-0 text-left text-[18px] font-bold tabular-nums leading-none text-[var(--accent-primary)]"
+        aria-hidden
+      >
+        #{rank}
+      </span>
+
+      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)]">
+        <Image
+          src={listing.logo}
+          alt=""
+          fill
+          className="object-cover"
+          sizes="56px"
+        />
+      </div>
+
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-center gap-1 pr-14 sm:pr-16">
+        <span className="truncate text-[18px] font-semibold leading-tight text-[var(--text-primary)]">
+          {listing.name}
         </span>
-      ) : null}
-      <div className="mt-5 flex flex-1 gap-3">
-        <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-[#11131A] ring-1 ring-[rgba(255,255,255,0.04)]">
-          <Image
-            src={listing.logo}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="44px"
-          />
-        </div>
-        <div className="flex min-w-0 flex-1 flex-col justify-between gap-1">
-          <div>
-            <p className="truncate text-sm font-semibold text-white">
-              {listing.name}
-            </p>
-            <p className="mt-1 line-clamp-2 text-xs leading-snug text-[#A0A6B1]">
-              {clampTagline(listing.description, 72)}
-            </p>
-          </div>
-          <div className="flex items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1 text-xs text-[#6B7280]">
-              <IconStarTiny className="text-[#6B7280]" />
-              {listing.rating.toFixed(1)}
-            </span>
-            <span className="text-xs font-medium text-[#FF7A00] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-              Visit →
-            </span>
-          </div>
+        <p className="line-clamp-2 text-[13px] leading-snug text-[var(--text-secondary)]">
+          {clampTagline(listing.description, 120)}
+        </p>
+        <div className="inline-flex min-w-0 items-center gap-1 text-[13px] text-[#A0A6B1]">
+          <IconStarTiny className="h-3 w-3 shrink-0 text-[#A0A6B1]" />
+          <span className="tabular-nums">{listing.rating.toFixed(1)}</span>
         </div>
       </div>
+
+      <span
+        aria-hidden
+        className={cn(
+          "absolute bottom-3.5 right-4 inline-flex items-center gap-1.5 text-sm font-medium tabular-nums tracking-tight transition-[opacity,color] duration-200 ease-out",
+          "text-[#C49A72] group-hover:text-[#D4AA84]",
+          "opacity-100",
+          "lg:opacity-0 lg:group-hover:opacity-100",
+        )}
+      >
+        Enter
+        <span className="translate-y-px text-[0.95em] font-normal leading-none opacity-90">
+          →
+        </span>
+      </span>
     </Link>
   );
 }

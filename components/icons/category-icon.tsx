@@ -40,7 +40,7 @@ type Icon = ComponentType<LucideProps>;
 const ICONS: Record<string, Icon> = {
   "best-overall": Crown,
   "premium-porn": Gem,
-  "free-tubes": Unlock,
+  "free-tube": Unlock,
   "hd-4k": Monitor,
   vr: Glasses,
   "live-cams": Webcam,

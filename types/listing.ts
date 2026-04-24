@@ -19,6 +19,8 @@ export type Listing = {
   rating: number;
   added_date: string;
   popularity_score: number;
+  /** When set, overrides pseudo-random badge chips on dense cards. */
+  badge?: string;
 };
 
 export type QuickFilterId = "all" | "free" | "trending" | "premium" | "new";

@@ -53,7 +53,7 @@ export function FlDenseGrid({ items, eager = false }: Props) {
   return (
     <section aria-label="All listings" className="px-6">
       <div className="mx-auto max-w-[1600px]">
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-7 2xl:grid-cols-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {shown.map((l, i) => (
             <Reveal
               key={l.id}

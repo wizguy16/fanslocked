@@ -10,7 +10,7 @@ import { SpinToPick } from "@/components/home/spin-to-pick";
 /** Homepage discovery verticals — high-intent mix, capped for performance. */
 const HOME_CATEGORY_SLUGS = [
   "live-cams",
-  "free-tubes",
+  "free-tube",
   "premium-porn",
   "vr",
   "best-overall",

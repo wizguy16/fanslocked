@@ -10,7 +10,8 @@ import type { CategoryDef } from "@/lib/categories";
 import type { Listing } from "@/types/listing";
 import { cn, clampTagline } from "@/lib/utils";
 import { CategoryIcon } from "@/components/icons/category-icon";
-import { IconStarTiny } from "@/components/icons/mini-icons";
+import { IconStarTiny, VisualBadgeIcon } from "@/components/icons/mini-icons";
+import { resolveVisualBadge } from "@/lib/visual-badge";
 
 type SortId = "rating" | "newest" | "popular";
 type FilterId = "free" | "premium" | "live" | "ai";
@@ -59,16 +60,25 @@ function matchesSearch(l: Listing, q: string): boolean {
 }
 
 function CompactListingCard({ listing }: { listing: Listing }) {
+  const vb = listing.badge
+    ? resolveVisualBadge(listing.id, 0, listing.badge)
+    : null;
   return (
     <Link
       href={`/site/${listing.slug}`}
       className={cn(
         "group relative flex min-h-[72px] flex-col overflow-hidden rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#11131A] p-2 transition-all duration-200 ease-out",
-        "hover:z-10 hover:-translate-y-0.5 hover:border-[rgba(255,122,0,0.28)] hover:bg-[#151820] hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.65)]",
+        "hover:z-10 hover:-translate-y-0.5 hover:border-[rgba(255,122,0,0.35)] hover:bg-[#151820] hover:shadow-[0_0_22px_-8px_rgba(255,122,0,0.42),0_8px_24px_-12px_rgba(0,0,0,0.65)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7A00]/40",
       )}
     >
-      <div className="flex gap-2">
+      {vb ? (
+        <span className="pointer-events-none absolute right-1.5 top-1.5 flex max-w-[46%] items-center gap-0.5 text-[9px] font-semibold text-[#6B7280]">
+          <VisualBadgeIcon kind={vb.kind} className="h-2.5 w-2.5 shrink-0" />
+          <span className="truncate">{vb.label}</span>
+        </span>
+      ) : null}
+      <div className={cn("flex gap-2", vb ? "pr-10" : undefined)}>
         <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-md bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.05)]">
           <Image
             src={listing.logo}
@@ -95,16 +105,25 @@ function CompactListingCard({ listing }: { listing: Listing }) {
         className="pointer-events-none absolute bottom-1.5 right-1.5 text-[10px] font-semibold text-[#FF7A00] opacity-0 transition-opacity group-hover:opacity-100"
         aria-hidden
       >
-        View
+        Visit →
       </span>
     </Link>
   );
 }
 
 function TopPickCard({ listing }: { listing: Listing }) {
+  const vb = listing.badge
+    ? resolveVisualBadge(listing.id, 0, listing.badge)
+    : null;
   return (
-    <div className="flex min-h-[100px] flex-col rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#12151c] p-3 transition hover:border-[rgba(255,122,0,0.25)]">
-      <div className="flex flex-1 gap-3">
+    <div className="relative flex min-h-[100px] flex-col rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#12151c] p-3 transition hover:border-[rgba(255,122,0,0.25)]">
+      {vb ? (
+        <span className="pointer-events-none absolute right-2 top-2 flex items-center gap-0.5 text-[9px] font-semibold text-[#6B7280]">
+          <VisualBadgeIcon kind={vb.kind} className="h-2.5 w-2.5" />
+          {vb.label}
+        </span>
+      ) : null}
+      <div className={cn("flex flex-1 gap-3", vb ? "pr-12" : undefined)}>
         <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.06)]">
           <Image
             src={listing.logo}
@@ -136,7 +155,7 @@ function TopPickCard({ listing }: { listing: Listing }) {
               className="rounded-lg bg-[#FF7A00] px-2.5 py-1 text-[11px] font-bold text-black transition hover:brightness-110"
               onClick={(e) => e.stopPropagation()}
             >
-              Visit
+              Visit →
             </a>
           </div>
         </div>

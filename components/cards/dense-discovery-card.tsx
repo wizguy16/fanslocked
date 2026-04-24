@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCallback, useRef } from "react";
 import { cn, clampTagline } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
-import { pickVisualBadge } from "@/lib/visual-badge";
+import { resolveVisualBadge } from "@/lib/visual-badge";
 import { VisualBadgeIcon } from "@/components/icons/mini-icons";
 
 export function DenseDiscoveryCard({
@@ -18,7 +18,7 @@ export function DenseDiscoveryCard({
   highlight?: boolean;
 }) {
   const el = useRef<HTMLDivElement>(null);
-  const vb = pickVisualBadge(listing.id, index);
+  const vb = resolveVisualBadge(listing.id, index, listing.badge);
 
   const onMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const node = el.current;
@@ -43,7 +43,7 @@ export function DenseDiscoveryCard({
       onMouseLeave={onLeave}
       className={cn(
         "group relative flex h-[92px] max-h-[100px] min-h-[80px] flex-row gap-2 overflow-hidden rounded-lg border border-white/[0.08] bg-[#12131a] p-3 transition-[border-color,box-shadow,background-color] duration-200",
-        "hover:border-[#FF7A00]/40 hover:bg-[#171821] hover:shadow-[0_0_0_1px_rgba(255,122,0,0.1)]",
+        "hover:border-[#FF7A00]/45 hover:bg-[#171821] hover:shadow-[0_0_28px_-8px_rgba(255,122,0,0.45),0_0_0_1px_rgba(255,122,0,0.12)]",
         highlight &&
           "ring-2 ring-[#FF7A00]/70 ring-offset-2 ring-offset-[#0A0B10]",
       )}

@@ -14,6 +14,8 @@ import { SectionHeader } from "@/components/ui/section-header";
 const STRIP = CATEGORIES.slice(0, 14);
 const SCROLL_OFFSET = 118;
 const DENSE_PREVIEW = 28;
+/** Horizontal top-picks rail — dense grid starts after this. */
+const FEATURED_RAIL_COUNT = 12;
 
 function leadSubtitle(description: string): string {
   const t = description.trim();
@@ -57,8 +59,11 @@ export function FanslockedHomePage() {
         slug: c.slug,
         label: c.label,
         meta,
-        featured: filtered.slice(0, 4),
-        dense: filtered.slice(4, 4 + DENSE_PREVIEW),
+        featured: filtered.slice(0, FEATURED_RAIL_COUNT),
+        dense: filtered.slice(
+          FEATURED_RAIL_COUNT,
+          FEATURED_RAIL_COUNT + DENSE_PREVIEW,
+        ),
         empty: filtered.length === 0,
       };
     });

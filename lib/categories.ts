@@ -19,10 +19,10 @@ export const CATEGORIES: CategoryDef[] = [
       "Subscription studios with licensed scenes, downloads where available, and fewer ads.",
   },
   {
-    slug: "free-tubes",
-    label: "Free Porn Tubes",
+    slug: "free-tube",
+    label: "Free Porn Tube Sites",
     description:
-      "High-traffic tubes with massive libraries — great for sampling before you upgrade.",
+      "High-traffic free tubes with huge libraries — top-of-funnel traffic you can route toward premium, cams, or AI offers.",
   },
   {
     slug: "hd-4k",
