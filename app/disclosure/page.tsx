@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Affiliate disclosure",
-  description: "FTC-compliant affiliate disclosure for The Porn Dude 2.0.",
+  description: "FTC-compliant affiliate disclosure for FansLocked.",
   alternates: { canonical: "/disclosure" },
 };
 
@@ -15,7 +15,7 @@ export default function DisclosurePage() {
         </h1>
         <p className="text-slate-400">Last updated: April 23, 2026</p>
         <p>
-          The Porn Dude 2.0 earns commissions from some outbound links when you
+          FansLocked earns commissions from some outbound links when you
           sign up, purchase, or take qualifying actions on partner sites. Those
           links are marked with{" "}
           <code className="rounded bg-white/10 px-1 py-0.5 text-xs">

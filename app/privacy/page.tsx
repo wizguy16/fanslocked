@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
-  description: "How The Porn Dude 2.0 handles analytics, cookies, and data.",
+  description: "How FansLocked handles analytics, cookies, and data.",
   alternates: { canonical: "/privacy" },
 };
 

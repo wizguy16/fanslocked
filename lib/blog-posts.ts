@@ -15,7 +15,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Practical habits for payments, privacy, and malware avoidance when you follow outbound directory links.",
     body: [
       "Adult destinations vary wildly in how they handle billing, data retention, and third-party scripts. Before you subscribe, confirm the domain in your address bar matches the brand you intended to visit, and prefer credit cards with virtual numbers or privacy-focused wallets where available.",
-      "Use a modern browser with strict tracking protection, keep extensions minimal, and avoid downloading unknown players or “codec packs.” If a site pushes unexpected downloads, close the tab and return to a trusted editorial source like The Porn Dude 2.0 for an alternative pick.",
+      "Use a modern browser with strict tracking protection, keep extensions minimal, and avoid downloading unknown players or “codec packs.” If a site pushes unexpected downloads, close the tab and return to a trusted editorial source like FansLocked for an alternative pick.",
       "Finally, understand that affiliate links help fund our testing but never change our star ratings. If something feels off — surprise charges, missing invoices, or aggressive upsells — dispute through your bank and tell us so we can re-test the listing.",
     ],
   },

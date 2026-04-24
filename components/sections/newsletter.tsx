@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 export function Newsletter() {
@@ -28,65 +26,77 @@ export function Newsletter() {
   }
 
   return (
-    <Reveal>
-      <section
-        className="border-y border-white/5 bg-gradient-to-r from-amber-500/10 via-transparent to-cyan-500/10 px-3 py-10 sm:px-4 md:px-6"
-        aria-labelledby="newsletter-heading"
-      >
-        <div className="mx-auto flex max-w-3xl flex-col gap-4 text-center">
-          <h2
-            id="newsletter-heading"
-            className="font-display text-xl font-bold text-white sm:text-2xl"
-          >
-            Deals & weekly picks
-          </h2>
-          <p className="text-sm text-slate-400">
-            One short email with editor-tested highlights and limited-time
-            partner offers. Unsubscribe anytime.
-          </p>
-          <form
-            onSubmit={onSubmit}
-            className="mx-auto flex w-full max-w-md flex-col gap-2 sm:flex-row"
-          >
-            <label htmlFor="nl-email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="nl-email"
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              placeholder="you@domain.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="min-w-0 flex-1 rounded-2xl border border-white/10 bg-[#0a0a0f]/80 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/40"
-            />
-            <motion.button
-              type="submit"
-              disabled={status === "loading"}
-              whileTap={{ scale: 0.98 }}
-              className={cn(
-                "rounded-2xl px-5 py-3 text-sm font-semibold text-black transition",
-                "bg-gradient-to-r from-amber-500 to-amber-600 shadow-[0_0_24px_-8px_rgba(245,158,11,0.55)]",
-                "disabled:opacity-60",
-              )}
+    <section
+      className="relative w-full overflow-hidden border-t border-[rgba(255,255,255,0.05)]"
+      aria-labelledby="newsletter-heading"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#0B0A10_0%,#08070E_45%,#07060C_100%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-screen bg-[radial-gradient(ellipse_55%_45%_at_15%_50%,rgba(124,58,237,0.12),transparent_60%),radial-gradient(ellipse_50%_40%_at_88%_55%,rgba(255,122,0,0.07),transparent_58%)]"
+        aria-hidden
+      />
+      <div className="relative mx-auto w-full max-w-[900px] px-6 py-12">
+        <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12 lg:gap-14">
+          <div className="text-left">
+            <h2
+              id="newsletter-heading"
+              className="text-balance text-2xl font-semibold tracking-tight text-white md:text-[1.65rem] md:leading-snug"
             >
-              {status === "loading" ? "Joining…" : "Subscribe"}
-            </motion.button>
-          </form>
-          {status === "ok" ? (
-            <p className="text-xs text-emerald-400" role="status">
-              You are on the list. Watch your inbox.
+              Exclusive Drops & Weekly Picks
+            </h2>
+            <p className="mt-3 max-w-[38ch] text-pretty text-sm leading-relaxed text-[#A0A6B1] md:text-[15px] md:leading-7">
+              Get the best platforms, private deals, and trending picks before
+              everyone else.
             </p>
-          ) : null}
-          {status === "err" ? (
-            <p className="text-xs text-rose-400" role="alert">
-              Something went wrong. Please try again shortly.
-            </p>
-          ) : null}
+          </div>
+
+          <div>
+            <form onSubmit={onSubmit} className="space-y-2.5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                <label htmlFor="nl-email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="nl-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="Enter your email…"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="min-h-12 min-w-0 flex-1 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#11131A] px-4 text-sm text-white placeholder:text-[#5C6370] focus:border-[rgba(255,122,0,0.35)] focus:outline-none focus:ring-2 focus:ring-[rgba(255,122,0,0.15)]"
+                />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className={cn(
+                    "h-12 shrink-0 rounded-xl bg-[#FF7A00] px-6 text-sm font-semibold text-black transition hover:brightness-110 active:scale-[0.99] disabled:opacity-60 sm:px-8",
+                  )}
+                >
+                  {status === "loading" ? "…" : "Get Access"}
+                </button>
+              </div>
+              <p className="text-[11px] leading-relaxed text-[#6B7280]">
+                No spam. Only top picks. Unsubscribe anytime.
+              </p>
+              {status === "ok" ? (
+                <p className="text-xs text-emerald-500/90" role="status">
+                  You&apos;re on the list. Check your inbox soon.
+                </p>
+              ) : null}
+              {status === "err" ? (
+                <p className="text-xs text-rose-500/90" role="alert">
+                  Something went wrong. Please try again.
+                </p>
+              ) : null}
+            </form>
+          </div>
         </div>
-      </section>
-    </Reveal>
+      </div>
+    </section>
   );
 }

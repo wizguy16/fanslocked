@@ -10,8 +10,9 @@ import {
 import { getSiteUrl } from "@/lib/site";
 import { Badge } from "@/components/ui/badge";
 import { AffiliateLink } from "@/components/ui/affiliate-link";
-import { StarRating } from "@/components/ui/star-rating";
-import { CompactCard } from "@/components/cards/compact-card";
+import { clampTagline } from "@/lib/utils";
+import { DenseDiscoveryCard } from "@/components/cards/dense-discovery-card";
+import { IconStarTiny } from "@/components/icons/mini-icons";
 
 type Props = { params: { slug: string } };
 
@@ -24,13 +25,13 @@ export function generateMetadata({ params }: Props): Metadata {
   if (!listing) return { title: "Listing" };
   return {
     title: `${listing.name} review`,
-    description: listing.description,
+    description: clampTagline(listing.description, 40),
     alternates: {
       canonical: `/site/${listing.slug}`,
     },
     openGraph: {
-      title: `${listing.name} · The Porn Dude 2.0`,
-      description: listing.description,
+      title: `${listing.name} · FansLocked`,
+      description: clampTagline(listing.description, 40),
     },
   };
 }
@@ -46,7 +47,7 @@ function ReviewJsonLd({
     "@type": "Review",
     author: {
       "@type": "Organization",
-      name: "The Porn Dude 2.0",
+      name: "FansLocked",
       url: base,
     },
     itemReviewed: {
@@ -74,152 +75,142 @@ function ReviewJsonLd({
 export default function SitePage({ params }: Props) {
   const listing = getListingBySlug(params.slug);
   if (!listing) notFound();
-  const similar = getSimilar(listing, 6);
+  const similar = getSimilar(listing, 12);
 
   return (
     <>
       <ReviewJsonLd listing={listing} />
-      <article className="px-3 py-8 sm:px-4 md:px-6">
-        <div className="mx-auto max-w-4xl">
+      <article className="px-3 py-3 sm:px-4 md:px-6">
+        <div className="mx-auto max-w-3xl">
           <Link
             href="/"
-            className="text-xs font-medium text-slate-400 transition hover:text-amber-400"
+            className="text-[10px] font-medium text-slate-500 hover:text-amber-400"
           >
-            ← Back to directory
+            ← Directory
           </Link>
-          <div className="mt-4 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-[0_32px_80px_-48px_rgba(0,0,0,0.95)] backdrop-blur-2xl">
-            <div className="relative aspect-[21/9] w-full">
-              <Image
-                src={listing.image}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 896px) 100vw, 896px"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/35 to-transparent" />
-            </div>
-            <div className="flex flex-col gap-5 p-4 sm:flex-row sm:items-start sm:gap-6 sm:p-7">
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+
+          <div className="mt-2 overflow-hidden rounded-lg border border-white/10 bg-white/[0.02] p-2">
+            <div className="flex gap-2">
+              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded bg-white/5">
                 <Image
                   src={listing.logo}
                   alt=""
                   fill
                   className="object-cover"
-                  sizes="64px"
+                  sizes="40px"
                 />
               </div>
-              <div className="min-w-0 flex-1 space-y-4">
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-                  <div>
-                    <h1 className="font-display text-2xl font-bold text-white sm:text-3xl">
-                      {listing.name}
-                    </h1>
-                    <div className="mt-2 flex flex-wrap items-center gap-2">
-                      <Badge tone="secondary">{listing.categoryLabel}</Badge>
-                      <span className="text-xs text-slate-500">
-                        Updated {listing.added_date} · Popularity{" "}
-                        {listing.popularity_score}/100
-                      </span>
-                    </div>
-                  </div>
-                  <StarRating value={listing.rating} />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <h1 className="text-sm font-bold leading-tight text-white sm:text-base">
+                    {listing.name}
+                  </h1>
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-amber-400">
+                    <IconStarTiny className="h-2.5 w-2.5 text-amber-400" />
+                    {listing.rating.toFixed(1)}
+                  </span>
+                  <Badge tone="secondary" className="px-1 py-0 text-[8px]">
+                    {listing.categoryLabel}
+                  </Badge>
                 </div>
-                <p className="text-sm leading-relaxed text-slate-300">
-                  {listing.description}
+                <p className="mt-0.5 text-[10px] leading-snug text-slate-500">
+                  {clampTagline(listing.description, 40)}
                 </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {listing.tags.map((t) => (
-                    <Badge key={t} tone="neutral">
+                <div className="mt-1.5 flex flex-wrap gap-1">
+                  {listing.tags.slice(0, 3).map((t) => (
+                    <span
+                      key={t}
+                      className="rounded bg-white/10 px-1 py-px text-[8px] font-medium uppercase tracking-wide text-slate-400"
+                    >
                       {t}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-2 pt-1">
-                  <AffiliateLink href={listing.affiliate_url}>
-                    Visit site (affiliate)
+                <div className="mt-2 flex flex-wrap gap-1">
+                  <AffiliateLink
+                    href={listing.affiliate_url}
+                    className="px-2 py-1 text-[10px]"
+                  >
+                    Visit (affiliate)
                   </AffiliateLink>
                   <a
                     href={listing.website_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-medium text-slate-100 transition hover:border-cyan-400/40 hover:text-white"
+                    className="inline-flex items-center rounded-2xl border border-white/10 px-2 py-1 text-[10px] font-medium text-slate-200 hover:border-cyan-400/40"
                   >
-                    Official homepage
+                    Official
                   </a>
                   <Link
                     href={`/categories/${listing.categorySlug}`}
-                    className="inline-flex items-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-amber-500/35 hover:text-white"
+                    className="inline-flex items-center rounded-2xl border border-white/10 px-2 py-1 text-[10px] text-slate-300 hover:border-amber-500/35"
                   >
-                    More in category
+                    Category
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="border-t border-white/10 px-4 py-6 sm:px-7">
-              <h2 className="font-display text-lg font-semibold text-white">
-                Editorial review
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                {listing.review}
-              </p>
-              <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-                <table className="w-full text-left text-sm">
-                  <caption className="border-b border-white/10 bg-white/[0.03] px-4 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-400">
-                    Pros &amp; cons
-                  </caption>
-                  <thead>
-                    <tr className="border-b border-white/5 text-xs font-semibold uppercase tracking-wide text-slate-400">
-                      <th scope="col" className="w-1/2 px-4 py-3 text-emerald-400/95">
-                        Pros
-                      </th>
-                      <th scope="col" className="w-1/2 px-4 py-3 text-rose-400/95">
-                        Cons
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="align-top">
-                      <td className="border-r border-white/5 bg-white/[0.02] px-4 py-4">
-                        <ul className="list-disc space-y-2 pl-4 text-slate-300">
-                          {listing.pros.map((pro) => (
-                            <li key={pro}>{pro}</li>
-                          ))}
-                        </ul>
-                      </td>
-                      <td className="px-4 py-4">
-                        <ul className="list-disc space-y-2 pl-4 text-slate-300">
-                          {listing.cons.map((con) => (
-                            <li key={con}>{con}</li>
-                          ))}
-                        </ul>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p className="mt-4 text-xs text-slate-500">
-                Affiliate links are labeled as sponsored. The official homepage
-                link above is provided for transparency and is not necessarily
-                monetized.
-              </p>
+          </div>
+
+          <div className="mt-3 rounded-lg border border-white/10 p-2">
+            <h2 className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+              Review
+            </h2>
+            <p className="mt-1 text-xs leading-relaxed text-slate-400">
+              {listing.review}
+            </p>
+            <div className="mt-2 overflow-hidden rounded-md border border-white/10 text-xs">
+              <table className="w-full text-left">
+                <caption className="border-b border-white/5 bg-white/[0.02] px-2 py-1 text-left text-[9px] font-semibold uppercase tracking-wide text-slate-500">
+                  Pros &amp; cons
+                </caption>
+                <thead>
+                  <tr className="border-b border-white/5 text-[9px] font-semibold uppercase text-slate-500">
+                    <th scope="col" className="w-1/2 px-2 py-1.5 text-emerald-400/95">
+                      Pros
+                    </th>
+                    <th scope="col" className="w-1/2 px-2 py-1.5 text-rose-400/95">
+                      Cons
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="align-top">
+                    <td className="border-r border-white/5 bg-white/[0.02] px-2 py-2">
+                      <ul className="list-disc space-y-0.5 pl-3 text-[11px] text-slate-400">
+                        {listing.pros.map((pro) => (
+                          <li key={pro}>{pro}</li>
+                        ))}
+                      </ul>
+                    </td>
+                    <td className="px-2 py-2">
+                      <ul className="list-disc space-y-0.5 pl-3 text-[11px] text-slate-400">
+                        {listing.cons.map((con) => (
+                          <li key={con}>{con}</li>
+                        ))}
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+            <p className="mt-1.5 text-[9px] text-slate-600">
+              Affiliate links use{" "}
+              <code className="rounded bg-white/5 px-0.5">rel=sponsored</code>.
+            </p>
           </div>
 
           {similar.length > 0 ? (
-            <section className="mt-10" aria-labelledby="similar-heading">
+            <section className="mt-3" aria-labelledby="similar-heading">
               <h2
                 id="similar-heading"
-                className="font-display text-lg font-bold text-white"
+                className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500"
               >
-                You might also like
+                Similar
               </h2>
-              <p className="mt-1 text-sm text-slate-400">
-                Similar high-rated picks in {listing.categoryLabel}.
-              </p>
-              <div className="mt-4 grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3 lg:grid-cols-6">
-                {similar.map((l) => (
-                  <CompactCard key={l.id} listing={l} />
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {similar.map((l, i) => (
+                  <DenseDiscoveryCard key={l.id} listing={l} index={i} />
                 ))}
               </div>
             </section>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of use",
-  description: "Terms for using The Porn Dude 2.0 directory website.",
+  description: "Terms for using the FansLocked directory website.",
   alternates: { canonical: "/terms" },
 };
 
@@ -15,7 +15,7 @@ export default function TermsPage() {
         </h1>
         <p className="text-slate-400">Last updated: April 23, 2026</p>
         <p>
-          By using The Porn Dude 2.0 you confirm you are at least 18 years old (or
+          By using FansLocked you confirm you are at least 18 years old (or
           the age of majority where you live) and legally permitted to view
           adult-oriented directories.
         </p>

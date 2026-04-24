@@ -5,7 +5,7 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Long-form guides on safety, VR trends, and how affiliate disclosures work at The Porn Dude 2.0.",
+    "Long-form guides on safety, VR trends, and how affiliate disclosures work at FansLocked.",
   alternates: { canonical: "/blog" },
 };
 

@@ -14,7 +14,7 @@ const config: Config = {
         mono: ["ui-monospace", "monospace"],
       },
       colors: {
-        background: "#0a0a0f",
+        background: "#0A0B10",
         foreground: "#f8fafc",
         card: {
           DEFAULT: "#111118",
@@ -22,8 +22,8 @@ const config: Config = {
           hover: "rgba(255,255,255,0.05)",
         },
         primary: {
-          DEFAULT: "#f59e0b",
-          foreground: "#0a0a0f",
+          DEFAULT: "#FF7A00",
+          foreground: "#0A0B10",
         },
         secondary: "#a78bfa",
         accent: "#22d3ee",

@@ -1,5 +1,8 @@
 import type { Listing } from "@/types/listing";
-import { DenseCard } from "@/components/cards/dense-card";
+import { DenseDiscoveryCard } from "@/components/cards/dense-discovery-card";
+
+const GRID =
+  "grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-10";
 
 export function DenseGrid({
   title,
@@ -9,16 +12,16 @@ export function DenseGrid({
   items: Listing[];
 }) {
   return (
-    <section className="px-3 py-6 sm:px-4 md:px-6">
-      <div className="mx-auto max-w-7xl">
+    <section className="px-3 py-2 sm:px-4 md:px-6">
+      <div className="mx-auto max-w-[1600px]">
         {title ? (
-          <h2 className="mb-3 text-base font-bold text-white sm:text-lg">
+          <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
             {title}
           </h2>
         ) : null}
-        <div className="grid grid-cols-2 gap-2 sm:gap-2.5 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
-          {items.map((l) => (
-            <DenseCard key={l.id} listing={l} />
+        <div className={GRID}>
+          {items.map((l, i) => (
+            <DenseDiscoveryCard key={l.id} listing={l} index={i} />
           ))}
         </div>
       </div>

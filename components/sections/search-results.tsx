@@ -1,5 +1,8 @@
 import type { Listing } from "@/types/listing";
-import { CompactCard } from "@/components/cards/compact-card";
+import { DenseDiscoveryCard } from "@/components/cards/dense-discovery-card";
+
+const GRID =
+  "grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-10";
 
 export function SearchResults({
   subtitle,
@@ -11,16 +14,18 @@ export function SearchResults({
   items: Listing[];
 }) {
   return (
-    <section className="px-3 py-6 sm:px-4 md:px-6">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-4">
-          <h2 className="text-lg font-bold text-white sm:text-xl">Results</h2>
-          <p className="text-xs text-slate-400 sm:text-sm">{subtitle}</p>
+    <section className="px-3 py-2 sm:px-4 md:px-6">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="mb-2">
+          <h2 className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+            Results
+          </h2>
+          <p className="text-[10px] text-slate-500 sm:text-xs">{subtitle}</p>
         </div>
         {count > 0 ? (
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4 lg:grid-cols-6">
-            {items.map((l) => (
-              <CompactCard key={l.id} listing={l} />
+          <div className={GRID}>
+            {items.map((l, i) => (
+              <DenseDiscoveryCard key={l.id} listing={l} index={i} />
             ))}
           </div>
         ) : null}

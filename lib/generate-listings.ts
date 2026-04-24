@@ -197,7 +197,7 @@ function logoFor(seed: number) {
 function affiliateUrl(slug: string) {
   const base =
     process.env.NEXT_PUBLIC_AFFILIATE_BASE?.replace(/\/$/, "") ??
-    "https://theporndude2.example/out";
+    "https://fanslocked.example/out";
   return `${base}?site=${encodeURIComponent(slug)}`;
 }
 
@@ -240,7 +240,7 @@ function buildReview(
 }
 
 function tagsFor(rand: () => number, categorySlug: string): string[] {
-  const base = ["hd", "streaming", "verified", "editor-pick"];
+  const base = ["hd", "streaming", "verified", "editor-pick", "ai"];
   const extras: Record<string, string[]> = {
     "free-tubes": ["free", "trending", "ads"],
     "premium-porn": ["premium", "4k", "exclusive"],

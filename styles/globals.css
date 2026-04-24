@@ -3,13 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0f;
+  --background: #0a0b10;
   --foreground: #f8fafc;
   --card: #111118;
   --card-alt: #151520;
-  --primary: #f59e0b;
+  --primary: #ff7a00;
   --secondary: #a78bfa;
   --accent: #22d3ee;
+  --text-primary: #f8fafc;
+  --text-secondary: #a0a6b1;
+  --accent-primary: #ff7a00;
 }
 
 html {
@@ -22,6 +25,11 @@ body {
   min-height: 100vh;
 }
 
+.scroll-momentum,
+.scroll-touch {
+  -webkit-overflow-scrolling: touch;
+}
+
 ::selection {
   background: rgba(245, 158, 11, 0.35);
   color: #fff;
@@ -30,6 +38,81 @@ body {
 @layer components {
   .transition-default {
     @apply transition-all duration-200 ease-out;
+  }
+
+  /** Category strip pills: icon + label, gap-2, vertical center */
+  .category-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.06)] px-4 py-2 text-sm font-medium transition-colors duration-200;
+    color: var(--text-secondary);
+  }
+
+  .category-pill svg {
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: color 200ms ease-out;
+  }
+
+  .category-pill:hover:not([aria-selected="true"]):not([aria-current="page"]) {
+    color: var(--text-primary);
+  }
+
+  .category-pill:hover:not([aria-selected="true"]):not([aria-current="page"]) svg {
+    color: var(--text-primary);
+  }
+
+  .category-pill[aria-selected="true"],
+  .category-pill[aria-current="page"] {
+    @apply border-[rgba(255,122,0,0.22)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)];
+    background: rgba(255, 122, 0, 0.12);
+    color: var(--accent-primary);
+  }
+
+  .category-pill[aria-selected="true"] svg,
+  .category-pill[aria-current="page"] svg {
+    color: var(--accent-primary);
+  }
+
+  .category-pill[aria-selected="true"]:hover,
+  .category-pill[aria-selected="true"]:hover svg,
+  .category-pill[aria-current="page"]:hover,
+  .category-pill[aria-current="page"]:hover svg {
+    color: var(--accent-primary);
+  }
+
+  /** Horizontal category rail: smooth scroll, hidden scrollbar */
+  .category-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.5rem;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .category-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /** In-view section fade (IntersectionObserver adds `.is-visible`) */
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.42s ease,
+      transform 0.42s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  }
+
+  .section-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 }
 

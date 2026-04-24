@@ -6,9 +6,9 @@ export function HomeJsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "The Porn Dude 2.0",
+    name: "FansLocked",
     description:
-      "Curated adult website directory with editorial reviews and affiliate disclosures.",
+      "High-density discovery directory for adult listings with editorial context and affiliate disclosures.",
     url: base,
     about: {
       "@type": "Thing",

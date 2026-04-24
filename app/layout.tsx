@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "@/styles/globals.css";
-import { Navbar } from "@/components/layout/navbar";
+import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
 import { Footer } from "@/components/layout/footer";
+import { Newsletter } from "@/components/sections/newsletter";
 import { AgeGate } from "@/components/age-gate";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
 import { getSiteUrl } from "@/lib/site";
@@ -24,30 +25,30 @@ const syne = Syne({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "The Porn Dude 2.0 — Best adult sites ranked (2026)",
-    template: "%s · The Porn Dude 2.0",
+    default: "FansLocked — High-density discovery for adult listings",
+    template: "%s · FansLocked",
   },
   description:
-    "Luxury dark-mode directory of 750+ adult websites: editorial star ratings, pros & cons, and transparent affiliate links across 30+ categories.",
+    "Fast, scannable directory of 750+ listings with clear CTAs, category feeds, and affiliate-safe outbound links.",
   openGraph: {
-    title: "The Porn Dude 2.0 — Adult link directory (2026)",
+    title: "FansLocked — Discovery directory",
     description:
-      "Editor-tested rankings, glassmorphism UI, and high-intent CTAs across tubes, premium, VR, cams, and niches.",
+      "Dense grids, featured picks per vertical, and one-click visits across tubes, premium, VR, cams, and more.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Porn Dude 2.0",
+    title: "FansLocked",
     description:
-      "Curated adult website directory with reviews and affiliate disclosures.",
+      "High-density discovery for adult listings with clear CTAs and category feeds.",
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
+  themeColor: "#0A0B10",
   colorScheme: "dark",
 };
 
@@ -63,10 +64,11 @@ export default function RootLayout({
       >
         <PlausibleAnalytics />
         <AgeGate />
-        <Navbar />
+        <ConditionalNavbar />
         <main id="main-content" className="flex-1">
           {children}
         </main>
+        <Newsletter />
         <Footer />
       </body>
     </html>
