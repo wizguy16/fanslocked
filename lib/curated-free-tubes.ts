@@ -1,6 +1,6 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
-import { buildAffiliateRedirectUrl } from "@/lib/affiliate-url";
+import { buildListingOutboundPath } from "@/lib/affiliate-url";
 
 const PHOTOS = [
   "photo-1611162617474-5b21e879e113",
@@ -200,7 +200,7 @@ export function buildCuratedFreeTubeListings(cat: CategoryDef): Listing[] {
       ],
       image: imageFor(s + i),
       logo: logoFor(s + i + 3),
-      affiliate_url: buildAffiliateRedirectUrl(t.siteKey),
+      affiliate_url: buildListingOutboundPath(t.slug),
       website_url: t.website_url,
       rating: t.rating,
       added_date: t.added_date,

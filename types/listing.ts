@@ -5,6 +5,8 @@ export type Listing = {
   categorySlug: string;
   categoryLabel: string;
   tags: string[];
+  /** Conversion-focused hover copy (fanslocked cards). Falls back to `description` when unset. */
+  preview?: string;
   /** Short hero blurb. */
   description: string;
   /** Longer editorial copy for review pages. */

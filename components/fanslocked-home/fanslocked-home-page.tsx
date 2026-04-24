@@ -29,7 +29,7 @@ function filterListings(list: Listing[], q: string): Listing[] {
   const s = q.trim().toLowerCase();
   if (!s) return list;
   return list.filter((l) => {
-    const hay = [l.name, l.description, l.categoryLabel, ...l.tags]
+    const hay = [l.name, l.description, l.preview, l.categoryLabel, ...l.tags]
       .join(" ")
       .toLowerCase();
     return hay.includes(s);

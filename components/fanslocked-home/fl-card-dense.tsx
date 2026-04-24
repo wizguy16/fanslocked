@@ -1,62 +1,64 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { cn, clampTagline } from "@/lib/utils";
-import { IconStarTiny } from "@/components/icons/mini-icons";
+import { cn } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
+import { FlListingBlurb } from "@/components/fanslocked-home/fl-listing-blurb";
+import { FlListingLogo } from "@/components/fanslocked-home/fl-listing-logo";
+import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
 
 type Props = {
   listing: Listing;
 };
 
-/**
- * Dense grid card — same footprint and interaction model as {@link FlCardFeatured}
- * (horizontal row, logo, copy, hover “Enter →”, orange stroke + lift on hover).
- */
+const glassCard =
+  "min-h-[132px] overflow-hidden transition-[transform,background-color,border-color,box-shadow,backdrop-filter] duration-200 ease-out " +
+  "origin-top group-hover:scale-[1.02] group-hover:overflow-visible " +
+  "group-hover:border-[rgba(255,122,0,0.6)] group-hover:bg-[rgba(236,242,250,0.11)] group-hover:backdrop-blur-2xl " +
+  "group-hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_16px_48px_rgba(0,0,0,0.38)] group-hover:z-[5]";
+
+const plainCard =
+  "h-[132px] overflow-hidden transition-[background-color,border-color] duration-200 ease-out " +
+  "hover:border-[rgba(255,122,0,0.7)] hover:bg-[var(--bg-elevated)]";
+
 export function FlCardDense({ listing }: Props) {
+  const link = outboundLinkProps(listing);
+  const hasPreview = Boolean(listing.preview?.trim());
+
   return (
     <Link
-      href={listing.affiliate_url}
-      target="_blank"
-      rel="sponsored noopener noreferrer"
+      {...link}
       aria-label={`${listing.name}. Opens partner site.`}
       className={cn(
-        "group relative flex h-[132px] w-full items-center gap-4 overflow-hidden rounded-[16px] border border-[rgba(255,255,255,0.06)] bg-[var(--bg-card)] px-5 py-4 no-underline outline-none",
-        "shadow-[0_2px_18px_-6px_rgba(0,0,0,0.45)]",
-        "transition-[transform,box-shadow,border-color] duration-200 ease-out",
-        "hover:-translate-y-0.5 hover:border-[rgba(255,122,0,0.45)]",
-        "hover:shadow-[0_0_28px_-14px_rgba(255,122,0,0.1)]",
-        "focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
+        "group relative flex w-full gap-4 rounded-[16px] border border-[rgba(255,255,255,0.06)] bg-[var(--bg-card)] px-5 py-4 no-underline outline-none",
+        hasPreview ? "min-h-[132px] items-start" : "h-[132px] items-center",
+        "shadow-[0_2px_12px_-8px_rgba(0,0,0,0.35)]",
+        hasPreview ? glassCard : plainCard,
+        "focus-visible:ring-2 focus-visible:ring-[rgba(255,122,0,0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
       )}
     >
-      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)]">
-        <Image
-          src={listing.logo}
-          alt=""
-          fill
-          className="object-cover"
-          sizes="56px"
-        />
-      </div>
+      <div
+        className={cn(
+          "flex min-h-0 min-w-0 flex-1 gap-4 transition-transform duration-200 ease-out",
+          hasPreview ? "items-start" : "items-center group-hover:-translate-y-px",
+        )}
+      >
+        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
+          <FlListingLogo logo={listing.logo} websiteUrl={listing.website_url} />
+        </div>
 
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-center gap-1 pr-14 sm:pr-16">
-        <span className="truncate text-[18px] font-semibold leading-tight text-[var(--text-primary)]">
-          {listing.name}
-        </span>
-        <p className="line-clamp-2 text-[13px] leading-snug text-[var(--text-secondary)]">
-          {clampTagline(listing.description, 120)}
-        </p>
-        <div className="inline-flex min-w-0 items-center gap-1 text-[13px] text-[#A0A6B1]">
-          <IconStarTiny className="h-3 w-3 shrink-0 text-[#A0A6B1]" />
-          <span className="tabular-nums">{listing.rating.toFixed(1)}</span>
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-0.5 self-stretch pr-14 sm:pr-16">
+          <span className="truncate text-[18px] font-semibold leading-tight text-[var(--text-primary)]">
+            {listing.name}
+          </span>
+          <FlListingBlurb listing={listing} />
         </div>
       </div>
 
       <span
         aria-hidden
         className={cn(
-          "absolute bottom-3.5 right-4 inline-flex items-center gap-1.5 text-sm font-medium tabular-nums tracking-tight transition-[opacity,color] duration-200 ease-out",
+          "pointer-events-none absolute bottom-3.5 right-4 inline-flex items-center gap-1.5 text-sm font-medium tabular-nums tracking-tight transition-[opacity,color] duration-200 ease-out",
           "text-[#C49A72] group-hover:text-[#D4AA84]",
           "opacity-100",
           "lg:opacity-0 lg:group-hover:opacity-100",

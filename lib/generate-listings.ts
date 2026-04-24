@@ -1,7 +1,8 @@
 import type { Listing } from "@/types/listing";
 import { CATEGORIES } from "@/lib/categories";
-import { buildAffiliateRedirectUrl } from "@/lib/affiliate-url";
+import { buildListingOutboundPath } from "@/lib/affiliate-url";
 import { buildCuratedFreeTubeListings } from "@/lib/curated-free-tubes";
+import { buildCuratedBestOverallListings } from "@/lib/curated-best-overall";
 
 const LISTINGS_PER_CATEGORY = 25;
 
@@ -269,6 +270,12 @@ export function generateAllListings(): Listing[] {
       global += curated.length;
       continue;
     }
+    if (cat.slug === "best-overall") {
+      const curated = buildCuratedBestOverallListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
     for (let i = 0; i < LISTINGS_PER_CATEGORY; i++) {
       global += 1;
       const seed = global * 977 + i * 131 + cat.slug.length * 17;
@@ -295,7 +302,7 @@ export function generateAllListings(): Listing[] {
         cons,
         image: imageFor(seed),
         logo: logoFor(seed + 3),
-        affiliate_url: buildAffiliateRedirectUrl(slug),
+        affiliate_url: buildListingOutboundPath(slug),
         website_url: websiteUrl(slug),
         rating,
         added_date: addedDate(seed),

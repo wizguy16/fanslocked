@@ -46,7 +46,7 @@ export function FlFeaturedRow({ items }: Props) {
         <div
           ref={dragRef}
           {...dragScrollProps}
-          className="scroll-momentum flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing"
+          className="scroll-momentum flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-visible scroll-smooth py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing"
         >
           {items.map((l, i) => (
             <FlCardFeatured

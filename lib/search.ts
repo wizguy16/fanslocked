@@ -25,6 +25,7 @@ function matchesQuery(listing: Listing, q: string): boolean {
     listing.categorySlug,
     listing.categoryLabel,
     listing.description,
+    listing.preview,
     listing.review,
     ...listing.tags,
     ...listing.pros,
