@@ -15,9 +15,11 @@ type Props = {
    * pages). Skips incremental reveal and intersection-based loading.
    */
   eager?: boolean;
+  /** First card shows this rank (continues from featured sections). */
+  rankOffset?: number;
 };
 
-export function FlDenseGrid({ items, eager = false }: Props) {
+export function FlDenseGrid({ items, eager = false, rankOffset }: Props) {
   const [visible, setVisible] = useState(() =>
     eager ? items.length : Math.min(BATCH, items.length),
   );
@@ -60,7 +62,10 @@ export function FlDenseGrid({ items, eager = false }: Props) {
               delay={Math.min(i * 0.03, 0.45)}
               className="min-w-0"
             >
-              <FlCardDense listing={l} />
+              <FlCardDense
+                listing={l}
+                rank={rankOffset != null ? rankOffset + i : undefined}
+              />
             </Reveal>
           ))}
         </div>

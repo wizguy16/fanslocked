@@ -24,7 +24,7 @@ export function Footer() {
             Categories
           </Link>
           <Link href="/blog" className="hover:text-[#FF7A00]">
-            Blog
+            Guides
           </Link>
           <Link href="/privacy" className="hover:text-[#FF7A00]">
             Privacy

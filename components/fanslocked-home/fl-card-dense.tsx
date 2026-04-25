@@ -14,9 +14,11 @@ import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link
 
 type Props = {
   listing: Listing;
+  /** When set, shows mock-style rank + rating strip (category landing). */
+  rank?: number;
 };
 
-export function FlCardDense({ listing }: Props) {
+export function FlCardDense({ listing, rank }: Props) {
   const link = outboundLinkProps(listing);
   const p = listing.preview?.trim();
   const hasPreview = Boolean(p);
@@ -35,10 +37,28 @@ export function FlCardDense({ listing }: Props) {
         "focus-visible:ring-2 focus-visible:ring-[rgba(255,122,0,0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
       )}
     >
+      {rank != null ? (
+        <>
+          <span
+            className="pointer-events-none absolute left-4 top-3 z-[1] text-[13px] font-bold tabular-nums leading-none text-[#6B7280] transition-colors group-hover:text-[#FF7A00]/80"
+            aria-hidden
+          >
+            #{rank}
+          </span>
+          <span
+            className="pointer-events-none absolute right-4 top-3 z-[1] inline-flex items-center gap-0.5 text-[11px] font-semibold tabular-nums text-[#6B7280]"
+            aria-hidden
+          >
+            <span className="text-[10px] text-zinc-500">★</span>
+            {listing.rating.toFixed(1)}
+          </span>
+        </>
+      ) : null}
       <div
         className={cn(
           "relative z-0 flex h-full min-w-0 flex-1 items-center gap-4 transition-opacity duration-200 ease-out",
           hasPreview && "group-hover:opacity-0",
+          rank != null && "pt-4",
         )}
       >
         <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">

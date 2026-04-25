@@ -1,12 +1,80 @@
+export type BlogHubEducation = {
+  whatMakesHeading: string;
+  whatMakesBullets: readonly string[];
+  freeVsPremiumHeading: string;
+  freeVsPremiumBody: string;
+};
+
+/** Rich funnel layout: hero → quick picks → listings → education → category CTAs. */
+export type BlogHubMeta = {
+  readTimeMinutes: number;
+  /** Conversion line directly under the H1. */
+  heroLead: string;
+  education: BlogHubEducation;
+  midCtaPrompt?: string;
+  midCtaButtonLabel?: string;
+  finalCtaHeading?: string;
+  finalCtaBody?: string;
+  finalCtaButtonLabel?: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
   date: string;
   excerpt: string;
   body: string[];
+  /** When set, this post is the long-tail guide for a money-page category (cross-link in UI). */
+  relatedCategorySlug?: string;
+  /** When set with `relatedCategorySlug` and listings, renders the hub funnel template. */
+  hub?: BlogHubMeta;
 };
 
+/** Primary guide post for a category hub, if one exists. */
+export function getGuidePostForCategory(
+  categorySlug: string,
+): BlogPost | undefined {
+  return BLOG_POSTS.find((p) => p.relatedCategorySlug === categorySlug);
+}
+
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "fetish-bdsm-beginner-guide",
+    title: "Best BDSM Sites (2026) — Safe, Verified & Worth Your Time",
+    date: "2026-04-10",
+    excerpt:
+      "Skip low-trust dumps: we map what separates verified, consent-forward platforms from volume-first tubes — then hand you live picks you can open today.",
+    relatedCategorySlug: "fetish-bdsm",
+    hub: {
+      readTimeMinutes: 10,
+      heroLead:
+        "Looking for real BDSM content without wasting time? Here is what actually matters on platforms worth bookmarking — then jump into our live ranked hub when you are ready to click.",
+      education: {
+        whatMakesHeading: "What makes a good BDSM site?",
+        whatMakesBullets: [
+          "Verified creators and clear consent / moderation policies",
+          "Strong category filtering so you land on intent fast",
+          "Consistent uploads and libraries that stay active",
+          "Clean playback, honest billing, and fewer dark patterns",
+        ],
+        freeVsPremiumHeading: "Free vs premium",
+        freeVsPremiumBody:
+          "Free destinations chase reach with ads and uneven moderation. Premium networks and creator marketplaces usually deliver tighter production, clearer policies, and better tooling when you want depth in a specific niche.",
+      },
+      midCtaPrompt:
+        "Want the full ranked list with star scores and side-by-side blurbs?",
+      midCtaButtonLabel: "View top BDSM sites →",
+      finalCtaHeading: "Ready to explore?",
+      finalCtaBody:
+        "Start with the picks above, then use the category hub for the complete shortlist and disclosure-safe outbound links.",
+      finalCtaButtonLabel: "Open the BDSM directory",
+    },
+    body: [
+      "BDSM and fetish content is everywhere, but platforms are not interchangeable. Some prioritize verified talent, published rules, and reporting paths; others optimize for raw volume. This page keeps the story tight: what to look for first, then our highest-rated destinations pulled straight from the same dataset as the money page.",
+      "Treat weak age gating, anonymous bulk uploads with no recourse, and pressure upsells as exit signals. The picks in this guide skew toward destinations that document how content is sourced and how users can flag problems.",
+      "When you want every ranked option in one place — including rising picks and editorial blurbs — the Fetish & BDSM category hub is the canonical next step.",
+    ],
+  },
   {
     slug: "stay-safe-adult-sites",
     title: "How to stay safer on adult sites in 2026",
@@ -25,10 +93,30 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-02-14",
     excerpt:
       "What changed in headset fidelity, foveated rendering, and studio pipelines — and which hubs are worth bookmarking.",
+    relatedCategorySlug: "vr",
+    hub: {
+      readTimeMinutes: 8,
+      heroLead:
+        "Headsets got lighter, passthrough got usable, and the serious hubs finally publish honest GPU and comfort notes. Here is how we separate playable libraries from tech demos — with live picks from our VR directory.",
+      education: {
+        whatMakesHeading: "What makes a strong VR adult hub?",
+        whatMakesBullets: [
+          "Adaptive streaming that does not melt laptop GPUs",
+          "Comfort toggles: seated modes, vignettes, locomotion options",
+          "Honest hardware requirements on every title page",
+          "Refund-friendly billing when performance claims miss reality",
+        ],
+        freeVsPremiumHeading: "Studios vs aggregators",
+        freeVsPremiumBody:
+          "Premium studios win on polish and support tickets. Aggregators win on breadth — but quality swings harder. Use previews and refund policies before you commit to a yearly pass.",
+      },
+      midCtaButtonLabel: "View top VR sites →",
+      finalCtaButtonLabel: "Open the VR directory",
+    },
     body: [
-      "VR adult content matured once passthrough mixed reality and lighter headsets reduced friction. The best hubs now ship adaptive bitrate ladders, quick scene previews, and honest hardware requirements on every title page.",
-      "When evaluating games versus passive VR video, look for locomotion comfort options, seated modes, and save systems — small details that separate polished releases from tech demos.",
-      "We keep a living shortlist inside our VR category with affiliate partners that consistently honor refunds when performance claims do not match reality on Meta or PCVR stacks.",
+      "VR adult content matured once passthrough mixed reality and lighter headsets reduced friction. The destinations below mirror what we surface on the VR category hub: adaptive ladders, quick scene previews, and clear headset notes.",
+      "When you are shopping games versus passive video, prioritize save systems, locomotion comfort, and seated defaults — the boring stuff that decides whether a library gets used twice or twenty times.",
+      "We re-test quarterly; if a partner stops honoring refunds when codecs fall apart, they drop in rank. The category page is always the freshest comparison grid.",
     ],
   },
   {

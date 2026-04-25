@@ -56,11 +56,11 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     title: `${h1} (${year})`,
     description: `${cat.description} Browse ${count}+ ranked picks with outbound-safe links.`,
-    alternates: { canonical: `/categories/${params.slug}` },
+    alternates: { canonical: `/category/${params.slug}` },
   };
 }
 
-export default function CategoryPage({ params }: Props) {
+export default function CategoryLandingPage({ params }: Props) {
   const cat = getCategoryBySlug(params.slug);
   if (!cat) notFound();
 

@@ -9,6 +9,8 @@ type Props = {
   logo: string;
   websiteUrl: string;
   className?: string;
+  /** Default `cover` for cards; `contain` for small logo tiles (e.g. category quick picks). */
+  fit?: "cover" | "contain";
 };
 
 function faviconFromClearbit(logoUrl: string): string | null {
@@ -48,7 +50,12 @@ function letterDataUrl(websiteUrl: string): string {
 /**
  * Clearbit often 404s or blocks optimized fetches; plain img + no-referrer + favicon fallbacks.
  */
-export function FlListingLogo({ logo, websiteUrl, className }: Props) {
+export function FlListingLogo({
+  logo,
+  websiteUrl,
+  className,
+  fit = "cover",
+}: Props) {
   const chain = useMemo(() => {
     /** Google favicon first — Clearbit often 404s in browser. */
     const a = [
@@ -74,7 +81,11 @@ export function FlListingLogo({ logo, websiteUrl, className }: Props) {
       loading="lazy"
       decoding="async"
       referrerPolicy="no-referrer"
-      className={cn("h-full w-full object-cover", className)}
+      className={cn(
+        "h-full w-full",
+        fit === "contain" ? "object-contain" : "object-cover",
+        className,
+      )}
       onError={() =>
         setI((x) => (x < chain.length - 1 ? x + 1 : x))
       }

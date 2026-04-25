@@ -3,9 +3,9 @@ import Link from "next/link";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Guides & Insights",
   description:
-    "Long-form guides on safety, VR trends, and how affiliate disclosures work at FansLocked.",
+    "Long-tail guides tied to our category hubs — safety, VR, niche explainers, and how disclosures work at FansLocked.",
   alternates: { canonical: "/blog" },
 };
 
@@ -14,11 +14,12 @@ export default function BlogIndexPage() {
     <div className="px-3 py-8 sm:px-4 md:px-6">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-2xl font-bold text-white sm:text-3xl">
-          Editorial blog
+          Guides & Insights
         </h1>
         <p className="mt-2 text-sm text-slate-400">
-          SEO-friendly explainers and annual trend notes — no paywalls, just
-          context around the directory.
+          Long-form articles that feed our category pages — deep intent, not
+          duplicate “mini reviews.” Follow a guide here, then hit the ranked hub
+          when you are ready to compare sites.
         </p>
         <ul className="mt-8 space-y-4">
           {BLOG_POSTS.map((p) => (
@@ -38,7 +39,7 @@ export default function BlogIndexPage() {
                   href={`/blog/${p.slug}`}
                   className="mt-3 inline-block text-xs font-semibold text-amber-400 hover:text-amber-300"
                 >
-                  Read more →
+                  {p.relatedCategorySlug ? "Read guide →" : "Read article →"}
                 </Link>
               </article>
             </li>
