@@ -2,7 +2,19 @@ import type { Listing } from "@/types/listing";
 import { CATEGORIES } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
 import { buildCuratedFreeTubeListings } from "@/lib/curated-free-tubes";
-import { buildCuratedBestOverallListings } from "@/lib/curated-best-overall";
+import { buildCuratedPremiumPornListings } from "@/lib/curated-premium-porn";
+import { buildCuratedLiveCamsListings } from "@/lib/curated-live-cams";
+import { buildCuratedVRPornListings } from "@/lib/curated-vr-porn";
+import { buildCuratedAIGeneratedListings } from "@/lib/curated-ai-generated";
+import { buildCuratedFanSubscriptionPlatformListings } from "@/lib/curated-fan-subscription-platforms";
+import { buildCuratedMaleCompanionsListings } from "@/lib/curated-male-companions";
+import { buildCuratedHookupListings } from "@/lib/curated-hookup";
+import { buildCuratedSexChatListings } from "@/lib/curated-sexchat";
+import { buildCuratedSearchListings } from "@/lib/curated-search";
+import { buildCuratedAmateurListings } from "@/lib/curated-amateur";
+import { buildCuratedGamingListings } from "@/lib/curated-gaming";
+import { buildCuratedHentaiListings } from "@/lib/curated-hentai";
+import { buildCuratedFetishBdsmListings } from "@/lib/curated-fetish-bdsm";
 
 const LISTINGS_PER_CATEGORY = 25;
 
@@ -242,11 +254,16 @@ function tagsFor(rand: () => number, categorySlug: string): string[] {
     "premium-porn": ["premium", "4k", "exclusive"],
     "live-cams": ["live", "tokens", "interactive"],
     vr: ["vr", "immersive", "headset"],
-    "dating-hookup": ["dating", "matches", "local"],
-    "hentai-anime": ["anime", "subbed", "studio"],
-    gaming: ["interactive", "browser", "quests"],
-    "fetish-bdsm": ["kink", "community", "education"],
-    "blogs-reviews": ["editorial", "deals", "guides"],
+    hookup: ["dating", "hookup", "matches", "local"],
+    "hentai-anime": ["hentai", "anime", "manga", "subbed"],
+    gaming: ["gaming", "browser", "adult", "interactive"],
+    "fetish-bdsm": ["fetish", "bdsm", "kink", "niche"],
+    "ai-generated": ["ai", "generator", "companion", "recurring"],
+    "fan-subscription-platforms": ["creator", "subscriptions", "fan-platform", "revshare"],
+    "male-companions": ["male", "companions", "lgbt"],
+    "sex-chat": ["sexting", "chat", "credits", "private"],
+    search: ["search", "directory", "discovery", "tube"],
+    amateur: ["amateur", "creator", "homemade", "clips"],
   };
   const extra = extras[categorySlug] ?? ["niche", "curated", "new"];
   const pool = [...base, ...extra, "trending", "premium", "new", "free"];
@@ -264,14 +281,86 @@ export function generateAllListings(): Listing[] {
   const out: Listing[] = [];
   let global = 0;
   for (const cat of CATEGORIES) {
+    if (cat.slug === "ai-generated") {
+      const curated = buildCuratedAIGeneratedListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
     if (cat.slug === "free-tube") {
       const curated = buildCuratedFreeTubeListings(cat);
       out.push(...curated);
       global += curated.length;
       continue;
     }
-    if (cat.slug === "best-overall") {
-      const curated = buildCuratedBestOverallListings(cat);
+    if (cat.slug === "search") {
+      const curated = buildCuratedSearchListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "premium-porn") {
+      const curated = buildCuratedPremiumPornListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "live-cams") {
+      const curated = buildCuratedLiveCamsListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "fan-subscription-platforms") {
+      const curated = buildCuratedFanSubscriptionPlatformListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "amateur") {
+      const curated = buildCuratedAmateurListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "vr") {
+      const curated = buildCuratedVRPornListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "male-companions") {
+      const curated = buildCuratedMaleCompanionsListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "hookup") {
+      const curated = buildCuratedHookupListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "sex-chat") {
+      const curated = buildCuratedSexChatListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "gaming") {
+      const curated = buildCuratedGamingListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "hentai-anime") {
+      const curated = buildCuratedHentaiListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "fetish-bdsm") {
+      const curated = buildCuratedFetishBdsmListings(cat);
       out.push(...curated);
       global += curated.length;
       continue;

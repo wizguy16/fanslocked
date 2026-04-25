@@ -4,13 +4,19 @@ export type CategoryDef = {
   description: string;
 };
 
-/** Curated verticals — minimum 30 for directory coverage. */
+/** Curated verticals only — each has a real listing set in `generate-listings`. */
 export const CATEGORIES: CategoryDef[] = [
   {
-    slug: "best-overall",
-    label: "Best Overall Porn Sites",
+    slug: "free-tube",
+    label: "Free Porn Tube Sites",
     description:
-      "Editor-tested picks that balance catalog depth, streaming quality, and trustworthy billing.",
+      "High-traffic free tubes with huge libraries — top-of-funnel traffic you can route toward premium, cams, or AI offers.",
+  },
+  {
+    slug: "search",
+    label: "Porn Search Engines",
+    description:
+      "Tube search, meta indexes, and discovery hubs — route intent across your funnel and complementary offers.",
   },
   {
     slug: "premium-porn",
@@ -19,16 +25,10 @@ export const CATEGORIES: CategoryDef[] = [
       "Subscription studios with licensed scenes, downloads where available, and fewer ads.",
   },
   {
-    slug: "free-tube",
-    label: "Free Porn Tube Sites",
+    slug: "male-companions",
+    label: "Male Companions",
     description:
-      "High-traffic free tubes with huge libraries — top-of-funnel traffic you can route toward premium, cams, or AI offers.",
-  },
-  {
-    slug: "hd-4k",
-    label: "HD / 4K Porn Sites",
-    description:
-      "Platforms that prioritize bitrate, HDR-friendly masters, and crisp playback.",
+      "Directories, massage listings, and creator platforms with clear compliance — same brands may also appear under fan subscriptions where relevant.",
   },
   {
     slug: "vr",
@@ -43,148 +43,52 @@ export const CATEGORIES: CategoryDef[] = [
       "Token-based rooms, tipping rails, and discovery feeds for real-time interaction.",
   },
   {
+    slug: "fan-subscription-platforms",
+    label: "Fan Subscription Platforms",
+    description:
+      "Legit creator subscriptions and fan monetization — revshare-friendly platforms, not leaks or reposts.",
+  },
+  {
     slug: "amateur",
     label: "Amateur Porn Sites",
     description:
-      "Creator-forward catalogs leaning on authenticity, community uploads, and niches.",
+      "Creator platforms, clip stores, and fan subscriptions — homemade and independent intent, separate from premium studio catalogs and free tubes.",
   },
   {
-    slug: "dating-hookup",
-    label: "Dating & Hookup Sites",
+    slug: "ai-generated",
+    label: "AI Generated Porn",
     description:
-      "Matchmaking and casual dating — always follow local laws and safety best practices.",
+      "Create your own AI generated porn images of animated and realistic imaginary women — companions, chat, and generators with strong recurring commissions.",
+  },
+  {
+    slug: "hookup",
+    label: "Hookup & Dating Sites",
+    description:
+      "High-payout adult dating and casual meetup programs — CPA-focused offers with strong conversion when traffic is compliant and disclosed.",
+  },
+  {
+    slug: "sex-chat",
+    label: "Sex Chat / Sexting",
+    description:
+      "Pay-per-message, credits, and private chat — fast-converting when creatives are compliant and age-gated.",
   },
   {
     slug: "hentai-anime",
-    label: "Hentai & Anime Porn",
+    label: "Best Hentai & Anime Porn Sites",
     description:
-      "Animated releases, subtitled drops, and niche tags common to Eastern studios.",
-  },
-  {
-    slug: "cartoon",
-    label: "Cartoon Porn",
-    description:
-      "Western-style animation parodies and stylized toons with episodic releases.",
-  },
-  {
-    slug: "gaming",
-    label: "Gaming & Sex Games",
-    description:
-      "Interactive fiction, sims, and browser titles blending gameplay with adult themes.",
-  },
-  {
-    slug: "asmr",
-    label: "ASMR Porn",
-    description:
-      "Audio-forward intimacy, binaural mics, and slow-burn pacing for headphone users.",
+      "Manga readers, streaming hubs, and archives — high-traffic niche with mixed affiliate quality; keep disclosures and regional rules in mind.",
   },
   {
     slug: "fetish-bdsm",
     label: "Fetish & BDSM",
     description:
-      "Consensual kink education, scene libraries, and communities with clear guidelines.",
+      "Networks, clip stores, dating, and niche tubes — balanced for monetization, depth, and long-tail SEO; keep everything consent-forward and policy-clean.",
   },
   {
-    slug: "ebony",
-    label: "Ebony Porn Sites",
+    slug: "gaming",
+    label: "Adult / Sex Games",
     description:
-      "Studios and tubes highlighting Black performers with fair representation and SEO clarity.",
-  },
-  {
-    slug: "asian",
-    label: "Asian Porn Sites",
-    description:
-      "Regional studios and aggregators with multilingual UI and diverse subgenres.",
-  },
-  {
-    slug: "latina",
-    label: "Latina Porn Sites",
-    description:
-      "Curated hubs focused on Latina performers, bilingual support, and Latin American studios.",
-  },
-  {
-    slug: "milf",
-    label: "MILF Porn Sites",
-    description:
-      "Mature-focused catalogs with story-forward scenes and experienced performer rosters.",
-  },
-  {
-    slug: "lesbian-queer",
-    label: "Lesbian & Queer Porn",
-    description:
-      "Queer-led productions, ethical casting notes, and inclusive discovery filters.",
-  },
-  {
-    slug: "solo-female",
-    label: "Solo Female / Masturbation Sites",
-    description:
-      "Solo performances, toy-forward scenes, and intimate cam-adjacent archives.",
-  },
-  {
-    slug: "gay-male",
-    label: "Male Gay Porn Sites",
-    description:
-      "Gay studios and tubes with strong search facets, HD scenes, and community features.",
-  },
-  {
-    slug: "trans",
-    label: "Trans & Gender-diverse Sites",
-    description:
-      "Trans-led labels and allies with respectful metadata and performer-first marketing.",
-  },
-  {
-    slug: "vintage",
-    label: "Vintage / Classic Porn",
-    description:
-      "Remastered classics, retro aesthetics, and historical archives for collectors.",
-  },
-  {
-    slug: "public-outdoor",
-    label: "Public & Outdoor",
-    description:
-      "Fantasy-forward outdoor sets — editorially flagged for consent-forward productions only.",
-  },
-  {
-    slug: "celebrity",
-    label: "Celebrity & Fappening",
-    description:
-      "Gossip-adjacent indexes — we only list destinations that comply with DMCA and privacy law.",
-  },
-  {
-    slug: "stories",
-    label: "Story & Literotica Sites",
-    description:
-      "Long-form fiction, serialized chapters, and community writing with moderation tools.",
-  },
-  {
-    slug: "blogs-reviews",
-    label: "Porn Blogs & Review Sites",
-    description:
-      "Editorial roundups, deal trackers, and safety explainers that complement directories.",
-  },
-  {
-    slug: "tube-gifs",
-    label: "Tube Sites (webms, GIFs)",
-    description:
-      "Short-loop libraries, meme-friendly clips, and lightweight mobile experiences.",
-  },
-  {
-    slug: "sex-ed-toys",
-    label: "Sex Education & Toys",
-    description:
-      "Wellness retailers, anatomy explainers, and toy reviews adjacent to adult media.",
-  },
-  {
-    slug: "cam2cam",
-    label: "Cam-to-Cam Platforms",
-    description:
-      "Private two-way sessions, HD cam stacks, and transparent per-minute pricing.",
-  },
-  {
-    slug: "escort-meetup",
-    label: "Escort & Meetup Sites (legal, age-verified)",
-    description:
-      "Directories that emphasize verification, safety resources, and jurisdiction-aware listings.",
+      "Real adult game hubs — Nutaku-style publishers, indie marketplaces, communities, and browser or downloadable titles. Strong for SEO and engagement; not your primary CPA vertical.",
   },
 ];
 

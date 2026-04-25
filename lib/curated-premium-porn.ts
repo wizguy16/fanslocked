@@ -3,7 +3,7 @@ import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
 import { clampTagline } from "@/lib/utils";
 
-export type CuratedBestOverallRow = {
+export type CuratedPremiumPornRow = {
   name: string;
   slug: string;
   logo: string;
@@ -11,8 +11,8 @@ export type CuratedBestOverallRow = {
   preview: string;
 };
 
-/** Top 12 — horizontal featured rail. */
-export const BEST_OVERALL_FEATURED: CuratedBestOverallRow[] = [
+/** Top 12 — horizontal featured rail (Premium Porn Sites). */
+export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Brazzers",
     slug: "brazzers",
@@ -112,7 +112,7 @@ export const BEST_OVERALL_FEATURED: CuratedBestOverallRow[] = [
 ];
 
 /** Next 13 — dense grid below the rail. */
-export const BEST_OVERALL_GRID: CuratedBestOverallRow[] = [
+export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Mofos",
     slug: "mofos",
@@ -220,11 +220,11 @@ export const BEST_OVERALL_GRID: CuratedBestOverallRow[] = [
 ];
 
 function tagsFor(): string[] {
-  return ["best-overall", "editor-pick", "premium", "streaming"];
+  return ["premium-porn", "editor-pick", "premium", "streaming"];
 }
 
 function buildListing(
-  row: CuratedBestOverallRow,
+  row: CuratedPremiumPornRow,
   cat: CategoryDef,
   rating: number,
   popularity_score: number,
@@ -244,7 +244,7 @@ function buildListing(
   ];
 
   return {
-    id: `listing-bo-${row.slug}`,
+    id: `listing-premium-${row.slug}`,
     name: row.name,
     slug: row.slug,
     categorySlug: cat.slug,
@@ -265,11 +265,11 @@ function buildListing(
   };
 }
 
-export function buildCuratedBestOverallListings(cat: CategoryDef): Listing[] {
-  const featured = BEST_OVERALL_FEATURED.map((row, i) =>
+export function buildCuratedPremiumPornListings(cat: CategoryDef): Listing[] {
+  const featured = PREMIUM_PORN_FEATURED.map((row, i) =>
     buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
   );
-  const grid = BEST_OVERALL_GRID.map((row, i) =>
+  const grid = PREMIUM_PORN_GRID.map((row, i) =>
     buildListing(
       row,
       cat,

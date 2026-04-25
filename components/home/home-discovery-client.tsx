@@ -10,13 +10,16 @@ import { SpinToPick } from "@/components/home/spin-to-pick";
 /** Homepage discovery verticals — high-intent mix, capped for performance. */
 const HOME_CATEGORY_SLUGS = [
   "live-cams",
+  "fan-subscription-platforms",
   "free-tube",
+  "search",
   "premium-porn",
   "vr",
-  "best-overall",
+  "ai-generated",
   "amateur",
-  "dating-hookup",
-  "hd-4k",
+  "hookup",
+  "sex-chat",
+  "male-companions",
 ] as const;
 
 export function HomeDiscoveryClient() {

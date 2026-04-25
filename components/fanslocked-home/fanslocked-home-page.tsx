@@ -11,7 +11,7 @@ import { FlFeaturedRow } from "@/components/fanslocked-home/fl-featured-row";
 import { FlDenseGrid } from "@/components/fanslocked-home/fl-dense-grid";
 import { SectionHeader } from "@/components/ui/section-header";
 
-const STRIP = CATEGORIES.slice(0, 14);
+const STRIP = CATEGORIES;
 const SCROLL_OFFSET = 118;
 const DENSE_PREVIEW = 28;
 /** Horizontal top-picks rail — dense grid starts after this. */

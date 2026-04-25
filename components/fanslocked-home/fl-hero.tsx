@@ -7,12 +7,12 @@ const PREFIX = "Search ";
 /** Short hints that cycle with a typewriter-style reveal (category-aligned). */
 const HINTS = [
   "tubes, VR, cams & premium…",
-  "VR & 4K libraries…",
+  "VR libraries…",
   "live cams & tipping…",
   "premium studios…",
   "amateur & creator hubs…",
-  "hentai, anime & toons…",
-  "dating & hookup picks…",
+  "hentai & anime streaming…",
+  "hookup & dating picks…",
   "fetish & niche catalogs…",
 ];
 
