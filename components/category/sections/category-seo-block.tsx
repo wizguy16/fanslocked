@@ -8,6 +8,15 @@ type Props = {
   guidePost: { slug: string; title: string } | null;
 };
 
+function renderTextBlocks(value: string | readonly string[], keyPrefix: string) {
+  const blocks = Array.isArray(value) ? value : [value];
+  return blocks.map((text, i) => (
+    <p key={`${keyPrefix}-${i}`} className="max-w-[52ch]">
+      {text}
+    </p>
+  ));
+}
+
 export function CategorySeoBlock({
   categoryLabel,
   editorial,
@@ -27,34 +36,70 @@ export function CategorySeoBlock({
             <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
               {editorial.whatMakesHeading}
             </h3>
-            <ul className="list-disc space-y-2 pl-5 marker:text-[#ff8c42]">
-              {editorial.whatMakesBullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
+            {editorial.whatMakesBody?.length ? (
+              <div className="space-y-3">{renderTextBlocks(editorial.whatMakesBody, "what")}</div>
+            ) : (
+              <ul className="list-disc space-y-2 pl-5 marker:text-[#ff8c42]">
+                {editorial.whatMakesBullets.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+            )}
           </div>
           <div>
             <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
               {editorial.whoForHeading}
             </h3>
-            <p className="max-w-[52ch]">{editorial.whoForBody}</p>
+            <div className="space-y-3">{renderTextBlocks(editorial.whoForBody, "who")}</div>
           </div>
         </div>
-        <div className="md:pt-0">
-          <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
-            {editorial.freeVsPremiumHeading}
-          </h3>
-          <p className="max-w-[38ch] text-[15px] leading-relaxed">
-            {editorial.freeVsPremiumBody}
-          </p>
+        <div className="space-y-7 md:space-y-6 md:pt-0">
+          <div>
+            <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
+              {editorial.freeVsPremiumHeading}
+            </h3>
+            <div className="space-y-3 text-[15px] leading-relaxed">
+              {renderTextBlocks(editorial.freeVsPremiumBody, "free-premium")}
+            </div>
+          </div>
+          {editorial.beginnerVsAdvancedBody ? (
+            <div>
+              <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
+                {editorial.beginnerVsAdvancedHeading ?? "Beginner vs advanced"}
+              </h3>
+              <div className="space-y-3 text-[15px] leading-relaxed">
+                {renderTextBlocks(
+                  typeof editorial.beginnerVsAdvancedBody === "string"
+                    ? [editorial.beginnerVsAdvancedBody]
+                    : editorial.beginnerVsAdvancedBody,
+                  "fourth-seo",
+                )}
+              </div>
+            </div>
+          ) : null}
         </div>
+        {editorial.useCaseBlock?.rows?.length ? (
+          <div className="border-t border-zinc-800 pt-6 md:col-span-2">
+            <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
+              {editorial.useCaseBlock.heading}
+            </h3>
+            <ul className="max-w-[60ch] list-disc space-y-2 pl-5 text-[15px] leading-relaxed marker:text-[#ff8c42]">
+              {editorial.useCaseBlock.rows.map((row) => (
+                <li key={row.useCase}>
+                  <span className="font-semibold text-[#e3e1e9]">{row.useCase}</span>
+                  <span className="text-[#ddc1b3]"> → {row.pick}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         {guidePost ? (
           <div className="border-t border-zinc-800 pt-6 md:col-span-2">
             <Link
               href={`/blog/${guidePost.slug}`}
-              className="inline-flex text-sm font-semibold text-[#ff8c42] transition hover:text-[#ffb68d]"
+              className="inline-flex max-w-prose text-sm font-semibold leading-snug text-[#ff8c42] transition hover:text-[#ffb68d]"
             >
-              Explore full guide →
+              {editorial.guideLinkLabel ?? "Explore full guide →"}
               <span className="sr-only">: {guidePost.title}</span>
             </Link>
           </div>
@@ -120,7 +165,7 @@ export function CategorySeoBlock({
         <div className="border-t border-zinc-800 pt-6 md:col-span-2">
           <Link
             href={`/blog/${guidePost.slug}`}
-            className="inline-flex text-sm font-semibold text-[#ff8c42] transition hover:text-[#ffb68d]"
+            className="inline-flex max-w-prose text-sm font-semibold leading-snug text-[#ff8c42] transition hover:text-[#ffb68d]"
           >
             Explore full guide →
             <span className="sr-only">: {guidePost.title}</span>

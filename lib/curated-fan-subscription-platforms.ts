@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedFanSubscriptionRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -23,19 +24,18 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   {
     name: "Fansly",
     slug: "fansly",
-    logo: "https://logo.clearbit.com/fansly.com",
     website: "https://fansly.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Subscription Platform",
-    description: "Top OnlyFans alternative with strong growth.",
+    description:
+      "Fast-growing fan subscription platform with strong discovery features and flexible creator content options.",
     preview:
-      "Fansly offers creators flexible monetization and exclusive content, making it one of the fastest-growing subscription platforms.",
+      "Fast-growing fan subscription platform with strong discovery features and flexible creator content options.",
   },
   {
     name: "Fanvue",
     slug: "fanvue",
-    logo: "https://logo.clearbit.com/fanvue.com",
     website: "https://fanvue.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -47,7 +47,6 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   {
     name: "Unlockd",
     slug: "unlockd",
-    logo: "https://logo.clearbit.com/unlockd.me",
     website: "https://unlockd.me",
     payout: "RevShare",
     difficulty: "Easy",
@@ -59,7 +58,6 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   {
     name: "ManyVids",
     slug: "manyvids",
-    logo: "https://logo.clearbit.com/manyvids.com",
     website: "https://manyvids.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -71,67 +69,66 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   {
     name: "FanCentro",
     slug: "fancentro",
-    logo: "https://logo.clearbit.com/fancentro.com",
     website: "https://fancentro.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Subscription Platform",
-    description: "Monetization platform for influencers.",
+    description:
+      "Creator monetization platform with built-in marketing tools and strong traffic funnels for driving subscriptions.",
     preview:
-      "FanCentro helps creators monetize social traffic with subscriptions and premium content.",
+      "Creator monetization platform with built-in marketing tools and strong traffic funnels for driving subscriptions.",
   },
   {
     name: "LoyalFans",
     slug: "loyalfans",
-    logo: "https://logo.clearbit.com/loyalfans.com",
     website: "https://loyalfans.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Fan Platform",
-    description: "Strong creator monetization platform.",
+    description:
+      "Feature-rich platform with messaging, live streams, and multiple ways for creators to monetize content.",
     preview:
-      "LoyalFans provides multiple monetization tools that increase user spending and retention.",
+      "Feature-rich platform with messaging, live streams, and multiple ways for creators to monetize content.",
   },
   {
     name: "JustForFans",
     slug: "justforfans",
-    logo: "https://logo.clearbit.com/justfor.fans",
     website: "https://justfor.fans",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Subscription Platform",
-    description: "Creator-focused subscription service.",
+    description:
+      "Subscription platform focused on creator control, with flexible pricing and direct fan interaction.",
     preview:
-      "JustForFans focuses on creator-first tools that drive consistent subscriber growth.",
+      "Subscription platform focused on creator control, with flexible pricing and direct fan interaction.",
   },
   {
-    name: "AVN Stars",
-    slug: "avn-stars",
-    logo: "https://logo.clearbit.com/avnstars.com",
-    website: "https://avnstars.com",
+    name: "Fansly",
+    slug: "fansly-discover",
+    website: "https://fansly.com",
     payout: "RevShare",
     difficulty: "Easy",
-    type: "Creator Platform",
-    description: "Industry-backed creator platform.",
+    type: "Subscription Platform",
+    description:
+      "Fast-growing platform with strong discovery tools and a mix of free and paid content options for creators.",
     preview:
-      "AVN Stars connects users with verified creators, increasing trust and conversions.",
+      "Fast-growing platform with strong discovery tools and a mix of free and paid content options for creators.",
   },
   {
     name: "AdmireMe",
     slug: "admireme",
-    logo: "https://logo.clearbit.com/admireme.vip",
     website: "https://admireme.vip",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Subscription Platform",
-    description: "UK-based creator platform.",
+    description:
+      "UK-based subscription platform with a focus on creator independence and simple fan engagement tools.",
     preview:
-      "AdmireMe offers strong engagement tools that help creators monetize loyal audiences.",
+      "UK-based subscription platform with a focus on creator independence and simple fan engagement tools.",
   },
   {
     name: "Patreon",
     slug: "patreon",
-    logo: "https://logo.clearbit.com/patreon.com",
     website: "https://patreon.com",
     payout: "Varies",
     difficulty: "Easy",
@@ -143,7 +140,6 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   {
     name: "Ko-fi",
     slug: "kofi",
-    logo: "https://logo.clearbit.com/ko-fi.com",
     website: "https://ko-fi.com",
     payout: "Varies",
     difficulty: "Easy",
@@ -155,7 +151,6 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   {
     name: "SubscribeStar",
     slug: "subscribestar",
-    logo: "https://logo.clearbit.com/subscribestar.com",
     website: "https://subscribestar.com",
     payout: "Varies",
     difficulty: "Easy",
@@ -170,7 +165,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "FansMetrics",
     slug: "fansmetrics",
-    logo: "https://logo.clearbit.com/fansmetrics.com",
     website: "https://fansmetrics.com",
     payout: "Lead Gen",
     difficulty: "Easy",
@@ -181,7 +175,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "FollowChain",
     slug: "followchain",
-    logo: "https://logo.clearbit.com/followchain.org",
     website: "https://followchain.org",
     payout: "Traffic",
     difficulty: "Easy",
@@ -192,7 +185,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "Fansly Search",
     slug: "fansly-search",
-    logo: "https://logo.clearbit.com/fansly.com",
     website: "https://fansly.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -203,7 +195,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "ManyVids Models",
     slug: "manyvids-models",
-    logo: "https://logo.clearbit.com/manyvids.com",
     website: "https://manyvids.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -214,7 +205,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "FanCentro Discover",
     slug: "fancentro-discover",
-    logo: "https://logo.clearbit.com/fancentro.com",
     website: "https://fancentro.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -225,7 +215,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "Fansly Creators",
     slug: "fansly-creators",
-    logo: "https://logo.clearbit.com/fansly.com",
     website: "https://fansly.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -236,7 +225,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "Fanvue Creators",
     slug: "fanvue-creators",
-    logo: "https://logo.clearbit.com/fanvue.com",
     website: "https://fanvue.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -247,7 +235,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "LoyalFans Discover",
     slug: "loyalfans-discover",
-    logo: "https://logo.clearbit.com/loyalfans.com",
     website: "https://loyalfans.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -256,9 +243,38 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
     preview: "LoyalFans Discover makes it easy to browse and subscribe to creators.",
   },
   {
+    name: "FanCentro Creators",
+    slug: "fancentro-creators",
+    website: "https://fancentro.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Discovery",
+    description: "Browse creators.",
+    preview: "Discover creators and exclusive content through FanCentro.",
+  },
+  {
+    name: "JustForFans Models",
+    slug: "jff-models",
+    website: "https://justfor.fans",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Discovery",
+    description: "Browse creator profiles.",
+    preview: "Find top creators and connect through subscriptions.",
+  },
+  {
+    name: "LoyalFans Creators",
+    slug: "loyalfans-creators",
+    website: "https://loyalfans.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Discovery",
+    description: "Discover creators.",
+    preview: "Explore trending creators and premium content.",
+  },
+  {
     name: "AdmireMe Creators",
     slug: "admireme-creators",
-    logo: "https://logo.clearbit.com/admireme.vip",
     website: "https://admireme.vip",
     payout: "RevShare",
     difficulty: "Easy",
@@ -269,7 +285,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "Fanvue",
     slug: "fanvue-ai-creator",
-    logo: "https://logo.clearbit.com/fanvue.com",
     website: "https://fanvue.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -281,7 +296,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "Fan Platform Hub",
     slug: "fan-platform-hub",
-    logo: "https://logo.clearbit.com/fanvue.com",
     website: "https://fanvue.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -292,7 +306,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "CreatorHub",
     slug: "creatorhub",
-    logo: "https://logo.clearbit.com/fanvue.com",
     website: "https://fanvue.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -303,7 +316,6 @@ export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
   {
     name: "FanFinder",
     slug: "fanfinder",
-    logo: "https://logo.clearbit.com/fansly.com",
     website: "https://fansly.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -349,11 +361,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

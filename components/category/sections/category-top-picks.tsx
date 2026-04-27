@@ -1,16 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn, clampTagline } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
 import { CATEGORY_GLASS_PANEL } from "@/components/category/sections/category-prestige-styles";
-
-function showcaseTag(listing: Listing): string {
-  const t = listing.tags.find(Boolean);
-  return t ? t.replace(/-/g, " ") : listing.categoryLabel;
-}
+import { SitePreview } from "@/components/shared/site-preview";
 
 type Props = {
   items: Listing[];
@@ -36,7 +32,6 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
           const reverse = index % 2 === 1;
           const rank = rankOffset + index + 1;
           const rankLabel = String(rank).padStart(2, "0");
-          const cover = listing.image?.trim() || listing.logo;
           const body =
             blurbs?.[index]?.trim() || clampTagline(listing.description, 160);
 
@@ -52,20 +47,22 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
               )}
             >
               <div className="w-full shrink-0 md:w-1/3">
-                <div className="relative aspect-video overflow-hidden rounded-lg border border-[#564338] bg-[#1e1f25]">
-                  <span
-                    className="absolute left-4 top-4 z-[1] flex h-10 w-10 items-center justify-center rounded-sm bg-[#ffb68d] text-center font-extrabold leading-none tracking-wide text-[#331200]"
-                    aria-hidden
-                  >
-                    {rankLabel}
-                  </span>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={cover}
-                    alt=""
-                    className="h-full w-full object-cover opacity-60"
-                  />
-                </div>
+                <SitePreview
+                  slug={listing.slug}
+                  categorySlug={listing.categorySlug}
+                  alt={`${listing.name} preview`}
+                  fallbackScreenshot={listing.screenshot}
+                  fallbackLogo={listing.logo}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  overlay={
+                    <span
+                      className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-sm bg-[#ffb68d] text-center font-extrabold leading-none tracking-wide text-[#331200]"
+                      aria-hidden
+                    >
+                      {rankLabel}
+                    </span>
+                  }
+                />
               </div>
 
               <div
@@ -92,18 +89,11 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
                       reverse ? "justify-end" : "justify-start",
                     )}
                   >
-                    <div className="inline-flex items-center gap-1 rounded-full border border-[#564338] bg-[#292a2f] px-3 py-1">
-                      <Star
-                        className="h-3.5 w-3.5 fill-[#ffb68d] text-[#ffb68d]"
-                        aria-hidden
-                      />
-                      <span className="text-xs font-bold tabular-nums text-[#e3e1e9]">
-                        {listing.rating.toFixed(1)}/10
+                    {listing.tag ? (
+                      <span className="rounded-full border border-white/10 px-2 py-1 text-[11px] text-[var(--text-secondary)]">
+                        {listing.tag}
                       </span>
-                    </div>
-                    <span className="text-xs font-semibold uppercase tracking-widest text-[#ddc1b3]">
-                      {showcaseTag(listing)}
-                    </span>
+                    ) : null}
                   </div>
                 </div>
                 <span

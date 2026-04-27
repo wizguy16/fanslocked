@@ -14,6 +14,10 @@ type Props = {
   quick: Listing[];
   showcase: Listing[];
   rising: Listing[];
+  /** When set, replaces the default “More to explore” heading. */
+  moreSectionHeading?: string | null;
+  /** When set, overrides the default supporting grid cap (10). */
+  moreSectionLimit?: number;
   listingCopy?: CategoryListingCopy | null;
 };
 
@@ -25,6 +29,8 @@ export function CategoryPrestigeListings({
   quick,
   showcase,
   rising,
+  moreSectionHeading,
+  moreSectionLimit,
   listingCopy,
 }: Props) {
   return (
@@ -38,6 +44,8 @@ export function CategoryPrestigeListings({
       <CategoryMoreToExplore
         items={rising}
         blurbs={listingCopy?.risingBlurbs ?? null}
+        heading={moreSectionHeading ?? undefined}
+        limit={moreSectionLimit}
       />
     </div>
   );

@@ -1,8 +1,11 @@
 import type { Listing } from "@/types/listing";
 import { CATEGORIES, categorySlugs, getCategoryBySlug } from "@/lib/categories";
 import { generateAllListings } from "@/lib/generate-listings";
+import { resolveListingSiteImages } from "@/lib/resolve-listing-site-images";
 
-export const listings: Listing[] = generateAllListings();
+export const listings: Listing[] = generateAllListings().map(
+  resolveListingSiteImages,
+);
 
 export { CATEGORIES, categorySlugs, getCategoryBySlug };
 

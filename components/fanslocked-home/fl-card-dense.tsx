@@ -14,7 +14,7 @@ import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link
 
 type Props = {
   listing: Listing;
-  /** When set, shows mock-style rank + rating strip (category landing). */
+  /** When set, shows mock-style rank strip (category landing). */
   rank?: number;
 };
 
@@ -45,13 +45,6 @@ export function FlCardDense({ listing, rank }: Props) {
           >
             #{rank}
           </span>
-          <span
-            className="pointer-events-none absolute right-4 top-3 z-[1] inline-flex items-center gap-0.5 text-[11px] font-semibold tabular-nums text-[#6B7280]"
-            aria-hidden
-          >
-            <span className="text-[10px] text-zinc-500">★</span>
-            {listing.rating.toFixed(1)}
-          </span>
         </>
       ) : null}
       <div
@@ -62,7 +55,12 @@ export function FlCardDense({ listing, rank }: Props) {
         )}
       >
         <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
-          <FlListingLogo logo={listing.logo} websiteUrl={listing.website_url} />
+          <FlListingLogo
+            slug={listing.slug}
+            categorySlug={listing.categorySlug}
+            websiteUrl={listing.website_url}
+            fallbackLogo={listing.logo}
+          />
         </div>
 
         <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-center gap-0.5 pr-14 sm:pr-16">

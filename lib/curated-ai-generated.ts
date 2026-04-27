@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedAIGeneratedRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -20,7 +21,6 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
   {
     name: "Candy AI",
     slug: "candy-ai",
-    logo: "https://logo.clearbit.com/candy.ai",
     website: "https://candy.ai",
     payout: "40% recurring",
     difficulty: "Easy",
@@ -32,7 +32,6 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
   {
     name: "OurDream AI",
     slug: "ourdream-ai",
-    logo: "https://logo.clearbit.com/ourdream.ai",
     website: "https://ourdream.ai",
     payout: "40% recurring / CPA",
     difficulty: "Easy",
@@ -44,7 +43,6 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
   {
     name: "GirlfriendGPT",
     slug: "girlfriendgpt",
-    logo: "https://logo.clearbit.com/girlfriendgpt.com",
     website: "https://girlfriendgpt.com",
     payout: "Recurring commissions",
     difficulty: "Easy",
@@ -56,7 +54,6 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
   {
     name: "SpicyChat",
     slug: "spicychat",
-    logo: "https://logo.clearbit.com/spicychat.ai",
     website: "https://spicychat.ai",
     payout: "RevShare",
     difficulty: "Easy",
@@ -68,98 +65,90 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
   {
     name: "JuicyChat AI",
     slug: "juicychat",
-    logo: "https://logo.clearbit.com/juicychat.ai",
     website: "https://juicychat.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Chat",
-    description: "Fast-growing AI chat ecosystem.",
+    description: "AI chat platform with a large library of user-created characters focused on roleplay and NSFW conversations. Strong for fast responses, character variety, and ongoing interaction.",
     preview:
-      "JuicyChat AI delivers fast onboarding and high engagement, making it ideal for converting cold traffic into subscribers.",
+      "AI chat platform with a large library of user-created characters focused on roleplay and NSFW conversations. Strong for fast responses, character variety, and ongoing interaction.",
   },
   {
     name: "Joi AI",
     slug: "joi-ai",
-    logo: "https://logo.clearbit.com/joi.ai",
     website: "https://joi.ai",
     payout: "RevShare / CPA",
     difficulty: "Easy",
     type: "AI Companion",
-    description: "Premium AI interaction platform.",
+    description: "Premium AI companion platform focused on structured chat, guided interactions, and high-quality character experiences. Built for more controlled and immersive AI conversations.",
     preview:
-      "Joi AI combines premium features and strong monetization, helping affiliates earn from both subscriptions and usage.",
+      "Premium AI companion platform focused on structured chat, guided interactions, and high-quality character experiences. Built for more controlled and immersive AI conversations.",
   },
   {
     name: "Secrets AI",
     slug: "secrets-ai",
-    logo: "https://logo.clearbit.com/secrets.ai",
     website: "https://secrets.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
-    description: "AI content generation platform.",
+    description: "AI content platform combining chat, character customization, and visual generation. Designed for users who want both conversation and image-based interaction in one place.",
     preview:
-      "Secrets AI focuses on customizable content creation, keeping users engaged and increasing repeat spending.",
+      "AI content platform combining chat, character customization, and visual generation. Designed for users who want both conversation and image-based interaction in one place.",
   },
   {
-    name: "PlayBox",
-    slug: "playbox",
-    logo: "https://logo.clearbit.com/playbox.ai",
-    website: "https://playbox.ai",
+    name: "Candy Box AI",
+    slug: "candybox-ai",
+    website: "https://candybox.ai",
     payout: "RevShare",
     difficulty: "Easy",
     type: "AI Generator",
-    description: "AI content creation with strong UX.",
+    description: "AI chat platform with simple onboarding and quick access to NSFW conversations. Focused on speed, ease of use, and lightweight interaction without complex setup.",
     preview:
-      "PlayBox simplifies content creation, making it easy for users to generate and engage with AI-driven experiences.",
+      "AI chat platform with simple onboarding and quick access to NSFW conversations. Focused on speed, ease of use, and lightweight interaction without complex setup.",
   },
   {
     name: "TryNectar",
     slug: "trynectar",
-    logo: "https://logo.clearbit.com/trynectar.ai",
     website: "https://trynectar.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Companion",
-    description: "Custom AI companion builder.",
+    description: "Custom AI companion builder that allows full control over personality, traits, and interaction style. Built for users who want to design and refine their own AI characters.",
     preview:
-      "TryNectar focuses on deep customization and immersive experiences, helping increase user retention and conversions.",
+      "Custom AI companion builder that allows full control over personality, traits, and interaction style. Built for users who want to design and refine their own AI characters.",
   },
   {
     name: "CrushOn AI",
     slug: "crushon-ai",
-    logo: "https://logo.clearbit.com/crushon.ai",
     website: "https://crushon.ai",
     payout: "RevShare",
     difficulty: "Easy",
     type: "AI Chat",
-    description: "Fast-growing AI chat platform.",
+    description: "AI chat platform with a large selection of characters and strong focus on NSFW roleplay conversations.",
     preview:
-      "CrushOn AI offers strong engagement loops that keep users interacting longer and spending more.",
+      "AI chat platform with a large selection of characters and strong focus on NSFW roleplay conversations.",
   },
   {
     name: "Lovescape",
     slug: "lovescape",
-    logo: "https://logo.clearbit.com/lovescape.ai",
     website: "https://lovescape.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Companion",
-    description: "Immersive AI relationship platform.",
+    description: "AI companion platform focused on immersive relationships and long-form interaction.",
     preview:
-      "Lovescape focuses on emotional and interactive experiences, increasing session time and recurring revenue.",
+      "AI companion platform focused on immersive relationships and long-form interaction.",
   },
   {
     name: "SecretCrush AI",
     slug: "secretcrush",
-    logo: "https://logo.clearbit.com/secretcrush.ai",
     website: "https://secretcrush.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Chat",
-    description: "AI-driven companion experience.",
+    description: "AI chat experience focused on personalized interactions and companion-style conversations.",
     preview:
-      "SecretCrush AI provides engaging chat experiences that convert casual users into paying subscribers.",
+      "AI chat experience focused on personalized interactions and companion-style conversations.",
   },
 ];
 
@@ -168,91 +157,83 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
   {
     name: "Undress AI",
     slug: "undress-ai",
-    logo: "https://logo.clearbit.com/undress.ai",
     website: "https://undress.ai",
     payout: "High CPA",
     difficulty: "Easy",
     type: "AI Tool",
-    description: "AI image transformation tool.",
+    description: "AI image tool designed for generating and transforming explicit visuals.",
     preview:
-      "Undress AI offers a unique tool-based experience that drives curiosity clicks and high conversion rates.",
+      "AI image tool designed for generating and transforming explicit visuals.",
   },
   {
     name: "SugarGenBox",
     slug: "sugargenbox",
-    logo: "https://logo.clearbit.com/sugargenbox.com",
     website: "https://sugargenbox.com",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
-    description: "AI content generator platform.",
+    description: "AI content generator focused on creating adult images and fantasy scenarios.",
     preview:
-      "SugarGenBox combines ease of use with engaging outputs, helping convert new users quickly.",
+      "AI content generator focused on creating adult images and fantasy scenarios.",
   },
   {
     name: "ClothOff",
     slug: "clothoff",
-    logo: "https://logo.clearbit.com/clothoff.ai",
     website: "https://clothoff.ai",
     payout: "CPA",
     difficulty: "Easy",
     type: "AI Tool",
-    description: "Popular AI transformation tool.",
+    description: "AI image transformation tool focused on visual-based adult content generation.",
     preview:
-      "ClothOff leverages curiosity-driven traffic, making it one of the highest click-through tools in the niche.",
+      "AI image transformation tool focused on visual-based adult content generation.",
   },
   {
     name: "PornWorks",
     slug: "pornworks",
-    logo: "https://logo.clearbit.com/pornworks.ai",
     website: "https://pornworks.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
-    description: "AI-driven content creation.",
+    description: "AI platform for generating custom adult images and scenes.",
     preview:
-      "PornWorks keeps users engaged through customizable content generation and repeat usage.",
+      "AI platform for generating custom adult images and scenes.",
   },
   {
     name: "CreatePorn",
     slug: "createporn",
-    logo: "https://logo.clearbit.com/createporn.ai",
     website: "https://createporn.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
-    description: "AI image generator platform.",
+    description: "AI porn generator built for creating custom explicit images and visual content.",
     preview:
-      "CreatePorn offers simple tools that convert quickly due to low friction onboarding.",
+      "AI porn generator built for creating custom explicit images and visual content.",
   },
   {
     name: "Nemora AI",
     slug: "nemora-ai",
-    logo: "https://logo.clearbit.com/nemora.ai",
     website: "https://nemora.ai",
     payout: "RevShare",
     difficulty: "Easy",
     type: "AI Companion",
-    description: "Emerging AI companion platform.",
+    description: "AI companion platform focused on emerging chat-based interactions and character creation.",
     preview:
-      "Nemora AI is a newer platform with less competition, making it easier to capture conversions.",
+      "AI companion platform focused on emerging chat-based interactions and character creation.",
   },
   {
     name: "CherryPop AI",
     slug: "cherrypop-ai",
-    logo: "https://logo.clearbit.com/cherrypop.ai",
     website: "https://cherrypop.ai",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
-    description: "AI content platform.",
+    description: "AI content platform centered around interactive chat and visual generation.",
     preview:
-      "CherryPop AI provides engaging content tools that drive user interaction and spending.",
+      "AI content platform centered around interactive chat and visual generation.",
   },
   {
     name: "LustGF AI",
     slug: "lustgf-ai",
-    logo: "https://logo.clearbit.com/lustgf.ai",
     website: "https://lustgf.ai",
     payout: "Recurring",
     difficulty: "Easy",
@@ -264,7 +245,6 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
   {
     name: "PornMaker AI",
     slug: "pornmaker-ai",
-    logo: "https://logo.clearbit.com/pornmaker.ai",
     website: "https://pornmaker.ai",
     payout: "Recurring",
     difficulty: "Easy",
@@ -276,7 +256,6 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
   {
     name: "LoveChat",
     slug: "lovechat",
-    logo: "https://logo.clearbit.com/lovechat.ai",
     website: "https://lovechat.ai",
     payout: "Recurring",
     difficulty: "Easy",
@@ -288,7 +267,6 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
   {
     name: "LusyChat AI",
     slug: "lusychat",
-    logo: "https://logo.clearbit.com/lusychat.ai",
     website: "https://lusychat.ai",
     payout: "Recurring",
     difficulty: "Easy",
@@ -300,7 +278,6 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
   {
     name: "MuseBox AI",
     slug: "musebox",
-    logo: "https://logo.clearbit.com/musebox.ai",
     website: "https://musebox.ai",
     payout: "Recurring",
     difficulty: "Easy",
@@ -312,7 +289,6 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
   {
     name: "FeelReal",
     slug: "feelreal",
-    logo: "https://logo.clearbit.com/feelreal.ai",
     website: "https://feelreal.ai",
     payout: "Recurring",
     difficulty: "Easy",
@@ -359,11 +335,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

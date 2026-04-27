@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedAmateurRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -19,7 +20,6 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
   {
     name: "ManyVids",
     slug: "manyvids",
-    logo: "https://logo.clearbit.com/manyvids.com",
     website: "https://www.manyvids.com",
     payout: "High",
     difficulty: "Easy",
@@ -30,7 +30,6 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
   {
     name: "Fansly",
     slug: "fansly",
-    logo: "https://logo.clearbit.com/fansly.com",
     website: "https://fansly.com",
     payout: "High",
     difficulty: "Easy",
@@ -41,7 +40,6 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
   {
     name: "FanCentro",
     slug: "fancentro",
-    logo: "https://logo.clearbit.com/fancentro.com",
     website: "https://www.fancentro.com",
     payout: "High",
     difficulty: "Easy",
@@ -52,7 +50,6 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
   {
     name: "LoyalFans",
     slug: "loyalfans",
-    logo: "https://logo.clearbit.com/loyalfans.com",
     website: "https://www.loyalfans.com",
     payout: "High",
     difficulty: "Easy",
@@ -63,62 +60,56 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
   {
     name: "Clips4Sale",
     slug: "clips4sale",
-    logo: "https://logo.clearbit.com/clips4sale.com",
     website: "https://www.clips4sale.com",
     payout: "High",
     difficulty: "Easy",
     type: "clip-store",
     preview:
-      "Clips4Sale is a massive marketplace for amateur video clips across thousands of niches and categories.",
+      "Massive clip marketplace with one of the deepest amateur libraries online. Best for finding niche content across thousands of independent creators.",
   },
   {
     name: "APClips",
     slug: "apclips",
-    logo: "https://logo.clearbit.com/apclips.com",
     website: "https://www.apclips.com",
     payout: "High",
     difficulty: "Easy",
     type: "clip-store",
     preview:
-      "APClips lets independent creators sell amateur videos, customs, and fan experiences directly.",
+      "Creator-first platform focused on customs, direct sales, and fan interaction. Strong choice if you want more personal or niche content.",
   },
   {
     name: "iWantClips",
     slug: "iwantclips",
-    logo: "https://logo.clearbit.com/iwantclips.com",
     website: "https://www.iwantclips.com",
     payout: "High",
     difficulty: "Easy",
     type: "clip-store",
     preview:
-      "iWantClips is a creator-driven platform focused on niche amateur content and direct sales.",
+      "Well-established clip platform known for niche categories and consistent creator uploads. Easy to browse and discover specific interests.",
   },
   {
     name: "JustForFans",
     slug: "justforfans",
-    logo: "https://logo.clearbit.com/justfor.fans",
     website: "https://justfor.fans",
     payout: "High",
     difficulty: "Easy",
     type: "subscription",
     preview:
-      "JustForFans offers subscription-based access to amateur creators with exclusive content and messaging.",
+      "Subscription platform built around independent creators with a strong focus on direct fan access and exclusive content.",
   },
   {
     name: "ModelCentro",
     slug: "modelcentro",
-    logo: "https://logo.clearbit.com/modelcentro.com",
     website: "https://www.modelcentro.com",
     payout: "High",
     difficulty: "Easy",
     type: "creator-tools",
     preview:
-      "ModelCentro powers creator websites and helps monetize amateur content through subscriptions and sales.",
+      "Backend-powered creator platform that supports subscriptions, clip sales, and custom content — often used by independent sites.",
   },
   {
     name: "PocketStars",
     slug: "pocketstars",
-    logo: "https://logo.clearbit.com/pocketstars.com",
     website: "https://pocketstars.com",
     payout: "High",
     difficulty: "Easy",
@@ -129,7 +120,6 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
   {
     name: "AdmireMe",
     slug: "admireme",
-    logo: "https://logo.clearbit.com/admireme.vip",
     website: "https://admireme.vip",
     payout: "Medium–High",
     difficulty: "Easy",
@@ -140,7 +130,6 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
   {
     name: "IsMyGirl",
     slug: "ismygirl",
-    logo: "https://logo.clearbit.com/ismygirl.com",
     website: "https://ismygirl.com",
     payout: "High",
     difficulty: "Easy",
@@ -155,7 +144,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "Fanvue",
     slug: "fanvue",
-    logo: "https://logo.clearbit.com/fanvue.com",
     website: "https://fanvue.com",
     payout: "High",
     difficulty: "Easy",
@@ -166,7 +154,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "Unlockd",
     slug: "unlockd",
-    logo: "https://logo.clearbit.com/unlockd.me",
     website: "https://unlockd.me",
     payout: "Medium",
     difficulty: "Easy",
@@ -177,7 +164,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "OnlyFans Alternatives Hub",
     slug: "ofan-alts",
-    logo: "https://logo.clearbit.com/fansly.com",
     website: "https://fansly.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -188,7 +174,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "FanHouse",
     slug: "fanhouse",
-    logo: "https://logo.clearbit.com/fanhouse.app",
     website: "https://fanhouse.app",
     payout: "Medium",
     difficulty: "Easy",
@@ -199,7 +184,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "LoyalFans Clips",
     slug: "loyalfans-clips",
-    logo: "https://logo.clearbit.com/loyalfans.com",
     website: "https://www.loyalfans.com",
     payout: "High",
     difficulty: "Easy",
@@ -210,7 +194,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "ManyVids Live",
     slug: "manyvids-live",
-    logo: "https://logo.clearbit.com/manyvids.com",
     website: "https://www.manyvids.com",
     payout: "High",
     difficulty: "Easy",
@@ -221,7 +204,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "FanCentro Store",
     slug: "fancentro-store",
-    logo: "https://logo.clearbit.com/fancentro.com",
     website: "https://www.fancentro.com",
     payout: "High",
     difficulty: "Easy",
@@ -232,7 +214,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "APClips Live",
     slug: "apclips-live",
-    logo: "https://logo.clearbit.com/apclips.com",
     website: "https://www.apclips.com",
     payout: "High",
     difficulty: "Easy",
@@ -243,7 +224,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "Fansly Plus",
     slug: "fansly-plus",
-    logo: "https://logo.clearbit.com/fansly.com",
     website: "https://fansly.com",
     payout: "High",
     difficulty: "Easy",
@@ -254,7 +234,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "PocketStars VIP",
     slug: "pocketstars-vip",
-    logo: "https://logo.clearbit.com/pocketstars.com",
     website: "https://pocketstars.com",
     payout: "High",
     difficulty: "Easy",
@@ -265,7 +244,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "ModelCentro Stores",
     slug: "modelcentro-stores",
-    logo: "https://logo.clearbit.com/modelcentro.com",
     website: "https://www.modelcentro.com",
     payout: "High",
     difficulty: "Easy",
@@ -276,7 +254,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "IsMyGirl Premium",
     slug: "ismygirl-premium",
-    logo: "https://logo.clearbit.com/ismygirl.com",
     website: "https://ismygirl.com",
     payout: "High",
     difficulty: "Easy",
@@ -287,7 +264,6 @@ export const AMATEUR_GRID: CuratedAmateurRow[] = [
   {
     name: "AdmireMe Plus",
     slug: "admireme-plus",
-    logo: "https://logo.clearbit.com/admireme.vip",
     website: "https://admireme.vip",
     payout: "Medium",
     difficulty: "Easy",
@@ -333,11 +309,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

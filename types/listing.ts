@@ -14,11 +14,15 @@ export type Listing = {
   pros: string[];
   cons: string[];
   image: string;
+  /** Optional screenshot path for large layouts (e.g. Top picks); filled by `resolveListingSiteImages`. */
+  screenshot?: string;
   logo: string;
   affiliate_url: string;
   /** Representative destination for “direct” links (demo uses .example). */
   website_url: string;
   rating: number;
+  /** Short platform/trait label for cards (no scores). */
+  tag?: string;
   added_date: string;
   popularity_score: number;
   /** When set, overrides pseudo-random badge chips on dense cards. */

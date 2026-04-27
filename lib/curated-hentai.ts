@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedHentaiRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -19,7 +20,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "Fakku",
     slug: "fakku",
-    logo: "https://logo.clearbit.com/fakku.net",
     website: "https://www.fakku.net",
     payout: "High",
     difficulty: "Medium",
@@ -30,7 +30,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "Nutaku",
     slug: "nutaku-hentai",
-    logo: "https://logo.clearbit.com/nutaku.net",
     website: "https://www.nutaku.net",
     payout: "High",
     difficulty: "Easy",
@@ -41,7 +40,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "HentaiHaven",
     slug: "hentaihaven",
-    logo: "https://logo.clearbit.com/hentaihaven.xxx",
     website: "https://hentaihaven.xxx",
     payout: "Medium",
     difficulty: "Easy",
@@ -52,7 +50,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "Hanime.tv",
     slug: "hanime",
-    logo: "https://logo.clearbit.com/hanime.tv",
     website: "https://hanime.tv",
     payout: "High",
     difficulty: "Easy",
@@ -63,7 +60,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "Hentaistream",
     slug: "hentaistream",
-    logo: "https://logo.clearbit.com/hentaistream.com",
     website: "https://hentaistream.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -74,7 +70,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "HentaiFox",
     slug: "hentaifox",
-    logo: "https://logo.clearbit.com/hentaifox.com",
     website: "https://hentaifox.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -85,7 +80,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "Nhentai",
     slug: "nhentai",
-    logo: "https://logo.clearbit.com/nhentai.net",
     website: "https://nhentai.net",
     payout: "Medium",
     difficulty: "Easy",
@@ -96,7 +90,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "E-Hentai",
     slug: "e-hentai",
-    logo: "https://logo.clearbit.com/e-hentai.org",
     website: "https://e-hentai.org",
     payout: "Medium",
     difficulty: "Easy",
@@ -107,7 +100,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "Hentai2Read",
     slug: "hentai2read",
-    logo: "https://logo.clearbit.com/hentai2read.com",
     website: "https://hentai2read.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -118,7 +110,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "AnimeHentaivideos",
     slug: "animehentaivideos",
-    logo: "https://logo.clearbit.com/animehentaivideos.xxx",
     website: "https://animehentaivideos.xxx",
     payout: "Medium",
     difficulty: "Easy",
@@ -129,7 +120,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "HentaiWorld",
     slug: "hentaiworld",
-    logo: "https://logo.clearbit.com/hentaiworld.tv",
     website: "https://hentaiworld.tv",
     payout: "Medium",
     difficulty: "Easy",
@@ -140,7 +130,6 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
   {
     name: "Rule34.xxx",
     slug: "rule34",
-    logo: "https://logo.clearbit.com/rule34.xxx",
     website: "https://rule34.xxx",
     payout: "Indirect",
     difficulty: "Easy",
@@ -154,7 +143,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiPulse",
     slug: "hentaipulse",
-    logo: "https://logo.clearbit.com/hentaipulse.com",
     website: "https://hentaipulse.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -165,7 +153,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiDude",
     slug: "hentaidude",
-    logo: "https://logo.clearbit.com/hentaidude.com",
     website: "https://hentaidude.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -176,7 +163,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "9Hentai",
     slug: "9hentai",
-    logo: "https://logo.clearbit.com/9hentai.com",
     website: "https://9hentai.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -187,7 +173,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiCafe",
     slug: "hentaicafe",
-    logo: "https://logo.clearbit.com/hentaicafe.io",
     website: "https://hentaicafe.io",
     payout: "Medium",
     difficulty: "Easy",
@@ -198,7 +183,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "SimplyHentai",
     slug: "simplyhentai",
-    logo: "https://logo.clearbit.com/simply-hentai.com",
     website: "https://simply-hentai.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -209,7 +193,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiStigma",
     slug: "hentaistigma",
-    logo: "https://logo.clearbit.com/hentaistigma.com",
     website: "https://hentaistigma.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -220,7 +203,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiHere",
     slug: "hentaihere",
-    logo: "https://logo.clearbit.com/hentaihere.com",
     website: "https://hentaihere.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -231,7 +213,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiZ",
     slug: "hentaiz",
-    logo: "https://logo.clearbit.com/hentaiz.com",
     website: "https://hentaiz.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -242,7 +223,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "AnimeRule34",
     slug: "anime-rule34",
-    logo: "https://logo.clearbit.com/rule34.xxx",
     website: "https://rule34.xxx",
     payout: "Indirect",
     difficulty: "Easy",
@@ -253,7 +233,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiMoon",
     slug: "hentaimoon",
-    logo: "https://logo.clearbit.com/hentaimoon.com",
     website: "https://hentaimoon.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -264,7 +243,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiShare",
     slug: "hentaishare",
-    logo: "https://logo.clearbit.com/hentaishare.com",
     website: "https://hentaishare.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -275,7 +253,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "HentaiDownload",
     slug: "hentaidownload",
-    logo: "https://logo.clearbit.com/hentaidownload.org",
     website: "https://hentaidownload.org",
     payout: "Medium",
     difficulty: "Easy",
@@ -286,7 +263,6 @@ export const HENTAI_GRID: CuratedHentaiRow[] = [
   {
     name: "AnimeBooty",
     slug: "animebooty",
-    logo: "https://logo.clearbit.com/animebooty.com",
     website: "https://animebooty.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -332,11 +308,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

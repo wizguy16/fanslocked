@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedGamingRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -14,45 +15,71 @@ export type CuratedGamingRow = {
   preview: string;
 };
 
-/** Top 12 — adult game platforms (browser, client, community). */
+/** Featured set — first rows map to prestige Top picks via `gaming-prestige-slices`. */
 export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "Nutaku",
     slug: "nutaku",
-    logo: "https://logo.clearbit.com/nutaku.net",
     website: "https://www.nutaku.net",
     payout: "High",
     difficulty: "Easy",
     type: "games",
     preview:
-      "Nutaku is the largest adult gaming platform featuring hundreds of free-to-play and premium erotic games.",
+      "Nutaku is one of the largest adult game platforms, offering browser and downloadable titles across multiple genres. The platform features free-to-play and premium games with regular updates and strong developer support.",
+  },
+  {
+    name: "EroLabs",
+    slug: "erolabs",
+    website: "https://www.erolabs.com",
+    payout: "High",
+    difficulty: "Easy",
+    type: "games",
+    preview:
+      "EroLabs hosts a wide range of adult mobile and browser games, including popular RPG and gacha-style titles. Known for consistent updates and monetized progression systems, it's a strong platform for ongoing gameplay.",
   },
   {
     name: "F95Zone",
     slug: "f95zone",
-    logo: "https://logo.clearbit.com/f95zone.to",
     website: "https://f95zone.to",
     payout: "Indirect",
     difficulty: "Easy",
     type: "community",
     preview:
-      "F95Zone is a massive community where users discover, download, and discuss the latest adult games.",
+      "F95Zone is a massive community hub for adult games, where users can discover new releases, download indie titles, and follow ongoing game development. It's one of the most active spaces for adult gaming discussions and updates.",
   },
   {
     name: "Itch.io Adult Games",
     slug: "itch-adult",
-    logo: "https://logo.clearbit.com/itch.io",
     website: "https://itch.io/games/tag-adult",
     payout: "Indirect",
     difficulty: "Easy",
     type: "marketplace",
     preview:
-      "Itch.io hosts a wide range of indie adult games including visual novels and interactive experiences.",
+      "Itch.io's adult section features indie-developed games across visual novels, RPGs, and experimental formats. Many titles are free or pay-what-you-want, making it a key discovery platform for new creators.",
+  },
+  {
+    name: "HentaiHeroes",
+    slug: "hentaiheroes",
+    website: "https://www.hentaiheroes.com",
+    payout: "High",
+    difficulty: "Easy",
+    type: "rpg",
+    preview:
+      "HentaiHeroes is a browser-based RPG that combines progression systems with adult content. Players unlock characters and scenes through gameplay, making it one of the more structured adult gaming experiences.",
+  },
+  {
+    name: "Patreon / SubscribeStar",
+    slug: "patreon-subscribestar",
+    website: "https://www.patreon.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "creator-support",
+    preview:
+      "Many adult game developers use platforms like Patreon and SubscribeStar to release exclusive builds, early access content, and ongoing updates. These platforms give users direct access to indie creators and evolving games.",
   },
   {
     name: "GameJolt Adult",
     slug: "gamejolt-adult",
-    logo: "https://logo.clearbit.com/gamejolt.com",
     website: "https://gamejolt.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -61,64 +88,8 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
       "GameJolt features indie developers creating experimental adult-themed games and experiences.",
   },
   {
-    name: "LewdGames",
-    slug: "lewdgames",
-    logo: "https://logo.clearbit.com/lewdgames.com",
-    website: "https://lewdgames.com",
-    payout: "Medium",
-    difficulty: "Easy",
-    type: "browser-games",
-    preview:
-      "LewdGames offers a large collection of browser-based adult games with instant play access.",
-  },
-  {
-    name: "SexGamesClub",
-    slug: "sexgamesclub",
-    logo: "https://logo.clearbit.com/sexgamesclub.com",
-    website: "https://sexgamesclub.com",
-    payout: "Medium",
-    difficulty: "Easy",
-    type: "browser-games",
-    preview:
-      "SexGamesClub features a variety of free interactive adult games across multiple genres.",
-  },
-  {
-    name: "HentaiHeroes",
-    slug: "hentaiheroes",
-    logo: "https://logo.clearbit.com/hentaiheroes.com",
-    website: "https://www.hentaiheroes.com",
-    payout: "High",
-    difficulty: "Easy",
-    type: "rpg",
-    preview:
-      "HentaiHeroes is a popular RPG-style adult game where players build relationships and unlock scenes.",
-  },
-  {
-    name: "HaremHeroes",
-    slug: "haremheroes",
-    logo: "https://logo.clearbit.com/haremheroes.com",
-    website: "https://www.haremheroes.com",
-    payout: "High",
-    difficulty: "Easy",
-    type: "rpg",
-    preview:
-      "HaremHeroes combines story-driven gameplay with adult content in a progression-based system.",
-  },
-  {
-    name: "EroLabs",
-    slug: "erolabs",
-    logo: "https://logo.clearbit.com/erolabs.com",
-    website: "https://www.erolabs.com",
-    payout: "High",
-    difficulty: "Easy",
-    type: "games",
-    preview:
-      "EroLabs publishes adult mobile and browser games with strong monetization and ongoing updates.",
-  },
-  {
     name: "AdultGameCity",
     slug: "adultgamecity",
-    logo: "https://logo.clearbit.com/adultgamecity.com",
     website: "https://adultgamecity.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -129,7 +100,6 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "Porngames.com",
     slug: "porngames",
-    logo: "https://logo.clearbit.com/porngames.com",
     website: "https://porngames.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -140,7 +110,6 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "3DXChat",
     slug: "3dxchat",
-    logo: "https://logo.clearbit.com/3dxchat.com",
     website: "https://3dxchat.com",
     payout: "High",
     difficulty: "Medium",
@@ -154,7 +123,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Summertime Saga",
     slug: "summertime-saga",
-    logo: "https://logo.clearbit.com/summertimesaga.com",
     website: "https://summertimesaga.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -165,7 +133,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Milfy City",
     slug: "milfy-city",
-    logo: "https://logo.clearbit.com/milfycity.com",
     website: "https://milfycity.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -176,7 +143,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Being a DIK",
     slug: "being-a-dik",
-    logo: "https://logo.clearbit.com/patreon.com",
     website: "https://www.patreon.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -187,7 +153,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Dreams of Desire",
     slug: "dreams-of-desire",
-    logo: "https://logo.clearbit.com/patreon.com",
     website: "https://www.patreon.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -198,7 +163,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Corruption of Champions",
     slug: "corruption-of-champions",
-    logo: "https://logo.clearbit.com/itch.io",
     website: "https://itch.io",
     payout: "Indirect",
     difficulty: "Easy",
@@ -209,7 +173,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Trials in Tainted Space",
     slug: "tainted-space",
-    logo: "https://logo.clearbit.com/itch.io",
     website: "https://itch.io",
     payout: "Indirect",
     difficulty: "Easy",
@@ -220,7 +183,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Love Esquire",
     slug: "love-esquire",
-    logo: "https://logo.clearbit.com/steam.com",
     website: "https://store.steampowered.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -231,7 +193,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "House Party",
     slug: "house-party",
-    logo: "https://logo.clearbit.com/steam.com",
     website: "https://store.steampowered.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -242,7 +203,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "My Cute Roommate",
     slug: "cute-roommate",
-    logo: "https://logo.clearbit.com/itch.io",
     website: "https://itch.io",
     payout: "Indirect",
     difficulty: "Easy",
@@ -253,7 +213,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Monster Girl Island",
     slug: "monster-girl-island",
-    logo: "https://logo.clearbit.com/itch.io",
     website: "https://itch.io",
     payout: "Indirect",
     difficulty: "Easy",
@@ -264,7 +223,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Hentai Clicker",
     slug: "hentai-clicker",
-    logo: "https://logo.clearbit.com/nutaku.net",
     website: "https://www.nutaku.net",
     payout: "Medium",
     difficulty: "Easy",
@@ -275,7 +233,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Booty Calls",
     slug: "booty-calls",
-    logo: "https://logo.clearbit.com/nutaku.net",
     website: "https://www.nutaku.net",
     payout: "Medium",
     difficulty: "Easy",
@@ -286,7 +243,6 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Hentai Legends",
     slug: "hentai-legends",
-    logo: "https://logo.clearbit.com/nutaku.net",
     website: "https://www.nutaku.net",
     payout: "Medium",
     difficulty: "Easy",
@@ -332,11 +288,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

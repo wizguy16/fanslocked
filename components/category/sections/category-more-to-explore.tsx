@@ -6,6 +6,8 @@ import { FlCardCompact } from "@/components/fanslocked-home/fl-card-compact";
 type Props = {
   items: Listing[];
   blurbs?: readonly string[] | null;
+  /** Replaces the default “More to explore” section title. */
+  heading?: string;
   /** Max cards in the supporting grid (default 10). */
   limit?: number;
 };
@@ -13,6 +15,7 @@ type Props = {
 export function CategoryMoreToExplore({
   items,
   blurbs,
+  heading = "More to explore",
   limit = 10,
 }: Props) {
   const limited = items.slice(0, limit);
@@ -25,7 +28,7 @@ export function CategoryMoreToExplore({
           id="category-more-to-explore-heading"
           className="mb-4 text-[18px] font-semibold text-white"
         >
-          More to explore
+          {heading}
         </h3>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 md:gap-4">
           {limited.map((listing, i) => (

@@ -3,13 +3,17 @@ import type { CategoryDef } from "@/lib/categories";
 import { CategoryFinalCta } from "@/components/category/sections/category-final-cta";
 import { CategoryPrestigeListings } from "@/components/category/category-prestige-listings";
 import { CategorySeoBlock } from "@/components/category/sections/category-seo-block";
-import { getCategoryPrestigeEditorial } from "@/lib/category-prestige-editorial";
+import type { CategoryPrestigeEditorial } from "@/lib/category-prestige-editorial";
+import { buildGamingPrestigeSlices } from "@/lib/gaming-prestige-slices";
+import { buildHookupPrestigeSlices } from "@/lib/hookup-prestige-slices";
+import { buildSexChatPrestigeSlices } from "@/lib/sex-chat-prestige-slices";
 import { getGuidePostForCategory } from "@/lib/blog-posts";
-import { getListingsByCategorySlug } from "@/lib/data";
+import type { Listing } from "@/types/listing";
 
 const QUICK = 4;
 const SHOWCASE = 5;
-const LISTINGS_CAP = 25;
+/** Hookup and other large verticals need >25 curated rows on prestige pages. */
+const LISTINGS_CAP = 30;
 
 function heroBlurb(description: string): string {
   const t = description.trim();
@@ -32,21 +36,38 @@ function heroTitle(label: string): string {
 /**
  * Category prestige page: width bands (1100 copy / 1400 listings / 1100 SEO+CTA).
  * Sections are composed in `CategoryPrestigeListings` + `sections/*`.
+ * Listings are split here: 4 quick picks, 5 top picks, remainder in the grid (capped at 25).
  */
-export function CategoryPrestigeShell({ cat }: { cat: CategoryDef }) {
-  const allInCat = getListingsByCategorySlug(cat.slug);
-  const sorted = [...allInCat].sort((a, b) => b.rating - a.rating);
+export function CategoryPrestigeShell({
+  category,
+  listings,
+  editorial,
+}: {
+  category: CategoryDef;
+  listings: Listing[];
+  editorial: CategoryPrestigeEditorial | null;
+}) {
+  const sorted = [...listings].sort((a, b) => b.rating - a.rating);
   const capped = sorted.slice(0, LISTINGS_CAP);
-  const quick = capped.slice(0, QUICK);
-  const showcase = capped.slice(QUICK, QUICK + SHOWCASE);
-  const rising = capped.slice(QUICK + SHOWCASE);
+  const slices =
+    category.slug === "hookup"
+      ? buildHookupPrestigeSlices(capped)
+      : category.slug === "sex-chat"
+        ? buildSexChatPrestigeSlices(capped)
+        : category.slug === "gaming"
+          ? buildGamingPrestigeSlices(capped)
+          : {
+              quick: capped.slice(0, QUICK),
+              showcase: capped.slice(QUICK, QUICK + SHOWCASE),
+              rising: capped.slice(QUICK + SHOWCASE),
+            };
+  const { quick, showcase, rising } = slices;
   const year = new Date().getFullYear();
-  const editorial = getCategoryPrestigeEditorial(cat.slug, year);
-  const guidePostRaw = getGuidePostForCategory(cat.slug);
+  const guidePostRaw = getGuidePostForCategory(category.slug);
   const guidePost = guidePostRaw
     ? { slug: guidePostRaw.slug, title: guidePostRaw.title }
     : null;
-  const defaultH1 = heroTitle(cat.label);
+  const defaultH1 = heroTitle(category.label);
 
   return (
     <div className="min-h-[100dvh] bg-[#121318] text-[#e3e1e9]">
@@ -63,8 +84,8 @@ export function CategoryPrestigeShell({ cat }: { cat: CategoryDef }) {
             <span className="text-zinc-700" aria-hidden>
               /
             </span>
-            <span className="text-zinc-400">{cat.label}</span>
-            <span className="text-zinc-600">· {allInCat.length}</span>
+            <span className="text-zinc-400">{category.label}</span>
+            <span className="text-zinc-600">· {listings.length}</span>
           </nav>
 
           <header className="mb-12 text-center md:mb-16">
@@ -78,9 +99,15 @@ export function CategoryPrestigeShell({ cat }: { cat: CategoryDef }) {
                 </>
               )}
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#ddc1b3]">
-              {editorial?.heroDescription ?? heroBlurb(cat.description)}
-            </p>
+            <div className="mx-auto mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-[#ddc1b3]">
+              {editorial?.heroParagraphs?.length ? (
+                editorial.heroParagraphs.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))
+              ) : (
+                <p>{editorial?.heroDescription ?? heroBlurb(category.description)}</p>
+              )}
+            </div>
           </header>
         </div>
 
@@ -91,6 +118,8 @@ export function CategoryPrestigeShell({ cat }: { cat: CategoryDef }) {
               quick={quick}
               showcase={showcase}
               rising={rising}
+              moreSectionHeading={editorial?.moreListingSectionHeading ?? null}
+              moreSectionLimit={editorial?.moreListingGridLimit}
               listingCopy={
                 editorial
                   ? {
@@ -106,7 +135,7 @@ export function CategoryPrestigeShell({ cat }: { cat: CategoryDef }) {
         {/* SEO + CTA band — max-w-[1100px] */}
         <div className="mx-auto max-w-[1100px] px-6">
           <CategorySeoBlock
-            categoryLabel={cat.label}
+            categoryLabel={category.label}
             editorial={editorial}
             guidePost={guidePost}
           />

@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedHookupRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -14,111 +15,134 @@ export type CuratedHookupRow = {
   preview: string;
 };
 
-/** Top 12 — horizontal featured rail. */
+/**
+ * Curated order: trust-first brands, then monetized picks, then supporting featured rows.
+ * Category prestige layout re-slices by slug (`hookup-prestige-slices`).
+ */
 export const HOOKUP_FEATURED: CuratedHookupRow[] = [
+  {
+    name: "Tinder",
+    slug: "tinder",
+    website: "https://tinder.com",
+    payout: "Varies",
+    difficulty: "Easy",
+    type: "dating",
+    preview:
+      "The most widely used dating app for casual connections, with fast swiping, location-based matching, and massive user volume.",
+  },
   {
     name: "AdultFriendFinder",
     slug: "adultfriendfinder",
-    logo: "https://logo.clearbit.com/adultfriendfinder.com",
     website: "https://www.adultfriendfinder.com",
     payout: "High ($40–$80 CPA)",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "AdultFriendFinder is one of the largest hookup platforms, connecting millions of users for casual encounters, live streams, and adult dating experiences worldwide.",
+      "A long-running adult dating platform focused on hookups, open relationships, and explicit connections.",
   },
   {
     name: "Ashley Madison",
     slug: "ashley-madison",
-    logo: "https://logo.clearbit.com/ashleymadison.com",
     website: "https://www.ashleymadison.com",
     payout: "High",
     difficulty: "Medium",
     type: "hookup",
     preview:
-      "Ashley Madison is built for discreet relationships, offering a platform for users seeking private connections and anonymous encounters.",
+      "A privacy-focused dating platform designed for discreet encounters and controlled communication.",
   },
   {
     name: "BeNaughty",
     slug: "benaughty",
-    logo: "https://logo.clearbit.com/benaughty.com",
     website: "https://www.benaughty.com",
     payout: "High",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "BeNaughty is a fast-growing casual dating platform designed for flirty chats, quick matches, and no-strings-attached hookups.",
+      "A casual dating platform built for quick matches and flirt-driven conversations with strong activity.",
   },
   {
-    name: "Flirt",
-    slug: "flirt",
-    logo: "https://logo.clearbit.com/flirt.com",
-    website: "https://www.flirt.com",
-    payout: "High",
+    name: "Kasual",
+    slug: "kasual",
+    website: "https://www.kasualapp.com",
+    payout: "Medium–High",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "Flirt makes it easy to meet new people instantly with live chat, matchmaking, and a focus on casual dating and fun connections.",
+      "An anonymous hookup app for no-strings connections—minimal profiles and interactions built around speed and privacy.",
+  },
+  {
+    name: "Pure",
+    slug: "pure",
+    website: "https://pure.app",
+    payout: "Medium",
+    difficulty: "Easy",
+    type: "hookup",
+    preview:
+      "A real-time hookup app where profiles expire quickly, encouraging immediate conversations and meetups.",
   },
   {
     name: "SnapSext",
     slug: "snapsext",
-    logo: "https://logo.clearbit.com/snapsext.com",
     website: "https://www.snapsext.com",
     payout: "High",
     difficulty: "Easy",
     type: "sexting",
     preview:
-      "SnapSext connects users with real people for instant sexting, photo exchanges, and private adult conversations.",
+      "SnapSext connects users for private sexting, photo exchanges, and adult conversations with fast engagement.",
   },
   {
     name: "FriendFinder-X",
     slug: "friendfinder-x",
-    logo: "https://logo.clearbit.com/friendfinder-x.com",
     website: "https://www.friendfinder-x.com",
     payout: "High",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "FriendFinder-X is a premium adult dating platform focused on explicit connections, live cams, and open-minded relationships.",
+      "An adult-focused dating network centered around explicit profiles, live cams, and open-minded communities.",
   },
   {
     name: "XMatch",
     slug: "xmatch",
-    logo: "https://logo.clearbit.com/xmatch.com",
     website: "https://www.xmatch.com",
     payout: "High",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "XMatch helps users find compatible partners for casual dating with powerful search filters and detailed profiles.",
+      "Detailed profiles and advanced filters for users seeking casual encounters and compatible matches.",
   },
   {
     name: "Instabang",
     slug: "instabang",
-    logo: "https://logo.clearbit.com/instabang.com",
     website: "https://www.instabang.com",
     payout: "High",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "Instabang focuses on instant connections, helping users quickly find nearby matches for casual encounters.",
+      "Fast connections and location-based matching for meeting nearby without long onboarding.",
   },
   {
     name: "Together2Night",
     slug: "together2night",
-    logo: "https://logo.clearbit.com/together2night.com",
     website: "https://www.together2night.com",
     payout: "Medium–High",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "Together2Night is designed for spontaneous meetups, helping users find someone for tonight quickly and easily.",
+      "Designed for spontaneous meetups and same-day connections with a simple path from match to chat.",
+  },
+  {
+    name: "Flirt",
+    slug: "flirt",
+    website: "https://www.flirt.com",
+    payout: "High",
+    difficulty: "Easy",
+    type: "hookup",
+    preview:
+      "Flirt makes it easy to meet new people with live chat and matchmaking focused on casual dating.",
   },
   {
     name: "NaughtyDate",
     slug: "naughtydate",
-    logo: "https://logo.clearbit.com/naughtydate.com",
     website: "https://www.naughtydate.com",
     payout: "Medium–High",
     difficulty: "Easy",
@@ -129,18 +153,16 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   {
     name: "Fling",
     slug: "fling",
-    logo: "https://logo.clearbit.com/fling.com",
     website: "https://www.fling.com",
     payout: "High",
     difficulty: "Easy",
     type: "hookup",
     preview:
-      "Fling is a long-running casual dating site focused on quick hookups and adult chat experiences.",
+      "A long-running casual dating site focused on quick hookups and adult chat experiences.",
   },
   {
     name: "QuickFlirt",
     slug: "quickflirt",
-    logo: "https://logo.clearbit.com/quickflirt.com",
     website: "https://www.quickflirt.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -150,12 +172,11 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   },
 ];
 
-/** Next 13 — dense grid below the rail. */
+/** Dense grid below the featured set. */
 export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "UpForIt",
     slug: "upforit",
-    logo: "https://logo.clearbit.com/upforit.com",
     website: "https://www.upforit.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -166,7 +187,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "iHookup",
     slug: "ihookup",
-    logo: "https://logo.clearbit.com/ihookup.com",
     website: "https://www.ihookup.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -176,7 +196,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "LocalFlirt",
     slug: "localflirt",
-    logo: "https://logo.clearbit.com/localflirt.com",
     website: "https://www.localflirt.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -186,7 +205,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "OneNightFriend",
     slug: "onenightfriend",
-    logo: "https://logo.clearbit.com/onenightfriend.com",
     website: "https://www.onenightfriend.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -197,7 +215,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "HookupHangout",
     slug: "hookuphangout",
-    logo: "https://logo.clearbit.com/hookuphangout.com",
     website: "https://www.hookuphangout.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -208,7 +225,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "CasualX",
     slug: "casualx",
-    logo: "https://logo.clearbit.com/casualxapp.com",
     website: "https://casualxapp.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -219,7 +235,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "AdultDating",
     slug: "adultdating",
-    logo: "https://logo.clearbit.com/adultdating.com",
     website: "https://www.adultdating.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -230,7 +245,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "DateMyAge",
     slug: "datemyage",
-    logo: "https://logo.clearbit.com/datemyage.com",
     website: "https://www.datemyage.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -240,7 +254,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "Loveaholics",
     slug: "loveaholics",
-    logo: "https://logo.clearbit.com/loveaholics.com",
     website: "https://www.loveaholics.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -251,7 +264,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "SecretBenefits",
     slug: "secretbenefits",
-    logo: "https://logo.clearbit.com/secretbenefits.com",
     website: "https://www.secretbenefits.com",
     payout: "High",
     difficulty: "Medium",
@@ -262,7 +274,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "WhatsFlirt",
     slug: "whatsflirt",
-    logo: "https://logo.clearbit.com/whatsflirt.com",
     website: "https://www.whatsflirt.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -273,7 +284,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "MeetNHook",
     slug: "meetnhook",
-    logo: "https://logo.clearbit.com/meetnhook.com",
     website: "https://www.meetnhook.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -283,7 +293,6 @@ export const HOOKUP_GRID: CuratedHookupRow[] = [
   {
     name: "HookupDating",
     slug: "hookupdating",
-    logo: "https://logo.clearbit.com/hookupdating.com",
     website: "https://www.hookupdating.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -328,11 +337,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

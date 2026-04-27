@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { AffiliateLink } from "@/components/ui/affiliate-link";
 import { clampTagline } from "@/lib/utils";
 import { DenseDiscoveryCard } from "@/components/cards/dense-discovery-card";
-import { IconStarTiny } from "@/components/icons/mini-icons";
+import { listingLogoImageSrc } from "@/lib/listing-site-images";
 
 type Props = { params: { slug: string } };
 
@@ -36,7 +36,7 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-function ReviewJsonLd({
+function SiteJsonLd({
   listing,
 }: {
   listing: NonNullable<ReturnType<typeof getListingBySlug>>;
@@ -44,25 +44,15 @@ function ReviewJsonLd({
   const base = getSiteUrl();
   const data = {
     "@context": "https://schema.org",
-    "@type": "Review",
-    author: {
+    "@type": "WebSite",
+    name: listing.name,
+    url: listing.website_url,
+    description: clampTagline(listing.review, 240),
+    publisher: {
       "@type": "Organization",
       name: "FansLocked",
       url: base,
     },
-    itemReviewed: {
-      "@type": "WebSite",
-      name: listing.name,
-      url: listing.website_url,
-    },
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: listing.rating,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    reviewBody: listing.review,
-    datePublished: listing.added_date,
   };
   return (
     <script
@@ -79,7 +69,7 @@ export default function SitePage({ params }: Props) {
 
   return (
     <>
-      <ReviewJsonLd listing={listing} />
+      <SiteJsonLd listing={listing} />
       <article className="px-3 py-3 sm:px-4 md:px-6">
         <div className="mx-auto max-w-3xl">
           <Link
@@ -93,7 +83,11 @@ export default function SitePage({ params }: Props) {
             <div className="flex gap-2">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded bg-white/5">
                 <Image
-                  src={listing.logo}
+                  src={listingLogoImageSrc(
+                    listing.slug,
+                    listing.categorySlug,
+                    listing.logo,
+                  )}
                   alt=""
                   fill
                   className="object-cover"
@@ -105,10 +99,11 @@ export default function SitePage({ params }: Props) {
                   <h1 className="text-sm font-bold leading-tight text-white sm:text-base">
                     {listing.name}
                   </h1>
-                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-amber-400">
-                    <IconStarTiny className="h-2.5 w-2.5 text-amber-400" />
-                    {listing.rating.toFixed(1)}
-                  </span>
+                  {listing.tag ? (
+                    <span className="rounded-full border border-white/10 px-2 py-0.5 text-[9px] text-slate-400">
+                      {listing.tag}
+                    </span>
+                  ) : null}
                   <Badge tone="secondary" className="px-1 py-0 text-[8px]">
                     {listing.categoryLabel}
                   </Badge>

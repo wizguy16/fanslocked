@@ -6,12 +6,12 @@
  */
 
 import Link from "next/link";
-import { Star } from "lucide-react";
 import { cn, clampTagline } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
 import { FlListingBlurb } from "@/components/fanslocked-home/fl-listing-blurb";
 import { FlListingLogo } from "@/components/fanslocked-home/fl-listing-logo";
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
+import { listingScreenshotImageSrc } from "@/lib/listing-site-images";
 
 export type FlCardFeaturedVariant = "rail" | "portrait" | "stacked";
 
@@ -33,7 +33,11 @@ export function FlCardFeatured({
   const p = listing.preview?.trim();
   const hasPreview = Boolean(p);
   const isStacked = variant === "stacked";
-  const coverSrc = listing.image?.trim() || listing.logo;
+  const coverSrc = listingScreenshotImageSrc(
+    listing.slug,
+    listing.categorySlug,
+    listing.image ?? listing.logo,
+  );
 
   if (variant === "portrait") {
     return (
@@ -64,13 +68,6 @@ export function FlCardFeatured({
           #{rank}
         </span>
         <div className="relative z-[1] mt-auto flex flex-col gap-3 p-5 pt-16">
-          <div className="flex items-center gap-2 text-sm font-semibold tabular-nums text-zinc-200">
-            <Star
-              className="h-4 w-4 shrink-0 fill-[#FF7A00] text-[#FF7A00]"
-              aria-hidden
-            />
-            {listing.rating.toFixed(1)}
-          </div>
           <span className="text-lg font-bold leading-tight tracking-tight text-white">
             {listing.name}
           </span>
@@ -108,7 +105,12 @@ export function FlCardFeatured({
 
   const logoBlock = (
     <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
-      <FlListingLogo logo={listing.logo} websiteUrl={listing.website_url} />
+      <FlListingLogo
+        slug={listing.slug}
+        categorySlug={listing.categorySlug}
+        websiteUrl={listing.website_url}
+        fallbackLogo={listing.logo}
+      />
     </div>
   );
 

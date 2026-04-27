@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedVRPornRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   description: string;
   preview: string;
@@ -20,7 +21,6 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
   {
     name: "VRPorn",
     slug: "vrporn",
-    logo: "https://logo.clearbit.com/vrporn.com",
     website: "https://vrporn.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -32,7 +32,6 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
   {
     name: "POVR",
     slug: "povr",
-    logo: "https://logo.clearbit.com/povr.com",
     website: "https://povr.com",
     payout: "$120 PPS",
     difficulty: "Easy",
@@ -44,7 +43,6 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
   {
     name: "VRBangers",
     slug: "vrbangers",
-    logo: "https://logo.clearbit.com/vrbangers.com",
     website: "https://vrbangers.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -56,7 +54,6 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
   {
     name: "SexLikeReal",
     slug: "sexlikereal",
-    logo: "https://logo.clearbit.com/sexlikereal.com",
     website: "https://sexlikereal.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -68,67 +65,66 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
   {
     name: "VirtualRealPorn",
     slug: "virtualrealporn",
-    logo: "https://logo.clearbit.com/virtualrealporn.com",
     website: "https://virtualrealporn.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Studio",
-    description: "Realistic VR storytelling platform.",
+    description:
+      "Story-driven VR scenes with strong production quality and immersive camera work designed for headset viewing.",
     preview:
-      "VirtualRealPorn focuses on immersive storytelling and realism, helping convert users looking for deeper VR experiences.",
+      "Story-driven VR scenes with strong production quality and immersive camera work designed for headset viewing.",
   },
   {
     name: "Naughty America VR",
     slug: "naughty-america-vr",
-    logo: "https://logo.clearbit.com/naughtyamerica.com",
     website: "https://naughtyamerica.com",
     payout: "$100+ PPS",
     difficulty: "Easy",
     type: "Premium VR",
-    description: "Premium VR from a top studio brand.",
+    description:
+      "High-end studio VR with polished scenes and consistent production across a large catalog.",
     preview:
-      "Naughty America VR combines premium branding with immersive VR scenes, making it a strong performer for high-value traffic.",
+      "High-end studio VR with polished scenes and consistent production across a large catalog.",
   },
   {
     name: "BadoinkVR",
     slug: "badoinkvr",
-    logo: "https://logo.clearbit.com/badoinkvr.com",
     website: "https://badoinkvr.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Platform",
-    description: "Long-standing VR platform with bundles.",
+    description:
+      "Large VR library with bundled access across multiple studios and frequent content updates.",
     preview:
-      "BadoinkVR offers bundled VR content across multiple niches, increasing user value and affiliate earnings.",
+      "Large VR library with bundled access across multiple studios and frequent content updates.",
   },
   {
     name: "Virtual Taboo",
     slug: "virtual-taboo",
-    logo: "https://logo.clearbit.com/virtualtaboo.com",
     website: "https://virtualtaboo.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Niche VR",
-    description: "Story-driven immersive VR scenes.",
+    description:
+      "Narrative-focused VR experiences with interactive-style scenes and immersive storytelling.",
     preview:
-      "Virtual Taboo focuses on immersive storytelling that keeps users engaged and increases session time.",
+      "Narrative-focused VR experiences with interactive-style scenes and immersive storytelling.",
   },
   {
     name: "WankzVR",
     slug: "wankzvr",
-    logo: "https://logo.clearbit.com/wankzvr.com",
     website: "https://wankzvr.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Studio",
-    description: "High-volume VR content studio.",
+    description:
+      "High-volume VR platform with a wide range of scenes and regular new releases.",
     preview:
-      "WankzVR produces a steady stream of content, helping affiliates convert repeat traffic consistently.",
+      "High-volume VR platform with a wide range of scenes and regular new releases.",
   },
   {
     name: "AdultTime VR",
     slug: "adulttime-vr",
-    logo: "https://logo.clearbit.com/adulttime.com",
     website: "https://adulttime.com",
     payout: "$120 PPS",
     difficulty: "Easy",
@@ -140,7 +136,6 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
   {
     name: "Brazzers VR",
     slug: "brazzers-vr",
-    logo: "https://logo.clearbit.com/brazzers.com",
     website: "https://brazzers.com",
     payout: "$100+ PPS",
     difficulty: "Easy",
@@ -152,7 +147,6 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
   {
     name: "CzechVR",
     slug: "czechvr",
-    logo: "https://logo.clearbit.com/czechvr.com",
     website: "https://czechvr.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -168,7 +162,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "MilfVR",
     slug: "milfvr",
-    logo: "https://logo.clearbit.com/milfvr.com",
     website: "https://milfvr.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -180,7 +173,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "WetVR",
     slug: "wetvr",
-    logo: "https://logo.clearbit.com/wetvr.com",
     website: "https://wetvr.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -192,7 +184,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "VRHush",
     slug: "vrhush",
-    logo: "https://logo.clearbit.com/vrhush.com",
     website: "https://vrhush.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -204,7 +195,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "VRCosplayX",
     slug: "vrcosplayx",
-    logo: "https://logo.clearbit.com/vrcosplayx.com",
     website: "https://vrcosplayx.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -216,7 +206,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "VRSpy",
     slug: "vrspy",
-    logo: "https://logo.clearbit.com/vrspy.com",
     website: "https://vrspy.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -228,7 +217,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "RealPornstarsVR",
     slug: "realpornstarsvr",
-    logo: "https://logo.clearbit.com/realpornstarsvr.com",
     website: "https://realpornstarsvr.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -240,7 +228,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "GroobyVR",
     slug: "groobyvr",
-    logo: "https://logo.clearbit.com/groobyvr.com",
     website: "https://groobyvr.com",
     payout: "RevShare",
     difficulty: "Medium",
@@ -252,7 +239,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "KinkVR",
     slug: "kinkvr",
-    logo: "https://logo.clearbit.com/kinkvr.com",
     website: "https://kinkvr.com",
     payout: "RevShare",
     difficulty: "Medium",
@@ -264,7 +250,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "PornCornVR",
     slug: "porncornvr",
-    logo: "https://logo.clearbit.com/porncornvr.com",
     website: "https://porncornvr.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -276,7 +261,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "ZexyVR",
     slug: "zexyvr",
-    logo: "https://logo.clearbit.com/zexyvr.com",
     website: "https://zexyvr.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -288,7 +272,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "SexBabesVR",
     slug: "sexbabesvr",
-    logo: "https://logo.clearbit.com/sexbabesvr.com",
     website: "https://sexbabesvr.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -300,7 +283,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "BlushEroticaVR",
     slug: "blusheroticavr",
-    logo: "https://logo.clearbit.com/blusherotica.com",
     website: "https://blusherotica.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -312,7 +294,6 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
   {
     name: "StripChat VR",
     slug: "stripchat-vr",
-    logo: "https://logo.clearbit.com/stripchat.com",
     website: "https://stripchat.com",
     payout: "$168 PPS",
     difficulty: "Easy",
@@ -359,11 +340,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

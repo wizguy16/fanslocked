@@ -7,6 +7,7 @@ import { buildCuratedLiveCamsListings } from "@/lib/curated-live-cams";
 import { buildCuratedVRPornListings } from "@/lib/curated-vr-porn";
 import { buildCuratedAIGeneratedListings } from "@/lib/curated-ai-generated";
 import { buildCuratedFanSubscriptionPlatformListings } from "@/lib/curated-fan-subscription-platforms";
+import { buildCuratedEscortDirectoryListings } from "@/lib/curated-escort-directories";
 import { buildCuratedMaleCompanionsListings } from "@/lib/curated-male-companions";
 import { buildCuratedHookupListings } from "@/lib/curated-hookup";
 import { buildCuratedSexChatListings } from "@/lib/curated-sexchat";
@@ -15,6 +16,7 @@ import { buildCuratedAmateurListings } from "@/lib/curated-amateur";
 import { buildCuratedGamingListings } from "@/lib/curated-gaming";
 import { buildCuratedHentaiListings } from "@/lib/curated-hentai";
 import { buildCuratedFetishBdsmListings } from "@/lib/curated-fetish-bdsm";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 
 const LISTINGS_PER_CATEGORY = 25;
 
@@ -260,7 +262,8 @@ function tagsFor(rand: () => number, categorySlug: string): string[] {
     "fetish-bdsm": ["fetish", "bdsm", "kink", "niche"],
     "ai-generated": ["ai", "generator", "companion", "recurring"],
     "fan-subscription-platforms": ["creator", "subscriptions", "fan-platform", "revshare"],
-    "male-companions": ["male", "companions", "lgbt"],
+    "escort-directories": ["directory", "listings", "regional", "verified"],
+    "male-companions": ["male", "companions", "lgbt", "massage"],
     "sex-chat": ["sexting", "chat", "credits", "private"],
     search: ["search", "directory", "discovery", "tube"],
     amateur: ["amateur", "creator", "homemade", "clips"],
@@ -325,6 +328,12 @@ export function generateAllListings(): Listing[] {
     }
     if (cat.slug === "vr") {
       const curated = buildCuratedVRPornListings(cat);
+      out.push(...curated);
+      global += curated.length;
+      continue;
+    }
+    if (cat.slug === "escort-directories") {
+      const curated = buildCuratedEscortDirectoryListings(cat);
       out.push(...curated);
       global += curated.length;
       continue;
@@ -394,6 +403,7 @@ export function generateAllListings(): Listing[] {
         affiliate_url: buildListingOutboundPath(slug),
         website_url: websiteUrl(slug),
         rating,
+        tag: curatedListingTag(cat.slug, slug),
         added_date: addedDate(seed),
         popularity_score,
       });

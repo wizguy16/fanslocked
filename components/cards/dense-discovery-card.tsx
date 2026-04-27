@@ -6,6 +6,7 @@ import { useCallback, useRef } from "react";
 import { cn, clampTagline } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
 import { resolveVisualBadge } from "@/lib/visual-badge";
+import { listingLogoImageSrc } from "@/lib/listing-site-images";
 import { VisualBadgeIcon } from "@/components/icons/mini-icons";
 
 export function DenseDiscoveryCard({
@@ -51,7 +52,11 @@ export function DenseDiscoveryCard({
     >
       <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md bg-white/5">
         <Image
-          src={listing.logo}
+          src={listingLogoImageSrc(
+            listing.slug,
+            listing.categorySlug,
+            listing.logo,
+          )}
           alt=""
           fill
           className="object-cover"

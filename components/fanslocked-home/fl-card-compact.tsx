@@ -34,12 +34,13 @@ export function FlCardCompact({ listing, className, teaser }: Props) {
     >
       <div className="flex items-center justify-between">
         <div className="h-9 w-9 shrink-0 overflow-hidden rounded-[8px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
-          <FlListingLogo logo={listing.logo} websiteUrl={listing.website_url} />
+          <FlListingLogo
+            slug={listing.slug}
+            categorySlug={listing.categorySlug}
+            websiteUrl={listing.website_url}
+            fallbackLogo={listing.logo}
+          />
         </div>
-
-        <span className="text-[12px] font-medium tabular-nums text-[var(--text-secondary)]">
-          ★ {listing.rating.toFixed(1)}
-        </span>
       </div>
 
       <div className="mt-2 min-w-0">

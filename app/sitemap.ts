@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/categories",
     "/explore",
     "/blog",
+    "/guides/onlyfans-alternatives",
     "/privacy",
     "/terms",
     "/disclosure",
@@ -44,5 +45,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...categories, ...sites, ...posts];
+  const postSlugs = new Set(BLOG_POSTS.map((p) => p.slug));
+  const autoCategoryBlogs: MetadataRoute.Sitemap = CATEGORIES.filter(
+    (c) => !postSlugs.has(c.slug),
+  ).map((c) => ({
+    url: `${base}/blog/${c.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.55,
+  }));
+
+  return [...staticRoutes, ...categories, ...sites, ...posts, ...autoCategoryBlogs];
 }

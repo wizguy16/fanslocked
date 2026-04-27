@@ -19,6 +19,7 @@ const HOME_CATEGORY_SLUGS = [
   "amateur",
   "hookup",
   "sex-chat",
+  "escort-directories",
   "male-companions",
 ] as const;
 

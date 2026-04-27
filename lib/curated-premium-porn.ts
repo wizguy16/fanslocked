@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedPremiumPornRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   preview: string;
 };
@@ -16,7 +17,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Brazzers",
     slug: "brazzers",
-    logo: "https://logo.clearbit.com/brazzers.com",
     website: "https://www.brazzers.com",
     preview:
       "Brazzers is one of the most recognized premium porn networks, known for high-budget scenes, top-tier performers, and polished production quality.",
@@ -24,7 +24,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "BangBros",
     slug: "bangbros",
-    logo: "https://logo.clearbit.com/bangbros.com",
     website: "https://www.bangbros.com",
     preview:
       "BangBros delivers a massive collection of raw, high-energy scenes across dozens of popular series, updated daily with exclusive content.",
@@ -32,7 +31,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "AdultTime",
     slug: "adulttime",
-    logo: "https://logo.clearbit.com/adulttime.com",
     website: "https://www.adulttime.com",
     preview:
       "AdultTime is an all-in-one premium platform offering access to multiple top studios with one subscription, often called the Netflix of porn.",
@@ -40,7 +38,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "TeamSkeet",
     slug: "teamskeet",
-    logo: "https://logo.clearbit.com/teamskeet.com",
     website: "https://www.teamskeet.com",
     preview:
       "TeamSkeet features a wide range of popular series and exclusive scenes, focusing on high-quality amateur-style and studio content.",
@@ -48,7 +45,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "MYLF",
     slug: "mylf",
-    logo: "https://logo.clearbit.com/mylf.com",
     website: "https://www.mylf.com",
     preview:
       "MYLF specializes in premium MILF-focused content with high production value and a strong lineup of experienced performers.",
@@ -56,7 +52,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Naughty America",
     slug: "naughty-america",
-    logo: "https://logo.clearbit.com/naughtyamerica.com",
     website: "https://www.naughtyamerica.com",
     preview:
       "Naughty America offers high-definition scenes with a focus on immersive storytelling and VR-compatible experiences.",
@@ -64,7 +59,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Vixen",
     slug: "vixen",
-    logo: "https://logo.clearbit.com/vixen.com",
     website: "https://www.vixen.com",
     preview:
       "Vixen is known for cinematic adult films with stunning visuals, luxury aesthetics, and some of the industry’s top talent.",
@@ -72,7 +66,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Blacked",
     slug: "blacked",
-    logo: "https://logo.clearbit.com/blacked.com",
     website: "https://www.blacked.com",
     preview:
       "Blacked delivers high-end cinematic scenes with a signature visual style and strong storytelling elements.",
@@ -80,7 +73,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Reality Kings",
     slug: "reality-kings",
-    logo: "https://logo.clearbit.com/realitykings.com",
     website: "https://www.realitykings.com",
     preview:
       "Reality Kings offers a huge library of exclusive scenes and long-running series featuring popular performers and real-world settings.",
@@ -88,7 +80,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Digital Playground",
     slug: "digital-playground",
-    logo: "https://logo.clearbit.com/digitalplayground.com",
     website: "https://www.digitalplayground.com",
     preview:
       "Digital Playground produces high-budget, story-driven adult films with a focus on visual effects and premium quality.",
@@ -96,7 +87,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Babes",
     slug: "babes",
-    logo: "https://logo.clearbit.com/babes.com",
     website: "https://www.babes.com",
     preview:
       "Babes focuses on sensual, high-quality scenes featuring top performers and a more intimate, cinematic style.",
@@ -104,7 +94,6 @@ export const PREMIUM_PORN_FEATURED: CuratedPremiumPornRow[] = [
   {
     name: "Private.com",
     slug: "private",
-    logo: "https://logo.clearbit.com/private.com",
     website: "https://www.private.com",
     preview:
       "Private.com delivers European-style adult content with elegant production, strong narratives, and exclusive scenes.",
@@ -116,7 +105,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Mofos",
     slug: "mofos",
-    logo: "https://logo.clearbit.com/mofos.com",
     website: "https://www.mofos.com",
     preview:
       "Mofos is known for its casual, street-style adult content with a wide range of popular series and frequent updates.",
@@ -124,7 +112,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Evil Angel",
     slug: "evil-angel",
-    logo: "https://logo.clearbit.com/evilangel.com",
     website: "https://www.evilangel.com",
     preview:
       "Evil Angel offers a massive catalog of director-driven content, featuring unique styles and niche categories.",
@@ -132,7 +119,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "PornBox",
     slug: "pornbox",
-    logo: "https://logo.clearbit.com/pornbox.com",
     website: "https://www.pornbox.com",
     preview:
       "PornBox combines content from multiple studios into one platform, offering a large and diverse premium library.",
@@ -140,7 +126,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Nubiles Porn",
     slug: "nubiles-porn",
-    logo: "https://logo.clearbit.com/nubiles-porn.com",
     website: "https://nubiles-porn.com",
     preview:
       "Nubiles focuses on youthful, high-quality scenes with clean visuals and a polished production style.",
@@ -148,7 +133,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Jules Jordan",
     slug: "jules-jordan",
-    logo: "https://logo.clearbit.com/julesjordan.com",
     website: "https://www.julesjordan.com",
     preview:
       "Jules Jordan is known for high-performance scenes and a strong reputation for quality and consistency.",
@@ -156,7 +140,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "SisLovesMe",
     slug: "sislovesme",
-    logo: "https://logo.clearbit.com/sislovesme.com",
     website: "https://www.sislovesme.com",
     preview:
       "SisLovesMe features storyline-driven scenes with popular themes and high-quality production value.",
@@ -164,7 +147,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Tiny4K",
     slug: "tiny4k",
-    logo: "https://logo.clearbit.com/tiny4k.com",
     website: "https://www.tiny4k.com",
     preview:
       "Tiny4K delivers ultra-HD content with a focus on petite performers and crisp, modern visuals.",
@@ -172,7 +154,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Passion HD",
     slug: "passion-hd",
-    logo: "https://logo.clearbit.com/passionhd.com",
     website: "https://www.passionhd.com",
     preview:
       "Passion HD focuses on sensual, story-driven scenes with high-definition production and elegant direction.",
@@ -180,7 +161,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "New Sensations",
     slug: "new-sensations",
-    logo: "https://logo.clearbit.com/newsensations.com",
     website: "https://www.newsensations.com",
     preview:
       "New Sensations is a long-running studio known for its wide range of themed content and consistent releases.",
@@ -188,7 +168,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "CherryPimps",
     slug: "cherrypimps",
-    logo: "https://logo.clearbit.com/cherrypimps.com",
     website: "https://www.cherrypimps.com",
     preview:
       "CherryPimps blends amateur and professional content with a focus on variety and frequent updates.",
@@ -196,7 +175,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "Deeper.com",
     slug: "deeper",
-    logo: "https://logo.clearbit.com/deeper.com",
     website: "https://www.deeper.com",
     preview:
       "Deeper offers intense, cinematic experiences with a strong focus on storytelling and visual depth.",
@@ -204,7 +182,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "21Sextury",
     slug: "21sextury",
-    logo: "https://logo.clearbit.com/21sextury.com",
     website: "https://www.21sextury.com",
     preview:
       "21Sextury delivers European-style adult content with a diverse selection of scenes and performers.",
@@ -212,7 +189,6 @@ export const PREMIUM_PORN_GRID: CuratedPremiumPornRow[] = [
   {
     name: "PornPros",
     slug: "pornpros",
-    logo: "https://logo.clearbit.com/pornpros.com",
     website: "https://www.pornpros.com",
     preview:
       "PornPros features multiple popular brands under one network, offering a wide range of premium scenes.",
@@ -255,11 +231,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

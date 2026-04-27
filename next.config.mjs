@@ -9,8 +9,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "logo.clearbit.com",
-        pathname: "/**",
+        hostname: "www.google.com",
+        pathname: "/s2/favicons/**",
       },
     ],
   },

@@ -25,10 +25,16 @@ export const CATEGORIES: CategoryDef[] = [
       "Subscription studios with licensed scenes, downloads where available, and fewer ads.",
   },
   {
+    slug: "escort-directories",
+    label: "Escort Directories",
+    description:
+      "Curated directories for browsing escort listings across regions and niches, including male, female, and specialty services.",
+  },
+  {
     slug: "male-companions",
     label: "Male Companions",
     description:
-      "Directories, massage listings, and creator platforms with clear compliance — same brands may also appear under fan subscriptions where relevant.",
+      "Platforms focused on male escorts and companions, including directories and listing services tailored for male providers.",
   },
   {
     slug: "vr",
@@ -46,7 +52,7 @@ export const CATEGORIES: CategoryDef[] = [
     slug: "fan-subscription-platforms",
     label: "Fan Subscription Platforms",
     description:
-      "Legit creator subscriptions and fan monetization — revshare-friendly platforms, not leaks or reposts.",
+      "Creator-driven platforms where users subscribe to exclusive content from independent adult creators.",
   },
   {
     slug: "amateur",
@@ -70,7 +76,7 @@ export const CATEGORIES: CategoryDef[] = [
     slug: "sex-chat",
     label: "Sex Chat / Sexting",
     description:
-      "Pay-per-message, credits, and private chat — fast-converting when creatives are compliant and age-gated.",
+      "Sex chat and sexting platforms—pay-per-message apps, private messaging, and real-time adult chat built for engagement, fast replies, and compliant outbound funnels.",
   },
   {
     slug: "hentai-anime",

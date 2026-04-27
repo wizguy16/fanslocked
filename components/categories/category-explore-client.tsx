@@ -10,15 +10,16 @@ import type { CategoryDef } from "@/lib/categories";
 import type { Listing } from "@/types/listing";
 import { cn, clampTagline } from "@/lib/utils";
 import { CategoryIcon } from "@/components/icons/category-icon";
-import { IconStarTiny, VisualBadgeIcon } from "@/components/icons/mini-icons";
+import { VisualBadgeIcon } from "@/components/icons/mini-icons";
 import { resolveVisualBadge } from "@/lib/visual-badge";
+import { listingLogoImageSrc } from "@/lib/listing-site-images";
 
-type SortId = "rating" | "newest" | "popular";
+type SortId = "recommended" | "newest" | "popular";
 type FilterId = "free" | "premium" | "live" | "ai";
 type GridMode = "compact" | "comfortable";
 
 const SORT_OPTIONS: { id: SortId; label: string }[] = [
-  { id: "rating", label: "Highest rated" },
+  { id: "recommended", label: "Recommended" },
   { id: "newest", label: "Newest" },
   { id: "popular", label: "Popular" },
 ];
@@ -81,7 +82,11 @@ function CompactListingCard({ listing }: { listing: Listing }) {
       <div className={cn("flex gap-2", vb ? "pr-10" : undefined)}>
         <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-md bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.05)]">
           <Image
-            src={listing.logo}
+            src={listingLogoImageSrc(
+              listing.slug,
+              listing.categorySlug,
+              listing.logo,
+            )}
             alt=""
             fill
             className="object-cover"
@@ -92,10 +97,9 @@ function CompactListingCard({ listing }: { listing: Listing }) {
           <p className="truncate text-[11px] font-semibold leading-tight text-white">
             {listing.name}
           </p>
-          <p className="mt-0.5 inline-flex items-center gap-0.5 text-[10px] font-medium text-[#6B7280]">
-            <IconStarTiny className="h-2.5 w-2.5 text-[#6B7280]" />
-            {listing.rating.toFixed(1)}
-          </p>
+          {listing.tag ? (
+            <p className="mt-0.5 truncate text-[10px] font-medium text-[#6B7280]">{listing.tag}</p>
+          ) : null}
         </div>
       </div>
       <p className="mt-1.5 line-clamp-2 max-h-0 overflow-hidden text-[10px] leading-snug text-[#8B909A] opacity-0 transition-[max-height,opacity] duration-200 ease-out group-hover:max-h-[3.25rem] group-hover:opacity-100">
@@ -126,7 +130,11 @@ function TopPickCard({ listing }: { listing: Listing }) {
       <div className={cn("flex flex-1 gap-3", vb ? "pr-12" : undefined)}>
         <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.06)]">
           <Image
-            src={listing.logo}
+            src={listingLogoImageSrc(
+              listing.slug,
+              listing.categorySlug,
+              listing.logo,
+            )}
             alt=""
             fill
             className="object-cover"
@@ -143,11 +151,10 @@ function TopPickCard({ listing }: { listing: Listing }) {
           <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-[#8B909A]">
             {clampTagline(listing.description, 100)}
           </p>
-          <div className="mt-2 flex items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-0.5 text-xs text-[#6B7280]">
-              <IconStarTiny className="h-3 w-3" />
-              {listing.rating.toFixed(1)}
-            </span>
+          <div className="mt-2 flex items-center justify-end gap-2">
+            {listing.tag ? (
+              <span className="mr-auto min-w-0 truncate text-[10px] text-[#6B7280]">{listing.tag}</span>
+            ) : null}
             <a
               href={listing.affiliate_url}
               target="_blank"
@@ -194,7 +201,7 @@ function BreakBand({
       >
         <Gem className="h-4 w-4 shrink-0 text-[#D4A574]" aria-hidden />
         <p className="text-[11px] font-medium text-[#A0A6B1]">
-          <span className="text-white">Hidden gems</span> — strong scores, less
+          <span className="text-white">Hidden gems</span> — strong fits, less
           mainstream noise. Worth a bookmark.
         </p>
       </div>
@@ -268,7 +275,7 @@ type Props = {
 };
 
 export function CategoryExploreClient({ cat, categories, items }: Props) {
-  const [sort, setSort] = useState<SortId>("rating");
+  const [sort, setSort] = useState<SortId>("recommended");
   const [filters, setFilters] = useState<Set<FilterId>>(new Set());
   const [query, setQuery] = useState("");
   const [gridMode, setGridMode] = useState<GridMode>("compact");
@@ -278,7 +285,7 @@ export function CategoryExploreClient({ cat, categories, items }: Props) {
     let list = items.filter((l) => matchesFilters(l, filters));
     list = list.filter((l) => matchesSearch(l, query));
     const copy = [...list];
-    if (sort === "rating") copy.sort((a, b) => b.rating - a.rating);
+    if (sort === "recommended") copy.sort((a, b) => b.rating - a.rating);
     if (sort === "newest")
       copy.sort(
         (a, b) =>

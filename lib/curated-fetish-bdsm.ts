@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedFetishRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -21,7 +22,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "Kink",
     slug: "kink",
-    logo: "https://logo.clearbit.com/kink.com",
     website: "https://www.kink.com",
     payout: "High",
     difficulty: "Medium",
@@ -32,7 +32,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "Clips4Sale",
     slug: "clips4sale-fetish",
-    logo: "https://logo.clearbit.com/clips4sale.com",
     website: "https://www.clips4sale.com",
     payout: "High",
     difficulty: "Easy",
@@ -43,7 +42,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "ManyVids",
     slug: "manyvids-fetish",
-    logo: "https://logo.clearbit.com/manyvids.com",
     website: "https://www.manyvids.com",
     payout: "High",
     difficulty: "Easy",
@@ -54,7 +52,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "iWantClips",
     slug: "iwantclips-fetish",
-    logo: "https://logo.clearbit.com/iwantclips.com",
     website: "https://iwantclips.com",
     payout: "High",
     difficulty: "Easy",
@@ -65,7 +62,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "Fetish Network",
     slug: "fetish-network",
-    logo: "https://logo.clearbit.com/fetishnetwork.com",
     website: "https://www.fetishnetwork.com",
     payout: "High",
     difficulty: "Medium",
@@ -76,7 +72,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "KinkVR",
     slug: "kinkvr-fetish",
-    logo: "https://logo.clearbit.com/kinkvr.com",
     website: "https://www.kinkvr.com",
     payout: "High",
     difficulty: "Medium",
@@ -87,7 +82,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "SexLikeReal",
     slug: "sexlikereal-fetish",
-    logo: "https://logo.clearbit.com/sexlikereal.com",
     website: "https://www.sexlikereal.com",
     payout: "High",
     difficulty: "Medium",
@@ -98,7 +92,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "Alt",
     slug: "alt",
-    logo: "https://logo.clearbit.com/alt.com",
     website: "https://www.alt.com",
     payout: "High",
     difficulty: "Easy",
@@ -109,7 +102,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "Bondage",
     slug: "bondage",
-    logo: "https://logo.clearbit.com/bondage.com",
     website: "https://www.bondage.com",
     payout: "High",
     difficulty: "Easy",
@@ -120,7 +112,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "Whiplr",
     slug: "whiplr",
-    logo: "https://logo.clearbit.com/whiplr.com",
     website: "https://www.whiplr.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -131,7 +122,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "Domination",
     slug: "domination",
-    logo: "https://logo.clearbit.com/domination.com",
     website: "https://www.domination.com",
     payout: "High",
     difficulty: "Medium",
@@ -142,7 +132,6 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
   {
     name: "ModelCentro",
     slug: "modelcentro-fetish",
-    logo: "https://logo.clearbit.com/modelcentro.com",
     website: "https://modelcentro.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -156,7 +145,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "ThisVid",
     slug: "thisvid",
-    logo: "https://logo.clearbit.com/thisvid.com",
     website: "https://thisvid.com",
     payout: "Low",
     difficulty: "Easy",
@@ -167,7 +155,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "BoundHub",
     slug: "boundhub",
-    logo: "https://logo.clearbit.com/boundhub.com",
     website: "https://boundhub.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -178,7 +165,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "Motherless",
     slug: "motherless",
-    logo: "https://logo.clearbit.com/motherless.com",
     website: "https://motherless.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -189,7 +175,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "Heavy-R",
     slug: "heavy-r",
-    logo: "https://logo.clearbit.com/heavy-r.com",
     website: "https://heavy-r.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -200,7 +185,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "HypnoTube",
     slug: "hypnotube",
-    logo: "https://logo.clearbit.com/hypnotube.com",
     website: "https://hypnotube.com",
     payout: "Low",
     difficulty: "Easy",
@@ -211,7 +195,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "Pervertium",
     slug: "pervertium",
-    logo: "https://logo.clearbit.com/pervertium.com",
     website: "https://pervertium.com",
     payout: "Medium",
     difficulty: "Easy",
@@ -222,7 +205,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "BDSMX",
     slug: "bdsmx",
-    logo: "https://logo.clearbit.com/bdsmx.tube",
     website: "https://bdsmx.tube",
     payout: "Low",
     difficulty: "Easy",
@@ -233,7 +215,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "FemdomXXX",
     slug: "femdomxxx",
-    logo: "https://logo.clearbit.com/femdomxxx.com",
     website: "https://femdomxxx.com",
     payout: "Low",
     difficulty: "Easy",
@@ -244,7 +225,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "FemdomUp",
     slug: "femdomup",
-    logo: "https://logo.clearbit.com/femdomup.net",
     website: "https://femdomup.net",
     payout: "Low",
     difficulty: "Easy",
@@ -255,7 +235,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "YoungDommes",
     slug: "youngdommes",
-    logo: "https://logo.clearbit.com/youngdommes.net",
     website: "https://youngdommes.net",
     payout: "Low",
     difficulty: "Easy",
@@ -266,7 +245,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "Giantess",
     slug: "giantess",
-    logo: "https://logo.clearbit.com/giantessworld.net",
     website: "https://giantessworld.net",
     payout: "Low",
     difficulty: "Easy",
@@ -277,7 +255,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "Tickle Porn",
     slug: "tickle",
-    logo: "https://logo.clearbit.com/tickleporn.com",
     website: "https://tickleporn.com",
     payout: "Low",
     difficulty: "Easy",
@@ -288,7 +265,6 @@ export const FETISH_GRID: CuratedFetishRow[] = [
   {
     name: "Ball Busting",
     slug: "ballbusting",
-    logo: "https://logo.clearbit.com/ballbusting.cc",
     website: "https://ballbusting.cc",
     payout: "Low",
     difficulty: "Easy",
@@ -334,11 +310,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

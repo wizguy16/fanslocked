@@ -7,7 +7,8 @@ import { cn } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
 import { clampTagline } from "@/lib/utils";
 import type { VisualBadgeKind } from "@/lib/visual-badge";
-import { IconStarTiny, VisualBadgeIcon } from "@/components/icons/mini-icons";
+import { VisualBadgeIcon } from "@/components/icons/mini-icons";
+import { listingLogoImageSrc } from "@/lib/listing-site-images";
 
 const HIGHLIGHT: { kind: VisualBadgeKind; label: string }[] = [
   { kind: "top", label: "Best" },
@@ -60,7 +61,11 @@ export function FeaturedDiscoveryCard({
       <div className="mt-6 flex flex-1 gap-3">
         <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md bg-white/5">
           <Image
-            src={listing.logo}
+            src={listingLogoImageSrc(
+              listing.slug,
+              listing.categorySlug,
+              listing.logo,
+            )}
             alt=""
             fill
             className="object-cover"
@@ -79,16 +84,17 @@ export function FeaturedDiscoveryCard({
               {clampTagline(listing.description, 56)}
             </p>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-400/90">
-              <IconStarTiny className="text-amber-400/90" />
-              {listing.rating.toFixed(1)}
-            </span>
+          <div className="grid grid-cols-[1fr_auto] items-center gap-2">
+            {listing.tag ? (
+              <span className="min-w-0 truncate text-[10px] font-medium text-slate-500">
+                {listing.tag}
+              </span>
+            ) : null}
             <a
               href={listing.affiliate_url}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              className="inline-flex h-8 min-w-[88px] shrink-0 items-center justify-center rounded-lg bg-[#FF7A00] px-3 text-xs font-bold text-black transition hover:scale-[1.03] hover:shadow-[0_0_20px_-4px_rgba(255,122,0,0.65)]"
+              className="col-start-2 inline-flex h-8 min-w-[88px] shrink-0 items-center justify-center rounded-lg bg-[#FF7A00] px-3 text-xs font-bold text-black transition hover:scale-[1.03] hover:shadow-[0_0_20px_-4px_rgba(255,122,0,0.65)]"
             >
               Visit →
             </a>

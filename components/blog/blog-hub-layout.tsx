@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FlCardCompact } from "@/components/fanslocked-home/fl-card-compact";
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
+import { SitePreview } from "@/components/shared/site-preview";
 import { clampTagline } from "@/lib/utils";
 import type { BlogPost } from "@/lib/blog-posts";
 import type { Listing } from "@/types/listing";
@@ -32,7 +32,7 @@ export function BlogHubLayout({
   const updated = formatBlogHeroDate(post.date);
   const midPrompt =
     hub.midCtaPrompt ??
-    "Want the full ranked list with ratings and comparisons?";
+    "Want the full ranked list with comparisons?";
   const midButton =
     hub.midCtaButtonLabel ?? `View top ${categoryLabel} →`;
   const finalHead =
@@ -105,15 +105,16 @@ export function BlogHubLayout({
                     aria-label={`${l.name} — opens partner site`}
                     className="group block overflow-hidden rounded-[14px] border border-[rgba(255,255,255,0.06)] bg-[var(--bg-elevated)]"
                   >
-                    <div className="relative aspect-[16/10] w-full">
-                      <Image
-                        src={l.image}
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition duration-300 group-hover:scale-[1.02]"
-                      />
-                    </div>
+                    <SitePreview
+                      slug={l.slug}
+                      categorySlug={l.categorySlug}
+                      alt={`${l.name} preview`}
+                      fallbackScreenshot={l.screenshot}
+                      fallbackLogo={l.logo}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="aspect-[16/10] rounded-none border-0 bg-transparent"
+                      imageClassName="transition duration-300 group-hover:scale-[1.02]"
+                    />
                   </Link>
                 </div>
                 <div className={i % 2 === 1 ? "md:order-1" : ""}>

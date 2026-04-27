@@ -12,6 +12,7 @@ import {
   Camera,
   Glasses,
   Link2,
+  BookUser,
   Mars,
   MessageCircle,
   Palette,
@@ -36,6 +37,7 @@ const ICONS: Record<string, Icon> = {
   "hentai-anime": Palette,
   gaming: Gamepad2,
   "fetish-bdsm": Link2,
+  "escort-directories": BookUser,
   "male-companions": Mars,
 };
 

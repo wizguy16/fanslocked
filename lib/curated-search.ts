@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedSearchRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -19,7 +20,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "YesPornPlease",
     slug: "yespornplease",
-    logo: "https://logo.clearbit.com/yespornplease.com",
     website: "https://yespornplease.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -30,7 +30,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "PornMD",
     slug: "pornmd",
-    logo: "https://logo.clearbit.com/pornmd.com",
     website: "https://www.pornmd.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -41,7 +40,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "SpankBang Search",
     slug: "spankbang-search",
-    logo: "https://logo.clearbit.com/spankbang.com",
     website: "https://spankbang.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -52,7 +50,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "XNXX Search",
     slug: "xnxx-search",
-    logo: "https://logo.clearbit.com/xnxx.com",
     website: "https://www.xnxx.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -63,7 +60,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "XVideos Search",
     slug: "xvideos-search",
-    logo: "https://logo.clearbit.com/xvideos.com",
     website: "https://www.xvideos.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -74,7 +70,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "YouPorn Search",
     slug: "youporn-search",
-    logo: "https://logo.clearbit.com/youporn.com",
     website: "https://www.youporn.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -85,7 +80,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "Eporner",
     slug: "eporner",
-    logo: "https://logo.clearbit.com/eporner.com",
     website: "https://www.eporner.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -96,7 +90,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "RedTube",
     slug: "redtube",
-    logo: "https://logo.clearbit.com/redtube.com",
     website: "https://www.redtube.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -107,7 +100,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "Tnaflix",
     slug: "tnaflix",
-    logo: "https://logo.clearbit.com/tnaflix.com",
     website: "https://www.tnaflix.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -118,7 +110,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "KeezMovies",
     slug: "keezmovies",
-    logo: "https://logo.clearbit.com/keezmovies.com",
     website: "https://www.keezmovies.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -129,7 +120,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "Tube8",
     slug: "tube8",
-    logo: "https://logo.clearbit.com/tube8.com",
     website: "https://www.tube8.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -140,7 +130,6 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
     name: "DrTuber",
     slug: "drtuber",
-    logo: "https://logo.clearbit.com/drtuber.com",
     website: "https://www.drtuber.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -155,7 +144,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "Nudevista",
     slug: "nudevista",
-    logo: "https://logo.clearbit.com/nudevista.com",
     website: "https://www.nudevista.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -166,7 +154,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "FUQ",
     slug: "fuq",
-    logo: "https://logo.clearbit.com/fuq.com",
     website: "https://www.fuq.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -177,7 +164,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "Tubesafari",
     slug: "tubesafari",
-    logo: "https://logo.clearbit.com/tubesafari.com",
     website: "https://tubesafari.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -188,7 +174,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "AlohaTube",
     slug: "alohatube",
-    logo: "https://logo.clearbit.com/alohatube.com",
     website: "https://www.alohatube.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -199,7 +184,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "iXXX",
     slug: "ixxx",
-    logo: "https://logo.clearbit.com/ixxx.com",
     website: "https://www.ixxx.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -210,7 +194,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "PeekVids",
     slug: "peekvids",
-    logo: "https://logo.clearbit.com/peekvids.com",
     website: "https://www.peekvids.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -221,7 +204,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "Porntrex",
     slug: "porntrex",
-    logo: "https://logo.clearbit.com/porntrex.com",
     website: "https://www.porntrex.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -232,7 +214,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "HQporner",
     slug: "hqporner",
-    logo: "https://logo.clearbit.com/hqporner.com",
     website: "https://hqporner.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -243,7 +224,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "Beeg",
     slug: "beeg",
-    logo: "https://logo.clearbit.com/beeg.com",
     website: "https://www.beeg.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -254,7 +234,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "SunPorno",
     slug: "sunporno",
-    logo: "https://logo.clearbit.com/sunporno.com",
     website: "https://www.sunporno.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -265,7 +244,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "4Tube",
     slug: "4tube",
-    logo: "https://logo.clearbit.com/4tube.com",
     website: "https://www.4tube.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -276,7 +254,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "xHamster Search",
     slug: "xhamster-search",
-    logo: "https://logo.clearbit.com/xhamster.com",
     website: "https://www.xhamster.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -287,7 +264,6 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "PornHD",
     slug: "pornhd",
-    logo: "https://logo.clearbit.com/pornhd.com",
     website: "https://www.pornhd.com",
     payout: "Indirect",
     difficulty: "Easy",
@@ -333,11 +309,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
 import { FlListingLogo } from "@/components/fanslocked-home/fl-listing-logo";
@@ -40,23 +39,16 @@ export function CategoryQuickPicks({ items }: Props) {
               <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-lg border border-[#564338] bg-[#1e1f25]">
                 <div className="relative h-10 w-10">
                   <FlListingLogo
-                    logo={listing.logo}
+                    slug={listing.slug}
+                    categorySlug={listing.categorySlug}
                     websiteUrl={listing.website_url}
+                    fallbackLogo={listing.logo}
                     fit="contain"
                     className="h-10 w-10"
                   />
                 </div>
               </div>
-              <h3 className="mb-1 text-sm font-semibold text-white">{listing.name}</h3>
-              <div className="mb-4 flex items-center justify-center gap-1 text-[#ffb68d]">
-                <Star
-                  className="h-3.5 w-3.5 fill-[#ffb68d] text-[#ffb68d]"
-                  aria-hidden
-                />
-                <span className="text-xs font-bold tabular-nums">
-                  {listing.rating.toFixed(1)}
-                </span>
-              </div>
+              <h3 className="mb-4 text-sm font-semibold text-white">{listing.name}</h3>
               <span className="text-xs font-semibold uppercase tracking-wide text-[#ffb68d] underline-offset-2 hover:underline">
                 View site
               </span>

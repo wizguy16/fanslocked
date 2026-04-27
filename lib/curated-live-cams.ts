@@ -1,12 +1,13 @@
 import type { Listing } from "@/types/listing";
 import type { CategoryDef } from "@/lib/categories";
 import { buildListingOutboundPath } from "@/lib/affiliate-url";
+import { curatedListingTag } from "@/lib/curated-listing-tags";
 import { clampTagline } from "@/lib/utils";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 export type CuratedLiveCamsRow = {
   name: string;
   slug: string;
-  logo: string;
   website: string;
   payout: string;
   difficulty: string;
@@ -20,7 +21,6 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "Stripchat",
     slug: "stripchat",
-    logo: "https://logo.clearbit.com/stripchat.com",
     website: "https://stripchat.com",
     payout: "$168 PPS / RevShare",
     difficulty: "Easy",
@@ -32,7 +32,6 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "JerkMate",
     slug: "jerkmate",
-    logo: "https://logo.clearbit.com/jerkmate.com",
     website: "https://jerkmate.com",
     payout: "$65+ PPS",
     difficulty: "Easy",
@@ -44,7 +43,6 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "BongaCams",
     slug: "bongacams",
-    logo: "https://logo.clearbit.com/bongacams.com",
     website: "https://bongacams.com",
     payout: "RevShare + PPS",
     difficulty: "Easy",
@@ -56,7 +54,6 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "CamSoda",
     slug: "camsoda",
-    logo: "https://logo.clearbit.com/camsoda.com",
     website: "https://camsoda.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -68,67 +65,66 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "Streamate",
     slug: "streamate",
-    logo: "https://logo.clearbit.com/streamate.com",
     website: "https://streamate.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Premium Cam",
-    description: "Private show focused high-spend platform.",
+    description:
+      "Premium cam platform focused on private shows, with high-quality streams and a more one-on-one experience.",
     preview:
-      "Streamate focuses on private shows and premium users, making it one of the highest revenue-per-user cam platforms in the industry.",
+      "Premium cam platform focused on private shows, with high-quality streams and a more one-on-one experience.",
   },
   {
     name: "LiveJasmin",
     slug: "livejasmin",
-    logo: "https://logo.clearbit.com/livejasmin.com",
     website: "https://livejasmin.com",
     payout: "$130 PPS + RevShare",
     difficulty: "Medium",
     type: "Premium Cam",
-    description: "High-end cam site with premium users.",
+    description:
+      "High-end cam site with polished performers and strong private show options across a global audience.",
     preview:
-      "LiveJasmin attracts high-spending users with premium models and private show experiences, making it ideal for higher-ticket affiliate conversions.",
+      "High-end cam site with polished performers and strong private show options across a global audience.",
   },
   {
     name: "SinParty",
     slug: "sinparty",
-    logo: "https://logo.clearbit.com/sinparty.com",
     website: "https://sinparty.com",
     payout: "$150 PPS",
     difficulty: "Easy",
     type: "New Cam",
-    description: "Modern cam platform with strong payouts.",
+    description:
+      "Modern cam platform with fast browsing, active rooms, and strong token-based interaction features.",
     preview:
-      "SinParty is a newer cam platform with strong payouts and low competition, making it easier to convert fresh traffic into revenue.",
+      "Modern cam platform with fast browsing, active rooms, and strong token-based interaction features.",
   },
   {
     name: "MyFreeCams",
     slug: "myfreecams",
-    logo: "https://logo.clearbit.com/myfreecams.com",
     website: "https://myfreecams.com",
     payout: "RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
-    description: "One of the most established cam platforms.",
+    description:
+      "Large cam community with active public rooms and a mix of free interaction and paid private shows.",
     preview:
-      "MyFreeCams has a loyal user base and strong retention, making it a consistent performer for long-term affiliate revenue.",
+      "Large cam community with active public rooms and a mix of free interaction and paid private shows.",
   },
   {
     name: "Cam4",
     slug: "cam4",
-    logo: "https://logo.clearbit.com/cam4.com",
     website: "https://cam4.com",
     payout: "PPL + RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
-    description: "Large cam site with global audience.",
+    description:
+      "High-traffic cam site with global performers and a strong mix of public and private streaming.",
     preview:
-      "Cam4 provides a large, diverse audience and strong engagement metrics, helping affiliates convert traffic efficiently.",
+      "High-traffic cam site with global performers and a strong mix of public and private streaming.",
   },
   {
     name: "ImLive",
     slug: "imlive",
-    logo: "https://logo.clearbit.com/imlive.com",
     website: "https://imlive.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -140,7 +136,6 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "Xtease",
     slug: "xtease",
-    logo: "https://logo.clearbit.com/xtease.com",
     website: "https://xtease.com",
     payout: "$168 PPS",
     difficulty: "Easy",
@@ -152,7 +147,6 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "SlutRoulette",
     slug: "slutroulette",
-    logo: "https://logo.clearbit.com/slutroulette.com",
     website: "https://slutroulette.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -168,7 +162,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "SkyPrivate",
     slug: "skyprivate",
-    logo: "https://logo.clearbit.com/skyprivate.com",
     website: "https://skyprivate.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -180,7 +173,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "CooMeet",
     slug: "coomeet",
-    logo: "https://logo.clearbit.com/coomeet.com",
     website: "https://coomeet.com",
     payout: "PPL + RevShare",
     difficulty: "Easy",
@@ -192,7 +184,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "LuckyCrush",
     slug: "luckycrush",
-    logo: "https://logo.clearbit.com/luckycrush.com",
     website: "https://luckycrush.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -204,7 +195,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "Camster",
     slug: "camster",
-    logo: "https://logo.clearbit.com/camster.com",
     website: "https://camster.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -216,7 +206,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "SextPanther",
     slug: "sextpanther",
-    logo: "https://logo.clearbit.com/sextpanther.com",
     website: "https://sextpanther.com",
     payout: "RevShare",
     difficulty: "Medium",
@@ -228,7 +217,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "Xcams",
     slug: "xcams",
-    logo: "https://logo.clearbit.com/xcams.com",
     website: "https://xcams.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -240,7 +228,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "Flirtbate",
     slug: "flirtbate",
-    logo: "https://logo.clearbit.com/flirtbate.com",
     website: "https://flirtbate.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -252,7 +239,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "BabeStation",
     slug: "babestation",
-    logo: "https://logo.clearbit.com/babestation.com",
     website: "https://babestation.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -264,7 +250,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "Joystick.tv",
     slug: "joysticktv",
-    logo: "https://logo.clearbit.com/joystick.tv",
     website: "https://joystick.tv",
     payout: "RevShare",
     difficulty: "Easy",
@@ -276,7 +261,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "AdultWork Cams",
     slug: "adultwork",
-    logo: "https://logo.clearbit.com/adultwork.com",
     website: "https://adultwork.com",
     payout: "RevShare",
     difficulty: "Medium",
@@ -288,7 +272,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "SakuraLive",
     slug: "sakuralive",
-    logo: "https://logo.clearbit.com/sakuralive.com",
     website: "https://sakuralive.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -300,7 +283,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "Reveal Me",
     slug: "revealme",
-    logo: "https://logo.clearbit.com/reveal.me",
     website: "https://reveal.me",
     payout: "RevShare",
     difficulty: "Easy",
@@ -312,7 +294,6 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
   {
     name: "Peeks Social",
     slug: "peeks",
-    logo: "https://logo.clearbit.com/peeks.com",
     website: "https://peeks.com",
     payout: "RevShare",
     difficulty: "Easy",
@@ -359,11 +340,12 @@ function buildListing(
     review,
     pros,
     cons,
-    image: row.logo,
-    logo: row.logo,
+    image: SITE_IMAGE_PLACEHOLDER,
+    logo: SITE_IMAGE_PLACEHOLDER,
     affiliate_url: buildListingOutboundPath(row.slug),
     website_url: row.website,
     rating,
+    tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
   };

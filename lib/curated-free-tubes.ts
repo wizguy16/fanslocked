@@ -38,6 +38,7 @@ type CuratedTube = {
   slug: string;
   siteKey: string;
   rating: number;
+  tag: string;
   description: string;
   tags: string[];
   website_url: string;
@@ -52,6 +53,7 @@ const TUBES: CuratedTube[] = [
     slug: "pornhub",
     siteKey: "pornhub",
     rating: 4.9,
+    tag: "Community",
     description:
       "Massive free library and daily uploads make it the default first stop for discovery-minded traffic.",
     tags: ["free", "videos", "trending"],
@@ -65,6 +67,7 @@ const TUBES: CuratedTube[] = [
     slug: "xvideos",
     siteKey: "xvideos",
     rating: 4.85,
+    tag: "Community",
     description:
       "Huge long-tail catalog and fast loads—ideal for scale when you want cheap clicks at the top of the funnel.",
     tags: ["free", "videos", "long-tail"],
@@ -78,6 +81,7 @@ const TUBES: CuratedTube[] = [
     slug: "xnxx",
     siteKey: "xnxx",
     rating: 4.82,
+    tag: "Community",
     description:
       "Sister-scale traffic to other major tubes—pair it with cam or premium upsells in your own funnel.",
     tags: ["free", "videos", "high-traffic"],
@@ -91,6 +95,7 @@ const TUBES: CuratedTube[] = [
     slug: "xhamster",
     siteKey: "xhamster",
     rating: 4.7,
+    tag: "Community",
     description:
       "Community features and familiar UX keep session length strong for affiliate retargeting.",
     tags: ["free", "community", "videos"],
@@ -103,6 +108,7 @@ const TUBES: CuratedTube[] = [
     slug: "eporner",
     siteKey: "eporner",
     rating: 4.65,
+    tag: "Clips",
     description:
       "Quality-tilted tube positioning helps pre-sell HD and premium upgrades without feeling spammy.",
     tags: ["free", "hd", "videos"],
@@ -115,6 +121,7 @@ const TUBES: CuratedTube[] = [
     slug: "hqporner",
     siteKey: "hqporner",
     rating: 4.55,
+    tag: "Studio",
     description:
       "Bitrate-forward branding attracts viewers who are already primed for paid studio content.",
     tags: ["free", "hd", "streaming"],
@@ -127,6 +134,7 @@ const TUBES: CuratedTube[] = [
     slug: "spankbang",
     siteKey: "spankbang",
     rating: 4.5,
+    tag: "Community",
     description:
       "Lean player and aggressive discovery—great for arbitrage when you route clicks to higher-EPC offers.",
     tags: ["free", "trending", "fast"],
@@ -139,6 +147,7 @@ const TUBES: CuratedTube[] = [
     slug: "youporn",
     siteKey: "youporn",
     rating: 4.45,
+    tag: "Community",
     description:
       "Household-name recognition lowers bounce on cold traffic from search and social previews.",
     tags: ["free", "videos", "brand"],
@@ -151,6 +160,7 @@ const TUBES: CuratedTube[] = [
     slug: "redtube",
     siteKey: "redtube",
     rating: 4.4,
+    tag: "Community",
     description:
       "Classic tube UX with broad niches—use it as a trust anchor before pushing trials or cams.",
     tags: ["free", "videos", "classic"],
@@ -163,6 +173,7 @@ const TUBES: CuratedTube[] = [
     slug: "tube8",
     siteKey: "tube8",
     rating: 4.35,
+    tag: "Community",
     description:
       "Straightforward search and categories make it easy to match intent with your downstream monetization.",
     tags: ["free", "videos", "search"],
@@ -203,6 +214,7 @@ export function buildCuratedFreeTubeListings(cat: CategoryDef): Listing[] {
       affiliate_url: buildListingOutboundPath(t.slug),
       website_url: t.website_url,
       rating: t.rating,
+      tag: t.tag,
       added_date: t.added_date,
       popularity_score: t.popularity_score,
       ...(t.badge ? { badge: t.badge } : {}),

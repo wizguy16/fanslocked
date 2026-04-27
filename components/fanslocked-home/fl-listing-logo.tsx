@@ -4,26 +4,20 @@
 
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { getSiteImage } from "@/lib/get-site-image";
+import { sitesFolderForCategorySlug } from "@/lib/category-sites-folder";
+import { SITE_IMAGE_PLACEHOLDER } from "@/lib/site-image-constants";
 
 type Props = {
-  logo: string;
+  slug: string;
+  categorySlug: string;
   websiteUrl: string;
+  /** When the manifest has no match (e.g. Unsplash `listing.logo`). */
+  fallbackLogo?: string | null;
   className?: string;
   /** Default `cover` for cards; `contain` for small logo tiles (e.g. category quick picks). */
   fit?: "cover" | "contain";
 };
-
-function faviconFromClearbit(logoUrl: string): string | null {
-  try {
-    const u = new URL(logoUrl);
-    if (u.hostname !== "logo.clearbit.com") return null;
-    const domain = u.pathname.replace(/^\//, "").split("/")[0];
-    if (!domain) return null;
-    return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=128`;
-  } catch {
-    return null;
-  }
-}
 
 function faviconFromWebsite(websiteUrl: string): string | null {
   try {
@@ -47,25 +41,35 @@ function letterDataUrl(websiteUrl: string): string {
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
-/**
- * Clearbit often 404s or blocks optimized fetches; plain img + no-referrer + favicon fallbacks.
- */
+/** Resolves logo via `getSiteImage(slug, "logo", …)`, then favicon / remote fallbacks. */
 export function FlListingLogo({
-  logo,
+  slug,
+  categorySlug,
   websiteUrl,
+  fallbackLogo,
   className,
   fit = "cover",
 }: Props) {
+  const resolved = useMemo(() => {
+    const folder = sitesFolderForCategorySlug(categorySlug);
+    /** `true`: use screenshot when a folder only ships hero PNGs (e.g. `sexchat/`). */
+    return getSiteImage(slug, "logo", true, folder);
+  }, [slug, categorySlug]);
+
   const chain = useMemo(() => {
-    /** Google favicon first — Clearbit often 404s in browser. */
+    const raw = fallbackLogo?.trim() ?? null;
+    const isPlaceholder =
+      raw === SITE_IMAGE_PLACEHOLDER || raw?.endsWith("/placeholder.svg");
+    /** Placeholder is not a real asset — skip it so Google favicon can run (search rail vs free-tube Unsplash). */
+    const primary = resolved ?? (isPlaceholder ? null : raw);
     const a = [
+      primary?.startsWith("/") ? primary : null,
       faviconFromWebsite(websiteUrl),
-      logo,
-      faviconFromClearbit(logo),
+      primary && !primary.startsWith("/") ? primary : null,
       letterDataUrl(websiteUrl),
     ].filter((x): x is string => Boolean(x));
     return Array.from(new Set(a));
-  }, [logo, websiteUrl]);
+  }, [resolved, fallbackLogo, websiteUrl]);
 
   const [i, setI] = useState(0);
   const safe = Math.min(i, chain.length - 1);
