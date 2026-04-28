@@ -13,6 +13,8 @@ export type CategoryPrestigeEditorial = {
   heroDescription: string;
   /** When set, hero renders these paragraphs (with spacing) instead of a single `heroDescription` block. */
   heroParagraphs?: readonly string[];
+  /** Optional one blurb per quick-pick tile (gaming only). */
+  quickBlurbs?: readonly string[];
   /** One blurb per showcase row (top 5 after quick picks), in rating order. */
   showcaseBlurbs: readonly string[];
   /** One blurb per rising grid card, in rating order. */
@@ -470,24 +472,22 @@ export function getCategoryPrestigeEditorial(
       heroTitle: `Best Adult Games & Sex Games Sites (${year})`,
       heroDescription: "",
       heroParagraphs: [
-        "Explore the best adult and sex games in 2026, including browser-based titles, downloadable RPGs, and indie-developed experiences. From visual novels to progression-based games, these platforms offer a wide range of adult gaming content.",
-        "Whether you're looking for free-to-play games, premium titles, or early access indie releases, the platforms below highlight the most active and consistently updated adult gaming hubs available today.",
+        "Explore the best adult sex games in 2026, including browser-based platforms, downloadable RPGs, and interactive story-driven experiences. Compare top adult game sites for gameplay quality, progression systems, and overall user experience.",
       ],
       showcaseBlurbs: [
-        "Nutaku is one of the largest adult game platforms, offering browser and downloadable titles across multiple genres. The platform features free-to-play and premium games with regular updates and strong developer support.",
-        "EroLabs hosts a wide range of adult mobile and browser games, including popular RPG and gacha-style titles. Known for consistent updates and monetized progression systems, it's a strong platform for ongoing gameplay.",
-        "F95Zone is a massive community hub for adult games, where users can discover new releases, download indie titles, and follow ongoing game development. It's one of the most active spaces for adult gaming discussions and updates.",
-        "Itch.io's adult section features indie-developed games across visual novels, RPGs, and experimental formats. Many titles are free or pay-what-you-want, making it a key discovery platform for new creators.",
-        "HentaiHeroes is a browser-based RPG that combines progression systems with adult content. Players unlock characters and scenes through gameplay, making it one of the more structured adult gaming experiences.",
-        "Many adult game developers use platforms like Patreon and SubscribeStar to release exclusive builds, early access content, and ongoing updates. These platforms give users direct access to indie creators and evolving games.",
+        "Nutaku is one of the largest adult game platforms, offering both browser-based and downloadable titles across multiple genres. With free-to-play and premium options, it provides consistent updates and strong player engagement.",
+        "EroLabs publishes high-quality adult games with strong progression systems, premium content, and frequent updates, making it one of the top platforms for long-term gameplay.",
+        "HentaiHeroes is a progression-based RPG adult game that combines character collection, upgrades, and story-driven content, making it one of the most recognized long-term play experiences.",
+        "Grand Bang Auto delivers an open-world style adult experience with sandbox gameplay, character progression, and ongoing updates for immersive exploration.",
+        "Itch.io hosts a massive collection of indie adult games, including visual novels, RPGs, and experimental titles, making it a strong discovery platform for unique and frequently updated content.",
       ],
       risingBlurbs: [],
       whatMakesHeading: "What makes a good adult game platform?",
       whatMakesBullets: [],
       whatMakesBody: splitParagraphs(`
-        The best adult game platforms combine consistent updates, active communities, and a strong library of titles across multiple genres. High-quality sites make it easy to discover new games, track updates, and access both free and premium content.
+        The best adult game platforms go beyond simple interactions and focus on gameplay depth, progression systems, and consistent content updates. Strong platforms combine engaging mechanics, character development, and smooth user experience.
 
-        Look for platforms that support developers, offer regular releases, and provide a mix of browser-based and downloadable experiences. The strongest sites keep content fresh and continuously expanding.
+        We prioritize platforms that offer real gameplay value, active development, and a clear path for users to explore content without unnecessary friction.
       `),
       freeVsPremiumHeading: "Free vs premium",
       freeVsPremiumBody: splitParagraphs(`
@@ -497,9 +497,9 @@ export function getCategoryPrestigeEditorial(
       `),
       whoForHeading: "Who this is for",
       whoForBody: splitParagraphs(`
-        This page is for adults comparing adult game publishers, browser hubs, mobile RPGs, indie marketplaces, and creator-supported builds—whether you want free-to-play discovery, premium titles, or early access from developers.
+        This category is designed for users looking for interactive adult experiences rather than passive content. Whether you're interested in quick browser-based games or deeper progression-driven titles, these platforms focus on gameplay, immersion, and long-term engagement.
 
-        Use the top picks for high-traffic platforms and communities, then browse the rest for more games and discovery angles.
+        Use the top picks for flagship hubs and deeper titles, then browse the rest for more games and discovery angles.
       `),
       finalCtaBody:
         "Browse the platforms above to discover the best adult games for your style, then explore the sites that offer the content, gameplay, and updates you're looking for.",

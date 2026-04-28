@@ -1,25 +1,37 @@
 import type { Listing } from "@/types/listing";
 
-/** Ordered for Top picks: publisher → community → marketplace → RPG → creator rails. */
+/** Exactly four — compact row above Top picks (legacy order). */
+export const GAMING_QUICK_PICK_SLUGS = [
+  "gamejolt-adult",
+  "adultgamecity",
+  "porngames",
+  "3dxchat",
+] as const;
+
+/** Full-width Top picks (order + copy in `category-prestige-editorial` blurbs). */
 export const GAMING_TOP_PICK_SLUGS = [
   "nutaku",
   "erolabs",
-  "f95zone",
-  "itch-adult",
   "hentaiheroes",
-  "patreon-subscribestar",
+  "grand-bang-auto",
+  "itch-adult",
 ] as const;
 
 export function buildGamingPrestigeSlices(capped: Listing[]) {
   const bySlug = new Map(capped.map((l) => [l.slug, l]));
+  const quick = GAMING_QUICK_PICK_SLUGS.map((s) => bySlug.get(s)).filter(
+    (l): l is Listing => Boolean(l),
+  );
   const showcase = GAMING_TOP_PICK_SLUGS.map((s) => bySlug.get(s)).filter(
     (l): l is Listing => Boolean(l),
   );
-  const heroIds = new Set(showcase.map((l) => l.id));
-  const rest = capped.filter((l) => !heroIds.has(l.id));
+  const used = new Set<string>();
+  for (const l of quick) used.add(l.id);
+  for (const l of showcase) used.add(l.id);
+  const rising = capped.filter((l) => !used.has(l.id));
   return {
-    quick: rest.slice(0, 4),
+    quick,
     showcase,
-    rising: rest.slice(4),
+    rising,
   };
 }

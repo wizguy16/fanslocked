@@ -17,6 +17,11 @@ type Props = {
   className?: string;
   /** Default `cover` for cards; `contain` for small logo tiles (e.g. category quick picks). */
   fit?: "cover" | "contain";
+  /**
+   * When false, never uses folder screenshots as a stand-in for logos (small tiles stay icons).
+   * Favicon / letter fallbacks still apply. Default true for larger cards that only ship hero PNGs.
+   */
+  screenshotFallback?: boolean;
 };
 
 function faviconFromWebsite(websiteUrl: string): string | null {
@@ -49,12 +54,12 @@ export function FlListingLogo({
   fallbackLogo,
   className,
   fit = "cover",
+  screenshotFallback = true,
 }: Props) {
   const resolved = useMemo(() => {
     const folder = sitesFolderForCategorySlug(categorySlug);
-    /** `true`: use screenshot when a folder only ships hero PNGs (e.g. `sexchat/`). */
-    return getSiteImage(slug, "logo", true, folder);
-  }, [slug, categorySlug]);
+    return getSiteImage(slug, "logo", screenshotFallback, folder);
+  }, [slug, categorySlug, screenshotFallback]);
 
   const chain = useMemo(() => {
     const raw = fallbackLogo?.trim() ?? null;

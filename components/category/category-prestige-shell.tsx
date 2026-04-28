@@ -88,6 +88,22 @@ export function CategoryPrestigeShell({
             <span className="text-zinc-600">· {listings.length}</span>
           </nav>
 
+          {category.slug === "fetish-bdsm" ? (
+            <div className="mb-8 rounded-lg border border-[rgba(255,182,141,0.25)] bg-[#1a1b21] px-4 py-3 text-left md:mb-10">
+              <p className="text-sm font-medium text-[#e3e1e9]">
+                Looking for more specific fetish categories?
+              </p>
+              <p className="mt-1">
+                <Link
+                  href="/categories/fetish"
+                  className="text-sm font-semibold text-[#ffb68d] underline-offset-2 transition hover:text-[#ffcba4] hover:underline"
+                >
+                  Explore our full fetish hub →
+                </Link>
+              </p>
+            </div>
+          ) : null}
+
           <header className="mb-12 text-center md:mb-16">
             <h1 className="text-balance font-display text-3xl font-bold leading-tight tracking-tight text-[#e3e1e9] md:text-4xl md:leading-[1.2] md:tracking-[-0.02em]">
               {editorial ? (
@@ -123,6 +139,7 @@ export function CategoryPrestigeShell({
               listingCopy={
                 editorial
                   ? {
+                      quickBlurbs: editorial.quickBlurbs,
                       showcaseBlurbs: editorial.showcaseBlurbs,
                       risingBlurbs: editorial.risingBlurbs,
                     }

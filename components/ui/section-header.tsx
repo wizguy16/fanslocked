@@ -7,6 +7,8 @@ type Props = {
   viewAllHref?: string;
   viewAllLabel?: string;
   className?: string;
+  /** Homepage lane sections — centered, larger type, editorial hierarchy. */
+  variant?: "default" | "centered";
 };
 
 export function SectionHeader({
@@ -15,7 +17,38 @@ export function SectionHeader({
   viewAllHref,
   viewAllLabel = "View All",
   className,
+  variant = "default",
 }: Props) {
+  if (variant === "centered") {
+    return (
+      <div
+        className={cn(
+          "mx-auto mb-12 max-w-3xl text-center",
+          className,
+        )}
+      >
+        <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          {title}
+        </h2>
+        {subtitle ? (
+          <p className="mt-4 text-lg leading-relaxed text-neutral-400">
+            {subtitle}
+          </p>
+        ) : null}
+        {viewAllHref ? (
+          <p className="mt-5">
+            <Link
+              href={viewAllHref}
+              className="text-sm font-medium text-[#FF7A00] transition hover:text-[#FFA04D]"
+            >
+              {viewAllLabel} <span aria-hidden>→</span>
+            </Link>
+          </p>
+        ) : null}
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(

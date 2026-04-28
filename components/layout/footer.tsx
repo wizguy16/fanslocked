@@ -23,6 +23,9 @@ export function Footer() {
           <Link href="/categories" className="hover:text-[#FF7A00]">
             Categories
           </Link>
+          <Link href="/categories/fetish" className="hover:text-[#FF7A00]">
+            Fetish Sites Hub
+          </Link>
           <Link href="/blog" className="hover:text-[#FF7A00]">
             Guides
           </Link>

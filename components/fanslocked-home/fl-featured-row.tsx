@@ -7,6 +7,7 @@
  */
 
 import type { Listing } from "@/types/listing";
+import { HOME_LISTING_TIER_LABELS } from "@/lib/home-intent";
 import { FlCardFeatured } from "@/components/fanslocked-home/fl-card-featured";
 import { useDragScroll } from "@/components/home/use-drag-scroll";
 
@@ -16,12 +17,18 @@ type Props = {
   mode?: "scroll" | "stacked";
   /** Added to each card's displayed rank (e.g. after a separate quick-picks row). */
   rankOffset?: number;
+  /**
+   * Homepage: first picks show editorial tier framing instead of #1–#3.
+   * Ignored when `mode === "stacked"`.
+   */
+  tieredHomeBadges?: boolean;
 };
 
 export function FlFeaturedRow({
   items,
   mode = "scroll",
   rankOffset = 0,
+  tieredHomeBadges = false,
 }: Props) {
   const { ref: dragRef, dragScrollProps } = useDragScroll<HTMLDivElement>();
 
@@ -36,6 +43,11 @@ export function FlFeaturedRow({
               key={l.id}
               listing={l}
               rank={rankOffset + i + 1}
+              rankLabel={
+                tieredHomeBadges && i < HOME_LISTING_TIER_LABELS.length
+                  ? HOME_LISTING_TIER_LABELS[i]
+                  : undefined
+              }
               variant="stacked"
               stackedReverse={i % 2 === 1}
             />
@@ -46,20 +58,25 @@ export function FlFeaturedRow({
   }
 
   return (
-    <section aria-label="Featured picks" className="relative px-6">
+    <section aria-label="Featured picks" className="relative mt-8 px-6">
       <div className="relative mx-auto max-w-[1600px]">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-10 bg-gradient-to-r from-[#0A0B10] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-10 bg-gradient-to-l from-[#0A0B10] to-transparent" />
         <div
           ref={dragRef}
           {...dragScrollProps}
-          className="scroll-momentum flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-visible scroll-smooth py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing"
+          className="scroll-momentum flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-visible scroll-smooth py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing"
         >
           {items.map((l, i) => (
             <FlCardFeatured
               key={l.id}
               listing={l}
               rank={rankOffset + i + 1}
+              rankLabel={
+                tieredHomeBadges && i < HOME_LISTING_TIER_LABELS.length
+                  ? HOME_LISTING_TIER_LABELS[i]
+                  : undefined
+              }
             />
           ))}
         </div>

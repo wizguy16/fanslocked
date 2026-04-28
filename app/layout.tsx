@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "@/styles/globals.css";
 import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
-import { Footer } from "@/components/layout/footer";
+import { ConditionalFooter } from "@/components/layout/conditional-footer";
 import { Newsletter } from "@/components/sections/newsletter";
 import { AgeGate } from "@/components/age-gate";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
@@ -69,7 +69,7 @@ export default function RootLayout({
           {children}
         </main>
         <Newsletter />
-        <Footer />
+        <ConditionalFooter />
       </body>
     </html>
   );

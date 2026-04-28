@@ -6,6 +6,7 @@ import { CategoryQuickPicks } from "@/components/category/sections/category-quic
 import { CategoryTopPicks } from "@/components/category/sections/category-top-picks";
 
 export type CategoryListingCopy = {
+  quickBlurbs?: readonly string[] | null;
   showcaseBlurbs: readonly string[];
   risingBlurbs: readonly string[];
 };
@@ -35,7 +36,7 @@ export function CategoryPrestigeListings({
 }: Props) {
   return (
     <div className="space-y-10 md:space-y-12">
-      <CategoryQuickPicks items={quick} />
+      <CategoryQuickPicks items={quick} blurbs={listingCopy?.quickBlurbs ?? null} />
       <CategoryTopPicks
         items={showcase}
         rankOffset={quick.length}

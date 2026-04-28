@@ -15,7 +15,10 @@ export type CuratedGamingRow = {
   preview: string;
 };
 
-/** Featured set — first rows map to prestige Top picks via `gaming-prestige-slices`. */
+/**
+ * Featured hubs — each row has a matching asset under `public/images/sites/adultgames/`
+ * (`{slug}.png`). GameLink sits in “More to explore” after Quick + Top picks.
+ */
 export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "Nutaku",
@@ -25,7 +28,7 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
     difficulty: "Easy",
     type: "games",
     preview:
-      "Nutaku is one of the largest adult game platforms, offering browser and downloadable titles across multiple genres. The platform features free-to-play and premium games with regular updates and strong developer support.",
+      "Nutaku is one of the largest adult game platforms, offering both browser-based and downloadable titles across multiple genres. With free-to-play and premium options, it provides consistent updates and strong player engagement.",
   },
   {
     name: "EroLabs",
@@ -35,17 +38,7 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
     difficulty: "Easy",
     type: "games",
     preview:
-      "EroLabs hosts a wide range of adult mobile and browser games, including popular RPG and gacha-style titles. Known for consistent updates and monetized progression systems, it's a strong platform for ongoing gameplay.",
-  },
-  {
-    name: "F95Zone",
-    slug: "f95zone",
-    website: "https://f95zone.to",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "community",
-    preview:
-      "F95Zone is a massive community hub for adult games, where users can discover new releases, download indie titles, and follow ongoing game development. It's one of the most active spaces for adult gaming discussions and updates.",
+      "EroLabs publishes high-quality adult games with strong progression systems, premium content, and frequent updates, making it one of the top platforms for long-term gameplay.",
   },
   {
     name: "Itch.io Adult Games",
@@ -55,7 +48,17 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
     difficulty: "Easy",
     type: "marketplace",
     preview:
-      "Itch.io's adult section features indie-developed games across visual novels, RPGs, and experimental formats. Many titles are free or pay-what-you-want, making it a key discovery platform for new creators.",
+      "Itch.io hosts a massive collection of indie adult games, including visual novels, RPGs, and experimental titles, making it a strong discovery platform for unique and frequently updated content.",
+  },
+  {
+    name: "Grand Bang Auto",
+    slug: "grand-bang-auto",
+    website: "https://grandbangauto.com/features",
+    payout: "High",
+    difficulty: "Easy",
+    type: "games",
+    preview:
+      "Grand Bang Auto delivers an open-world style adult experience with sandbox gameplay, character progression, and ongoing updates for immersive exploration.",
   },
   {
     name: "HentaiHeroes",
@@ -65,57 +68,17 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
     difficulty: "Easy",
     type: "rpg",
     preview:
-      "HentaiHeroes is a browser-based RPG that combines progression systems with adult content. Players unlock characters and scenes through gameplay, making it one of the more structured adult gaming experiences.",
+      "HentaiHeroes is a progression-based RPG adult game that combines character collection, upgrades, and story-driven content, making it one of the most recognized long-term play experiences.",
   },
   {
-    name: "Patreon / SubscribeStar",
-    slug: "patreon-subscribestar",
-    website: "https://www.patreon.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "creator-support",
-    preview:
-      "Many adult game developers use platforms like Patreon and SubscribeStar to release exclusive builds, early access content, and ongoing updates. These platforms give users direct access to indie creators and evolving games.",
-  },
-  {
-    name: "GameJolt Adult",
-    slug: "gamejolt-adult",
-    website: "https://gamejolt.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "community",
-    preview:
-      "GameJolt features indie developers creating experimental adult-themed games and experiences.",
-  },
-  {
-    name: "AdultGameCity",
-    slug: "adultgamecity",
-    website: "https://adultgamecity.com",
-    payout: "Medium",
-    difficulty: "Easy",
-    type: "download",
-    preview:
-      "AdultGameCity offers downloadable adult games across multiple genres and storylines.",
-  },
-  {
-    name: "Porngames.com",
-    slug: "porngames",
-    website: "https://porngames.com",
-    payout: "Medium",
-    difficulty: "Easy",
-    type: "browser-games",
-    preview:
-      "Porngames.com features quick-play browser games designed for instant adult entertainment.",
-  },
-  {
-    name: "3DXChat",
-    slug: "3dxchat",
-    website: "https://3dxchat.com",
+    name: "GameLink Interactive",
+    slug: "gamelink-interactive",
+    website: "https://www.gamelink.com",
     payout: "High",
-    difficulty: "Medium",
-    type: "simulation",
+    difficulty: "Easy",
+    type: "premium",
     preview:
-      "3DXChat is a 3D adult simulation game where players interact, explore, and create virtual experiences.",
+      "GameLink Interactive offers a mix of adult video content and interactive experiences, including downloadable and game-style content. With an established subscription model and affiliate program, it works as a strong secondary platform for users exploring interactive adult content beyond browser-based games.",
   },
 ];
 
@@ -143,7 +106,7 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Being a DIK",
     slug: "being-a-dik",
-    website: "https://www.patreon.com",
+    website: "https://store.steampowered.com/app/825563/Being_a_DIJK/",
     payout: "Indirect",
     difficulty: "Easy",
     type: "visual-novel",
@@ -153,7 +116,7 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
   {
     name: "Dreams of Desire",
     slug: "dreams-of-desire",
-    website: "https://www.patreon.com",
+    website: "https://store.steampowered.com/app/463240/Dreams_of_Desire_Definitive_Edition/",
     payout: "Indirect",
     difficulty: "Easy",
     type: "visual-novel",
@@ -250,6 +213,46 @@ export const SEXGAMES_GRID: CuratedGamingRow[] = [
     preview:
       "Hentai Legends is a strategy-based adult game with character progression and unlockable scenes.",
   },
+  {
+    name: "GameJolt Adult",
+    slug: "gamejolt-adult",
+    website: "https://gamejolt.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "community",
+    preview:
+      "GameJolt features indie developers creating experimental adult-themed games and experiences.",
+  },
+  {
+    name: "AdultGameCity",
+    slug: "adultgamecity",
+    website: "https://adultgamecity.com",
+    payout: "Medium",
+    difficulty: "Easy",
+    type: "download",
+    preview:
+      "AdultGameCity offers downloadable adult games across multiple genres and storylines.",
+  },
+  {
+    name: "Porngames.com",
+    slug: "porngames",
+    website: "https://porngames.com",
+    payout: "Medium",
+    difficulty: "Easy",
+    type: "browser-games",
+    preview:
+      "Porngames.com features quick-play browser games designed for instant adult entertainment.",
+  },
+  {
+    name: "3DXChat",
+    slug: "3dxchat",
+    website: "https://3dxchat.com",
+    payout: "High",
+    difficulty: "Medium",
+    type: "simulation",
+    preview:
+      "3DXChat is a 3D adult simulation game where players interact, explore, and create virtual experiences.",
+  },
 ];
 
 function tagsFor(): string[] {
@@ -273,7 +276,7 @@ function buildListing(
   const cons = [
     "Monetization is often indirect compared to cams or dating — set expectations",
     "Platform policies and age gates vary — qualify outbound carefully",
-    "Some titles are Patreon or Steam-backed — deep links may shift over time",
+    "Some titles are storefront- or Steam-backed — deep links may shift over time",
   ];
 
   return {

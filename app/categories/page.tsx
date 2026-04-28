@@ -22,6 +22,20 @@ export default function CategoriesPage() {
         <h1 className="text-sm font-bold text-white">
           Categories · {CATEGORIES.length}
         </h1>
+        <Link
+          href="/categories/fetish"
+          className="mt-3 block rounded-md border border-amber-500/40 bg-gradient-to-br from-amber-500/15 to-white/[0.03] p-3 no-underline transition hover:border-amber-500/60 hover:from-amber-500/20"
+        >
+          <p className="text-[11px] font-bold uppercase tracking-wide text-amber-400">
+            Featured hub
+          </p>
+          <p className="mt-1 text-sm font-bold text-white">
+            Fetish &amp; BDSM Sites
+          </p>
+          <p className="mt-1 text-[11px] leading-snug text-slate-400">
+            Explore curated fetish platforms, categories, and niche content hubs
+          </p>
+        </Link>
         <ul className="mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {CATEGORIES.map((c) => {
             const n = countInCategory(c.slug);

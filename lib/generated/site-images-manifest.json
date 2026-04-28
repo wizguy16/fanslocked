@@ -1,5 +1,16 @@
 {
   "byFolder": {
+    "adultgames": {
+      "screenshot": {
+        "erolabs": "/images/sites/adultgames/erolabs.png",
+        "gamelink-interactive": "/images/sites/adultgames/gamelink-interactive.png",
+        "grand-bang-auto": "/images/sites/adultgames/grand-bang-auto.png",
+        "hentaiheroes": "/images/sites/adultgames/hentaiheroes.png",
+        "itch-adult": "/images/sites/adultgames/itch-adult.png",
+        "nutaku": "/images/sites/adultgames/nutaku.png"
+      },
+      "logo": {}
+    },
     "ai": {
       "screenshot": {
         "candyai": "/images/sites/ai/candyai.png",

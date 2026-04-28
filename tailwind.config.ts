@@ -39,6 +39,15 @@ const config: Config = {
       transitionDuration: {
         DEFAULT: "200ms",
       },
+      keyframes: {
+        homeIntentFade: {
+          from: { opacity: "0", transform: "translateY(8px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "home-intent-fade": "homeIntentFade 0.3s ease-out",
+      },
     },
   },
   plugins: [],

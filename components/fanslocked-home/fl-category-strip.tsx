@@ -1,34 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { CategoryDef } from "@/lib/categories";
 import { CategoryIcon } from "@/components/icons/category-icon";
 
 type Props = {
   categories: CategoryDef[];
-  activeSlug: string;
-  onSelect: (slug: string) => void;
   scrolled?: boolean;
 };
 
+/**
+ * Secondary nav rail: each chip is a real route to `/categories/[slug]`.
+ * No in-page state or scroll-jump — distinct from hero “Pick your lane”.
+ */
 export function FlCategoryStrip({
   categories,
-  activeSlug,
-  onSelect,
   scrolled = false,
 }: Props) {
-  const pillRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-
-  useEffect(() => {
-    const el = pillRefs.current[activeSlug];
-    el?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
-  }, [activeSlug]);
-
   return (
     <div
       className={cn(
@@ -37,34 +26,29 @@ export function FlCategoryStrip({
           "shadow-[0_12px_36px_-20px_rgba(0,0,0,0.75)] bg-[#0A0B10]/82",
       )}
     >
-      <div
-        className="category-scroll scroll-touch flex h-14 items-center px-6"
-        role="tablist"
-        aria-label="Categories"
+      <nav
+        className="category-scroll scroll-touch flex min-h-11 items-center gap-1.5 px-6 py-2"
+        aria-label="Browse all categories"
       >
-        {categories.map((c) => {
-          const active = c.slug === activeSlug;
-          return (
-            <button
-              key={c.slug}
-              ref={(node) => {
-                pillRefs.current[c.slug] = node;
-              }}
-              type="button"
-              role="tab"
-              data-category-pill={c.slug}
-              aria-selected={active}
-              onClick={() => onSelect(c.slug)}
-              className={cn("category-pill shrink-0")}
-            >
-              <CategoryIcon slug={c.slug} />
-              <span className="max-w-[140px] truncate text-left sm:max-w-none">
-                {c.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+        {categories.map((c) => (
+          <Link
+            key={c.slug}
+            href={`/categories/${c.slug}`}
+            data-category-pill={c.slug}
+            className={cn(
+              "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[rgba(255,255,255,0.05)] bg-transparent px-2.5 py-1.5 text-left text-[11px] font-medium leading-tight text-[#7B8190] transition-colors duration-200",
+              "hover:border-[rgba(255,255,255,0.1)] hover:text-[#A0A6B1]",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7A00]",
+              "md:px-3 md:text-xs",
+            )}
+          >
+            <CategoryIcon slug={c.slug} size={14} />
+            <span className="max-w-[118px] truncate sm:max-w-[150px] md:max-w-none">
+              {c.label}
+            </span>
+          </Link>
+        ))}
+      </nav>
     </div>
   );
 }

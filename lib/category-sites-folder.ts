@@ -11,6 +11,7 @@ export const CATEGORY_SLUG_TO_SITES_FOLDER: Record<string, string> = {
   "ai-generated": "ai",
   hookup: "hookup",
   "sex-chat": "sexchat",
+  gaming: "adultgames",
 };
 
 export function sitesFolderForCategorySlug(
