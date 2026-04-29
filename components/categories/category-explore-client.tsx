@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
@@ -12,7 +11,7 @@ import { cn, clampTagline } from "@/lib/utils";
 import { CategoryIcon } from "@/components/icons/category-icon";
 import { VisualBadgeIcon } from "@/components/icons/mini-icons";
 import { resolveVisualBadge } from "@/lib/visual-badge";
-import { listingLogoImageSrc } from "@/lib/listing-site-images";
+import { ListingLogo } from "@/components/shared/listing-logo";
 
 type SortId = "recommended" | "newest" | "popular";
 type FilterId = "free" | "premium" | "live" | "ai";
@@ -80,18 +79,8 @@ function CompactListingCard({ listing }: { listing: Listing }) {
         </span>
       ) : null}
       <div className={cn("flex gap-2", vb ? "pr-10" : undefined)}>
-        <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-md bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.05)]">
-          <Image
-            src={listingLogoImageSrc(
-              listing.slug,
-              listing.categorySlug,
-              listing.logo,
-            )}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="36px"
-          />
+        <div className="relative isolate h-9 w-9 shrink-0 overflow-hidden rounded-md bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.05)]">
+          <ListingLogo listing={listing} />
         </div>
         <div className="min-w-0 flex-1">
           <p className="truncate text-[11px] font-semibold leading-tight text-white">
@@ -128,18 +117,8 @@ function TopPickCard({ listing }: { listing: Listing }) {
         </span>
       ) : null}
       <div className={cn("flex flex-1 gap-3", vb ? "pr-12" : undefined)}>
-        <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.06)]">
-          <Image
-            src={listingLogoImageSrc(
-              listing.slug,
-              listing.categorySlug,
-              listing.logo,
-            )}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="44px"
-          />
+        <div className="relative isolate h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.06)]">
+          <ListingLogo listing={listing} />
         </div>
         <div className="min-w-0 flex-1">
           <Link

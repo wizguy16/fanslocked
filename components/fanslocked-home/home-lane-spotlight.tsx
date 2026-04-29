@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * “Spotlight decision” card for the Creator Platforms lane only.
- * Outer shell + inner card (photo 3 style); backdrop shifts per listing.
+ * Unified homepage lane spotlight — single decision card per intent.
+ * Outer shell + inner card; backdrop shifts with carousel index.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -20,13 +20,17 @@ import {
   ScrollText,
 } from "lucide-react";
 import type { Listing } from "@/types/listing";
-import { getHomeListingTierLabels } from "@/lib/home-intent";
+import {
+  getHomeListingTierLabels,
+  type HomeIntentId,
+} from "@/lib/home-intent";
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
-import { listingScreenshotImageSrc } from "@/lib/listing-site-images";
+import { ListingLogo } from "@/components/shared/listing-logo";
 import { clampTagline, cn } from "@/lib/utils";
 
 type Props = {
   items: Listing[];
+  activeIntent: HomeIntentId;
   laneTitle: string;
   laneSubtitle: string;
   valueStrip: readonly [string, string, string];
@@ -173,8 +177,9 @@ function CreatorValueExpandPill({
   );
 }
 
-export function HomeLaneCreatorSpotlight({
+export function HomeLaneSpotlight({
   items,
+  activeIntent,
   laneTitle,
   laneSubtitle,
   valueStrip,
@@ -185,8 +190,8 @@ export function HomeLaneCreatorSpotlight({
   const prefersReducedMotion = useReducedMotion();
 
   const tierLabels = useMemo(
-    () => getHomeListingTierLabels("creator-platforms"),
-    [],
+    () => getHomeListingTierLabels(activeIntent),
+    [activeIntent],
   );
 
   const ids = useMemo(() => items.map((x) => x.id).join(","), [items]);
@@ -195,7 +200,12 @@ export function HomeLaneCreatorSpotlight({
     setIndex(0);
   }, [ids]);
 
-  /** Lane description: peek when section scrolls into view, then tuck away to save space. */
+  /** Peek lane subtitle when intent changes or section enters view — then auto-hide (saves space). */
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    setPeekSubtitle(true);
+  }, [activeIntent, prefersReducedMotion]);
+
   useEffect(() => {
     const el = sectionRef.current;
     if (!el || prefersReducedMotion) return;
@@ -203,11 +213,9 @@ export function HomeLaneCreatorSpotlight({
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return;
-        if (entry.intersectionRatio >= 0.12) {
-          setPeekSubtitle(true);
-        }
+        setPeekSubtitle(true);
       },
-      { rootMargin: "-6% 0px -10% 0px", threshold: [0, 0.08, 0.15, 0.25] },
+      { rootMargin: "0px 0px -8% 0px", threshold: [0, 0.05, 0.1] },
     );
 
     obs.observe(el);
@@ -215,23 +223,15 @@ export function HomeLaneCreatorSpotlight({
   }, [prefersReducedMotion]);
 
   useEffect(() => {
-    if (!peekSubtitle) return;
+    if (!peekSubtitle || prefersReducedMotion) return;
     const id = window.setTimeout(() => setPeekSubtitle(false), SUBTITLE_PEEK_MS);
     return () => clearTimeout(id);
-  }, [peekSubtitle]);
+  }, [peekSubtitle, activeIntent, prefersReducedMotion]);
 
   const n = items.length;
   const safeIndex = n === 0 ? 0 : ((index % n) + n) % n;
   const listing = items[safeIndex];
   const link = listing ? outboundLinkProps(listing) : null;
-  const coverSrc = listing
-    ? listingScreenshotImageSrc(
-        listing.slug,
-        listing.categorySlug,
-        listing.image ?? listing.logo,
-      )
-    : "";
-  const initial = listing?.name?.trim().charAt(0).toUpperCase() ?? "?";
   const badge = spotlightBadge(safeIndex, tierLabels);
   const blurb = listing
     ? clampTagline(listing.description, 200)
@@ -268,13 +268,13 @@ export function HomeLaneCreatorSpotlight({
     <section
       ref={sectionRef}
       className="relative mt-6 outline-none sm:mt-8 focus-visible:ring-2 focus-visible:ring-[#ff4d80]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B10]"
-      aria-label="Creator platform spotlight"
-      aria-describedby="creator-lane-subtitle-live"
+      aria-label={`${laneTitle} spotlight`}
+      aria-describedby="home-lane-subtitle-live"
       onKeyDown={onKeyDown}
       tabIndex={0}
     >
       {/* Always expose subtitle text for AT / SEO while visually tucking the paragraph */}
-      <span id="creator-lane-subtitle-live" className="sr-only">
+      <span id="home-lane-subtitle-live" className="sr-only">
         {laneSubtitle}
       </span>
 
@@ -305,28 +305,35 @@ export function HomeLaneCreatorSpotlight({
             }}
           />
 
-          <header className="relative z-30 shrink-0 text-center">
-            <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl md:text-3xl lg:text-4xl">
+          {/* No header-only bg/blur — that read as a horizontal opacity seam against the mural */}
+          <header className="relative z-10 shrink-0 px-3 py-3 text-center sm:px-5 sm:py-4">
+            <h2 className="text-xl font-semibold tracking-tight text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.92),0_1px_2px_rgba(0,0,0,0.9)] sm:text-2xl md:text-3xl lg:text-4xl">
               {laneTitle}
             </h2>
 
-            <motion.div
-              className="mx-auto max-w-3xl overflow-hidden"
-              initial={false}
-              animate={{
-                maxHeight: peekSubtitle ? 160 : 0,
-                opacity: peekSubtitle ? 1 : 0,
-                marginTop: peekSubtitle ? 12 : 0,
-              }}
-              transition={{
-                duration: prefersReducedMotion ? 0.12 : 0.38,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <p className="text-sm leading-relaxed text-neutral-400 md:text-base lg:text-lg">
+            {prefersReducedMotion ? (
+              <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-neutral-300 [text-shadow:0_2px_20px_rgba(0,0,0,0.85)] md:text-base lg:text-lg">
                 {laneSubtitle}
               </p>
-            </motion.div>
+            ) : (
+              <motion.div
+                className="mx-auto max-w-3xl overflow-hidden"
+                initial={false}
+                animate={{
+                  maxHeight: peekSubtitle ? 160 : 0,
+                  opacity: peekSubtitle ? 1 : 0,
+                  marginTop: peekSubtitle ? 12 : 0,
+                }}
+                transition={{
+                  duration: 0.38,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <p className="text-sm leading-relaxed text-neutral-300 [text-shadow:0_2px_18px_rgba(0,0,0,0.88)] md:text-base lg:text-lg">
+                  {laneSubtitle}
+                </p>
+              </motion.div>
+            )}
 
             <CreatorLaneValueExpandPills labels={valueStrip} />
           </header>
@@ -344,33 +351,41 @@ export function HomeLaneCreatorSpotlight({
             </span>
           </div>
 
-          <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6 md:right-8 md:top-8">
+          <div className="absolute right-4 top-4 z-10 sm:right-6 sm:top-6 md:right-8 md:top-8">
             <span className="inline-block rounded-full bg-[#fe6b00] px-3 py-1 font-semibold uppercase tracking-[0.12em] text-black shadow-[0_0_15px_rgba(254,107,0,0.3)] [font-size:10px] sm:px-4 sm:py-1.5 sm:text-xs">
               {badge}
             </span>
           </div>
 
-          {/* Hero — circle then ghost Visit site (affiliate outbound link) */}
-          <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center justify-center gap-5 py-5 sm:gap-6 sm:py-6 md:py-8">
+          {/* Hero — above footer row (z-10) so outbound link stays clickable */}
+          <div className="relative z-30 flex min-h-0 flex-1 flex-col items-center justify-center gap-5 py-5 sm:gap-6 sm:py-6 md:py-8">
             <div className="pointer-events-none absolute h-[min(52vw,260px)] w-[min(52vw,260px)] rounded-full bg-[#ff4d80]/10 blur-[80px]" />
-            <div className="relative h-[min(28vw,7.5rem)] w-[min(28vw,7.5rem)] shrink-0 overflow-hidden rounded-full border border-white/10 bg-[#0A0B10] shadow-2xl shadow-black/50 sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-40 lg:w-40">
-              {/* eslint-disable-next-line @next/next/no-img-element -- mixed CDNs */}
-              <img
-                src={coverSrc}
-                alt=""
-                className="h-full w-full object-cover opacity-80 mix-blend-screen"
-              />
-              <span className="absolute inset-0 flex items-center justify-center text-3xl font-black tracking-tighter text-white mix-blend-difference sm:text-4xl md:text-5xl">
-                {initial}
-              </span>
-            </div>
+            {/* mode="wait": previous logo exits before next mounts — avoids stacked imgs when paging */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={listing.id}
+                className="relative isolate flex h-[min(28vw,7.5rem)] w-[min(28vw,7.5rem)] shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 shadow-2xl shadow-black/50 sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-40 lg:w-40"
+                initial={
+                  prefersReducedMotion ? false : { opacity: 0 }
+                }
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: prefersReducedMotion ? 0.12 : 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <ListingLogo
+                  listing={listing}
+                  slotShape="circle"
+                  className="h-full w-full"
+                />
+              </motion.div>
+            </AnimatePresence>
 
             {link ? (
               <a
                 key={listing.id}
                 {...link}
                 className={cn(
-                  "group relative z-[15] inline-flex max-w-[min(100%,17rem)] items-center justify-center gap-1.5 overflow-hidden rounded-full",
+                  "pointer-events-auto group relative z-40 inline-flex max-w-[min(100%,17rem)] items-center justify-center gap-1.5 overflow-hidden rounded-full",
                   "border border-[#FF7A00]/50 bg-transparent px-6 py-3",
                   "text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FF7A00]",
                   "transition-[transform,box-shadow,border-color,background-color,color] duration-300 ease-out",
@@ -394,7 +409,7 @@ export function HomeLaneCreatorSpotlight({
             ) : null}
           </div>
 
-          <div className="relative z-20 mt-auto flex min-h-0 w-full shrink-0 flex-col gap-5 pt-3 sm:gap-6 sm:pt-4 lg:flex-row lg:items-end lg:justify-between lg:gap-8 lg:pt-5">
+          <div className="relative z-10 mt-auto flex min-h-0 w-full shrink-0 flex-col gap-5 pt-3 sm:gap-6 sm:pt-4 lg:flex-row lg:items-end lg:justify-between lg:gap-8 lg:pt-5">
             <div className="min-w-0 max-w-xl flex-1">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div

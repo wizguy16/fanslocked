@@ -62,6 +62,72 @@ export function isHomeIntentId(v: string): v is HomeIntentId {
   return HOME_INTENT_OPTIONS.some((o) => o.id === v);
 }
 
+/** Initial homepage lane — avoids default-then-effect flicker (single paint). */
+export type HomeIntentInitialState = {
+  activeIntent: HomeIntentId;
+  heroKeywordIdle: boolean;
+};
+
+function laneQueryFromSearchParams(
+  searchParams: Pick<URLSearchParams, "get"> | null | undefined,
+): string {
+  return (
+    searchParams?.get("lane")?.trim() ??
+    searchParams?.get("intent")?.trim() ??
+    ""
+  );
+}
+
+/**
+ * Deterministic intent from URL (+ defaults only). Same on server and client — use for `useState` initial value.
+ * Persisted lane is applied in `useEffect` (see `useHomePageIntent`).
+ */
+export function getIntentStateFromSearchParamsOnly(
+  searchParams: Pick<URLSearchParams, "get"> | null | undefined,
+): HomeIntentInitialState {
+  const q = laneQueryFromSearchParams(searchParams);
+  if (q && isHomeIntentId(q)) {
+    return {
+      activeIntent: q,
+      heroKeywordIdle: q === DEFAULT_HOME_INTENT,
+    };
+  }
+  return {
+    activeIntent: DEFAULT_HOME_INTENT,
+    heroKeywordIdle: true,
+  };
+}
+
+/**
+ * Priority: `?lane=` / `?intent=` → `localStorage` → default (client only for storage).
+ */
+export function getInitialHomeIntent(
+  searchParams: Pick<URLSearchParams, "get"> | null | undefined,
+): HomeIntentInitialState {
+  const q = laneQueryFromSearchParams(searchParams);
+  if (q && isHomeIntentId(q)) {
+    return {
+      activeIntent: q,
+      heroKeywordIdle: q === DEFAULT_HOME_INTENT,
+    };
+  }
+  if (typeof window === "undefined") {
+    return getIntentStateFromSearchParamsOnly(searchParams);
+  }
+  try {
+    const stored = localStorage.getItem(HOME_INTENT_STORAGE_KEY);
+    if (stored && isHomeIntentId(stored)) {
+      return {
+        activeIntent: stored,
+        heroKeywordIdle: stored === DEFAULT_HOME_INTENT,
+      };
+    }
+  } catch {
+    /* ignore */
+  }
+  return getIntentStateFromSearchParamsOnly(searchParams);
+}
+
 export function getCategorySlugForIntent(id: HomeIntentId): string {
   return HOME_INTENT_OPTIONS.find((o) => o.id === id)!.categorySlug;
 }
@@ -239,3 +305,4 @@ export const HOME_HERO_KEYWORD_CYCLE: readonly HomeIntentId[] = [
   "creator-platforms",
   "watch-free-porn",
 ];
+

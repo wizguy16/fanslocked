@@ -145,7 +145,7 @@ body {
   }
 }
 
-/* Custom ambient pointer — class toggled by `CustomPointer` (fine pointers only) */
+/* Custom ambient pointer — class toggled by `AmbientPointer` ((any-pointer: fine) or mouse) */
 html.fl-custom-pointer body {
   cursor: none;
 }

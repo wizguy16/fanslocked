@@ -1,11 +1,27 @@
 import type { Listing } from "@/types/listing";
 import { CATEGORIES, categorySlugs, getCategoryBySlug } from "@/lib/categories";
+import { getListingLogoDebugSnapshot } from "@/lib/listing-logo-debug";
 import { generateAllListings } from "@/lib/generate-listings";
 import { resolveListingSiteImages } from "@/lib/resolve-listing-site-images";
 
 export const listings: Listing[] = generateAllListings().map(
   resolveListingSiteImages,
 );
+
+if (
+  process.env.NODE_ENV === "development" &&
+  process.env.DEBUG_LISTING_LOGO === "1"
+) {
+  const slug = process.env.DEBUG_LISTING_LOGO_SLUG?.trim() ?? "stripchat";
+  const row = listings.find((l) => l.slug === slug);
+  if (row) {
+    // eslint-disable-next-line no-console -- intentional dev tracing
+    console.info(
+      "[listing-logo] lib/data (after resolveListingSiteImages)",
+      getListingLogoDebugSnapshot(row),
+    );
+  }
+}
 
 export { CATEGORIES, categorySlugs, getCategoryBySlug };
 

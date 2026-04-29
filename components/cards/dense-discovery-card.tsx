@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useRef } from "react";
 import { cn, clampTagline } from "@/lib/utils";
 import type { Listing } from "@/types/listing";
 import { resolveVisualBadge } from "@/lib/visual-badge";
-import { listingLogoImageSrc } from "@/lib/listing-site-images";
+import { ListingLogo } from "@/components/shared/listing-logo";
 import { VisualBadgeIcon } from "@/components/icons/mini-icons";
 
 export function DenseDiscoveryCard({
@@ -50,18 +49,8 @@ export function DenseDiscoveryCard({
       )}
       style={{ transition: "transform 0.18s ease-out" }}
     >
-      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md bg-white/5">
-        <Image
-          src={listingLogoImageSrc(
-            listing.slug,
-            listing.categorySlug,
-            listing.logo,
-          )}
-          alt=""
-          fill
-          className="object-cover"
-          sizes="40px"
-        />
+      <div className="relative isolate h-10 w-10 shrink-0 overflow-hidden rounded-md bg-white/5">
+        <ListingLogo listing={listing} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col justify-between">
         <div className="flex min-w-0 items-start justify-between gap-1">

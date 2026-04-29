@@ -21,7 +21,7 @@ export function FlCategoryStrip({
   return (
     <div
       className={cn(
-        "sticky top-16 z-40 border-b border-[rgba(255,255,255,0.04)] bg-[#0A0B10]/95 backdrop-blur-md transition-[box-shadow,background-color] duration-300 ease-out",
+        "sticky top-16 z-30 border-b border-[rgba(255,255,255,0.04)] bg-[#0A0B10]/95 backdrop-blur-md transition-[box-shadow,background-color] duration-300 ease-out",
         scrolled &&
           "shadow-[0_12px_36px_-20px_rgba(0,0,0,0.75)] bg-[#0A0B10]/82",
       )}

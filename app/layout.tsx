@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "@/styles/globals.css";
 import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
@@ -6,8 +7,15 @@ import { ConditionalFooter } from "@/components/layout/conditional-footer";
 import { Newsletter } from "@/components/sections/newsletter";
 import { AgeGate } from "@/components/age-gate";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
-import { CustomPointer } from "@/components/ui/custom-pointer";
 import { getSiteUrl } from "@/lib/site";
+
+const AmbientPointer = dynamic(
+  () =>
+    import("@/components/ui/ambient-pointer").then((m) => ({
+      default: m.AmbientPointer,
+    })),
+  { ssr: false },
+);
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -64,7 +72,7 @@ export default function RootLayout({
         className={`${jakarta.variable} ${syne.variable} flex min-h-screen flex-col bg-background font-sans antialiased`}
       >
         <PlausibleAnalytics />
-        <CustomPointer />
+        <AmbientPointer />
         <AgeGate />
         <ConditionalNavbar />
         <main id="main-content" className="flex-1">

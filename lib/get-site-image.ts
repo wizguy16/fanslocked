@@ -74,8 +74,10 @@ export function getSiteImageOrPlaceholder(
   slug: string,
   type: ImageType = "screenshot",
   preferFolder?: string,
+  fallbackToOtherType = true,
 ): string {
   return (
-    getSiteImage(slug, type, true, preferFolder) ?? SITE_IMAGE_PLACEHOLDER
+    getSiteImage(slug, type, fallbackToOtherType, preferFolder) ??
+    SITE_IMAGE_PLACEHOLDER
   );
 }

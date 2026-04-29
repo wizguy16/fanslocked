@@ -74,12 +74,13 @@ export function FlHero({ activeIntent, heroKeyword, onIntentChange }: Props) {
                       : "text-[#E6E8ED] hover:border-[#FF7A00]/35 hover:bg-white/[0.07] hover:text-white",
                   )}
                 >
-                  {isActive ? (
-                    <span
-                      aria-hidden
-                      className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(95%_120%_at_50%_0%,rgba(255,122,0,0.28),transparent_72%)]"
-                    />
-                  ) : null}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(95%_120%_at_50%_0%,rgba(255,122,0,0.28),transparent_72%)] transition-opacity duration-200",
+                      isActive ? "opacity-100" : "opacity-0",
+                    )}
+                  />
                   {label}
                 </motion.button>
               );

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -8,7 +7,7 @@ import type { Listing } from "@/types/listing";
 import { clampTagline } from "@/lib/utils";
 import type { VisualBadgeKind } from "@/lib/visual-badge";
 import { VisualBadgeIcon } from "@/components/icons/mini-icons";
-import { listingLogoImageSrc } from "@/lib/listing-site-images";
+import { ListingLogo } from "@/components/shared/listing-logo";
 
 const HIGHLIGHT: { kind: VisualBadgeKind; label: string }[] = [
   { kind: "top", label: "Best" },
@@ -59,18 +58,8 @@ export function FeaturedDiscoveryCard({
         <span>{hl.label}</span>
       </div>
       <div className="mt-6 flex flex-1 gap-3">
-        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md bg-white/5">
-          <Image
-            src={listingLogoImageSrc(
-              listing.slug,
-              listing.categorySlug,
-              listing.logo,
-            )}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="48px"
-          />
+        <div className="relative isolate h-12 w-12 shrink-0 overflow-hidden rounded-md bg-white/5">
+          <ListingLogo listing={listing} />
         </div>
         <div className="flex min-w-0 flex-1 flex-col justify-between gap-1">
           <div>

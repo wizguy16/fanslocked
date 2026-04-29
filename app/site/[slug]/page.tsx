@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -12,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { AffiliateLink } from "@/components/ui/affiliate-link";
 import { clampTagline } from "@/lib/utils";
 import { DenseDiscoveryCard } from "@/components/cards/dense-discovery-card";
-import { listingLogoImageSrc } from "@/lib/listing-site-images";
+import { ListingLogo } from "@/components/shared/listing-logo";
 
 type Props = { params: { slug: string } };
 
@@ -81,18 +80,8 @@ export default function SitePage({ params }: Props) {
 
           <div className="mt-2 overflow-hidden rounded-lg border border-white/10 bg-white/[0.02] p-2">
             <div className="flex gap-2">
-              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded bg-white/5">
-                <Image
-                  src={listingLogoImageSrc(
-                    listing.slug,
-                    listing.categorySlug,
-                    listing.logo,
-                  )}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="40px"
-                />
+              <div className="relative isolate h-10 w-10 shrink-0 overflow-hidden rounded bg-white/5">
+                <ListingLogo listing={listing} />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-1.5">

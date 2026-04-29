@@ -54,12 +54,13 @@ export function FlCardDense({ listing, rank }: Props) {
           rank != null && "pt-4",
         )}
       >
-        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
+        <div className="relative isolate h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
           <FlListingLogo
             slug={listing.slug}
             categorySlug={listing.categorySlug}
             websiteUrl={listing.website_url}
             fallbackLogo={listing.logo}
+            heroImageUrl={listing.image}
           />
         </div>
 

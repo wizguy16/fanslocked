@@ -45,12 +45,13 @@ export function CategoryQuickPicks({ items, blurbs }: Props) {
               )}
             >
               <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-lg border border-[#564338] bg-[#1e1f25]">
-                <div className="relative h-10 w-10">
+                <div className="relative isolate h-10 w-10 overflow-hidden rounded-lg">
                   <FlListingLogo
                     slug={listing.slug}
                     categorySlug={listing.categorySlug}
                     websiteUrl={listing.website_url}
                     fallbackLogo={listing.logo}
+                    heroImageUrl={listing.image}
                     fit="contain"
                     screenshotFallback={false}
                     className="h-10 w-10"

@@ -1,56 +1,40 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  DEFAULT_HOME_INTENT,
   getCategorySlugForIntent,
   getHeroKeywordForIntent,
   getHomeLaneExperience,
   getLaneListingCap,
   HOME_HERO_KEYWORD_CYCLE,
-  HOME_INTENT_STORAGE_KEY,
-  isHomeIntentId,
   isTrafficAcquisitionLane,
-  type HomeIntentId,
 } from "@/lib/home-intent";
 import { CATEGORIES } from "@/lib/categories";
 import { getCategoryBySlug, getListingsByCategorySlug } from "@/lib/data";
 import { FlNav } from "@/components/fanslocked-home/fl-nav";
 import { FlHero } from "@/components/fanslocked-home/fl-hero";
 import { FlCategoryStrip } from "@/components/fanslocked-home/fl-category-strip";
-import { FlFeaturedRow } from "@/components/fanslocked-home/fl-featured-row";
-import { SectionHeader } from "@/components/ui/section-header";
-import { HomeLaneCreatorSpotlight } from "@/components/fanslocked-home/home-lane-creator-spotlight";
+import { HomeLaneSpotlight } from "@/components/fanslocked-home/home-lane-spotlight";
 import { HomeLaneTubeFunnel } from "@/components/fanslocked-home/home-lane-tube-funnel";
-import { HomeLaneUpgradePaths } from "@/components/fanslocked-home/home-lane-upgrade-paths";
-import { HomeLaneValueStrip } from "@/components/fanslocked-home/home-lane-value-strip";
+import { HomeLaneAuthorityBlock } from "@/components/fanslocked-home/home-lane-authority-block";
+import { useHomePageIntent } from "@/components/fanslocked-home/use-home-page-intent";
 
 const STRIP = CATEGORIES;
 
 export function FanslockedHomePage() {
-  const [activeIntent, setActiveIntent] =
-    useState<HomeIntentId>(DEFAULT_HOME_INTENT);
+  const { activeIntent, heroKeywordIdle, handleIntentChange } =
+    useHomePageIntent();
   const [scrolled, setScrolled] = useState(false);
-  /** Rotating subtitle keywords until the user commits from the hero lane buttons. */
-  const [heroKeywordIdle, setHeroKeywordIdle] = useState(true);
   const [idleCycleIndex, setIdleCycleIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
   const contentSectionRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(HOME_INTENT_STORAGE_KEY);
-      if (stored && isHomeIntentId(stored)) {
-        setActiveIntent(stored);
-        if (stored !== DEFAULT_HOME_INTENT) {
-          setHeroKeywordIdle(false);
-        }
-      }
-    } catch {
-      /* ignore */
-    }
-  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -146,24 +130,6 @@ export function FanslockedHomePage() {
     };
   }, [sectionBlock, setupReveal]);
 
-  function persistIntent(id: HomeIntentId) {
-    try {
-      localStorage.setItem(HOME_INTENT_STORAGE_KEY, id);
-    } catch {
-      /* ignore */
-    }
-  }
-
-  function handleIntentChange(id: HomeIntentId) {
-    setHeroKeywordIdle(false);
-
-    const changed = id !== activeIntent;
-    if (!changed) return;
-
-    setActiveIntent(id);
-    persistIntent(id);
-  }
-
   const { slug, label, picks, empty } = sectionBlock;
   const showTubeFunnel = isTrafficAcquisitionLane(activeIntent);
 
@@ -178,11 +144,11 @@ export function FanslockedHomePage() {
       <FlCategoryStrip categories={STRIP} scrolled={scrolled} />
       
       <div className="mx-auto max-w-[1600px] pb-16 pt-8">
-        <div ref={contentSectionRef} className="relative">
+        <div ref={contentSectionRef} className="relative z-0 isolate">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={activeIntent}
-              className="section-reveal scroll-mt-[7.75rem]"
+              className="section-reveal relative z-0 scroll-mt-[7.75rem]"
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
@@ -202,41 +168,20 @@ export function FanslockedHomePage() {
                         <span className="text-[#A0A6B1]">{label}</span> yet.
                       </p>
                     ) : (
-                      <>
-                        {activeIntent === "creator-platforms" ? (
-                          <HomeLaneCreatorSpotlight
-                            items={picks}
-                            laneTitle={laneXp.contextTitle}
-                            laneSubtitle={laneXp.contextDescription}
-                            valueStrip={laneXp.valueStrip}
-                          />
-                        ) : (
-                          <>
-                            <SectionHeader
-                              variant="centered"
-                              title={laneXp.contextTitle}
-                              subtitle={laneXp.contextDescription}
-                              viewAllHref={`/categories/${slug}`}
-                            />
-                            <HomeLaneValueStrip items={laneXp.valueStrip} />
-                            <FlFeaturedRow
-                              items={picks}
-                              tieredHomeBadges
-                              homeIntent={activeIntent}
-                            />
-                          </>
-                        )}
-                      </>
+                      <HomeLaneSpotlight
+                        activeIntent={activeIntent}
+                        items={picks}
+                        laneTitle={laneXp.contextTitle}
+                        laneSubtitle={laneXp.contextDescription}
+                        valueStrip={laneXp.valueStrip}
+                      />
                     )}
                   </div>
                 </div>
 
-                {!showTubeFunnel ? (
+                {!showTubeFunnel && !empty && picks[0] ? (
                   <div className="border-t border-white/5 py-16 md:py-20">
-                    <HomeLaneUpgradePaths
-                      activeIntent={activeIntent}
-                      onSwitchLane={handleIntentChange}
-                    />
+                    <HomeLaneAuthorityBlock listing={picks[0]!} />
                   </div>
                 ) : null}
                 {showTubeFunnel ? (
