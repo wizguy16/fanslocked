@@ -19,7 +19,7 @@ export function AffiliateLink({
       }
       data-affiliate="true"
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg bg-[#FF7A00] px-4 py-2 text-sm font-semibold text-black shadow-[0_0_20px_-8px_rgba(255,122,0,0.45)] transition hover:brightness-105 hover:shadow-[0_0_24px_-6px_rgba(255,122,0,0.55)] active:scale-[0.98]",
+        "inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[0_0_20px_-8px_rgba(255,45,85,0.45)] transition hover:brightness-105 hover:shadow-[0_0_24px_-6px_rgba(255,45,85,0.55)] active:scale-[0.98]",
         className,
       )}
       {...props}

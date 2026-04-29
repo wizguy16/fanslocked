@@ -22,11 +22,12 @@ const config: Config = {
           hover: "rgba(255,255,255,0.05)",
         },
         primary: {
-          DEFAULT: "#FF7A00",
-          foreground: "#0A0B10",
+          DEFAULT: "#FF2D55",
+          foreground: "#ffffff",
         },
-        secondary: "#a78bfa",
-        accent: "#22d3ee",
+        highlight: "#FF7A00",
+        secondary: "#7C5CFF",
+        accent: "#7C5CFF",
       },
       borderRadius: {
         DEFAULT: "1rem",
@@ -34,7 +35,7 @@ const config: Config = {
       boxShadow: {
         soft: "0 8px 30px -12px rgba(0, 0, 0, 0.75)",
         "soft-glow":
-          "0 0 36px -10px rgba(245, 158, 11, 0.35), 0 0 60px -24px rgba(34, 211, 238, 0.12)",
+          "0 0 36px -10px rgba(255, 45, 85, 0.35), 0 0 60px -24px rgba(124, 92, 255, 0.15)",
       },
       transitionDuration: {
         DEFAULT: "200ms",

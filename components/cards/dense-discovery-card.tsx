@@ -73,7 +73,7 @@ export function DenseDiscoveryCard({
             href={listing.affiliate_url}
             target="_blank"
             rel="sponsored noopener noreferrer"
-            className="inline-flex h-8 min-w-[76px] items-center justify-center rounded-lg bg-[#FF7A00] px-2.5 text-[11px] font-bold text-black transition group-hover:scale-[1.04] group-hover:shadow-[0_0_18px_-3px_rgba(255,122,0,0.55)]"
+            className="inline-flex h-8 min-w-[76px] items-center justify-center rounded-lg bg-primary px-2.5 text-[11px] font-bold text-primary-foreground transition group-hover:scale-[1.04] group-hover:shadow-[0_0_18px_-3px_rgba(255,45,85,0.5)]"
           >
             Visit →
           </a>

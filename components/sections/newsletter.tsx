@@ -74,7 +74,7 @@ export function Newsletter() {
                   type="submit"
                   disabled={status === "loading"}
                   className={cn(
-                    "h-12 shrink-0 rounded-xl bg-[#FF7A00] px-6 text-sm font-semibold text-black transition hover:brightness-110 active:scale-[0.99] disabled:opacity-60 sm:px-8",
+                    "h-12 shrink-0 rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110 active:scale-[0.99] disabled:opacity-60 sm:px-8",
                   )}
                 >
                   {status === "loading" ? "…" : "Get Access"}

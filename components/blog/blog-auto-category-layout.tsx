@@ -103,7 +103,7 @@ export function BlogAutoCategoryLayout({
                   </p>
                   <Link
                     {...out}
-                    className="mt-4 inline-block text-[14px] font-medium text-[var(--accent-primary)] transition hover:text-[#ff9a40]"
+                    className="mt-4 inline-block text-[14px] font-medium text-[var(--accent-primary)] transition hover:text-primary/85"
                   >
                     Visit site →
                   </Link>
@@ -130,7 +130,7 @@ export function BlogAutoCategoryLayout({
       <section className="px-6 pb-16 text-center">
         <Link
           href={categoryHref}
-          className="inline-block rounded-[10px] bg-[var(--accent-primary)] px-6 py-3 text-[14px] font-semibold text-black transition hover:bg-[#ff933a]"
+          className="inline-block rounded-[10px] bg-[var(--accent-primary)] px-6 py-3 text-[14px] font-semibold text-white transition hover:brightness-110"
         >
           View full rankings →
         </Link>

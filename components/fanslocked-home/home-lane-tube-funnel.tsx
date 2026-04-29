@@ -69,7 +69,7 @@ export function HomeLaneTubeFunnel({ onSwitchLane }: Props) {
                   onClick={() => onSwitchLane(item.intent!)}
                   className={cn(
                     "flex h-full w-full flex-col rounded-xl border px-4 py-3.5 text-left transition-[transform,border-color,background-color,box-shadow] duration-200",
-                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7A00]/65",
                     item.emphasis
                       ? "border-[#FF7A00]/35 bg-[#0A0B10]/80 hover:-translate-y-0.5 hover:scale-[1.01] hover:border-[#FF7A00]/55 hover:bg-[#0A0B10] hover:shadow-[0_10px_24px_-16px_rgba(255,122,0,0.65)]"
                       : "border-white/10 bg-[#0A0B10]/60 hover:-translate-y-0.5 hover:scale-[1.01] hover:border-white/18 hover:shadow-[0_10px_20px_-16px_rgba(0,0,0,0.55)]",
@@ -91,7 +91,7 @@ export function HomeLaneTubeFunnel({ onSwitchLane }: Props) {
                   className={cn(
                     "flex h-full flex-col rounded-xl border border-white/10 bg-[#0A0B10]/60 px-4 py-3.5 text-left transition-[transform,border-color,background-color,box-shadow] duration-200",
                     "hover:-translate-y-0.5 hover:scale-[1.01] hover:border-[#FF7A00]/35 hover:bg-[#0A0B10]/80 hover:shadow-[0_10px_24px_-16px_rgba(255,122,0,0.45)]",
-                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7A00]/65",
                   )}
                 >
                   <span className="text-sm font-semibold text-white">

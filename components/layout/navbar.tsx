@@ -15,10 +15,10 @@ export function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-1.5 sm:px-4 md:px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 font-semibold tracking-tight text-white transition hover:text-[#FF7A00]"
+          className="flex items-center gap-2 font-semibold tracking-tight text-white transition hover:text-highlight"
         >
           <span
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FF7A00] text-xs font-bold text-black"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground"
             aria-hidden
           >
             FL

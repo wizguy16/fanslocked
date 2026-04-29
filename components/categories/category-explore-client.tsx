@@ -138,7 +138,7 @@ function TopPickCard({ listing }: { listing: Listing }) {
               href={listing.affiliate_url}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              className="rounded-lg bg-[#FF7A00] px-2.5 py-1 text-[11px] font-bold text-black transition hover:brightness-110"
+              className="rounded-lg bg-primary px-2.5 py-1 text-[11px] font-bold text-primary-foreground transition hover:brightness-110"
               onClick={(e) => e.stopPropagation()}
             >
               Visit →
@@ -232,7 +232,7 @@ function MiniEmailCapture() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="h-9 shrink-0 rounded-md bg-[#FF7A00] px-4 text-xs font-semibold text-black transition hover:brightness-110 disabled:opacity-50"
+          className="h-9 shrink-0 rounded-md bg-primary px-4 text-xs font-semibold text-primary-foreground transition hover:brightness-110 disabled:opacity-50"
         >
           {status === "loading" ? "…" : "Subscribe"}
         </button>

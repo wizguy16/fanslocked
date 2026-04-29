@@ -5,7 +5,7 @@ type CTASectionProps = {
   body?: string;
   buttonText?: string;
   buttonHref?: string;
-  /** `primary` = solid amber (money). `secondary` = outline / nav (internal). */
+  /** `primary` = solid red (money CTA). `secondary` = outline / nav (internal). */
   buttonVariant?: "primary" | "secondary";
 };
 

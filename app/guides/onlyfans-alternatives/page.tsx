@@ -354,7 +354,7 @@ export default function OnlyFansAlternativesGuidePage() {
           </p>
           <Link
             href={CATEGORY_HREF}
-            className="mt-5 inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-2.5 text-sm font-semibold text-black shadow-soft transition hover:bg-primary/90 hover:shadow-soft-glow active:scale-[0.98]"
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft transition hover:bg-primary/90 hover:shadow-soft-glow active:scale-[0.98]"
           >
             Explore All Platforms
             <ArrowRight className="h-4 w-4" aria-hidden />

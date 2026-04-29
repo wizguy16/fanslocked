@@ -124,7 +124,7 @@ export function BlogHubLayout({
                   </p>
                   <Link
                     {...out}
-                    className="mt-4 inline-block text-[14px] font-medium text-[var(--accent-primary)] transition hover:text-[#ff9a40]"
+                    className="mt-4 inline-block text-[14px] font-medium text-[var(--accent-primary)] transition hover:text-primary/85"
                   >
                     Visit site →
                   </Link>
@@ -176,7 +176,7 @@ export function BlogHubLayout({
           <p className="text-[14px] text-[var(--text-secondary)]">{midPrompt}</p>
           <Link
             href={categoryHref}
-            className="mt-4 inline-block rounded-[10px] bg-[var(--accent-primary)] px-6 py-3 text-[14px] font-semibold text-black transition hover:bg-[#ff933a]"
+            className="mt-4 inline-block rounded-[10px] bg-[var(--accent-primary)] px-6 py-3 text-[14px] font-semibold text-white transition hover:brightness-110"
           >
             {midButton}
           </Link>
@@ -191,7 +191,7 @@ export function BlogHubLayout({
           </p>
           <Link
             href={categoryHref}
-            className="mt-6 inline-block rounded-[10px] bg-[var(--accent-primary)] px-6 py-3 text-[14px] font-semibold text-black transition hover:bg-[#ff933a]"
+            className="mt-6 inline-block rounded-[10px] bg-[var(--accent-primary)] px-6 py-3 text-[14px] font-semibold text-white transition hover:brightness-110"
           >
             {finalButton}
           </Link>

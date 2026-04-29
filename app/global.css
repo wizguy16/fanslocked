@@ -17,11 +17,13 @@
     --text-secondary: #A0A6B1;
     --text-muted: #6B7280;
   
-    /* Brand Colors */
-    --accent-primary: #FF7A00;   /* ORANGE (main CTA) */
-    --accent-secondary: #7C5CFF; /* PURPLE (secondary accent) */
-  
+    /* Brand — primary CTA (red), highlight (orange), secondary (purple) */
+    --accent-primary: #FF2D55;
+    --accent-highlight: #FF7A00;
+    --accent-secondary: #7C5CFF;
+
     /* Effects */
+    --glow-red: 0 0 20px rgba(255, 45, 85, 0.35);
     --glow-orange: 0 0 20px rgba(255, 122, 0, 0.35);
     --glow-purple: 0 0 20px rgba(124, 92, 255, 0.35);
   
@@ -110,7 +112,7 @@
   
   .btn-primary {
     background: var(--accent-primary);
-    color: #000;
+    color: #fff;
     border: none;
     border-radius: var(--radius-md);
     padding: 10px 16px;
@@ -118,11 +120,30 @@
     cursor: pointer;
     transition: all 0.2s ease;
   }
-  
-  /* Hover = glow + lift */
+
   .btn-primary:hover {
-    box-shadow: var(--glow-orange);
+    box-shadow: var(--glow-red);
     transform: translateY(-1px);
+  }
+
+  .btn-highlight {
+    background: var(--accent-highlight);
+    color: #000;
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-highlight:hover {
+    box-shadow: var(--glow-orange);
+  }
+
+  .badge-active {
+    border: 1px solid var(--accent-highlight);
+    color: var(--accent-highlight);
+    box-shadow: var(--glow-orange);
   }
   
   /* Secondary button (ghost style) */
@@ -145,10 +166,14 @@
   /* ✨ GLOW UTILITIES */
   /* ============================= */
   
+  .glow-red {
+    box-shadow: var(--glow-red);
+  }
+
   .glow-orange {
     box-shadow: var(--glow-orange);
   }
-  
+
   .glow-purple {
     box-shadow: var(--glow-purple);
   }

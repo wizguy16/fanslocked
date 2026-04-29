@@ -386,17 +386,15 @@ export function HomeLaneSpotlight({
                 {...link}
                 className={cn(
                   "pointer-events-auto group relative z-40 inline-flex max-w-[min(100%,17rem)] items-center justify-center gap-1.5 overflow-hidden rounded-full",
-                  "border border-[#FF7A00]/50 bg-transparent px-6 py-3",
-                  "text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FF7A00]",
-                  "transition-[transform,box-shadow,border-color,background-color,color] duration-300 ease-out",
-                  "hover:-translate-y-0.5 hover:border-[#FF7A00] hover:bg-[#FF7A00]/[0.08] hover:text-[#FFA04D]",
-                  "hover:shadow-[0_0_20px_-6px_rgba(255,122,0,0.4)] active:translate-y-0 active:scale-[0.98]",
-                  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7A00]/70",
+                  "bg-primary px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground",
+                  "shadow-[0_0_20px_-8px_rgba(255,45,85,0.45)] transition-[transform,box-shadow,background-color] duration-300 ease-out",
+                  "hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_0_24px_-6px_rgba(255,45,85,0.55)] active:translate-y-0 active:scale-[0.98]",
+                  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/70",
                 )}
               >
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[#FF7A00]/10 to-transparent opacity-0 transition-[transform,opacity] duration-500 ease-out group-hover:translate-x-full group-hover:opacity-100"
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-[transform,opacity] duration-500 ease-out group-hover:translate-x-full group-hover:opacity-100"
                 />
                 <span className="relative">Visit site</span>
                 <span

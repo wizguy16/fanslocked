@@ -61,7 +61,7 @@ export function FlHero({ activeIntent, heroKeyword, onIntentChange }: Props) {
                   transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                   className={cn(
                     "relative rounded-xl border px-2.5 py-2.5 text-left text-xs font-semibold transition-[border-color,background-color,color,opacity] duration-200 sm:text-center md:py-3 md:text-[13px]",
-                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7A00]/65",
                     "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
                     revenue &&
                       !isActive &&

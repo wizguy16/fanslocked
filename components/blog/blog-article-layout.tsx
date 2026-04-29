@@ -30,7 +30,7 @@ export function BlogArticleLayout({ post }: { post: BlogPost }) {
             </p>
             <Link
               href={`/categories/${post.relatedCategorySlug}`}
-              className="mt-4 inline-flex text-sm font-semibold text-[var(--accent-primary)] transition hover:text-[#ff9a40]"
+              className="mt-4 inline-flex text-sm font-semibold text-[var(--accent-primary)] transition hover:text-primary/85"
             >
               View top sites →
             </Link>

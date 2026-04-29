@@ -23,7 +23,7 @@ import { FlHero } from "@/components/fanslocked-home/fl-hero";
 import { FlCategoryStrip } from "@/components/fanslocked-home/fl-category-strip";
 import { HomeLaneSpotlight } from "@/components/fanslocked-home/home-lane-spotlight";
 import { HomeLaneTubeFunnel } from "@/components/fanslocked-home/home-lane-tube-funnel";
-import { HomeLaneAuthorityBlock } from "@/components/fanslocked-home/home-lane-authority-block";
+import { HomeTopPicksShowcase } from "@/components/fanslocked-home/home-top-picks-showcase";
 import { useHomePageIntent } from "@/components/fanslocked-home/use-home-page-intent";
 
 const STRIP = CATEGORIES;
@@ -179,9 +179,14 @@ export function FanslockedHomePage() {
                   </div>
                 </div>
 
-                {!showTubeFunnel && !empty && picks[0] ? (
+                {!showTubeFunnel && !empty && picks.length > 0 ? (
                   <div className="border-t border-white/5 py-16 md:py-20">
-                    <HomeLaneAuthorityBlock listing={picks[0]!} />
+                    <HomeTopPicksShowcase
+                      activeIntent={activeIntent}
+                      items={picks}
+                      laneSubtitle={laneXp.contextDescription}
+                      valueStrip={laneXp.valueStrip}
+                    />
                   </div>
                 ) : null}
                 {showTubeFunnel ? (

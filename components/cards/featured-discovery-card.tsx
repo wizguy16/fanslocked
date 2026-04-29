@@ -83,7 +83,7 @@ export function FeaturedDiscoveryCard({
               href={listing.affiliate_url}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              className="col-start-2 inline-flex h-8 min-w-[88px] shrink-0 items-center justify-center rounded-lg bg-[#FF7A00] px-3 text-xs font-bold text-black transition hover:scale-[1.03] hover:shadow-[0_0_20px_-4px_rgba(255,122,0,0.65)]"
+              className="col-start-2 inline-flex h-8 min-w-[88px] shrink-0 items-center justify-center rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground transition hover:scale-[1.03] hover:shadow-[0_0_20px_-4px_rgba(255,45,85,0.55)]"
             >
               Visit →
             </a>
