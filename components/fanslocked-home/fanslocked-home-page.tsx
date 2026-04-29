@@ -14,7 +14,6 @@ import {
   getHomeLaneExperience,
   getLaneListingCap,
   HOME_HERO_KEYWORD_CYCLE,
-  isTrafficAcquisitionLane,
 } from "@/lib/home-intent";
 import { CATEGORIES } from "@/lib/categories";
 import { getCategoryBySlug, getListingsByCategorySlug } from "@/lib/data";
@@ -22,7 +21,6 @@ import { FlNav } from "@/components/fanslocked-home/fl-nav";
 import { FlHero } from "@/components/fanslocked-home/fl-hero";
 import { FlCategoryStrip } from "@/components/fanslocked-home/fl-category-strip";
 import { HomeLaneSpotlight } from "@/components/fanslocked-home/home-lane-spotlight";
-import { HomeLaneTubeFunnel } from "@/components/fanslocked-home/home-lane-tube-funnel";
 import { HomeTopPicksShowcase } from "@/components/fanslocked-home/home-top-picks-showcase";
 import { useHomePageIntent } from "@/components/fanslocked-home/use-home-page-intent";
 
@@ -131,7 +129,6 @@ export function FanslockedHomePage() {
   }, [sectionBlock, setupReveal]);
 
   const { slug, label, picks, empty } = sectionBlock;
-  const showTubeFunnel = isTrafficAcquisitionLane(activeIntent);
 
   return (
     <div className="min-h-[100dvh] bg-[#0A0B10] text-white">
@@ -179,7 +176,7 @@ export function FanslockedHomePage() {
                   </div>
                 </div>
 
-                {!showTubeFunnel && !empty && picks.length > 0 ? (
+                {!empty && picks.length > 0 ? (
                   <div className="border-t border-white/5 py-16 md:py-20">
                     <HomeTopPicksShowcase
                       activeIntent={activeIntent}
@@ -187,11 +184,6 @@ export function FanslockedHomePage() {
                       laneSubtitle={laneXp.contextDescription}
                       valueStrip={laneXp.valueStrip}
                     />
-                  </div>
-                ) : null}
-                {showTubeFunnel ? (
-                  <div className="border-t border-white/5 py-16 md:py-20">
-                    <HomeLaneTubeFunnel onSwitchLane={handleIntentChange} />
                   </div>
                 ) : null}
               </div>
