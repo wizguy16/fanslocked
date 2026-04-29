@@ -176,9 +176,7 @@ export function FanslockedHomePage() {
         onIntentChange={handleIntentChange}
       />
       <FlCategoryStrip categories={STRIP} scrolled={scrolled} />
-      <div style={{ color: "red", fontSize: "40px" }}>
-  BUILD TEST v2
-</div>
+      
       <div className="mx-auto max-w-[1600px] pb-16 pt-8">
         <div ref={contentSectionRef} className="relative">
           <AnimatePresence mode="wait" initial={false}>
