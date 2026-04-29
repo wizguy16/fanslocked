@@ -7,7 +7,11 @@
  */
 
 import type { Listing } from "@/types/listing";
-import { HOME_LISTING_TIER_LABELS } from "@/lib/home-intent";
+import {
+  HOME_LISTING_TIER_LABELS,
+  getHomeListingTierLabels,
+  type HomeIntentId,
+} from "@/lib/home-intent";
 import { FlCardFeatured } from "@/components/fanslocked-home/fl-card-featured";
 import { useDragScroll } from "@/components/home/use-drag-scroll";
 
@@ -22,6 +26,8 @@ type Props = {
    * Ignored when `mode === "stacked"`.
    */
   tieredHomeBadges?: boolean;
+  /** When set with `tieredHomeBadges`, tier copy matches the active lane (e.g. free-tube). */
+  homeIntent?: HomeIntentId;
 };
 
 export function FlFeaturedRow({
@@ -29,8 +35,13 @@ export function FlFeaturedRow({
   mode = "scroll",
   rankOffset = 0,
   tieredHomeBadges = false,
+  homeIntent,
 }: Props) {
   const { ref: dragRef, dragScrollProps } = useDragScroll<HTMLDivElement>();
+  const tierLabels =
+    tieredHomeBadges && homeIntent
+      ? getHomeListingTierLabels(homeIntent)
+      : HOME_LISTING_TIER_LABELS;
 
   if (items.length === 0) return null;
 
@@ -44,8 +55,8 @@ export function FlFeaturedRow({
               listing={l}
               rank={rankOffset + i + 1}
               rankLabel={
-                tieredHomeBadges && i < HOME_LISTING_TIER_LABELS.length
-                  ? HOME_LISTING_TIER_LABELS[i]
+                tieredHomeBadges && i < tierLabels.length
+                  ? tierLabels[i]
                   : undefined
               }
               variant="stacked"
@@ -73,8 +84,8 @@ export function FlFeaturedRow({
               listing={l}
               rank={rankOffset + i + 1}
               rankLabel={
-                tieredHomeBadges && i < HOME_LISTING_TIER_LABELS.length
-                  ? HOME_LISTING_TIER_LABELS[i]
+                tieredHomeBadges && i < tierLabels.length
+                  ? tierLabels[i]
                   : undefined
               }
             />

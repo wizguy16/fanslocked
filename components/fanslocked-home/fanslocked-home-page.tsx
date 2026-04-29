@@ -1,11 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   DEFAULT_HOME_INTENT,
   getCategorySlugForIntent,
+  getHeroKeywordForIntent,
   getHomeLaneExperience,
   getLaneListingCap,
+  HOME_HERO_KEYWORD_CYCLE,
   HOME_INTENT_STORAGE_KEY,
   isHomeIntentId,
   isTrafficAcquisitionLane,
@@ -18,6 +21,7 @@ import { FlHero } from "@/components/fanslocked-home/fl-hero";
 import { FlCategoryStrip } from "@/components/fanslocked-home/fl-category-strip";
 import { FlFeaturedRow } from "@/components/fanslocked-home/fl-featured-row";
 import { SectionHeader } from "@/components/ui/section-header";
+import { HomeLaneCreatorSpotlight } from "@/components/fanslocked-home/home-lane-creator-spotlight";
 import { HomeLaneTubeFunnel } from "@/components/fanslocked-home/home-lane-tube-funnel";
 import { HomeLaneUpgradePaths } from "@/components/fanslocked-home/home-lane-upgrade-paths";
 import { HomeLaneValueStrip } from "@/components/fanslocked-home/home-lane-value-strip";
@@ -28,17 +32,44 @@ export function FanslockedHomePage() {
   const [activeIntent, setActiveIntent] =
     useState<HomeIntentId>(DEFAULT_HOME_INTENT);
   const [scrolled, setScrolled] = useState(false);
+  /** Rotating subtitle keywords until the user commits from the hero lane buttons. */
+  const [heroKeywordIdle, setHeroKeywordIdle] = useState(true);
+  const [idleCycleIndex, setIdleCycleIndex] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const contentSectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     try {
       const stored = localStorage.getItem(HOME_INTENT_STORAGE_KEY);
       if (stored && isHomeIntentId(stored)) {
         setActiveIntent(stored);
+        if (stored !== DEFAULT_HOME_INTENT) {
+          setHeroKeywordIdle(false);
+        }
       }
     } catch {
       /* ignore */
     }
   }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => setReduceMotion(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    const allowIdle = heroKeywordIdle && !reduceMotion;
+    if (!allowIdle) return;
+    const t = window.setInterval(() => {
+      setIdleCycleIndex(
+        (i) => (i + 1) % HOME_HERO_KEYWORD_CYCLE.length,
+      );
+    }, 2800);
+    return () => clearInterval(t);
+  }, [heroKeywordIdle, reduceMotion]);
 
   const activeSlug = useMemo(
     () => getCategorySlugForIntent(activeIntent),
@@ -54,6 +85,16 @@ export function FanslockedHomePage() {
     () => getHomeLaneExperience(activeIntent),
     [activeIntent],
   );
+
+  const heroKeyword = useMemo(() => {
+    const idle =
+      heroKeywordIdle && !reduceMotion;
+    if (!idle) {
+      return getHeroKeywordForIntent(activeIntent);
+    }
+    const id = HOME_HERO_KEYWORD_CYCLE[idleCycleIndex]!;
+    return getHeroKeywordForIntent(id);
+  }, [heroKeywordIdle, reduceMotion, activeIntent, idleCycleIndex]);
 
   const sectionBlock = useMemo(() => {
     const base = getListingsByCategorySlug(activeSlug);
@@ -114,19 +155,13 @@ export function FanslockedHomePage() {
   }
 
   function handleIntentChange(id: HomeIntentId) {
+    setHeroKeywordIdle(false);
+
     const changed = id !== activeIntent;
+    if (!changed) return;
+
     setActiveIntent(id);
     persistIntent(id);
-    if (changed && typeof document !== "undefined") {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          document.getElementById("lane-section")?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        });
-      });
-    }
   }
 
   const { slug, label, picks, empty } = sectionBlock;
@@ -135,56 +170,83 @@ export function FanslockedHomePage() {
   return (
     <div className="min-h-[100dvh] bg-[#0A0B10] text-white">
       <FlNav scrolled={scrolled} />
-      <FlHero activeIntent={activeIntent} onIntentChange={handleIntentChange} />
+      <FlHero
+        activeIntent={activeIntent}
+        heroKeyword={heroKeyword}
+        onIntentChange={handleIntentChange}
+      />
       <FlCategoryStrip categories={STRIP} scrolled={scrolled} />
 
       <div className="mx-auto max-w-[1600px] pb-16 pt-8">
-        <div
-          key={activeIntent}
-          className="animate-home-intent-fade section-reveal scroll-mt-[7.75rem]"
-        >
-          <div
-            id="lane-section"
-            className="scroll-mt-[7.75rem]"
-            role="region"
-            aria-label={label}
-          >
-            <div className="border-t border-white/5 py-16 md:py-20">
-              <div id={slug} className="space-y-0 px-6">
-                {empty ? (
-                  <p className="text-center text-sm text-[#6B7280]">
-                    No listings in{" "}
-                    <span className="text-[#A0A6B1]">{label}</span> yet.
-                  </p>
-                ) : (
-                  <>
-                    <SectionHeader
-                      variant="centered"
-                      title={laneXp.contextTitle}
-                      subtitle={laneXp.contextDescription}
-                      viewAllHref={`/categories/${slug}`}
-                    />
-                    <HomeLaneValueStrip items={laneXp.valueStrip} />
-                    <FlFeaturedRow items={picks} tieredHomeBadges />
-                  </>
-                )}
-              </div>
-            </div>
+        <div ref={contentSectionRef} className="relative">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={activeIntent}
+              className="section-reveal scroll-mt-[7.75rem]"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div
+                id="lane-section"
+                className="scroll-mt-[7.75rem]"
+                role="region"
+                aria-label={label}
+              >
+                <div className="border-t border-white/5 py-16 md:py-20">
+                  <div id={slug} className="space-y-0 px-6">
+                    {empty ? (
+                      <p className="text-center text-sm text-[#6B7280]">
+                        No listings in{" "}
+                        <span className="text-[#A0A6B1]">{label}</span> yet.
+                      </p>
+                    ) : (
+                      <>
+                        {activeIntent === "creator-platforms" ? (
+                          <HomeLaneCreatorSpotlight
+                            items={picks}
+                            laneTitle={laneXp.contextTitle}
+                            laneSubtitle={laneXp.contextDescription}
+                            valueStrip={laneXp.valueStrip}
+                          />
+                        ) : (
+                          <>
+                            <SectionHeader
+                              variant="centered"
+                              title={laneXp.contextTitle}
+                              subtitle={laneXp.contextDescription}
+                              viewAllHref={`/categories/${slug}`}
+                            />
+                            <HomeLaneValueStrip items={laneXp.valueStrip} />
+                            <FlFeaturedRow
+                              items={picks}
+                              tieredHomeBadges
+                              homeIntent={activeIntent}
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </div>
 
-            {!showTubeFunnel ? (
-              <div className="border-t border-white/5 py-16 md:py-20">
-                <HomeLaneUpgradePaths
-                  activeIntent={activeIntent}
-                  onSwitchLane={handleIntentChange}
-                />
+                {!showTubeFunnel ? (
+                  <div className="border-t border-white/5 py-16 md:py-20">
+                    <HomeLaneUpgradePaths
+                      activeIntent={activeIntent}
+                      onSwitchLane={handleIntentChange}
+                    />
+                  </div>
+                ) : null}
+                {showTubeFunnel ? (
+                  <div className="border-t border-white/5 py-16 md:py-20">
+                    <HomeLaneTubeFunnel onSwitchLane={handleIntentChange} />
+                  </div>
+                ) : null}
               </div>
-            ) : null}
-            {showTubeFunnel ? (
-              <div className="border-t border-white/5 py-16 md:py-20">
-                <HomeLaneTubeFunnel onSwitchLane={handleIntentChange} />
-              </div>
-            ) : null}
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </div>

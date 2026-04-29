@@ -40,8 +40,8 @@ export function HomeLaneUpgradePaths({ activeIntent, onSwitchLane }: Props) {
                 type="button"
                 onClick={() => onSwitchLane(id)}
                 className={cn(
-                  "flex h-full w-full flex-col rounded-xl border border-[#FF7A00]/25 bg-[#0A0B10]/80 px-4 py-3.5 text-left transition-colors duration-150",
-                  "hover:border-[#FF7A00]/45 hover:bg-[#0A0B10]",
+                  "flex h-full w-full flex-col rounded-xl border border-[#FF7A00]/25 bg-[#0A0B10]/80 px-4 py-3.5 text-left transition-[transform,border-color,background-color,box-shadow] duration-200",
+                  "hover:-translate-y-0.5 hover:scale-[1.01] hover:border-[#FF7A00]/45 hover:bg-[#0A0B10] hover:shadow-[0_10px_24px_-16px_rgba(255,122,0,0.65)]",
                   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
                 )}
               >

@@ -6,6 +6,7 @@ import { ConditionalFooter } from "@/components/layout/conditional-footer";
 import { Newsletter } from "@/components/sections/newsletter";
 import { AgeGate } from "@/components/age-gate";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
+import { CustomPointer } from "@/components/ui/custom-pointer";
 import { getSiteUrl } from "@/lib/site";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -63,6 +64,7 @@ export default function RootLayout({
         className={`${jakarta.variable} ${syne.variable} flex min-h-screen flex-col bg-background font-sans antialiased`}
       >
         <PlausibleAnalytics />
+        <CustomPointer />
         <AgeGate />
         <ConditionalNavbar />
         <main id="main-content" className="flex-1">

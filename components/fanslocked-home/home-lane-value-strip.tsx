@@ -1,12 +1,15 @@
+import { cn } from "@/lib/utils";
+
 type Props = {
   items: readonly [string, string, string];
+  className?: string;
 };
 
 /** Lane value props — rounded pills, no bullets or emoji. */
-export function HomeLaneValueStrip({ items }: Props) {
+export function HomeLaneValueStrip({ items, className }: Props) {
   return (
     <div
-      className="mb-10 flex flex-wrap justify-center gap-3"
+      className={cn("mb-10 flex flex-wrap justify-center gap-3", className)}
       aria-label="Why this lane"
     >
       {items.map((t) => (

@@ -91,6 +91,21 @@ export const HOME_LISTING_TIER_LABELS = [
   "Best premium option",
 ] as const;
 
+/** Free-tube lane — conversion-focused homepage tier framing. */
+export const HOME_LISTING_TIER_LABELS_FREE_TUBE = [
+  "🔥 Instant free videos",
+  "⚡ Find anything fast",
+  "💎 Premium-style scenes",
+] as const;
+
+export function getHomeListingTierLabels(
+  intent: HomeIntentId,
+): readonly string[] {
+  return intent === "watch-free-porn"
+    ? HOME_LISTING_TIER_LABELS_FREE_TUBE
+    : HOME_LISTING_TIER_LABELS;
+}
+
 export type HomeLaneExperience = {
   /** Hero paragraph under the H1 — changes with the active lane. */
   heroSubtitle: string;
@@ -201,3 +216,26 @@ export function getHomeUpgradePathIntents(active: HomeIntentId): HomeIntentId[] 
 export function getIntentLabel(id: HomeIntentId): string {
   return HOME_INTENT_OPTIONS.find((o) => o.id === id)!.label;
 }
+
+/** Keyword in the homepage hero subtitle — matches “Pick your lane” selection. */
+export function getHeroKeywordForIntent(id: HomeIntentId): string {
+  const map: Record<HomeIntentId, string> = {
+    "live-cams": "cams",
+    "chat-sexting": "chat",
+    "dating-hookups": "dating",
+    "ai-companions": "AI",
+    "creator-platforms": "creators",
+    "watch-free-porn": "free sites",
+  };
+  return map[id] ?? "sites";
+}
+
+/** Editorial order for idle hero keyword rotation (cams → … → free sites). */
+export const HOME_HERO_KEYWORD_CYCLE: readonly HomeIntentId[] = [
+  "live-cams",
+  "chat-sexting",
+  "dating-hookups",
+  "ai-companions",
+  "creator-platforms",
+  "watch-free-porn",
+];

@@ -144,3 +144,14 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Custom ambient pointer — class toggled by `CustomPointer` (fine pointers only) */
+html.fl-custom-pointer body {
+  cursor: none;
+}
+
+html.fl-custom-pointer input:not([type="hidden"]):not([disabled]),
+html.fl-custom-pointer textarea:not([disabled]),
+html.fl-custom-pointer [contenteditable="true"] {
+  cursor: text !important;
+}

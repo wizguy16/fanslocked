@@ -55,7 +55,7 @@ export function FlCardFeatured({
         className={cn(
           "group relative flex h-[min(52vh,26rem)] w-full shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#121318] no-underline outline-none",
           "shadow-[0_2px_12px_-8px_rgba(0,0,0,0.35)]",
-          "transition-[border-color] duration-200 ease-out hover:border-[rgba(255,122,0,0.45)]",
+          "transition-[transform,border-color,box-shadow] duration-250 ease-out hover:-translate-y-0.5 hover:scale-[1.008] hover:border-[rgba(255,122,0,0.45)] hover:shadow-[0_14px_30px_-18px_rgba(255,122,0,0.5)]",
           "focus-visible:ring-2 focus-visible:ring-[rgba(255,122,0,0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B10]",
         )}
       >
@@ -181,8 +181,8 @@ export function FlCardFeatured({
         railWidthClasses,
         isStacked ? "relative flex items-center gap-5 p-6" : "flex flex-col p-6",
         "shadow-[0_2px_12px_-8px_rgba(0,0,0,0.35)]",
-        "transition-[border-color,background-color] duration-200 ease-out",
-        "hover:border-[#FF7A00]/65 hover:bg-[var(--bg-elevated)]",
+        "transition-[transform,border-color,background-color,box-shadow] duration-250 ease-out",
+        "hover:-translate-y-0.5 hover:scale-[1.01] hover:border-[#FF7A00]/65 hover:bg-[var(--bg-elevated)] hover:shadow-[0_14px_28px_-16px_rgba(255,122,0,0.45)]",
         "focus-visible:ring-2 focus-visible:ring-[rgba(255,122,0,0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
       )}
     >
