@@ -27,6 +27,8 @@ export type Listing = {
   popularity_score: number;
   /** When set, overrides pseudo-random badge chips on dense cards. */
   badge?: string;
+  /** Prestige "Top picks" order within `categorySlug` (1 = first). Omitted = not in that band. */
+  topPickRank?: number;
 };
 
 export type QuickFilterId = "all" | "free" | "trending" | "premium" | "new";

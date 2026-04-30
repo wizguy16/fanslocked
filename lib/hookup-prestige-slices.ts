@@ -1,4 +1,5 @@
 import type { Listing } from "@/types/listing";
+import { selectCategoryTopPicks } from "@/lib/category-prestige-top-picks";
 
 /** Trust-first rail: recognizable brands before monetized picks. */
 const HOOKUP_TRUST_ORDER = [
@@ -19,11 +20,17 @@ const HOOKUP_MONETIZATION_ORDER = [
   "together2night",
 ] as const;
 
+/** Prestige Top picks band matches legacy trust rail length (six). */
+const HOOKUP_SHOWCASE_LIMIT = 6;
+
 export function buildHookupPrestigeSlices(capped: Listing[]) {
   const bySlug = new Map(capped.map((l) => [l.slug, l]));
-  const trust = HOOKUP_TRUST_ORDER.map((s) => bySlug.get(s)).filter(
-    (l): l is Listing => Boolean(l),
-  );
+  const dataTrust = selectCategoryTopPicks(capped, "hookup", HOOKUP_SHOWCASE_LIMIT);
+  const trust =
+    dataTrust ??
+    HOOKUP_TRUST_ORDER.map((s) => bySlug.get(s)).filter(
+      (l): l is Listing => Boolean(l),
+    );
   const trustIds = new Set(trust.map((l) => l.id));
   const monetization = HOOKUP_MONETIZATION_ORDER.map((s) => bySlug.get(s)).filter(
     (l): l is Listing => l !== undefined && !trustIds.has(l.id),

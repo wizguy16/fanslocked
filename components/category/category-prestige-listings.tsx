@@ -12,6 +12,8 @@ export type CategoryListingCopy = {
 };
 
 type Props = {
+  /** Page category slug — drives listing CTA labels and optional microcopy. */
+  categorySlug: string;
   quick: Listing[];
   showcase: Listing[];
   rising: Listing[];
@@ -27,6 +29,7 @@ type Props = {
  * Layout rules per section live in `components/category/sections/*`.
  */
 export function CategoryPrestigeListings({
+  categorySlug,
   quick,
   showcase,
   rising,
@@ -36,13 +39,19 @@ export function CategoryPrestigeListings({
 }: Props) {
   return (
     <div className="space-y-10 md:space-y-12">
-      <CategoryQuickPicks items={quick} blurbs={listingCopy?.quickBlurbs ?? null} />
+      <CategoryQuickPicks
+        categorySlug={categorySlug}
+        items={quick}
+        blurbs={listingCopy?.quickBlurbs ?? null}
+      />
       <CategoryTopPicks
+        categorySlug={categorySlug}
         items={showcase}
         rankOffset={quick.length}
         blurbs={listingCopy?.showcaseBlurbs ?? null}
       />
       <CategoryMoreToExplore
+        categorySlug={categorySlug}
         items={rising}
         blurbs={listingCopy?.risingBlurbs ?? null}
         heading={moreSectionHeading ?? undefined}

@@ -4,6 +4,7 @@ import type { Listing } from "@/types/listing";
 import { FlCardCompact } from "@/components/fanslocked-home/fl-card-compact";
 
 type Props = {
+  categorySlug: string;
   items: Listing[];
   blurbs?: readonly string[] | null;
   /** Replaces the default “More to explore” section title. */
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export function CategoryMoreToExplore({
+  categorySlug,
   items,
   blurbs,
   heading = "More to explore",
@@ -35,6 +37,7 @@ export function CategoryMoreToExplore({
             <FlCardCompact
               key={listing.id}
               listing={listing}
+              categoryPageSlug={categorySlug}
               teaser={blurbs?.[i]?.trim()}
             />
           ))}

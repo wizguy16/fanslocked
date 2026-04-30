@@ -7,16 +7,24 @@ import type { Listing } from "@/types/listing";
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
 import { CATEGORY_GLASS_PANEL } from "@/components/category/sections/category-prestige-styles";
 import { SitePreview } from "@/components/shared/site-preview";
+import {
+  categoryListingCtaLabel,
+  categoryListingCtaMicrocopy,
+  categoryShowcaseBadgeLabel,
+} from "@/lib/category-listing-cta";
 
 type Props = {
+  categorySlug: string;
   items: Listing[];
   /** Rank offset so badges continue after quick picks (e.g. 4). */
   rankOffset: number;
   blurbs?: readonly string[] | null;
 };
 
-export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
+export function CategoryTopPicks({ categorySlug, items, rankOffset, blurbs }: Props) {
   if (items.length === 0) return null;
+  const ctaLabel = categoryListingCtaLabel(categorySlug);
+  const ctaMicro = categoryListingCtaMicrocopy(categorySlug);
 
   return (
     <section aria-labelledby="category-top-picks-heading" className="space-y-4">
@@ -34,6 +42,7 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
           const rankLabel = String(rank).padStart(2, "0");
           const body =
             blurbs?.[index]?.trim() || clampTagline(listing.description, 160);
+          const showcaseBadge = categoryShowcaseBadgeLabel(index);
 
           return (
             <Link
@@ -72,9 +81,21 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
                 )}
               >
                 <div className={cn("min-w-0 flex-1", reverse && "text-right")}>
-                  <h3 className="mb-2 font-display text-xl font-bold text-[#e3e1e9] md:text-2xl">
-                    {listing.name}
-                  </h3>
+                  <div
+                    className={cn(
+                      "flex flex-col gap-2",
+                      reverse ? "items-end" : "items-start",
+                    )}
+                  >
+                    {showcaseBadge ? (
+                      <span className="inline-flex rounded-full border border-[rgba(255,182,141,0.28)] bg-[rgba(255,140,66,0.1)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#ffb68d]">
+                        {showcaseBadge}
+                      </span>
+                    ) : null}
+                    <h3 className="font-display text-xl font-bold text-[#e3e1e9] md:text-2xl">
+                      {listing.name}
+                    </h3>
+                  </div>
                   <p
                     className={cn(
                       "max-w-lg text-sm leading-relaxed text-[#ddc1b3]",
@@ -96,15 +117,32 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
                     ) : null}
                   </div>
                 </div>
-                <span
+                <div
                   className={cn(
-                    "inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#ff8c42] px-8 py-3.5 text-[15px] font-semibold uppercase tracking-wide text-[#331200] transition-colors md:px-10 md:py-4",
-                    "group-hover:bg-[#ff9f5a]",
+                    "flex shrink-0 flex-col items-stretch gap-1.5 md:items-end",
+                    reverse && "md:items-start",
                   )}
                 >
-                  Visit Site
-                  <ArrowRight className="h-5 w-5" strokeWidth={2.5} aria-hidden />
-                </span>
+                  <span
+                    className={cn(
+                      "inline-flex items-center justify-center gap-2 rounded-lg bg-[#ff8c42] px-8 py-3.5 text-[15px] font-bold text-[#331200] shadow-[inset_0_-1px_0_rgba(0,0,0,0.08)] transition-colors md:min-w-[200px] md:px-10 md:py-4",
+                      "group-hover:bg-[#ff9f5a]",
+                    )}
+                  >
+                    {ctaLabel}
+                    <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={2.5} aria-hidden />
+                  </span>
+                  {ctaMicro ? (
+                    <p
+                      className={cn(
+                        "max-w-[14rem] text-center text-[10px] leading-snug text-zinc-500 md:text-right",
+                        reverse && "md:text-left",
+                      )}
+                    >
+                      {ctaMicro}
+                    </p>
+                  ) : null}
+                </div>
               </div>
             </Link>
           );

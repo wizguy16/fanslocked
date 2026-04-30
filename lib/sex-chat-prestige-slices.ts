@@ -1,12 +1,15 @@
 import type { Listing } from "@/types/listing";
+import { selectCategoryTopPicks } from "@/lib/category-prestige-top-picks";
 
-/** Conversion-first order for the Top picks band (no quick picks for this vertical). */
+/** Fallback Top picks order when listings omit `topPickRank` (no quick picks for this vertical). */
 const SEXCHAT_SHOWCASE_ORDER = [
   "sextpanther",
   "arousr",
   "niteflirt",
   "jerkmate",
 ] as const;
+
+const SEXCHAT_SHOWCASE_LIMIT = 5;
 
 /** First rows in “More sex chat & sexting platforms” — copy from category editorial blurbs. */
 const SEXCHAT_RISING_LEAD_ORDER = [
@@ -17,9 +20,12 @@ const SEXCHAT_RISING_LEAD_ORDER = [
 
 export function buildSexChatPrestigeSlices(capped: Listing[]) {
   const bySlug = new Map(capped.map((l) => [l.slug, l]));
-  const showcase = SEXCHAT_SHOWCASE_ORDER.map((s) => bySlug.get(s)).filter(
-    (l): l is Listing => Boolean(l),
-  );
+  const dataShowcase = selectCategoryTopPicks(capped, "sex-chat", SEXCHAT_SHOWCASE_LIMIT);
+  const showcase =
+    dataShowcase ??
+    SEXCHAT_SHOWCASE_ORDER.map((s) => bySlug.get(s)).filter(
+      (l): l is Listing => Boolean(l),
+    );
   const showcaseIds = new Set(showcase.map((l) => l.id));
   const lead = SEXCHAT_RISING_LEAD_ORDER.map((s) => bySlug.get(s))
     .filter((l): l is Listing => Boolean(l))

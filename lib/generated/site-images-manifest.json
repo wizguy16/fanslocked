@@ -85,6 +85,7 @@
     },
     "livecam": {
       "screenshot": {
+        "bongacams": "/images/sites/livecam/bongacams.png",
         "cam4": "/images/sites/livecam/cam4.png",
         "camsoda": "/images/sites/livecam/camsoda.png",
         "coomeet": "/images/sites/livecam/coomeet.png",
@@ -92,7 +93,8 @@
         "luckycrush": "/images/sites/livecam/luckycrush.png",
         "myfreecams": "/images/sites/livecam/myfreecams.png",
         "sinparty": "/images/sites/livecam/sinparty.png",
-        "streamate": "/images/sites/livecam/streamate.png"
+        "streamate": "/images/sites/livecam/streamate.png",
+        "stripchat": "/images/sites/livecam/stripchat.png"
       },
       "logo": {}
     },

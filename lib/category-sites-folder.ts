@@ -6,7 +6,8 @@ export const CATEGORY_SLUG_TO_SITES_FOLDER: Record<string, string> = {
   "male-companions": "male-companions",
   "escort-directories": "escort",
   vr: "virtual",
-  "live-cams": "live-cams",
+  /** Matches `public/images/sites/livecam/` + manifest key `livecam`. */
+  "live-cams": "livecam",
   "fan-subscription-platforms": "creator",
   amateur: "amateur",
   "ai-generated": "ai",

@@ -14,6 +14,8 @@ export type CuratedGamingRow = {
   type: string;
   preview: string;
   tier: 1 | 2 | 3;
+  /** Prestige Top picks band (`Listing.topPickRank`). */
+  topPickRank?: number;
 };
 
 /**
@@ -24,6 +26,7 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "Nutaku",
     slug: "nutaku",
+    topPickRank: 1,
     website: "https://www.nutaku.net",
     payout: "High",
     difficulty: "Easy",
@@ -35,6 +38,7 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "EroLabs",
     slug: "erolabs",
+    topPickRank: 2,
     website: "https://www.erolabs.com",
     payout: "High",
     difficulty: "Easy",
@@ -46,6 +50,7 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "GameLink Interactive",
     slug: "gamelink-interactive",
+    topPickRank: 3,
     website: "https://www.gamelink.com",
     payout: "High",
     difficulty: "Easy",
@@ -57,6 +62,7 @@ export const SEXGAMES_FEATURED: CuratedGamingRow[] = [
   {
     name: "Itch.io Adult Games",
     slug: "itch-adult",
+    topPickRank: 4,
     website: "https://itch.io/games/tag-adult",
     payout: "Indirect",
     difficulty: "Easy",
@@ -326,6 +332,7 @@ function buildListing(
     tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
+    ...(row.topPickRank !== undefined ? { topPickRank: row.topPickRank } : {}),
   };
 }
 

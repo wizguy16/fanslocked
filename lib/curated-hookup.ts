@@ -13,6 +13,8 @@ export type CuratedHookupRow = {
   difficulty: string;
   type: string;
   preview: string;
+  /** Prestige Top picks (trust rail) — `Listing.topPickRank`. */
+  topPickRank?: number;
 };
 
 /**
@@ -23,6 +25,7 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   {
     name: "Tinder",
     slug: "tinder",
+    topPickRank: 1,
     website: "https://tinder.com",
     payout: "Varies",
     difficulty: "Easy",
@@ -33,6 +36,7 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   {
     name: "AdultFriendFinder",
     slug: "adultfriendfinder",
+    topPickRank: 2,
     website: "https://www.adultfriendfinder.com",
     payout: "High ($40–$80 CPA)",
     difficulty: "Easy",
@@ -43,6 +47,7 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   {
     name: "Ashley Madison",
     slug: "ashley-madison",
+    topPickRank: 3,
     website: "https://www.ashleymadison.com",
     payout: "High",
     difficulty: "Medium",
@@ -53,6 +58,7 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   {
     name: "BeNaughty",
     slug: "benaughty",
+    topPickRank: 4,
     website: "https://www.benaughty.com",
     payout: "High",
     difficulty: "Easy",
@@ -63,6 +69,7 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   {
     name: "Kasual",
     slug: "kasual",
+    topPickRank: 5,
     website: "https://www.kasualapp.com",
     payout: "Medium–High",
     difficulty: "Easy",
@@ -73,6 +80,7 @@ export const HOOKUP_FEATURED: CuratedHookupRow[] = [
   {
     name: "Pure",
     slug: "pure",
+    topPickRank: 6,
     website: "https://pure.app",
     payout: "Medium",
     difficulty: "Easy",
@@ -345,6 +353,7 @@ function buildListing(
     tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
+    ...(row.topPickRank !== undefined ? { topPickRank: row.topPickRank } : {}),
   };
 }
 

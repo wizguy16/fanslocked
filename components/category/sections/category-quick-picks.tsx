@@ -6,16 +6,23 @@ import type { Listing } from "@/types/listing";
 import { FlListingLogo } from "@/components/fanslocked-home/fl-listing-logo";
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
 import { CATEGORY_GLASS_PANEL } from "@/components/category/sections/category-prestige-styles";
+import {
+  categoryListingCtaLabel,
+  categoryListingCtaMicrocopy,
+} from "@/lib/category-listing-cta";
 
 type Props = {
+  categorySlug: string;
   items: Listing[];
   /** Optional line per tile (e.g. gaming editorial). */
   blurbs?: readonly string[] | null;
 };
 
-export function CategoryQuickPicks({ items, blurbs }: Props) {
+export function CategoryQuickPicks({ categorySlug, items, blurbs }: Props) {
   if (items.length === 0) return null;
   const hasBlurbs = Boolean(blurbs?.length);
+  const ctaLabel = categoryListingCtaLabel(categorySlug);
+  const ctaMicro = categoryListingCtaMicrocopy(categorySlug);
 
   return (
     <section aria-labelledby="category-quick-picks-heading" className="space-y-5">
@@ -64,14 +71,19 @@ export function CategoryQuickPicks({ items, blurbs }: Props) {
               {blurb ? (
                 <p className="mb-3 line-clamp-4 text-xs leading-relaxed text-[#ddc1b3]">{blurb}</p>
               ) : null}
-              <span
+              <div
                 className={cn(
-                  "inline-flex items-center justify-center rounded-md bg-[#ff8c42] px-4 py-2 text-sm font-semibold text-[#331200] transition-colors group-hover:bg-[#ff9f5a]",
+                  "flex w-full flex-col items-center gap-1.5",
                   hasBlurbs && "mt-auto",
                 )}
               >
-                Visit Site
-              </span>
+                <span className="inline-flex w-full max-w-[220px] items-center justify-center rounded-lg bg-[#ff8c42] px-4 py-2.5 text-sm font-bold text-[#331200] shadow-[inset_0_-1px_0_rgba(0,0,0,0.08)] transition-colors group-hover:bg-[#ff9f5a]">
+                  {ctaLabel}
+                </span>
+                {ctaMicro ? (
+                  <p className="text-center text-[10px] leading-snug text-zinc-500">{ctaMicro}</p>
+                ) : null}
+              </div>
             </Link>
           );
         })}

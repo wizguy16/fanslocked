@@ -14,16 +14,19 @@ export type CuratedSexChatRow = {
   type: string;
   preview: string;
   tier: 1 | 2 | 3;
+  /** Drives prestige Top picks order via `Listing.topPickRank`. */
+  topPickRank?: number;
 };
 
 /**
- * Featured band (prestige “Top picks” order is fixed in `sex-chat-prestige-slices`).
- * Tier 1 first (top monetization), then tier 2, then tier 3.
+ * Featured band (tier 1 first, then tier 2, then tier 3).
+ * Prestige Top picks order = `topPickRank` on listings (`selectCategoryTopPicks`), with slug fallback in `sex-chat-prestige-slices`.
  */
 export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
   {
     name: "SextPanther",
     slug: "sextpanther",
+    topPickRank: 1,
     website: "https://www.sextpanther.com",
     payout: "Very High",
     difficulty: "Medium",
@@ -35,6 +38,7 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
   {
     name: "Arousr",
     slug: "arousr",
+    topPickRank: 2,
     website: "https://www.arousr.com",
     payout: "High",
     difficulty: "Easy",
@@ -46,6 +50,7 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
   {
     name: "NiteFlirt",
     slug: "niteflirt",
+    topPickRank: 3,
     website: "https://www.niteflirt.com",
     payout: "High",
     difficulty: "Easy",
@@ -57,6 +62,7 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
   {
     name: "Jerkmate",
     slug: "jerkmate",
+    topPickRank: 4,
     website: "https://jerkmate.com",
     payout: "High",
     difficulty: "Easy",
@@ -319,6 +325,7 @@ function buildListing(
     tag: curatedListingTag(cat.slug, row.slug),
     added_date,
     popularity_score,
+    ...(row.topPickRank !== undefined ? { topPickRank: row.topPickRank } : {}),
   };
 }
 

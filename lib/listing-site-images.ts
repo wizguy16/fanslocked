@@ -68,7 +68,7 @@ export function listingScreenshotImageSrc(
   const local = resolveListingScreenshotPath(slug, categorySlug);
   if (local) return local;
   const fb = fallbackRemote?.trim();
-  if (fb) return fb;
+  if (fb && !isPlaceholderLike(fb)) return fb;
   return getSiteImageOrPlaceholder(
     slug,
     "screenshot",

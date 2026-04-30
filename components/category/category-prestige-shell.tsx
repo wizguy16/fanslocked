@@ -8,6 +8,7 @@ import { buildGamingPrestigeSlices } from "@/lib/gaming-prestige-slices";
 import { buildHookupPrestigeSlices } from "@/lib/hookup-prestige-slices";
 import { buildSexChatPrestigeSlices } from "@/lib/sex-chat-prestige-slices";
 import { getGuidePostForCategory } from "@/lib/blog-posts";
+import { selectCategoryTopPicks } from "@/lib/category-prestige-top-picks";
 import type { Listing } from "@/types/listing";
 
 const QUICK = 4;
@@ -33,6 +34,12 @@ function heroTitle(label: string): string {
   return /^best\s/i.test(label) ? label : `Best ${label}`;
 }
 
+function heroListingsCtaLabel(slug: string): string {
+  if (slug === "sex-chat") return "Start Chatting Now";
+  if (slug === "live-cams") return "Watch Live Now";
+  return "View Top Picks";
+}
+
 /**
  * Category prestige page: width bands (1100 copy / 1400 listings / 1100 SEO+CTA).
  * Sections are composed in `CategoryPrestigeListings` + `sections/*`.
@@ -56,15 +63,22 @@ export function CategoryPrestigeShell({
         ? buildSexChatPrestigeSlices(capped)
         : category.slug === "gaming"
           ? buildGamingPrestigeSlices(capped)
-          : {
-              quick: capped.slice(0, QUICK),
-              showcase: capped.slice(QUICK, QUICK + SHOWCASE),
-              rising: capped.slice(QUICK + SHOWCASE),
-            };
+          : (() => {
+              const quick = capped.slice(0, QUICK);
+              const showcase =
+                selectCategoryTopPicks(capped, category.slug, SHOWCASE) ??
+                capped.slice(QUICK, QUICK + SHOWCASE);
+              const used = new Set<string>();
+              for (const l of quick) used.add(l.id);
+              for (const l of showcase) used.add(l.id);
+              const rising = capped.filter((l) => !used.has(l.id));
+              return { quick, showcase, rising };
+            })();
   const { quick, showcase, rising } = slices;
   const year = new Date().getFullYear();
   const guidePost = getGuidePostForCategory(category.slug) ?? null;
   const defaultH1 = heroTitle(category.label);
+  const heroCtaLabel = heroListingsCtaLabel(category.slug);
 
   return (
     <div className="min-h-[100dvh] bg-[#121318] text-[#e3e1e9]">
@@ -121,6 +135,14 @@ export function CategoryPrestigeShell({
                 <p>{editorial?.heroDescription ?? heroBlurb(category.description)}</p>
               )}
             </div>
+            <div className="mt-8 flex justify-center">
+              <a
+                href="#category-listings"
+                className="rounded-lg bg-[#ff8c42] px-6 py-3 text-sm font-bold uppercase tracking-wide text-[#331200] transition-colors hover:bg-[#ff9f5a]"
+              >
+                {heroCtaLabel}
+              </a>
+            </div>
           </header>
         </div>
 
@@ -128,6 +150,7 @@ export function CategoryPrestigeShell({
         <div className="mx-auto mt-8 w-full max-w-[1400px] px-6 md:mt-10">
           <div id="category-listings" className="scroll-mt-28">
             <CategoryPrestigeListings
+              categorySlug={category.slug}
               quick={quick}
               showcase={showcase}
               rising={rising}
@@ -143,6 +166,14 @@ export function CategoryPrestigeShell({
                   : null
               }
             />
+          </div>
+          <div className="mt-10 flex justify-center md:mt-12">
+            <a
+              href="#category-listings"
+              className="rounded-lg border border-[#ff8c42] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-[#ffb68d] transition-colors hover:bg-[#ff8c42] hover:text-[#331200]"
+            >
+              Explore More Top Platforms
+            </a>
           </div>
         </div>
 
