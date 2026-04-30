@@ -14,21 +14,11 @@ export type CuratedVRPornRow = {
   payout: string;
   difficulty: string;
   type: string;
+  tier: 1 | 2 | 3;
 };
 
-/** Top 12 — horizontal featured rail (VR). */
+/** Top band — horizontal featured rail (VR). Tier 1 first (highest converting PPS + bundles), then tier 2, then tier 3. */
 export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
-  {
-    name: "VRPorn",
-    slug: "vrporn",
-    website: "https://vrporn.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "VR Aggregator",
-    description: "Massive VR content hub with multiple studios.",
-    preview:
-      "VRPorn aggregates top VR studios into one platform, giving users a huge variety of immersive content that keeps them engaged and exploring longer.",
-  },
   {
     name: "POVR",
     slug: "povr",
@@ -36,91 +26,10 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
     payout: "$120 PPS",
     difficulty: "Easy",
     type: "POV VR",
+    tier: 1,
     description: "High-quality POV VR experience.",
     preview:
       "POVR delivers ultra-realistic POV VR scenes designed for immersion, making it one of the highest-converting VR platforms for new users.",
-  },
-  {
-    name: "VRBangers",
-    slug: "vrbangers",
-    website: "https://vrbangers.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Studio VR",
-    description: "Top-tier VR production studio.",
-    preview:
-      "VRBangers is known for premium production quality and consistent updates, giving users a high-end VR experience that drives strong conversions.",
-  },
-  {
-    name: "SexLikeReal",
-    slug: "sexlikereal",
-    website: "https://sexlikereal.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "VR Platform",
-    description: "One of the largest VR libraries online.",
-    preview:
-      "SexLikeReal offers one of the biggest VR libraries available, combining quantity and quality to maximize user retention and spending.",
-  },
-  {
-    name: "VirtualRealPorn",
-    slug: "virtualrealporn",
-    website: "https://virtualrealporn.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "VR Studio",
-    description:
-      "Story-driven VR scenes with strong production quality and immersive camera work designed for headset viewing.",
-    preview:
-      "Story-driven VR scenes with strong production quality and immersive camera work designed for headset viewing.",
-  },
-  {
-    name: "Naughty America VR",
-    slug: "naughty-america-vr",
-    website: "https://naughtyamerica.com",
-    payout: "$100+ PPS",
-    difficulty: "Easy",
-    type: "Premium VR",
-    description:
-      "High-end studio VR with polished scenes and consistent production across a large catalog.",
-    preview:
-      "High-end studio VR with polished scenes and consistent production across a large catalog.",
-  },
-  {
-    name: "BadoinkVR",
-    slug: "badoinkvr",
-    website: "https://badoinkvr.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "VR Platform",
-    description:
-      "Large VR library with bundled access across multiple studios and frequent content updates.",
-    preview:
-      "Large VR library with bundled access across multiple studios and frequent content updates.",
-  },
-  {
-    name: "Virtual Taboo",
-    slug: "virtual-taboo",
-    website: "https://virtualtaboo.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Niche VR",
-    description:
-      "Narrative-focused VR experiences with interactive-style scenes and immersive storytelling.",
-    preview:
-      "Narrative-focused VR experiences with interactive-style scenes and immersive storytelling.",
-  },
-  {
-    name: "WankzVR",
-    slug: "wankzvr",
-    website: "https://wankzvr.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "VR Studio",
-    description:
-      "High-volume VR platform with a wide range of scenes and regular new releases.",
-    preview:
-      "High-volume VR platform with a wide range of scenes and regular new releases.",
   },
   {
     name: "AdultTime VR",
@@ -129,9 +38,111 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
     payout: "$120 PPS",
     difficulty: "Easy",
     type: "Bundle VR",
+    tier: 1,
     description: "VR inside premium bundle.",
     preview:
       "AdultTime VR offers access to multiple studios in one subscription, increasing perceived value and conversions.",
+  },
+  {
+    name: "Naughty America VR",
+    slug: "naughty-america-vr",
+    website: "https://naughtyamerica.com",
+    payout: "$100+ PPS",
+    difficulty: "Easy",
+    type: "Premium VR",
+    tier: 1,
+    description:
+      "High-end studio VR with polished scenes and consistent production across a large catalog.",
+    preview:
+      "High-end studio VR with polished scenes and consistent production across a large catalog.",
+  },
+  {
+    name: "SexLikeReal",
+    slug: "sexlikereal",
+    website: "https://sexlikereal.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "VR Platform",
+    tier: 1,
+    description: "One of the largest VR libraries online.",
+    preview:
+      "SexLikeReal offers one of the biggest VR libraries available, combining quantity and quality to maximize user retention and spending.",
+  },
+  {
+    name: "VRPorn",
+    slug: "vrporn",
+    website: "https://vrporn.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "VR Aggregator",
+    tier: 2,
+    description: "Massive VR content hub with multiple studios.",
+    preview:
+      "VRPorn aggregates top VR studios into one platform, giving users a huge variety of immersive content that keeps them engaged and exploring longer.",
+  },
+  {
+    name: "VRBangers",
+    slug: "vrbangers",
+    website: "https://vrbangers.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Studio VR",
+    tier: 2,
+    description: "Top-tier VR production studio.",
+    preview:
+      "VRBangers is known for premium production quality and consistent updates, giving users a high-end VR experience that drives strong conversions.",
+  },
+  {
+    name: "BadoinkVR",
+    slug: "badoinkvr",
+    website: "https://badoinkvr.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "VR Platform",
+    tier: 2,
+    description:
+      "Large VR library with bundled access across multiple studios and frequent content updates.",
+    preview:
+      "Large VR library with bundled access across multiple studios and frequent content updates.",
+  },
+  {
+    name: "WankzVR",
+    slug: "wankzvr",
+    website: "https://wankzvr.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "VR Studio",
+    tier: 2,
+    description:
+      "High-volume VR platform with a wide range of scenes and regular new releases.",
+    preview:
+      "High-volume VR platform with a wide range of scenes and regular new releases.",
+  },
+  {
+    name: "VirtualRealPorn",
+    slug: "virtualrealporn",
+    website: "https://virtualrealporn.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "VR Studio",
+    tier: 2,
+    description:
+      "Story-driven VR scenes with strong production quality and immersive camera work designed for headset viewing.",
+    preview:
+      "Story-driven VR scenes with strong production quality and immersive camera work designed for headset viewing.",
+  },
+  {
+    name: "Virtual Taboo",
+    slug: "virtual-taboo",
+    website: "https://virtualtaboo.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Niche VR",
+    tier: 3,
+    description:
+      "Narrative-focused VR experiences with interactive-style scenes and immersive storytelling.",
+    preview:
+      "Narrative-focused VR experiences with interactive-style scenes and immersive storytelling.",
   },
   {
     name: "Brazzers VR",
@@ -140,6 +151,7 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
     payout: "$100+ PPS",
     difficulty: "Easy",
     type: "Premium VR",
+    tier: 3,
     description: "Top brand VR content.",
     preview:
       "Brazzers VR leverages one of the strongest brands in the industry, making it easier to convert high-intent users.",
@@ -151,14 +163,27 @@ export const VR_PORN_FEATURED: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Niche VR",
+    tier: 3,
     description: "European VR niche content.",
     preview:
       "CzechVR targets niche audiences with authentic content, helping affiliates convert targeted traffic.",
   },
 ];
 
-/** Next 13 — dense grid below the rail. */
+/** Dense grid below the rail — niche targeting; StripChat VR first (tier 2) so scores reflect elevation. */
 export const VR_PORN_GRID: CuratedVRPornRow[] = [
+  {
+    name: "StripChat VR",
+    slug: "stripchat-vr",
+    website: "https://stripchat.com",
+    payout: "$168 PPS",
+    difficulty: "Easy",
+    type: "VR Cam",
+    tier: 2,
+    description: "VR-enabled live cam platform.",
+    preview:
+      "StripChat VR blends live cam interaction with VR immersion, creating strong engagement and high conversions.",
+  },
   {
     name: "MilfVR",
     slug: "milfvr",
@@ -166,6 +191,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Niche VR",
+    tier: 3,
     description: "VR content focused on MILF category.",
     preview:
       "MilfVR targets a high-demand niche, making it easier to convert traffic into paying users.",
@@ -177,6 +203,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Studio",
+    tier: 3,
     description: "High-quality immersive VR scenes.",
     preview:
       "WetVR offers immersive scenes with strong production quality that keeps users engaged.",
@@ -188,6 +215,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Platform",
+    tier: 3,
     description: "Large VR content collection.",
     preview:
       "VRHush provides a broad selection of VR content, helping affiliates capture a wide audience.",
@@ -199,6 +227,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Niche VR",
+    tier: 3,
     description: "Cosplay-focused VR content.",
     preview:
       "VRCosplayX taps into cosplay fandom, increasing engagement and conversions for niche audiences.",
@@ -210,6 +239,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "POV VR",
+    tier: 3,
     description: "POV-style immersive VR.",
     preview:
       "VRSpy delivers POV experiences that enhance immersion and user retention.",
@@ -221,6 +251,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Premium VR",
+    tier: 3,
     description: "VR content featuring known performers.",
     preview:
       "RealPornstarsVR leverages known performers to drive trust and conversions.",
@@ -232,6 +263,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Medium",
     type: "Niche VR",
+    tier: 3,
     description: "Specialized VR niche content.",
     preview:
       "GroobyVR targets specific audiences with tailored VR experiences, improving conversion rates.",
@@ -243,6 +275,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Medium",
     type: "Niche VR",
+    tier: 3,
     description: "Alternative VR content.",
     preview:
       "KinkVR focuses on alternative experiences, capturing niche audiences with high engagement.",
@@ -254,6 +287,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Platform",
+    tier: 3,
     description: "VR-focused content hub.",
     preview:
       "PornCornVR aggregates content to keep users browsing longer and increasing conversions.",
@@ -265,6 +299,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Studio",
+    tier: 3,
     description: "Modern VR production studio.",
     preview:
       "ZexyVR delivers modern VR scenes designed for immersive viewing and longer sessions.",
@@ -276,6 +311,7 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Studio",
+    tier: 3,
     description: "High-quality VR scenes.",
     preview:
       "SexBabesVR focuses on visual quality and immersive angles, helping boost engagement.",
@@ -287,20 +323,10 @@ export const VR_PORN_GRID: CuratedVRPornRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "VR Platform",
+    tier: 3,
     description: "Erotic storytelling VR platform.",
     preview:
       "BlushEroticaVR combines storytelling and VR immersion to keep users engaged longer.",
-  },
-  {
-    name: "StripChat VR",
-    slug: "stripchat-vr",
-    website: "https://stripchat.com",
-    payout: "$168 PPS",
-    difficulty: "Easy",
-    type: "VR Cam",
-    description: "VR-enabled live cam platform.",
-    preview:
-      "StripChat VR blends live cam interaction with VR immersion, creating strong engagement and high conversions.",
   },
 ];
 
@@ -351,18 +377,25 @@ function buildListing(
   };
 }
 
+function rowScore(row: CuratedVRPornRow, index: number): { rating: number; popularity_score: number } {
+  const tierBase = {
+    1: 4.95,
+    2: 4.75,
+    3: 4.55,
+  }[row.tier];
+  const rating = Math.round((tierBase - index * 0.02) * 10) / 10;
+  const popularity_score = (row.tier === 1 ? 100 : row.tier === 2 ? 92 : 84) - index;
+  return { rating, popularity_score };
+}
+
 export function buildCuratedVRPornListings(cat: CategoryDef): Listing[] {
-  const featured = VR_PORN_FEATURED.map((row, i) =>
-    buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
-  );
-  const grid = VR_PORN_GRID.map((row, i) =>
-    buildListing(
-      row,
-      cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
-      `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
-    ),
-  );
+  const featured = VR_PORN_FEATURED.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
+  const grid = VR_PORN_GRID.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-07-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
   return [...featured, ...grid];
 }

@@ -14,9 +14,10 @@ export type CuratedAIGeneratedRow = {
   type: string;
   description: string;
   preview: string;
+  tier: 1 | 2 | 3;
 };
 
-/** Top 12 — horizontal featured rail (AI generated). */
+/** Top band — tier 1 = highest LTV, then tier 2 monetizers; `candybox-ai` last in tier 2. */
 export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
   {
     name: "Candy AI",
@@ -25,6 +26,7 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "40% recurring",
     difficulty: "Easy",
     type: "AI Companion",
+    tier: 1,
     description: "Top AI companion generator with strong conversions.",
     preview:
       "Candy AI lets users create fully customizable AI companions with visuals and chat, making it one of the highest-converting platforms in the space.",
@@ -36,6 +38,7 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "40% recurring / CPA",
     difficulty: "Easy",
     type: "AI Companion",
+    tier: 1,
     description: "High EPC AI platform with strong affiliate support.",
     preview:
       "OurDream AI combines high conversion rates with flexible payouts, making it one of the most profitable AI companion platforms for affiliates.",
@@ -47,6 +50,7 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "Recurring commissions",
     difficulty: "Easy",
     type: "AI Chat",
+    tier: 1,
     description: "Story-driven AI companion platform.",
     preview:
       "GirlfriendGPT focuses on immersive conversations and long-term engagement, helping increase retention and recurring revenue.",
@@ -58,6 +62,7 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "AI Chat",
+    tier: 1,
     description: "Popular AI chat platform with strong engagement.",
     preview:
       "SpicyChat offers a wide variety of AI characters and scenarios, driving high user engagement and consistent conversions.",
@@ -69,7 +74,9 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Chat",
-    description: "AI chat platform with a large library of user-created characters focused on roleplay and NSFW conversations. Strong for fast responses, character variety, and ongoing interaction.",
+    tier: 2,
+    description:
+      "AI chat platform with a large library of user-created characters focused on roleplay and NSFW conversations. Strong for fast responses, character variety, and ongoing interaction.",
     preview:
       "AI chat platform with a large library of user-created characters focused on roleplay and NSFW conversations. Strong for fast responses, character variety, and ongoing interaction.",
   },
@@ -80,7 +87,9 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "RevShare / CPA",
     difficulty: "Easy",
     type: "AI Companion",
-    description: "Premium AI companion platform focused on structured chat, guided interactions, and high-quality character experiences. Built for more controlled and immersive AI conversations.",
+    tier: 2,
+    description:
+      "Premium AI companion platform focused on structured chat, guided interactions, and high-quality character experiences. Built for more controlled and immersive AI conversations.",
     preview:
       "Premium AI companion platform focused on structured chat, guided interactions, and high-quality character experiences. Built for more controlled and immersive AI conversations.",
   },
@@ -91,20 +100,11 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
-    description: "AI content platform combining chat, character customization, and visual generation. Designed for users who want both conversation and image-based interaction in one place.",
+    tier: 2,
+    description:
+      "AI content platform combining chat, character customization, and visual generation. Designed for users who want both conversation and image-based interaction in one place.",
     preview:
       "AI content platform combining chat, character customization, and visual generation. Designed for users who want both conversation and image-based interaction in one place.",
-  },
-  {
-    name: "Candy Box AI",
-    slug: "candybox-ai",
-    website: "https://candybox.ai",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "AI Generator",
-    description: "AI chat platform with simple onboarding and quick access to NSFW conversations. Focused on speed, ease of use, and lightweight interaction without complex setup.",
-    preview:
-      "AI chat platform with simple onboarding and quick access to NSFW conversations. Focused on speed, ease of use, and lightweight interaction without complex setup.",
   },
   {
     name: "TryNectar",
@@ -113,7 +113,9 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Companion",
-    description: "Custom AI companion builder that allows full control over personality, traits, and interaction style. Built for users who want to design and refine their own AI characters.",
+    tier: 2,
+    description:
+      "Custom AI companion builder that allows full control over personality, traits, and interaction style. Built for users who want to design and refine their own AI characters.",
     preview:
       "Custom AI companion builder that allows full control over personality, traits, and interaction style. Built for users who want to design and refine their own AI characters.",
   },
@@ -124,6 +126,7 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "AI Chat",
+    tier: 2,
     description: "AI chat platform with a large selection of characters and strong focus on NSFW roleplay conversations.",
     preview:
       "AI chat platform with a large selection of characters and strong focus on NSFW roleplay conversations.",
@@ -135,6 +138,7 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Companion",
+    tier: 2,
     description: "AI companion platform focused on immersive relationships and long-form interaction.",
     preview:
       "AI companion platform focused on immersive relationships and long-form interaction.",
@@ -146,14 +150,64 @@ export const AI_GENERATED_FEATURED: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Chat",
+    tier: 2,
     description: "AI chat experience focused on personalized interactions and companion-style conversations.",
     preview:
       "AI chat experience focused on personalized interactions and companion-style conversations.",
   },
+  {
+    name: "Candy Box AI",
+    slug: "candybox-ai",
+    website: "https://candybox.ai",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "AI Generator",
+    tier: 2,
+    description:
+      "AI chat platform with simple onboarding and quick access to NSFW conversations. Focused on speed, ease of use, and lightweight interaction without complex setup.",
+    preview:
+      "AI chat platform with simple onboarding and quick access to NSFW conversations. Focused on speed, ease of use, and lightweight interaction without complex setup.",
+  },
 ];
 
-/** Next 13 — dense grid below the rail. */
+/** Dense grid — tier-2 companions first, then tools / experimental (tier 3). */
 export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
+  {
+    name: "Nemora AI",
+    slug: "nemora-ai",
+    website: "https://nemora.ai",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "AI Companion",
+    tier: 2,
+    description: "AI companion platform focused on emerging chat-based interactions and character creation.",
+    preview:
+      "AI companion platform focused on emerging chat-based interactions and character creation.",
+  },
+  {
+    name: "LustGF AI",
+    slug: "lustgf-ai",
+    website: "https://lustgf.ai",
+    payout: "Recurring",
+    difficulty: "Easy",
+    type: "AI Companion",
+    tier: 2,
+    description: "AI companion platform.",
+    preview:
+      "LustGF AI offers strong engagement features that help convert and retain users.",
+  },
+  {
+    name: "FeelReal",
+    slug: "feelreal",
+    website: "https://feelreal.ai",
+    payout: "Recurring",
+    difficulty: "Easy",
+    type: "AI Companion",
+    tier: 2,
+    description: "Immersive AI experience platform.",
+    preview:
+      "FeelReal focuses on immersive interaction that increases user retention and spending.",
+  },
   {
     name: "Undress AI",
     slug: "undress-ai",
@@ -161,6 +215,7 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "High CPA",
     difficulty: "Easy",
     type: "AI Tool",
+    tier: 3,
     description: "AI image tool designed for generating and transforming explicit visuals.",
     preview:
       "AI image tool designed for generating and transforming explicit visuals.",
@@ -172,6 +227,7 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
+    tier: 3,
     description: "AI content generator focused on creating adult images and fantasy scenarios.",
     preview:
       "AI content generator focused on creating adult images and fantasy scenarios.",
@@ -183,6 +239,7 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "CPA",
     difficulty: "Easy",
     type: "AI Tool",
+    tier: 3,
     description: "AI image transformation tool focused on visual-based adult content generation.",
     preview:
       "AI image transformation tool focused on visual-based adult content generation.",
@@ -194,6 +251,7 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
+    tier: 3,
     description: "AI platform for generating custom adult images and scenes.",
     preview:
       "AI platform for generating custom adult images and scenes.",
@@ -205,20 +263,10 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
+    tier: 3,
     description: "AI porn generator built for creating custom explicit images and visual content.",
     preview:
       "AI porn generator built for creating custom explicit images and visual content.",
-  },
-  {
-    name: "Nemora AI",
-    slug: "nemora-ai",
-    website: "https://nemora.ai",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "AI Companion",
-    description: "AI companion platform focused on emerging chat-based interactions and character creation.",
-    preview:
-      "AI companion platform focused on emerging chat-based interactions and character creation.",
   },
   {
     name: "CherryPop AI",
@@ -227,20 +275,10 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
+    tier: 3,
     description: "AI content platform centered around interactive chat and visual generation.",
     preview:
       "AI content platform centered around interactive chat and visual generation.",
-  },
-  {
-    name: "LustGF AI",
-    slug: "lustgf-ai",
-    website: "https://lustgf.ai",
-    payout: "Recurring",
-    difficulty: "Easy",
-    type: "AI Companion",
-    description: "AI companion platform.",
-    preview:
-      "LustGF AI offers strong engagement features that help convert and retain users.",
   },
   {
     name: "PornMaker AI",
@@ -249,6 +287,7 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
+    tier: 3,
     description: "AI content creation tool.",
     preview:
       "PornMaker AI focuses on quick generation and repeat usage, boosting revenue potential.",
@@ -260,6 +299,7 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Chat",
+    tier: 3,
     description: "AI relationship chat platform.",
     preview:
       "LoveChat delivers engaging chat experiences that keep users returning frequently.",
@@ -271,6 +311,7 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Chat",
+    tier: 3,
     description: "AI-driven conversation platform.",
     preview:
       "LusyChat AI provides fast engagement loops that increase conversion rates.",
@@ -282,20 +323,10 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Generator",
+    tier: 3,
     description: "AI creative platform.",
     preview:
       "MuseBox AI keeps users engaged through creative outputs and repeat sessions.",
-  },
-  {
-    name: "FeelReal",
-    slug: "feelreal",
-    website: "https://feelreal.ai",
-    payout: "Recurring",
-    difficulty: "Easy",
-    type: "AI Companion",
-    description: "Immersive AI experience platform.",
-    preview:
-      "FeelReal focuses on immersive interaction that increases user retention and spending.",
   },
 ];
 
@@ -346,18 +377,25 @@ function buildListing(
   };
 }
 
+function rowScore(row: CuratedAIGeneratedRow, index: number): { rating: number; popularity_score: number } {
+  const tierBase = {
+    1: 4.95,
+    2: 4.75,
+    3: 4.55,
+  }[row.tier];
+  const rating = Math.round((tierBase - index * 0.02) * 10) / 10;
+  const popularity_score = (row.tier === 1 ? 100 : row.tier === 2 ? 92 : 84) - index;
+  return { rating, popularity_score };
+}
+
 export function buildCuratedAIGeneratedListings(cat: CategoryDef): Listing[] {
-  const featured = AI_GENERATED_FEATURED.map((row, i) =>
-    buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
-  );
-  const grid = AI_GENERATED_GRID.map((row, i) =>
-    buildListing(
-      row,
-      cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
-      `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
-    ),
-  );
+  const featured = AI_GENERATED_FEATURED.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
+  const grid = AI_GENERATED_GRID.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-07-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
   return [...featured, ...grid];
 }

@@ -16,7 +16,7 @@ export type CuratedEscortDirectoryRow = {
   preview: string;
 };
 
-/** Top rail — regional and general escort / massage listing directories. */
+/** Single rail — one canonical listing per directory (no duplicate-domain grid rows). */
 export const ESCORT_DIRECTORIES_FEATURED: CuratedEscortDirectoryRow[] = [
   {
     name: "Slixa",
@@ -28,6 +28,17 @@ export const ESCORT_DIRECTORIES_FEATURED: CuratedEscortDirectoryRow[] = [
     description: "Premium escort directory.",
     preview:
       "Slixa offers a high-end directory experience, connecting users with verified professionals.",
+  },
+  {
+    name: "AdultWork",
+    slug: "adultwork",
+    website: "https://adultwork.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Platform",
+    description: "UK-based adult services platform.",
+    preview:
+      "AdultWork offers multiple services including companionship, making it a versatile platform for users.",
   },
   {
     name: "Scarlet Blue",
@@ -52,17 +63,6 @@ export const ESCORT_DIRECTORIES_FEATURED: CuratedEscortDirectoryRow[] = [
       "Escort Babylon aggregates listings worldwide, making it easy to find local companions.",
   },
   {
-    name: "AdultWork",
-    slug: "adultwork",
-    website: "https://adultwork.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Platform",
-    description: "UK-based adult services platform.",
-    preview:
-      "AdultWork offers multiple services including companionship, making it a versatile platform for users.",
-  },
-  {
     name: "Massage Republic",
     slug: "massage-republic",
     website: "https://massagerepublic.com",
@@ -83,69 +83,6 @@ export const ESCORT_DIRECTORIES_FEATURED: CuratedEscortDirectoryRow[] = [
     description: "Specialized companion directory.",
     preview:
       "TS4Rent focuses on niche audiences, delivering highly targeted traffic and strong engagement.",
-  },
-];
-
-export const ESCORT_DIRECTORIES_GRID: CuratedEscortDirectoryRow[] = [
-  {
-    name: "Escort Babylon Listings",
-    slug: "escort-babylon-list",
-    website: "https://escortbabylon.net",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Browse listings.",
-    preview: "Explore global listings and find companions near you.",
-  },
-  {
-    name: "Slixa Listings",
-    slug: "slixa-list",
-    website: "https://slixa.com",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Premium listings.",
-    preview: "Browse high-end profiles on Slixa.",
-  },
-  {
-    name: "Massage Republic Listings",
-    slug: "massage-republic-list",
-    website: "https://massagerepublic.com",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Massage listings.",
-    preview: "Find massage professionals easily.",
-  },
-  {
-    name: "AdultWork Listings",
-    slug: "adultwork-list",
-    website: "https://adultwork.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Platform",
-    description: "Browse services.",
-    preview: "Explore services and connect with providers.",
-  },
-  {
-    name: "Scarlet Blue Listings",
-    slug: "scarlet-blue-list",
-    website: "https://scarletblue.com.au",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Browse listings.",
-    preview: "Discover trusted listings and profiles.",
-  },
-  {
-    name: "TS4Rent Listings",
-    slug: "ts4rent-list",
-    website: "https://ts4rent.com",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Browse profiles.",
-    preview: "Find niche companion listings.",
   },
 ];
 
@@ -200,14 +137,5 @@ export function buildCuratedEscortDirectoryListings(cat: CategoryDef): Listing[]
   const featured = ESCORT_DIRECTORIES_FEATURED.map((row, i) =>
     buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
   );
-  const grid = ESCORT_DIRECTORIES_GRID.map((row, i) =>
-    buildListing(
-      row,
-      cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
-      `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
-    ),
-  );
-  return [...featured, ...grid];
+  return featured;
 }

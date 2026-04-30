@@ -42,7 +42,7 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
               aria-label={`${listing.name}, rank ${rank}. Opens partner site.`}
               className={cn(
                 CATEGORY_GLASS_PANEL,
-                "flex flex-col items-center gap-6 p-6 no-underline outline-none transition-[border-color] duration-200 hover:border-[rgba(255,140,66,0.4)] focus-visible:ring-2 focus-visible:ring-[#ff8c42]/50 md:flex-row",
+                "group flex flex-col items-center gap-6 p-6 no-underline outline-none transition-[border-color] duration-200 hover:border-[rgba(255,140,66,0.4)] focus-visible:ring-2 focus-visible:ring-[#ff8c42]/50 md:flex-row",
                 reverse && "md:flex-row-reverse",
               )}
             >
@@ -98,13 +98,12 @@ export function CategoryTopPicks({ items, rankOffset, blurbs }: Props) {
                 </div>
                 <span
                   className={cn(
-                    "inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#ff8c42] px-8 py-3.5 text-[15px] font-semibold uppercase tracking-wide text-[#331200] md:px-10 md:py-4",
-                    "pointer-events-none",
+                    "inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#ff8c42] px-8 py-3.5 text-[15px] font-semibold uppercase tracking-wide text-[#331200] transition-colors md:px-10 md:py-4",
+                    "group-hover:bg-[#ff9f5a]",
                   )}
-                  aria-hidden
                 >
-                  Visit site
-                  <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
+                  Visit Site
+                  <ArrowRight className="h-5 w-5" strokeWidth={2.5} aria-hidden />
                 </span>
               </div>
             </Link>

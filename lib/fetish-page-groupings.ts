@@ -56,7 +56,7 @@ const SLICE_RULES: SliceRule[] = [
       "bdsmx",
       "fetish-network",
       "kink",
-      "kinkvr-fetish",
+      "vrporn-fetish",
     ]),
     text: /\b(bondage|rope|bound|restraint|shibari)\b/i,
   },

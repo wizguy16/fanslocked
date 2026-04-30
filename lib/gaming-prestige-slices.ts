@@ -1,19 +1,18 @@
 import type { Listing } from "@/types/listing";
 
-/** Exactly four — compact row above Top picks (legacy order). */
+/** Four strong titles — tier-2 featured + blockbusters (platforms live in Top picks). */
 export const GAMING_QUICK_PICK_SLUGS = [
-  "gamejolt-adult",
-  "adultgamecity",
-  "porngames",
+  "hentaiheroes",
+  "grand-bang-auto",
+  "summertime-saga",
   "3dxchat",
 ] as const;
 
-/** Full-width Top picks (order + copy in `category-prestige-editorial` blurbs). */
+/** Full-width Top picks — tier-1 platforms only. */
 export const GAMING_TOP_PICK_SLUGS = [
   "nutaku",
   "erolabs",
-  "hentaiheroes",
-  "grand-bang-auto",
+  "gamelink-interactive",
   "itch-adult",
 ] as const;
 

@@ -4,9 +4,8 @@ import type { Listing } from "@/types/listing";
 const SEXCHAT_SHOWCASE_ORDER = [
   "sextpanther",
   "arousr",
-  "isexychat",
+  "niteflirt",
   "jerkmate",
-  "chatrecruit",
 ] as const;
 
 /** First rows in “More sex chat & sexting platforms” — copy from category editorial blurbs. */

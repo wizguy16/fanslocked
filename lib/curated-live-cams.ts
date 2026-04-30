@@ -14,9 +14,10 @@ export type CuratedLiveCamsRow = {
   type: string;
   description: string;
   preview: string;
+  tier: 1 | 2 | 3;
 };
 
-/** Top 12 — horizontal featured rail (Live Cams). */
+/** Top band — horizontal featured rail. Tier 1 = top EPC drivers, then tier 2, then tier 3. */
 export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
   {
     name: "Stripchat",
@@ -25,6 +26,7 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
     payout: "$168 PPS / RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
+    tier: 1,
     description: "Massive global cam platform with high engagement.",
     preview:
       "Stripchat is one of the highest-converting live cam platforms, offering massive global traffic, interactive features, and freemium access that keeps users engaged and spending longer.",
@@ -36,43 +38,10 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
     payout: "$65+ PPS",
     difficulty: "Easy",
     type: "Smart Match Cam",
+    tier: 1,
     description: "AI-powered cam matching system.",
     preview:
       "JerkMate uses smart matching technology to instantly connect users with models they want, creating high-intent traffic and strong conversions across all devices.",
-  },
-  {
-    name: "BongaCams",
-    slug: "bongacams",
-    website: "https://bongacams.com",
-    payout: "RevShare + PPS",
-    difficulty: "Easy",
-    type: "Freemium Cam",
-    description: "Huge traffic cam platform with global reach.",
-    preview:
-      "BongaCams delivers massive worldwide traffic and consistent conversions through a freemium model that encourages tipping, private shows, and repeat visits.",
-  },
-  {
-    name: "CamSoda",
-    slug: "camsoda",
-    website: "https://camsoda.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Freemium Cam",
-    description: "VR-friendly cam site with modern features.",
-    preview:
-      "CamSoda blends VR, live cams, and interactive features to create an immersive experience that keeps users engaged and increases session time.",
-  },
-  {
-    name: "Streamate",
-    slug: "streamate",
-    website: "https://streamate.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Premium Cam",
-    description:
-      "Premium cam platform focused on private shows, with high-quality streams and a more one-on-one experience.",
-    preview:
-      "Premium cam platform focused on private shows, with high-quality streams and a more one-on-one experience.",
   },
   {
     name: "LiveJasmin",
@@ -81,22 +50,48 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
     payout: "$130 PPS + RevShare",
     difficulty: "Medium",
     type: "Premium Cam",
+    tier: 1,
     description:
       "High-end cam site with polished performers and strong private show options across a global audience.",
     preview:
       "High-end cam site with polished performers and strong private show options across a global audience.",
   },
   {
-    name: "SinParty",
-    slug: "sinparty",
-    website: "https://sinparty.com",
-    payout: "$150 PPS",
+    name: "BongaCams",
+    slug: "bongacams",
+    website: "https://bongacams.com",
+    payout: "RevShare + PPS",
     difficulty: "Easy",
-    type: "New Cam",
-    description:
-      "Modern cam platform with fast browsing, active rooms, and strong token-based interaction features.",
+    type: "Freemium Cam",
+    tier: 1,
+    description: "Huge traffic cam platform with global reach.",
     preview:
-      "Modern cam platform with fast browsing, active rooms, and strong token-based interaction features.",
+      "BongaCams delivers massive worldwide traffic and consistent conversions through a freemium model that encourages tipping, private shows, and repeat visits.",
+  },
+  {
+    name: "Streamate",
+    slug: "streamate",
+    website: "https://streamate.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Premium Cam",
+    tier: 2,
+    description:
+      "Premium cam platform focused on private shows, with high-quality streams and a more one-on-one experience.",
+    preview:
+      "Premium cam platform focused on private shows, with high-quality streams and a more one-on-one experience.",
+  },
+  {
+    name: "CamSoda",
+    slug: "camsoda",
+    website: "https://camsoda.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Freemium Cam",
+    tier: 2,
+    description: "VR-friendly cam site with modern features.",
+    preview:
+      "CamSoda blends VR, live cams, and interactive features to create an immersive experience that keeps users engaged and increases session time.",
   },
   {
     name: "MyFreeCams",
@@ -105,6 +100,7 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
+    tier: 2,
     description:
       "Large cam community with active public rooms and a mix of free interaction and paid private shows.",
     preview:
@@ -117,21 +113,24 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
     payout: "PPL + RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
+    tier: 2,
     description:
       "High-traffic cam site with global performers and a strong mix of public and private streaming.",
     preview:
       "High-traffic cam site with global performers and a strong mix of public and private streaming.",
   },
   {
-    name: "ImLive",
-    slug: "imlive",
-    website: "https://imlive.com",
-    payout: "RevShare",
+    name: "SinParty",
+    slug: "sinparty",
+    website: "https://sinparty.com",
+    payout: "$150 PPS",
     difficulty: "Easy",
-    type: "Premium Cam",
-    description: "International cam platform with premium traffic.",
+    type: "New Cam",
+    tier: 2,
+    description:
+      "Modern cam platform with fast browsing, active rooms, and strong token-based interaction features.",
     preview:
-      "ImLive offers a premium cam experience with international reach, delivering consistent conversions across multiple markets.",
+      "Modern cam platform with fast browsing, active rooms, and strong token-based interaction features.",
   },
   {
     name: "Xtease",
@@ -140,9 +139,22 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
     payout: "$168 PPS",
     difficulty: "Easy",
     type: "Stripchat Network",
+    tier: 2,
     description: "High payout cam offer powered by Stripchat.",
     preview:
       "Xtease leverages Stripchat’s backend with high payout offers, making it one of the most profitable cam affiliate programs available.",
+  },
+  {
+    name: "ImLive",
+    slug: "imlive",
+    website: "https://imlive.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Premium Cam",
+    tier: 3,
+    description: "International cam platform with premium traffic.",
+    preview:
+      "ImLive offers a premium cam experience with international reach, delivering consistent conversions across multiple markets.",
   },
   {
     name: "SlutRoulette",
@@ -151,25 +163,15 @@ export const LIVE_CAMS_FEATURED: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Random Cam",
+    tier: 3,
     description: "Omegle-style adult cam matching.",
     preview:
       "SlutRoulette connects users instantly with random cam partners, creating high engagement and impulsive conversion behavior.",
   },
 ];
 
-/** Next 13 — dense grid below the rail. */
+/** Dense grid — CooMeet + LuckyCrush first (tier 2) so index-based scores stay above long-tail tier 3. */
 export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
-  {
-    name: "SkyPrivate",
-    slug: "skyprivate",
-    website: "https://skyprivate.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Private Cam",
-    description: "Skype-based private cam platform.",
-    preview:
-      "SkyPrivate allows direct private cam sessions, giving users a more personal experience that converts well for affiliates.",
-  },
   {
     name: "CooMeet",
     slug: "coomeet",
@@ -177,6 +179,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "PPL + RevShare",
     difficulty: "Easy",
     type: "Video Chat",
+    tier: 2,
     description: "Premium video chat with real users.",
     preview:
       "CooMeet offers verified female users and instant video matching, leading to strong conversions and high user trust.",
@@ -188,9 +191,22 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Random Cam",
+    tier: 2,
     description: "Male/female instant cam matching.",
     preview:
       "LuckyCrush pairs users instantly with the opposite gender, creating high retention and strong conversion behavior.",
+  },
+  {
+    name: "SkyPrivate",
+    slug: "skyprivate",
+    website: "https://skyprivate.com",
+    payout: "RevShare",
+    difficulty: "Easy",
+    type: "Private Cam",
+    tier: 3,
+    description: "Skype-based private cam platform.",
+    preview:
+      "SkyPrivate allows direct private cam sessions, giving users a more personal experience that converts well for affiliates.",
   },
   {
     name: "Camster",
@@ -199,6 +215,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
+    tier: 3,
     description: "Classic cam platform with steady traffic.",
     preview:
       "Camster provides a simple cam experience with consistent traffic, making it a reliable affiliate performer.",
@@ -210,6 +227,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Medium",
     type: "Premium Chat",
+    tier: 3,
     description: "Text + cam monetization platform.",
     preview:
       "SextPanther combines messaging, calls, and cam features, allowing multiple monetization paths and higher user spend.",
@@ -221,6 +239,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
+    tier: 3,
     description: "European cam platform with high traffic.",
     preview:
       "Xcams delivers strong European traffic and consistent conversions through its freemium cam model.",
@@ -232,6 +251,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Freemium Cam",
+    tier: 3,
     description: "Chaturbate-style cam platform.",
     preview:
       "Flirtbate offers a familiar freemium cam experience that encourages tipping and extended engagement.",
@@ -243,6 +263,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "TV Cam",
+    tier: 3,
     description: "Live TV-style cam platform.",
     preview:
       "BabeStation blends live TV broadcasting with cam interaction, creating a unique experience for users.",
@@ -254,6 +275,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "NSFW Streaming",
+    tier: 3,
     description: "Twitch-style adult streaming.",
     preview:
       "Joystick.tv brings a Twitch-style streaming experience to adult content, attracting a younger, engaged audience.",
@@ -265,6 +287,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Medium",
     type: "UK Cam",
+    tier: 3,
     description: "UK-based cam and escort platform.",
     preview:
       "AdultWork combines cam and escort services, giving affiliates access to multiple revenue streams.",
@@ -276,6 +299,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Asian Cam",
+    tier: 3,
     description: "Asian-focused cam platform.",
     preview:
       "SakuraLive targets niche audiences with region-specific content, helping affiliates convert targeted traffic.",
@@ -287,6 +311,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Social Cam",
+    tier: 3,
     description: "Social media style cam platform.",
     preview:
       "Reveal Me blends social media and cam features, creating high engagement and user interaction.",
@@ -298,6 +323,7 @@ export const LIVE_CAMS_GRID: CuratedLiveCamsRow[] = [
     payout: "RevShare",
     difficulty: "Easy",
     type: "Social Cam",
+    tier: 3,
     description: "Live streaming + social platform.",
     preview:
       "Peeks Social combines live streaming with social interaction, keeping users engaged and spending longer.",
@@ -351,18 +377,25 @@ function buildListing(
   };
 }
 
+function rowScore(row: CuratedLiveCamsRow, index: number): { rating: number; popularity_score: number } {
+  const tierBase = {
+    1: 4.95,
+    2: 4.75,
+    3: 4.55,
+  }[row.tier];
+  const rating = Math.round((tierBase - index * 0.02) * 10) / 10;
+  const popularity_score = (row.tier === 1 ? 100 : row.tier === 2 ? 92 : 84) - index;
+  return { rating, popularity_score };
+}
+
 export function buildCuratedLiveCamsListings(cat: CategoryDef): Listing[] {
-  const featured = LIVE_CAMS_FEATURED.map((row, i) =>
-    buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
-  );
-  const grid = LIVE_CAMS_GRID.map((row, i) =>
-    buildListing(
-      row,
-      cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
-      `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
-    ),
-  );
+  const featured = LIVE_CAMS_FEATURED.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
+  const grid = LIVE_CAMS_GRID.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-07-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
   return [...featured, ...grid];
 }

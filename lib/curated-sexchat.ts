@@ -13,11 +13,12 @@ export type CuratedSexChatRow = {
   difficulty: string;
   type: string;
   preview: string;
+  tier: 1 | 2 | 3;
 };
 
 /**
  * Featured band (prestige “Top picks” order is fixed in `sex-chat-prestige-slices`).
- * First five: SextPanther → Arousr → iSexyChat → Jerkmate → ChatRecruit.
+ * Tier 1 first (top monetization), then tier 2, then tier 3.
  */
 export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
   {
@@ -27,6 +28,7 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
     payout: "Very High",
     difficulty: "Medium",
     type: "sex-chat",
+    tier: 1,
     preview:
       "SextPanther connects users with real verified creators for private messaging, sexting, and paid interactions. The platform is known for fast response times and high engagement through text, voice, and media.",
   },
@@ -37,18 +39,20 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "sexting",
+    tier: 1,
     preview:
       "Arousr focuses on real-time sexting and private messaging with verified chat partners. The platform emphasizes consistent engagement, personalized conversations, and ongoing interactions.",
   },
   {
-    name: "iSexyChat",
-    slug: "isexychat",
-    website: "https://www.isexychat.com",
-    payout: "Medium",
+    name: "NiteFlirt",
+    slug: "niteflirt",
+    website: "https://www.niteflirt.com",
+    payout: "High",
     difficulty: "Easy",
-    type: "chat",
+    type: "phone-chat",
+    tier: 1,
     preview:
-      "iSexyChat is built for fast, anonymous sexting and private messaging. Users can instantly connect with chat partners for direct conversations without long onboarding.",
+      "NiteFlirt specializes in phone-based conversations, combining voice and chat interactions.",
   },
   {
     name: "Jerkmate",
@@ -57,6 +61,7 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "chat",
+    tier: 1,
     preview:
       "Jerkmate blends live cam and chat, allowing users to instantly connect and message performers. Its smart matching system increases engagement and keeps conversations active.",
   },
@@ -67,18 +72,9 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "chat",
+    tier: 2,
     preview:
       "ChatRecruit is a multi-format chat platform offering text, phone, and video conversations with real users. It's designed for continuous engagement, giving users multiple ways to connect and keep conversations active beyond simple messaging. The platform stands out for flexibility—whether you prefer texting, voice chat, or live interaction, ChatRecruit supports ongoing, personalized conversations with strong response rates.",
-  },
-  {
-    name: "MyGirlFund",
-    slug: "mygirlfund",
-    website: "https://www.mygirlfund.com",
-    payout: "High",
-    difficulty: "Easy",
-    type: "chat",
-    preview:
-      "MyGirlFund connects users with real women for chatting, private messaging, and exclusive content.",
   },
   {
     name: "Phrendly",
@@ -87,28 +83,31 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "chat",
+    tier: 2,
     preview:
       "Phrendly is a chat-based platform where conversations can turn flirty and fun with real people.",
   },
   {
-    name: "TalkToMe",
-    slug: "talktome",
-    website: "https://www.talktome.com",
-    payout: "Medium",
-    difficulty: "Easy",
-    type: "chat",
-    preview:
-      "TalkToMe offers instant chat and conversation opportunities with users from around the world.",
-  },
-  {
-    name: "NiteFlirt",
-    slug: "niteflirt",
-    website: "https://www.niteflirt.com",
+    name: "MyGirlFund",
+    slug: "mygirlfund",
+    website: "https://www.mygirlfund.com",
     payout: "High",
     difficulty: "Easy",
-    type: "phone-chat",
+    type: "chat",
+    tier: 2,
     preview:
-      "NiteFlirt specializes in phone-based conversations, combining voice and chat interactions.",
+      "MyGirlFund connects users with real women for chatting, private messaging, and exclusive content.",
+  },
+  {
+    name: "Premium.Chat",
+    slug: "premiumchat",
+    website: "https://premium.chat",
+    payout: "High",
+    difficulty: "Medium",
+    type: "chat",
+    tier: 2,
+    preview:
+      "Premium.Chat allows creators to monetize private conversations and direct messaging.",
   },
   {
     name: "FlirtBucks",
@@ -117,8 +116,31 @@ export const SEXCHAT_FEATURED: CuratedSexChatRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "chat",
+    tier: 2,
     preview:
       "FlirtBucks powers chat-based interactions focused on texting and online conversations. The platform is optimized for continuous engagement and high reply rates.",
+  },
+  {
+    name: "iSexyChat",
+    slug: "isexychat",
+    website: "https://www.isexychat.com",
+    payout: "Medium",
+    difficulty: "Easy",
+    type: "chat",
+    tier: 3,
+    preview:
+      "iSexyChat is built for fast, anonymous sexting and private messaging. Users can instantly connect with chat partners for direct conversations without long onboarding.",
+  },
+  {
+    name: "TalkToMe",
+    slug: "talktome",
+    website: "https://www.talktome.com",
+    payout: "Medium",
+    difficulty: "Easy",
+    type: "chat",
+    tier: 3,
+    preview:
+      "TalkToMe offers instant chat and conversation opportunities with users from around the world.",
   },
 ];
 
@@ -131,6 +153,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview:
       "TextingFactory focuses on chat-based conversations and messaging interactions. It's structured for continuous engagement and scalable chat traffic.",
   },
@@ -141,6 +164,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "phone-chat",
+    tier: 3,
     preview:
       "LipService connects users with chat partners for private messaging and adult conversations, focusing on anonymity and fast replies.",
   },
@@ -151,6 +175,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview:
       "Cloudworkers connects users with chat operators for continuous messaging and engagement.",
   },
@@ -161,6 +186,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview:
       "TexKings offers real-time messaging platforms for casual and ongoing conversations.",
   },
@@ -171,6 +197,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview:
       "RentACyberFriend connects users with companions for online conversations and social interaction.",
   },
@@ -181,6 +208,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview: "FlirtMe is built for instant messaging, flirting, and casual chat experiences.",
   },
   {
@@ -190,6 +218,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview: "ChatJobs offers chat-based interactions with a focus on ongoing engagement.",
   },
   {
@@ -199,18 +228,9 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview:
       "FriendPC connects users with online companions for messaging and casual interaction.",
-  },
-  {
-    name: "Premium.Chat",
-    slug: "premiumchat",
-    website: "https://premium.chat",
-    payout: "High",
-    difficulty: "Medium",
-    type: "chat",
-    preview:
-      "Premium.Chat allows creators to monetize private conversations and direct messaging.",
   },
   {
     name: "Only2Chat",
@@ -219,6 +239,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview: "Only2Chat offers private messaging and real-time chat interactions.",
   },
   {
@@ -228,6 +249,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview: "ChatMatch focuses on quick connections and instant messaging experiences.",
   },
   {
@@ -237,6 +259,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "chat",
+    tier: 3,
     preview: "TalkLiv offers real-time chat and conversation opportunities with active users.",
   },
   {
@@ -246,6 +269,7 @@ export const SEXCHAT_GRID: CuratedSexChatRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "video-chat",
+    tier: 3,
     preview:
       "ChatSpin is a random video chat platform that connects users instantly.",
   },
@@ -298,18 +322,25 @@ function buildListing(
   };
 }
 
+function rowScore(row: CuratedSexChatRow, index: number): { rating: number; popularity_score: number } {
+  const tierBase = {
+    1: 4.95,
+    2: 4.75,
+    3: 4.55,
+  }[row.tier];
+  const rating = Math.round((tierBase - index * 0.02) * 10) / 10;
+  const popularity_score = (row.tier === 1 ? 100 : row.tier === 2 ? 92 : 84) - index;
+  return { rating, popularity_score };
+}
+
 export function buildCuratedSexChatListings(cat: CategoryDef): Listing[] {
-  const featured = SEXCHAT_FEATURED.map((row, i) =>
-    buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
-  );
-  const grid = SEXCHAT_GRID.map((row, i) =>
-    buildListing(
-      row,
-      cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
-      `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
-    ),
-  );
+  const featured = SEXCHAT_FEATURED.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
+  const grid = SEXCHAT_GRID.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-07-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
   return [...featured, ...grid];
 }

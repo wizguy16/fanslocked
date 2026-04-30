@@ -24,7 +24,7 @@ export function FlCardCompact({ listing, className, teaser }: Props) {
       {...link}
       aria-label={`${listing.name}. Opens partner site.`}
       className={cn(
-        "group relative flex h-[110px] w-full flex-col justify-between overflow-hidden rounded-[14px]",
+        "group relative flex min-h-[110px] w-full flex-col justify-between gap-1 overflow-hidden rounded-[14px]",
         "border border-[rgba(255,255,255,0.06)] bg-[var(--bg-card)] p-4",
         "transition-[border-color,background-color] duration-200 ease-out",
         "hover:border-[rgba(255,122,0,0.7)] hover:bg-[var(--bg-elevated)]",
@@ -52,8 +52,8 @@ export function FlCardCompact({ listing, className, teaser }: Props) {
         <p className="mt-1 line-clamp-1 text-[12px] text-[var(--text-secondary)]">{sub}</p>
       </div>
 
-      <span className="mt-2 text-[12px] font-medium text-[var(--accent-primary)]">
-        Visit site →
+      <span className="mt-1 inline-flex max-w-full items-center justify-center self-start rounded-md bg-[#ff8c42] px-3 py-1.5 text-[12px] font-semibold text-[#331200] transition-colors group-hover:bg-[#ff9f5a]">
+        Visit Site
       </span>
     </Link>
   );

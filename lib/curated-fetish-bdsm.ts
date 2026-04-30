@@ -13,22 +13,14 @@ export type CuratedFetishRow = {
   difficulty: string;
   type: string;
   preview: string;
+  tier: 1 | 2 | 3;
 };
 
 /**
- * Top 12 — money + authority. Slugs suffixed where they collide with amateur / VR / fan listings.
+ * Top band — monetization / authority first (clips + creators), then VR / networks / social, then dating-adjacent.
+ * Slugs suffixed where they collide with amateur / VR / fan listings.
  */
 export const FETISH_FEATURED: CuratedFetishRow[] = [
-  {
-    name: "Kink",
-    slug: "kink",
-    website: "https://www.kink.com",
-    payout: "High",
-    difficulty: "Medium",
-    type: "BDSM Network",
-    preview:
-      "Kink is the industry leader in BDSM content, known for high-production scenes, real sets, and intense power dynamics.",
-  },
   {
     name: "Clips4Sale",
     slug: "clips4sale-fetish",
@@ -36,6 +28,7 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "Fetish Marketplace",
+    tier: 1,
     preview:
       "Clips4Sale dominates the fetish niche with thousands of creators offering extremely specific and custom kink content.",
   },
@@ -46,6 +39,7 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "Creator Platform",
+    tier: 1,
     preview:
       "ManyVids blends fetish and creator-driven content, making it perfect for custom requests and niche fantasies.",
   },
@@ -56,8 +50,20 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "Clip Store",
+    tier: 1,
     preview:
       "iWantClips focuses heavily on domination, humiliation, and extreme fetish categories with strong creator presence.",
+  },
+  {
+    name: "Kink",
+    slug: "kink",
+    website: "https://www.kink.com",
+    payout: "High",
+    difficulty: "Medium",
+    type: "BDSM Network",
+    tier: 1,
+    preview:
+      "Kink is the industry leader in BDSM content, known for high-production scenes, real sets, and intense power dynamics.",
   },
   {
     name: "Fetish Network",
@@ -66,18 +72,9 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Medium",
     type: "Network",
+    tier: 2,
     preview:
       "Fetish Network bundles multiple BDSM brands into one membership covering bondage, domination, and taboo themes.",
-  },
-  {
-    name: "KinkVR",
-    slug: "kinkvr-fetish",
-    website: "https://www.kinkvr.com",
-    payout: "High",
-    difficulty: "Medium",
-    type: "VR BDSM",
-    preview:
-      "KinkVR delivers immersive BDSM experiences in virtual reality, placing users directly inside the scene.",
   },
   {
     name: "SexLikeReal",
@@ -86,8 +83,20 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Medium",
     type: "VR Fetish",
+    tier: 2,
     preview:
       "SexLikeReal includes a large VR fetish library with interactive scenes and high-end production.",
+  },
+  {
+    name: "VRPorn",
+    slug: "vrporn-fetish",
+    website: "https://vrporn.com",
+    payout: "High",
+    difficulty: "Medium",
+    type: "VR Aggregator",
+    tier: 2,
+    preview:
+      "VRPorn aggregates multiple VR fetish studios into one platform with strong affiliate monetization and scalable traffic routing.",
   },
   {
     name: "Alt",
@@ -96,8 +105,20 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "Fetish Dating",
+    tier: 2,
     preview:
       "Alt is one of the largest BDSM communities online, combining dating, content, and kink exploration.",
+  },
+  {
+    name: "LoyalFans",
+    slug: "loyalfans-fetish",
+    website: "https://www.loyalfans.com",
+    payout: "High",
+    difficulty: "Easy",
+    type: "Creator Platform",
+    tier: 2,
+    preview:
+      "LoyalFans has a strong presence in the fetish space, with creators offering subscription content, custom requests, and high-converting fan interactions across niche categories.",
   },
   {
     name: "Bondage",
@@ -106,18 +127,9 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Easy",
     type: "Dating + Fetish",
+    tier: 3,
     preview:
       "Bondage blends adult dating with fetish exploration, connecting users based on specific kinks.",
-  },
-  {
-    name: "Whiplr",
-    slug: "whiplr",
-    website: "https://www.whiplr.com",
-    payout: "Medium",
-    difficulty: "Easy",
-    type: "Kink Social",
-    preview:
-      "Whiplr is a fetish-focused social platform that helps users connect safely within the BDSM lifestyle.",
   },
   {
     name: "Domination",
@@ -126,18 +138,9 @@ export const FETISH_FEATURED: CuratedFetishRow[] = [
     payout: "High",
     difficulty: "Medium",
     type: "Fetish Network",
+    tier: 3,
     preview:
       "Domination focuses on power play, control fantasies, and intense BDSM storytelling.",
-  },
-  {
-    name: "ModelCentro",
-    slug: "modelcentro-fetish",
-    website: "https://modelcentro.com",
-    payout: "Medium",
-    difficulty: "Easy",
-    type: "Creator Platform",
-    preview:
-      "ModelCentro allows fetish creators to sell exclusive content directly to fans.",
   },
 ];
 
@@ -149,6 +152,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Community",
+    tier: 3,
     preview:
       "ThisVid is a community-driven platform featuring raw, user-uploaded fetish and kink content.",
   },
@@ -159,6 +163,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "Tube",
+    tier: 3,
     preview:
       "BoundHub specializes in bondage-focused scenes, offering a wide range of tied-up fantasies.",
   },
@@ -169,6 +174,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "Fetish Tube",
+    tier: 3,
     preview:
       "Motherless hosts one of the largest collections of extreme and niche fetish content online.",
   },
@@ -179,6 +185,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "Hardcore Tube",
+    tier: 3,
     preview:
       "Heavy-R focuses on hardcore and taboo-style fetish content with a massive free library.",
   },
@@ -189,6 +196,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Hypno",
+    tier: 3,
     preview:
       "HypnoTube delivers hypnotic fetish content centered around mind control and visual stimulation.",
   },
@@ -199,6 +207,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Medium",
     difficulty: "Easy",
     type: "Tube",
+    tier: 3,
     preview:
       "Pervertium focuses on extreme and taboo fetish niches rarely found on mainstream platforms.",
   },
@@ -209,6 +218,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Tube",
+    tier: 3,
     preview:
       "BDSMX offers a large collection of BDSM content with a focus on domination and restraint.",
   },
@@ -219,6 +229,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Femdom",
+    tier: 3,
     preview:
       "FemdomXXX specializes in female domination content with a wide variety of power-play scenarios.",
   },
@@ -229,6 +240,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Femdom",
+    tier: 3,
     preview:
       "FemdomUp curates female domination videos from across the web into one place.",
   },
@@ -239,6 +251,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Femdom",
+    tier: 3,
     preview:
       "YoungDommes focuses on younger dominant performers and modern domination content.",
   },
@@ -249,6 +262,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Size Fetish",
+    tier: 3,
     preview:
       "Giantess content explores size-difference fantasies with a strong niche following.",
   },
@@ -259,6 +273,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Tickle",
+    tier: 3,
     preview:
       "Tickle Porn focuses on tickling fetishes with playful yet niche-specific content.",
   },
@@ -269,6 +284,7 @@ export const FETISH_GRID: CuratedFetishRow[] = [
     payout: "Low",
     difficulty: "Easy",
     type: "Impact Fetish",
+    tier: 3,
     preview:
       "Ball Busting features extreme impact play content for a very specific fetish audience.",
   },
@@ -321,18 +337,25 @@ function buildListing(
   };
 }
 
+function rowScore(row: CuratedFetishRow, index: number): { rating: number; popularity_score: number } {
+  const tierBase = {
+    1: 4.95,
+    2: 4.75,
+    3: 4.5,
+  }[row.tier];
+  const rating = Math.round((tierBase - index * 0.02) * 10) / 10;
+  const popularity_score = (row.tier === 1 ? 100 : row.tier === 2 ? 92 : 84) - index;
+  return { rating, popularity_score };
+}
+
 export function buildCuratedFetishBdsmListings(cat: CategoryDef): Listing[] {
-  const featured = FETISH_FEATURED.map((row, i) =>
-    buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
-  );
-  const grid = FETISH_GRID.map((row, i) =>
-    buildListing(
-      row,
-      cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
-      `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
-    ),
-  );
+  const featured = FETISH_FEATURED.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
+  const grid = FETISH_GRID.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-07-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
   return [...featured, ...grid];
 }

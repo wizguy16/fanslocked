@@ -102,11 +102,11 @@ export function SiteCard({
 
         <span
           className={cn(
-            "mt-4 flex w-full items-center justify-center rounded-lg bg-[#d97706] font-bold text-[#0a0a0a] transition-colors hover:bg-[#e88e12]",
+            "mt-4 flex w-full items-center justify-center rounded-lg bg-[#d97706] font-bold text-[#0a0a0a] transition-colors group-hover:bg-[#e88e12]",
             isFeatured ? "py-3 text-[14px] md:text-[15px]" : "py-2.5 text-[12px] md:text-[13px]",
           )}
         >
-          Visit Site
+          View Details
         </span>
       </div>
     </Link>

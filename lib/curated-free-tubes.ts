@@ -33,7 +33,7 @@ function seedFor(key: string) {
   return h;
 }
 
-type CuratedTube = {
+export type CuratedTube = {
   name: string;
   slug: string;
   siteKey: string;
@@ -45,150 +45,157 @@ type CuratedTube = {
   badge?: string;
   popularity_score: number;
   added_date: string;
+  tier: 1 | 2 | 3;
 };
 
-const TUBES: CuratedTube[] = [
+/** Static rows — `rating` / `popularity_score` are derived in `buildCuratedFreeTubeListings` from `tier` + sort index. */
+type CuratedTubeRow = Omit<CuratedTube, "rating" | "popularity_score">;
+
+const TUBES: CuratedTubeRow[] = [
   {
     name: "Pornhub",
     slug: "pornhub",
     siteKey: "pornhub",
-    rating: 4.9,
+    tier: 1,
     tag: "Community",
     description:
       "Watch instantly — no signup, huge variety, and endless scrolling.",
     tags: ["free", "videos", "trending"],
     website_url: "https://www.pornhub.com",
     badge: "Top Pick",
-    popularity_score: 98,
     added_date: "2025-11-02",
   },
   {
     name: "XVideos",
     slug: "xvideos",
     siteKey: "xvideos",
-    rating: 4.85,
+    tier: 1,
     tag: "Community",
     description:
       "Find exactly what you want fast — massive library with quick loading.",
     tags: ["free", "videos", "long-tail"],
     website_url: "https://www.xvideos.com",
     badge: "Huge Library",
-    popularity_score: 97,
     added_date: "2025-11-05",
   },
   {
     name: "XNXX",
     slug: "xnxx",
     siteKey: "xnxx",
-    rating: 4.82,
+    tier: 1,
     tag: "Community",
     description:
       "Simple, fast, and reliable — jump straight into videos without friction.",
     tags: ["free", "videos", "high-traffic"],
     website_url: "https://www.xnxx.com",
     badge: "Fast Browse",
-    popularity_score: 96,
     added_date: "2025-11-06",
   },
   {
     name: "xHamster",
     slug: "xhamster",
     siteKey: "xhamster",
-    rating: 4.7,
+    tier: 1,
     tag: "Community",
     description:
       "Community features and familiar UX keep session length strong for affiliate retargeting.",
     tags: ["free", "community", "videos"],
     website_url: "https://xhamster.com",
-    popularity_score: 91,
     added_date: "2025-11-08",
-  },
-  {
-    name: "Eporner",
-    slug: "eporner",
-    siteKey: "eporner",
-    rating: 4.65,
-    tag: "Clips",
-    description:
-      "Quality-tilted tube positioning helps pre-sell HD and premium upgrades without feeling spammy.",
-    tags: ["free", "hd", "videos"],
-    website_url: "https://www.eporner.com",
-    popularity_score: 88,
-    added_date: "2025-11-10",
-  },
-  {
-    name: "HQPorner",
-    slug: "hqporner",
-    siteKey: "hqporner",
-    rating: 4.55,
-    tag: "Studio",
-    description:
-      "Bitrate-forward branding attracts viewers who are already primed for paid studio content.",
-    tags: ["free", "hd", "streaming"],
-    website_url: "https://hqporner.com",
-    popularity_score: 84,
-    added_date: "2025-11-12",
   },
   {
     name: "SpankBang",
     slug: "spankbang",
     siteKey: "spankbang",
-    rating: 4.5,
+    tier: 2,
     tag: "Community",
     description:
       "Lean player and aggressive discovery—great for arbitrage when you route clicks to higher-EPC offers.",
     tags: ["free", "trending", "fast"],
     website_url: "https://spankbang.com",
-    popularity_score: 86,
     added_date: "2025-11-14",
+  },
+  {
+    name: "Eporner",
+    slug: "eporner",
+    siteKey: "eporner",
+    tier: 2,
+    tag: "Clips",
+    description:
+      "Quality-tilted tube positioning helps pre-sell HD and premium upgrades without feeling spammy.",
+    tags: ["free", "hd", "videos"],
+    website_url: "https://www.eporner.com",
+    added_date: "2025-11-10",
   },
   {
     name: "YouPorn",
     slug: "youporn",
     siteKey: "youporn",
-    rating: 4.45,
+    tier: 2,
     tag: "Community",
     description:
       "Household-name recognition lowers bounce on cold traffic from search and social previews.",
     tags: ["free", "videos", "brand"],
     website_url: "https://www.youporn.com",
-    popularity_score: 82,
     added_date: "2025-11-16",
   },
   {
     name: "RedTube",
     slug: "redtube",
     siteKey: "redtube",
-    rating: 4.4,
+    tier: 2,
     tag: "Community",
     description:
       "Classic tube UX with broad niches—use it as a trust anchor before pushing trials or cams.",
     tags: ["free", "videos", "classic"],
     website_url: "https://www.redtube.com",
-    popularity_score: 80,
     added_date: "2025-11-18",
+  },
+  {
+    name: "HQPorner",
+    slug: "hqporner",
+    siteKey: "hqporner",
+    tier: 3,
+    tag: "Studio",
+    description:
+      "Bitrate-forward branding attracts viewers who are already primed for paid studio content.",
+    tags: ["free", "hd", "streaming"],
+    website_url: "https://hqporner.com",
+    added_date: "2025-11-12",
   },
   {
     name: "Tube8",
     slug: "tube8",
     siteKey: "tube8",
-    rating: 4.35,
+    tier: 3,
     tag: "Community",
     description:
       "Straightforward search and categories make it easy to match intent with your downstream monetization.",
     tags: ["free", "videos", "search"],
     website_url: "https://www.tube8.com",
-    popularity_score: 78,
     added_date: "2025-11-20",
   },
 ];
+
+function rowScore(tier: 1 | 2 | 3, index: number): { rating: number; popularity_score: number } {
+  const tierBase = {
+    1: 4.9,
+    2: 4.7,
+    3: 4.4,
+  }[tier];
+  const rating = Math.round((tierBase - index * 0.02) * 10) / 10;
+  const popularity_score = (tier === 1 ? 100 : tier === 2 ? 92 : 84) - index;
+  return { rating, popularity_score };
+}
 
 function reviewFor(name: string): string {
   return `${name} is positioned as top-of-funnel free traffic: huge catalogs, ad-supported playback, and predictable search behavior. We list it for readers comparing tubes before upgrading to premium or cam products; always verify age-gate flows, regional restrictions, and your affiliate program terms before scaling spend.`;
 }
 
 export function buildCuratedFreeTubeListings(cat: CategoryDef): Listing[] {
-  return TUBES.map((t, i) => {
+  const sorted = [...TUBES].sort((a, b) => a.tier - b.tier);
+  return sorted.map((t, i) => {
+    const { rating, popularity_score } = rowScore(t.tier, i);
     const s = seedFor(t.slug);
     return {
       id: `listing-tube-${t.slug}`,
@@ -213,10 +220,10 @@ export function buildCuratedFreeTubeListings(cat: CategoryDef): Listing[] {
       logo: logoFor(s + i + 3),
       affiliate_url: buildListingOutboundPath(t.slug),
       website_url: t.website_url,
-      rating: t.rating,
+      rating,
       tag: t.tag,
       added_date: t.added_date,
-      popularity_score: t.popularity_score,
+      popularity_score,
       ...(t.badge ? { badge: t.badge } : {}),
     };
   });

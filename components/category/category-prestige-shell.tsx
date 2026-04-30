@@ -63,10 +63,7 @@ export function CategoryPrestigeShell({
             };
   const { quick, showcase, rising } = slices;
   const year = new Date().getFullYear();
-  const guidePostRaw = getGuidePostForCategory(category.slug);
-  const guidePost = guidePostRaw
-    ? { slug: guidePostRaw.slug, title: guidePostRaw.title }
-    : null;
+  const guidePost = getGuidePostForCategory(category.slug) ?? null;
   const defaultH1 = heroTitle(category.label);
 
   return (

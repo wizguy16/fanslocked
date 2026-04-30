@@ -13,39 +13,21 @@ export type CuratedSearchRow = {
   difficulty: string;
   type: string;
   preview: string;
+  tier: 1 | 2 | 3;
 };
 
-/** Top 12 — horizontal featured rail. */
+/** Top rail source — order is editorial; ranking comes from tier + buildCuratedSearchListings. */
 export const SEARCH_FEATURED: CuratedSearchRow[] = [
   {
-    name: "YesPornPlease",
-    slug: "yespornplease",
-    website: "https://yespornplease.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "aggregator",
-    preview:
-      "YesPornPlease curates trending adult content and provides a fast, search-driven browsing experience across multiple sites.",
-  },
-  {
-    name: "PornMD",
-    slug: "pornmd",
-    website: "https://www.pornmd.com",
+    name: "XVideos Search",
+    slug: "xvideos-search",
+    website: "https://www.xvideos.com",
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 1,
     preview:
-      "PornMD is a search engine that aggregates content from multiple adult sites in one place.",
-  },
-  {
-    name: "SpankBang Search",
-    slug: "spankbang-search",
-    website: "https://spankbang.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "search",
-    preview:
-      "SpankBang offers a powerful internal search engine with a massive content library.",
+      "XVideos includes one of the largest searchable databases of adult content online.",
   },
   {
     name: "XNXX Search",
@@ -54,18 +36,20 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 1,
     preview:
       "XNXX provides fast and extensive search capabilities across millions of videos.",
   },
   {
-    name: "XVideos Search",
-    slug: "xvideos-search",
-    website: "https://www.xvideos.com",
+    name: "xHamster Search",
+    slug: "xhamster-search",
+    website: "https://www.xhamster.com",
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 1,
     preview:
-      "XVideos includes one of the largest searchable databases of adult content online.",
+      "xHamster’s search spans a huge UGC library and trending queries.",
   },
   {
     name: "YouPorn Search",
@@ -74,6 +58,7 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 1,
     preview:
       "YouPorn’s search system helps users find trending and popular videos instantly.",
   },
@@ -84,8 +69,20 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
       "Eporner offers a clean interface with strong search and filtering capabilities.",
+  },
+  {
+    name: "SpankBang",
+    slug: "spankbang-search",
+    website: "https://spankbang.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "search",
+    tier: 2,
+    preview:
+      "SpankBang offers a powerful internal search engine with a massive content library.",
   },
   {
     name: "RedTube",
@@ -94,18 +91,31 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
       "RedTube provides an easy-to-use search experience with curated video results.",
   },
   {
-    name: "Tnaflix",
-    slug: "tnaflix",
-    website: "https://www.tnaflix.com",
+    name: "PornMD",
+    slug: "pornmd",
+    website: "https://www.pornmd.com",
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
-      "Tnaflix features a wide range of videos and an effective search engine.",
+      "PornMD is a search engine that aggregates content from multiple adult sites in one place.",
+  },
+  {
+    name: "YesPornPlease",
+    slug: "yespornplease",
+    website: "https://yespornplease.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "aggregator",
+    tier: 3,
+    preview:
+      "YesPornPlease curates trending adult content and provides a fast, search-driven browsing experience across multiple sites.",
   },
   {
     name: "KeezMovies",
@@ -114,6 +124,7 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 3,
     preview:
       "KeezMovies provides fast search functionality and curated adult content.",
   },
@@ -124,6 +135,7 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 3,
     preview:
       "Tube8 offers categorized search and curated video discovery.",
   },
@@ -134,12 +146,13 @@ export const SEARCH_FEATURED: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 3,
     preview:
       "DrTuber allows users to explore a wide selection of adult content through search.",
   },
 ];
 
-/** Next 13 — meta search and large tube discovery (same pattern as featured). */
+/** Grid source — tier-2 strong picks first, then tier-3 long tail. No duplicate slugs vs SEARCH_FEATURED. */
 export const SEARCH_GRID: CuratedSearchRow[] = [
   {
     name: "Nudevista",
@@ -148,48 +161,9 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
       "Nudevista aggregates tube results so users can search across many sources at once.",
-  },
-  {
-    name: "FUQ",
-    slug: "fuq",
-    website: "https://www.fuq.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "search",
-    preview:
-      "FUQ surfaces popular clips and categories from major tubes in one interface.",
-  },
-  {
-    name: "Tubesafari",
-    slug: "tubesafari",
-    website: "https://tubesafari.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "search",
-    preview:
-      "Tubesafari helps users discover videos across a wide index with simple search.",
-  },
-  {
-    name: "AlohaTube",
-    slug: "alohatube",
-    website: "https://www.alohatube.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "search",
-    preview:
-      "AlohaTube combines a large catalog with search and category browsing.",
-  },
-  {
-    name: "iXXX",
-    slug: "ixxx",
-    website: "https://www.ixxx.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "search",
-    preview:
-      "iXXX links out to multiple tubes and niches for broad discovery.",
   },
   {
     name: "PeekVids",
@@ -198,6 +172,7 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
       "PeekVids offers trending and search-driven discovery across popular scenes.",
   },
@@ -208,6 +183,7 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
       "Porntrex emphasizes HD discovery with strong filters and search.",
   },
@@ -218,6 +194,7 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
       "HQporner focuses on high-bitrate scenes with straightforward search.",
   },
@@ -228,8 +205,53 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 2,
     preview:
       "Beeg offers minimal UI with fast search and curated scene picks.",
+  },
+  {
+    name: "FUQ",
+    slug: "fuq",
+    website: "https://www.fuq.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "search",
+    tier: 3,
+    preview:
+      "FUQ surfaces popular clips and categories from major tubes in one interface.",
+  },
+  {
+    name: "Tubesafari",
+    slug: "tubesafari",
+    website: "https://tubesafari.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "search",
+    tier: 3,
+    preview:
+      "Tubesafari helps users discover videos across a wide index with simple search.",
+  },
+  {
+    name: "AlohaTube",
+    slug: "alohatube",
+    website: "https://www.alohatube.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "search",
+    tier: 3,
+    preview:
+      "AlohaTube combines a large catalog with search and category browsing.",
+  },
+  {
+    name: "iXXX",
+    slug: "ixxx",
+    website: "https://www.ixxx.com",
+    payout: "Indirect",
+    difficulty: "Easy",
+    type: "search",
+    tier: 3,
+    preview:
+      "iXXX links out to multiple tubes and niches for broad discovery.",
   },
   {
     name: "SunPorno",
@@ -238,6 +260,7 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 3,
     preview:
       "SunPorno provides category-first discovery plus full-site search.",
   },
@@ -248,18 +271,9 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 3,
     preview:
       "4Tube surfaces network-wide results with consistent search UX.",
-  },
-  {
-    name: "xHamster Search",
-    slug: "xhamster-search",
-    website: "https://www.xhamster.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "search",
-    preview:
-      "xHamster’s search spans a huge UGC library and trending queries.",
   },
   {
     name: "PornHD",
@@ -268,6 +282,7 @@ export const SEARCH_GRID: CuratedSearchRow[] = [
     payout: "Indirect",
     difficulty: "Easy",
     type: "search",
+    tier: 3,
     preview:
       "PornHD highlights HD scenes with search and studio-style filters.",
   },
@@ -320,18 +335,44 @@ function buildListing(
   };
 }
 
+const TIER_BASE: Record<1 | 2 | 3, number> = {
+  1: 4.9,
+  2: 4.7,
+  3: 4.5,
+};
+
+function ratingForRow(row: CuratedSearchRow, indexInSlice: number): number {
+  const tierBase = TIER_BASE[row.tier];
+  return Math.round((tierBase - indexInSlice * 0.015) * 10) / 10;
+}
+
+function popularityForRow(row: CuratedSearchRow, indexInSlice: number): number {
+  const base = row.tier === 1 ? 100 : row.tier === 2 ? 90 : 80;
+  return base - indexInSlice;
+}
+
 export function buildCuratedSearchListings(cat: CategoryDef): Listing[] {
   const featured = SEARCH_FEATURED.map((row, i) =>
-    buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
+    buildListing(
+      row,
+      cat,
+      ratingForRow(row, i),
+      popularityForRow(row, i),
+      `2025-08-${String((i % 28) + 1).padStart(2, "0")}`,
+    ),
   );
   const grid = SEARCH_GRID.map((row, i) =>
     buildListing(
       row,
       cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
+      ratingForRow(row, i),
+      popularityForRow(row, i),
       `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
     ),
   );
-  return [...featured, ...grid];
+
+  return [...featured, ...grid].sort((a, b) => {
+    if (b.rating !== a.rating) return b.rating - a.rating;
+    return b.popularity_score - a.popularity_score;
+  });
 }

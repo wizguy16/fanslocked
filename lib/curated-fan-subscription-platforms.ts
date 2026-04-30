@@ -17,8 +17,8 @@ export type CuratedFanSubscriptionRow = {
 };
 
 /**
- * Top 12 — rail order: money-first (Fansly, Fanvue, Unlockd), then breadth.
- * Fanvue uses AI + creator positioning; no duplicate Fanvue row here.
+ * Real subscription / creator platforms only — one row per site (no duplicate domains or discovery URLs).
+ * Grid reserved for future alternative platforms (empty until rebuilt).
  */
 export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   {
@@ -103,18 +103,6 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
       "Subscription platform focused on creator control, with flexible pricing and direct fan interaction.",
   },
   {
-    name: "Fansly",
-    slug: "fansly-discover",
-    website: "https://fansly.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Subscription Platform",
-    description:
-      "Fast-growing platform with strong discovery tools and a mix of free and paid content options for creators.",
-    preview:
-      "Fast-growing platform with strong discovery tools and a mix of free and paid content options for creators.",
-  },
-  {
     name: "AdmireMe",
     slug: "admireme",
     website: "https://admireme.vip",
@@ -161,169 +149,7 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
   },
 ];
 
-export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [
-  {
-    name: "FansMetrics",
-    slug: "fansmetrics",
-    website: "https://fansmetrics.com",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Analytics",
-    description: "OnlyFans analytics tool.",
-    preview: "FansMetrics helps creators track performance and optimize earnings.",
-  },
-  {
-    name: "FollowChain",
-    slug: "followchain",
-    website: "https://followchain.org",
-    payout: "Traffic",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Creator discovery platform.",
-    preview: "FollowChain helps users discover trending creators across platforms.",
-  },
-  {
-    name: "Fansly Search",
-    slug: "fansly-search",
-    website: "https://fansly.com",
-    payout: "Indirect",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Find creators on Fansly.",
-    preview: "Fansly Search helps users quickly discover new creators.",
-  },
-  {
-    name: "ManyVids Models",
-    slug: "manyvids-models",
-    website: "https://manyvids.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Marketplace",
-    description: "Creator marketplace listings.",
-    preview: "ManyVids Models allows users to browse and subscribe to creators easily.",
-  },
-  {
-    name: "FanCentro Discover",
-    slug: "fancentro-discover",
-    website: "https://fancentro.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Find FanCentro creators.",
-    preview: "FanCentro Discover helps users find premium creators quickly.",
-  },
-  {
-    name: "Fansly Creators",
-    slug: "fansly-creators",
-    website: "https://fansly.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Fansly creator directory.",
-    preview: "Fansly Creators showcases trending and popular profiles.",
-  },
-  {
-    name: "Fanvue Creators",
-    slug: "fanvue-creators",
-    website: "https://fanvue.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Fanvue creator discovery.",
-    preview: "Fanvue Creators highlights top-performing creators on the platform.",
-  },
-  {
-    name: "LoyalFans Discover",
-    slug: "loyalfans-discover",
-    website: "https://loyalfans.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Find LoyalFans creators.",
-    preview: "LoyalFans Discover makes it easy to browse and subscribe to creators.",
-  },
-  {
-    name: "FanCentro Creators",
-    slug: "fancentro-creators",
-    website: "https://fancentro.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Browse creators.",
-    preview: "Discover creators and exclusive content through FanCentro.",
-  },
-  {
-    name: "JustForFans Models",
-    slug: "jff-models",
-    website: "https://justfor.fans",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Browse creator profiles.",
-    preview: "Find top creators and connect through subscriptions.",
-  },
-  {
-    name: "LoyalFans Creators",
-    slug: "loyalfans-creators",
-    website: "https://loyalfans.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Discover creators.",
-    preview: "Explore trending creators and premium content.",
-  },
-  {
-    name: "AdmireMe Creators",
-    slug: "admireme-creators",
-    website: "https://admireme.vip",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "AdmireMe creator listings.",
-    preview: "AdmireMe Creators helps users explore premium content creators.",
-  },
-  {
-    name: "Fanvue",
-    slug: "fanvue-ai-creator",
-    website: "https://fanvue.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "AI + Creator Platform",
-    description: "Modern creator platform with AI integration.",
-    preview:
-      "Fanvue combines creator content with AI tools, creating a high-converting platform for both fans and creators.",
-  },
-  {
-    name: "Fan Platform Hub",
-    slug: "fan-platform-hub",
-    website: "https://fanvue.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Aggregator",
-    description: "Multi-platform creator hub.",
-    preview: "Fan Platform Hub aggregates creators across multiple platforms.",
-  },
-  {
-    name: "CreatorHub",
-    slug: "creatorhub",
-    website: "https://fanvue.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Creator discovery platform.",
-    preview: "CreatorHub helps users find trending creators across platforms.",
-  },
-  {
-    name: "FanFinder",
-    slug: "fanfinder",
-    website: "https://fansly.com",
-    payout: "RevShare",
-    difficulty: "Easy",
-    type: "Discovery",
-    description: "Find top creators easily.",
-    preview: "FanFinder helps users quickly locate trending creators.",
-  },
-];
+export const CREATOR_PLATFORMS_GRID: CuratedFanSubscriptionRow[] = [];
 
 function tagsFor(): string[] {
   return ["creator", "subscriptions", "fan-platform", "editor-pick", "revshare", "trending"];

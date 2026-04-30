@@ -28,6 +28,7 @@
         "iwantclips": "/images/sites/amateur/iwantclips.png",
         "justforfansamateur": "/images/sites/amateur/justforfansAmateur.png",
         "modelcentro": "/images/sites/amateur/modelcentro.png",
+        "pocketstars": "/images/sites/amateur/pocketstars.png",
         "trendingcreators": "/images/sites/amateur/trendingcreators.png"
       },
       "logo": {}
@@ -39,6 +40,25 @@
         "fansly": "/images/sites/creator/fansly.png",
         "justforfans": "/images/sites/creator/justforfans.png",
         "loyalfans": "/images/sites/creator/loyalfans.png"
+      },
+      "logo": {}
+    },
+    "escorts": {
+      "screenshot": {
+        "massage-republic": "/images/sites/escorts/massage-republic.png",
+        "ts4rent": "/images/sites/escorts/ts4rent.png"
+      },
+      "logo": {}
+    },
+    "fetish": {
+      "screenshot": {
+        "alt": "/images/sites/fetish/alt.png",
+        "fetishnetwork": "/images/sites/fetish/fetishnetwork.png",
+        "kink": "/images/sites/fetish/kink.png",
+        "loyalfans-fetish": "/images/sites/fetish/loyalfans-fetish.png",
+        "loyalfans": "/images/sites/fetish/loyalfans.png",
+        "sexlikereal-fetish": "/images/sites/fetish/sexlikereal-fetish.png",
+        "vrporn-fetish": "/images/sites/fetish/vrporn-fetish.png"
       },
       "logo": {}
     },
@@ -66,7 +86,10 @@
     "livecam": {
       "screenshot": {
         "cam4": "/images/sites/livecam/cam4.png",
+        "camsoda": "/images/sites/livecam/camsoda.png",
+        "coomeet": "/images/sites/livecam/coomeet.png",
         "livejasmin": "/images/sites/livecam/livejasmin.png",
+        "luckycrush": "/images/sites/livecam/luckycrush.png",
         "myfreecams": "/images/sites/livecam/myfreecams.png",
         "sinparty": "/images/sites/livecam/sinparty.png",
         "streamate": "/images/sites/livecam/streamate.png"
@@ -75,9 +98,13 @@
     },
     "male-companion": {
       "screenshot": {
+        "bedpage": "/images/sites/male-companion/bedpage.png",
         "mfinder": "/images/sites/male-companion/mfinder.png",
         "rentm": "/images/sites/male-companion/rentM.png",
-        "rentrubber": "/images/sites/male-companion/rentRubber.png"
+        "rentrubber": "/images/sites/male-companion/rentRubber.png",
+        "skipthegames": "/images/sites/male-companion/skipthegames.png",
+        "slixa": "/images/sites/male-companion/slixa.png",
+        "tryst": "/images/sites/male-companion/tryst.png"
       },
       "logo": {}
     },
@@ -94,9 +121,12 @@
     "searchEngine": {
       "screenshot": {
         "eporner": "/images/sites/searchEngine/eporner.png",
-        "hqporner": "/images/sites/searchEngine/hqporner.png",
+        "nudevista": "/images/sites/searchEngine/nudevista.png",
+        "peekvids": "/images/sites/searchEngine/peekvids.png",
+        "porntrex": "/images/sites/searchEngine/porntrex.png",
         "redtube": "/images/sites/searchEngine/redtube.png",
         "spankbang": "/images/sites/searchEngine/spankbang.png",
+        "xvideos": "/images/sites/searchEngine/xvideos.png",
         "youporn": "/images/sites/searchEngine/youporn.png"
       },
       "logo": {}
@@ -107,6 +137,7 @@
         "chatrecuit": "/images/sites/sexchat/chatrecuit.png",
         "isexychat": "/images/sites/sexchat/isexychat.png",
         "jerkmate": "/images/sites/sexchat/jerkmate.png",
+        "niteflirt": "/images/sites/sexchat/niteflirt.png",
         "sexphanter": "/images/sites/sexchat/sexphanter.png"
       },
       "logo": {}
@@ -115,8 +146,11 @@
       "screenshot": {
         "badionk": "/images/sites/virtual/badionk.png",
         "naughtyamerica": "/images/sites/virtual/naughtyamerica.png",
+        "stripchat-vr": "/images/sites/virtual/stripchat-vr.png",
         "taboo": "/images/sites/virtual/taboo.png",
         "virtualreal": "/images/sites/virtual/virtualreal.png",
+        "vrbangers": "/images/sites/virtual/vrbangers.png",
+        "vrporn": "/images/sites/virtual/vrporn.png",
         "wankz": "/images/sites/virtual/wankz.png"
       },
       "logo": {}

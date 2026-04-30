@@ -1,11 +1,12 @@
 import Link from "next/link";
+import type { BlogPost } from "@/lib/blog-posts";
 import type { CategoryPrestigeEditorial } from "@/lib/category-prestige-editorial";
 
 type Props = {
   categoryLabel: string;
   editorial: CategoryPrestigeEditorial | null;
   /** Long-form guide on /blog when this category has a linked article. */
-  guidePost: { slug: string; title: string } | null;
+  guidePost: BlogPost | null;
 };
 
 function renderTextBlocks(value: string | readonly string[], keyPrefix: string) {
@@ -104,6 +105,51 @@ export function CategorySeoBlock({
             </Link>
           </div>
         ) : null}
+      </section>
+    );
+  }
+
+  if (guidePost?.hub) {
+    const hub = guidePost.hub;
+    return (
+      <section
+        className="mt-10 grid grid-cols-1 gap-6 border-t border-zinc-900 pt-10 text-[15px] leading-relaxed text-[#ddc1b3] md:mt-12 md:grid-cols-2 md:gap-x-8 md:gap-y-5 md:pt-12"
+        aria-labelledby="category-seo-heading"
+      >
+        <h2 id="category-seo-heading" className="sr-only">
+          {hub.education.whatMakesHeading}
+        </h2>
+        <div className="space-y-7 md:space-y-6">
+          <div>
+            <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
+              {hub.education.whatMakesHeading}
+            </h3>
+            <ul className="list-disc space-y-2 pl-5 marker:text-[#ff8c42]">
+              {hub.education.whatMakesBullets.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="space-y-7 md:space-y-6">
+          <div>
+            <h3 className="mb-3 font-display text-lg font-bold text-[#e3e1e9] md:text-xl">
+              {hub.education.freeVsPremiumHeading}
+            </h3>
+            <p className="text-[15px] leading-relaxed">
+              {hub.education.freeVsPremiumBody}
+            </p>
+          </div>
+        </div>
+        <div className="border-t border-zinc-800 pt-6 md:col-span-2">
+          <Link
+            href={`/blog/${guidePost.slug}`}
+            className="inline-flex max-w-prose text-sm font-semibold leading-snug text-[#ff8c42] transition hover:text-[#ffb68d]"
+          >
+            Explore full guide →
+            <span className="sr-only">: {guidePost.title}</span>
+          </Link>
+        </div>
       </section>
     );
   }

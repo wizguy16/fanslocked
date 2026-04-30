@@ -4,7 +4,6 @@
  */
 export const SITE_IMAGE_SLUG_ALIASES: Record<string, string[]> = {
   rentmen: ["rentm"],
-  "rentmen-eu": ["rentm"],
   justforfans: ["justforfansamateur"],
   "reality-kings": ["realityking"],
   manyvids: ["manyvids", "mv"],
@@ -15,11 +14,7 @@ export const SITE_IMAGE_SLUG_ALIASES: Record<string, string[]> = {
   wankzvr: ["wankz"],
   "naughty-america-vr": ["naughtyamerica"],
   rentmasseur: ["rentrubber"],
-  "rentmasseur-list": ["rentrubber"],
   masseurfinder: ["mfinder"],
-  "masseurfinder-models": ["mfinder"],
-  "masseurfinder-list": ["mfinder"],
-  "fansly-discover": ["fansly"],
   /** Search category uses suffixed slugs; PNGs use tube basename under `searchEngine/`. */
   "spankbang-search": ["spankbang"],
   "xnxx-search": ["xnxx"],

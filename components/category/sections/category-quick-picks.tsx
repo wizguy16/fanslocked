@@ -36,10 +36,10 @@ export function CategoryQuickPicks({ items, blurbs }: Props) {
             <Link
               key={listing.id}
               {...link}
-              aria-label={`${listing.name}, view site`}
+              aria-label={`${listing.name}. Opens partner site.`}
               className={cn(
                 CATEGORY_GLASS_PANEL,
-                "flex flex-col items-center p-6 text-center no-underline outline-none transition-[border-color,transform] duration-200 hover:border-[rgba(255,140,66,0.45)] focus-visible:ring-2 focus-visible:ring-[#ff8c42]/50",
+                "group flex flex-col items-center p-6 text-center no-underline outline-none transition-[border-color,transform] duration-200 hover:border-[rgba(255,140,66,0.45)] focus-visible:ring-2 focus-visible:ring-[#ff8c42]/50",
                 hasBlurbs && "min-h-[220px]",
                 i === 2 && "border-[rgba(255,140,66,0.35)]",
               )}
@@ -66,11 +66,11 @@ export function CategoryQuickPicks({ items, blurbs }: Props) {
               ) : null}
               <span
                 className={cn(
-                  "text-xs font-semibold uppercase tracking-wide text-[#ffb68d] underline-offset-2 hover:underline",
+                  "inline-flex items-center justify-center rounded-md bg-[#ff8c42] px-4 py-2 text-sm font-semibold text-[#331200] transition-colors group-hover:bg-[#ff9f5a]",
                   hasBlurbs && "mt-auto",
                 )}
               >
-                View site
+                Visit Site
               </span>
             </Link>
           );

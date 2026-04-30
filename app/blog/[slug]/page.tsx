@@ -4,7 +4,7 @@ import { BlogArticleLayout } from "@/components/blog/blog-article-layout";
 import { BlogAutoCategoryLayout } from "@/components/blog/blog-auto-category-layout";
 import { BlogHubLayout } from "@/components/blog/blog-hub-layout";
 import { BLOG_POSTS, getPostBySlug } from "@/lib/blog-posts";
-import { generateCategoryBlog } from "@/lib/blog/generate-category-blog";
+import { resolveCategoryBlogContent } from "@/lib/blog/resolve-category-blog-content";
 import { CATEGORIES } from "@/lib/categories";
 import { getCategoryData } from "@/lib/get-category-data";
 
@@ -30,10 +30,21 @@ export function generateMetadata({ params }: Props): Metadata {
   const data = getCategoryData(params.slug);
   if (!data || data.listings.length === 0) return { title: "Post" };
 
-  const blog = generateCategoryBlog(data.category.label, data.listings);
+  const blogContent = resolveCategoryBlogContent(
+    data.category.slug,
+    data.category.label,
+    data.listings,
+  );
+  if (blogContent.type === "hub") {
+    return {
+      title: blogContent.data.title,
+      description: blogContent.data.excerpt,
+      alternates: { canonical: `/blog/${params.slug}` },
+    };
+  }
   return {
-    title: blog.title,
-    description: blog.description,
+    title: blogContent.data.title,
+    description: blogContent.data.description,
     alternates: { canonical: `/blog/${params.slug}` },
   };
 }
@@ -64,10 +75,27 @@ export default function BlogPostPage({ params }: Props) {
   const data = getCategoryData(params.slug);
   if (!data || data.listings.length === 0) notFound();
 
-  const blog = generateCategoryBlog(data.category.label, data.listings);
+  const blogContent = resolveCategoryBlogContent(
+    data.category.slug,
+    data.category.label,
+    data.listings,
+  );
+
+  if (blogContent.type === "hub") {
+    const topListings = [...data.listings].sort((a, b) => b.rating - a.rating);
+    return (
+      <BlogHubLayout
+        post={blogContent.data}
+        categorySlug={data.category.slug}
+        categoryLabel={data.category.label}
+        topListings={topListings}
+      />
+    );
+  }
+
   return (
     <BlogAutoCategoryLayout
-      blog={blog}
+      blog={blogContent.data}
       categorySlug={data.category.slug}
       categoryLabel={data.category.label}
       listings={data.listings}

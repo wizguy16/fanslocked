@@ -14,9 +14,10 @@ export type CuratedMaleCompanionsRow = {
   type: string;
   description: string;
   preview: string;
+  tier: 1 | 2 | 3;
 };
 
-/** Male escort and male massage directory picks. */
+/** Male escort and male massage directory picks — tier 1 authority, then tier 2 expansion. */
 export const MALE_COMPANIONS_FEATURED: CuratedMaleCompanionsRow[] = [
   {
     name: "RentMen",
@@ -25,6 +26,7 @@ export const MALE_COMPANIONS_FEATURED: CuratedMaleCompanionsRow[] = [
     payout: "Lead Gen",
     difficulty: "Medium",
     type: "Directory",
+    tier: 1,
     description: "Largest male escort directory online.",
     preview:
       "RentMen connects users with male companions worldwide, offering a premium directory experience with high-intent traffic.",
@@ -36,6 +38,7 @@ export const MALE_COMPANIONS_FEATURED: CuratedMaleCompanionsRow[] = [
     payout: "Lead Gen",
     difficulty: "Easy",
     type: "Massage Directory",
+    tier: 1,
     description: "Male massage and companion directory.",
     preview:
       "RentMasseur focuses on professional male massage services, attracting high-quality traffic and strong engagement.",
@@ -47,52 +50,71 @@ export const MALE_COMPANIONS_FEATURED: CuratedMaleCompanionsRow[] = [
     payout: "Lead Gen",
     difficulty: "Easy",
     type: "Massage Directory",
+    tier: 1,
     description: "Find male massage providers worldwide.",
     preview:
       "MasseurFinder helps users discover male massage providers, offering a safer and more structured browsing experience.",
+  },
+  {
+    name: "MintBoys",
+    slug: "mintboys",
+    website: "https://www.mintboys.com",
+    payout: "Lead Gen",
+    difficulty: "Medium",
+    type: "Directory",
+    tier: 2,
+    description: "Male escort directory with international coverage.",
+    preview:
+      "MintBoys provides global listings with strong profile variety and growing user demand.",
+  },
+  {
+    name: "Tryst",
+    slug: "tryst",
+    website: "https://tryst.link",
+    payout: "Lead Gen",
+    difficulty: "Medium",
+    type: "Directory",
+    tier: 2,
+    description: "High-end escort directory with strong trust signals.",
+    preview: "Tryst focuses on premium listings and vetted profiles for higher-quality traffic.",
+  },
+  {
+    name: "Slixa",
+    slug: "slixa",
+    website: "https://www.slixa.com",
+    payout: "Lead Gen",
+    difficulty: "Medium",
+    type: "Directory",
+    tier: 2,
+    description: "Premium escort listing platform.",
+    preview: "Slixa offers polished listings and strong geographic coverage.",
   },
 ];
 
 export const MALE_COMPANIONS_GRID: CuratedMaleCompanionsRow[] = [
   {
-    name: "Masseurfinder Models",
-    slug: "masseurfinder-models",
-    website: "https://masseurfinder.com",
+    name: "SkipTheGames",
+    slug: "skipthegames",
+    website: "https://skipthegames.com",
     payout: "Lead Gen",
     difficulty: "Easy",
-    type: "Directory",
-    description: "Browse verified male massage listings with location-based filtering.",
-    preview: "Explore available profiles and connect with professionals instantly.",
+    type: "Classifieds",
+    tier: 3,
+    description:
+      "Classified ads platform with open listings—wide coverage; users should verify profiles carefully.",
+    preview:
+      "Classified ads platform with open listings. Best used for broad coverage, but users should verify profiles carefully.",
   },
   {
-    name: "RentMen Europe",
-    slug: "rentmen-eu",
-    website: "https://rent.men",
+    name: "Bedpage",
+    slug: "bedpage",
+    website: "https://bedpage.com",
     payout: "Lead Gen",
     difficulty: "Easy",
-    type: "Directory",
-    description: "Browse verified male escort listings across Europe with location-based filtering.",
-    preview: "Find male companions across European cities with ease.",
-  },
-  {
-    name: "RentMasseur Listings",
-    slug: "rentmasseur-list",
-    website: "https://rentmasseur.com",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Browse verified male massage companion profiles with location-based filtering.",
-    preview: "Find massage providers quickly.",
-  },
-  {
-    name: "MasseurFinder Listings",
-    slug: "masseurfinder-list",
-    website: "https://masseurfinder.com",
-    payout: "Lead Gen",
-    difficulty: "Easy",
-    type: "Directory",
-    description: "Browse verified male masseur profiles with location-based filtering.",
-    preview: "Explore masseur listings worldwide.",
+    type: "Classifieds",
+    tier: 3,
+    description: "General classifieds with escort listings.",
+    preview: "Expands reach into lower-intent traffic segments.",
   },
 ];
 
@@ -143,18 +165,28 @@ function buildListing(
   };
 }
 
+function rowScore(
+  row: CuratedMaleCompanionsRow,
+  index: number,
+): { rating: number; popularity_score: number } {
+  const tierBase = {
+    1: 4.9,
+    2: 4.7,
+    3: 4.4,
+  }[row.tier];
+  const rating = Math.round((tierBase - index * 0.02) * 10) / 10;
+  const popularity_score = (row.tier === 1 ? 100 : row.tier === 2 ? 92 : 84) - index;
+  return { rating, popularity_score };
+}
+
 export function buildCuratedMaleCompanionsListings(cat: CategoryDef): Listing[] {
-  const featured = MALE_COMPANIONS_FEATURED.map((row, i) =>
-    buildListing(row, cat, Math.round((4.95 - i * 0.04) * 10) / 10, 96 - i, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`),
-  );
-  const grid = MALE_COMPANIONS_GRID.map((row, i) =>
-    buildListing(
-      row,
-      cat,
-      Math.round((4.62 - i * 0.02) * 10) / 10,
-      88 - i,
-      `2025-07-${String((i % 28) + 1).padStart(2, "0")}`,
-    ),
-  );
+  const featured = MALE_COMPANIONS_FEATURED.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-08-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
+  const grid = MALE_COMPANIONS_GRID.map((row, i) => {
+    const { rating, popularity_score } = rowScore(row, i);
+    return buildListing(row, cat, rating, popularity_score, `2025-07-${String((i % 28) + 1).padStart(2, "0")}`);
+  });
   return [...featured, ...grid];
 }
