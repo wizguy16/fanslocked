@@ -6,8 +6,11 @@ import { cn } from "@/lib/utils";
 const center = [
   { href: "/explore", label: "Explore" },
   { href: "/categories", label: "Categories" },
-  { href: "/explore", label: "Trending" },
+  { href: "/explore?sort=trending", label: "Trending" },
 ];
+
+/** Toggle account + overflow menu (login, submit site, ads, etc.). */
+const showUserControls = false;
 
 export function FlNav({ scrolled = false }: { scrolled?: boolean }) {
   return (
@@ -48,31 +51,37 @@ export function FlNav({ scrolled = false }: { scrolled?: boolean }) {
         </nav>
 
         <div className="flex items-center justify-end gap-2">
-          <button
-            type="button"
-            aria-label="Account"
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.04)] bg-[#11131A] text-[#A0A6B1] transition hover:border-[rgba(255,255,255,0.08)] hover:text-white"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path
-                d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20a8 8 0 0116 0"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            aria-label="More"
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.04)] bg-[#11131A] text-[#A0A6B1] transition hover:border-[rgba(255,255,255,0.08)] hover:text-white"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <circle cx="6" cy="12" r="1.5" fill="currentColor" />
-              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-              <circle cx="18" cy="12" r="1.5" fill="currentColor" />
-            </svg>
-          </button>
+          {showUserControls ? (
+            <>
+              <button
+                type="button"
+                aria-label="Account"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.04)] bg-[#11131A] text-[#A0A6B1] transition hover:border-[rgba(255,255,255,0.08)] hover:text-white"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path
+                    d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20a8 8 0 0116 0"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                aria-label="More"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.04)] bg-[#11131A] text-[#A0A6B1] transition hover:border-[rgba(255,255,255,0.08)] hover:text-white"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <circle cx="6" cy="12" r="1.5" fill="currentColor" />
+                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                  <circle cx="18" cy="12" r="1.5" fill="currentColor" />
+                </svg>
+              </button>
+            </>
+          ) : (
+            <span className="inline-block h-9 w-20 shrink-0" aria-hidden />
+          )}
         </div>
       </div>
     </header>

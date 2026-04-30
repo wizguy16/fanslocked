@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CategoryDef } from "@/lib/categories";
+import { getHeroCTA } from "@/lib/get-hero-cta";
 import { CategoryFinalCta } from "@/components/category/sections/category-final-cta";
 import { CategoryPrestigeListings } from "@/components/category/category-prestige-listings";
 import { CategorySeoBlock } from "@/components/category/sections/category-seo-block";
@@ -32,12 +33,6 @@ function heroBlurb(description: string): string {
 
 function heroTitle(label: string): string {
   return /^best\s/i.test(label) ? label : `Best ${label}`;
-}
-
-function heroListingsCtaLabel(slug: string): string {
-  if (slug === "sex-chat") return "Start Chatting Now";
-  if (slug === "live-cams") return "Watch Live Now";
-  return "View Top Picks";
 }
 
 /**
@@ -78,7 +73,9 @@ export function CategoryPrestigeShell({
   const year = new Date().getFullYear();
   const guidePost = getGuidePostForCategory(category.slug) ?? null;
   const defaultH1 = heroTitle(category.label);
-  const heroCtaLabel = heroListingsCtaLabel(category.slug);
+  const heroCta = getHeroCTA(`/categories/${category.slug}`, {
+    slug: category.slug,
+  });
 
   return (
     <div className="min-h-[100dvh] bg-[#121318] text-[#e3e1e9]">
@@ -135,13 +132,19 @@ export function CategoryPrestigeShell({
                 <p>{editorial?.heroDescription ?? heroBlurb(category.description)}</p>
               )}
             </div>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <a
-                href="#category-listings"
+                href={heroCta.primaryHref}
                 className="rounded-lg bg-[#ff8c42] px-6 py-3 text-sm font-bold uppercase tracking-wide text-[#331200] transition-colors hover:bg-[#ff9f5a]"
               >
-                {heroCtaLabel}
+                {heroCta.primary}
               </a>
+              <Link
+                href={heroCta.secondaryHref}
+                className="rounded-lg border border-[#ff8c42] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-[#ffb68d] transition-colors hover:bg-[#ff8c42] hover:text-[#331200]"
+              >
+                {heroCta.secondary}
+              </Link>
             </div>
           </header>
         </div>

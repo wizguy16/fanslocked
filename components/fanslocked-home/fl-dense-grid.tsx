@@ -17,9 +17,18 @@ type Props = {
   eager?: boolean;
   /** First card shows this rank (continues from featured sections). */
   rankOffset?: number;
+  /** Subtle inset ring on the first row (e.g. trending discovery). */
+  highlightFirstRow?: boolean;
 };
 
-export function FlDenseGrid({ items, eager = false, rankOffset }: Props) {
+const FIRST_ROW_COUNT = 4;
+
+export function FlDenseGrid({
+  items,
+  eager = false,
+  rankOffset,
+  highlightFirstRow = false,
+}: Props) {
   const [visible, setVisible] = useState(() =>
     eager ? items.length : Math.min(BATCH, items.length),
   );
@@ -60,7 +69,11 @@ export function FlDenseGrid({ items, eager = false, rankOffset }: Props) {
             <Reveal
               key={l.id}
               delay={Math.min(i * 0.03, 0.45)}
-              className="min-w-0"
+              className={
+                highlightFirstRow && i < FIRST_ROW_COUNT
+                  ? "min-w-0 ring-1 ring-inset ring-[#FF7A00]/20 ring-offset-0 ring-offset-[#0A0B10] transition-shadow duration-500"
+                  : "min-w-0"
+              }
             >
               <FlCardDense
                 listing={l}

@@ -2,16 +2,11 @@
 
 import { usePathname } from "next/navigation";
 import { Navbar } from "@/components/layout/navbar";
+import { usesGlobalSiteNavbar } from "@/lib/site-layout";
 
-/** Homepage ships its own chrome; other routes keep the shared navbar. */
+/** Homepage, Explore, and Fetish hubs ship their own chrome; others use the shared navbar. */
 export function ConditionalNavbar() {
-  const pathname = usePathname();
-  if (
-    pathname === "/" ||
-    pathname === "/explore" ||
-    pathname === "/categories/fetish" ||
-    pathname.startsWith("/fetish/")
-  )
-    return null;
+  const pathname = usePathname() ?? "/";
+  if (!usesGlobalSiteNavbar(pathname)) return null;
   return <Navbar />;
 }

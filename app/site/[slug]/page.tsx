@@ -10,6 +10,7 @@ import { getSiteUrl } from "@/lib/site";
 import { Badge } from "@/components/ui/badge";
 import { AffiliateLink } from "@/components/ui/affiliate-link";
 import { clampTagline } from "@/lib/utils";
+import { getHeroCTA } from "@/lib/get-hero-cta";
 import { DenseDiscoveryCard } from "@/components/cards/dense-discovery-card";
 import { ListingLogo } from "@/components/shared/listing-logo";
 
@@ -65,6 +66,9 @@ export default function SitePage({ params }: Props) {
   const listing = getListingBySlug(params.slug);
   if (!listing) notFound();
   const similar = getSimilar(listing, 12);
+  const heroCta = getHeroCTA(`/site/${listing.slug}`, {
+    siteUrl: listing.affiliate_url,
+  });
 
   return (
     <>
@@ -115,8 +119,14 @@ export default function SitePage({ params }: Props) {
                     href={listing.affiliate_url}
                     className="px-2 py-1 text-[10px]"
                   >
-                    Visit (affiliate)
+                    {heroCta.primary}
                   </AffiliateLink>
+                  <Link
+                    href={heroCta.secondaryHref}
+                    className="inline-flex items-center rounded-2xl border border-white/10 px-2 py-1 text-[10px] font-medium text-slate-200 hover:border-amber-500/35"
+                  >
+                    {heroCta.secondary}
+                  </Link>
                   <a
                     href={listing.website_url}
                     target="_blank"

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "@/styles/globals.css";
+import { LayoutBreadcrumbs } from "@/components/navigation/breadcrumbs";
 import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
 import { ConditionalFooter } from "@/components/layout/conditional-footer";
 import { Newsletter } from "@/components/sections/newsletter";
@@ -76,6 +77,7 @@ export default function RootLayout({
         <AgeGate />
         <ConditionalNavbar />
         <main id="main-content" className="flex-1">
+          <LayoutBreadcrumbs />
           {children}
         </main>
         <Newsletter />

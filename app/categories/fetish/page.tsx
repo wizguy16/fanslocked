@@ -7,6 +7,7 @@ import {
 } from "@/lib/fetish-page-groupings";
 import { getFetishHubSectionCopy } from "@/lib/fetish-hub-routes";
 import { MainHeader } from "@/components/layout/MainHeader";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturedPicksRow } from "@/components/sections/FeaturedPicksRow";
 import { CategorySection } from "@/components/sections/CategorySection";
@@ -54,6 +55,7 @@ export default function FetishLandingPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] antialiased">
       <MainHeader />
+      <Breadcrumbs containerClassName="max-w-[1280px] px-4 md:px-8" />
       <HeroSection title={heroTitle} subtitle={HERO_SUBTITLE} year={year} />
       <FetishExploreCategoriesIntro />
       <FeaturedPicksRow items={featured} />

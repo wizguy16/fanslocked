@@ -18,6 +18,7 @@ import {
   FEMDOM_WHO_FOR,
 } from "@/lib/femdom-ranking-content";
 import { MainHeader } from "@/components/layout/MainHeader";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { SiteCard } from "@/components/ui/SiteCard";
 import { CTASection } from "@/components/sections/CTASection";
 import { FemdomRankingTopPick } from "@/components/fetish/femdom-ranking-top-pick";
@@ -61,6 +62,7 @@ export default function FemdomRankingPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] antialiased">
       <MainHeader />
+      <Breadcrumbs containerClassName="max-w-[1280px] px-4 md:px-8" />
       <main>
         <section
           id="femdom-hero"

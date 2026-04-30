@@ -8,6 +8,7 @@ import {
   type FetishHubSlug,
 } from "@/lib/fetish-hub-routes";
 import { MainHeader } from "@/components/layout/MainHeader";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 
 type Props = { params: { slug: string } };
 
@@ -35,6 +36,7 @@ export default function FetishHubPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] antialiased">
       <MainHeader />
+      <Breadcrumbs containerClassName="max-w-[1280px] px-4 md:px-8" />
       <main className="mx-auto max-w-[1280px] px-4 py-12 md:px-8 md:py-16">
         <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-[#a3a3a3]">
           <Link
