@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
-import { CategoryIcon } from "@/components/icons/category-icon";
+import { CategoriesLiveCamsWidgetTrio } from "@/components/categories/categories-live-cams-widget-trio";
+import { CategoriesRailHeading } from "@/components/categories/categories-rail-heading";
+import { CategoryDirectorySpotlight } from "@/components/categories/category-directory-spotlight";
 import { listings } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -18,48 +19,17 @@ function countInCategory(slug: string) {
 export default function CategoriesPage() {
   return (
     <div className="px-3 py-3 sm:px-4 md:px-6">
-      <div className="mx-auto max-w-6xl">
-        <h1 className="text-sm font-bold text-white">
-          Categories · {CATEGORIES.length}
-        </h1>
-        <Link
-          href="/categories/fetish"
-          className="mt-3 block rounded-md border border-amber-500/40 bg-gradient-to-br from-amber-500/15 to-white/[0.03] p-3 no-underline transition hover:border-amber-500/60 hover:from-amber-500/20"
-        >
-          <p className="text-[11px] font-bold uppercase tracking-wide text-amber-400">
-            Featured hub
-          </p>
-          <p className="mt-1 text-sm font-bold text-white">
-            Fetish &amp; BDSM Sites
-          </p>
-          <p className="mt-1 text-[11px] leading-snug text-slate-400">
-            Explore curated fetish platforms, categories, and niche content hubs
-          </p>
-        </Link>
-        <ul className="mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="mx-auto max-w-7xl">
+        <CategoriesLiveCamsWidgetTrio />
+        <CategoriesRailHeading as="h1" className="mt-8">
+          Categories
+        </CategoriesRailHeading>
+        <ul className="mt-5 grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {CATEGORIES.map((c) => {
             const n = countInCategory(c.slug);
             return (
               <li key={c.slug}>
-                <Link
-                  href={`/categories/${c.slug}`}
-                  className="group flex h-[100px] max-h-[100px] flex-col justify-between overflow-hidden rounded-md border border-white/10 bg-white/[0.02] p-1.5 transition hover:border-amber-500/35"
-                >
-                  <div className="flex items-start justify-between gap-1">
-                    <span
-                      className="inline-flex text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]"
-                      aria-hidden
-                    >
-                      <CategoryIcon slug={c.slug} size={16} />
-                    </span>
-                    <span className="rounded bg-white/10 px-1 py-px text-[8px] font-semibold text-slate-400">
-                      {n}
-                    </span>
-                  </div>
-                  <span className="line-clamp-2 text-left text-[10px] font-semibold leading-tight text-slate-200">
-                    {c.label}
-                  </span>
-                </Link>
+                <CategoryDirectorySpotlight category={c} listingCount={n} />
               </li>
             );
           })}
