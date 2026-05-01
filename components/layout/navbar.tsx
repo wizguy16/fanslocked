@@ -1,45 +1,34 @@
-import Link from "next/link";
+import { NavbarClient, type NavbarListingThumb } from "@/components/layout/navbar-client";
+import { getMegaMenuCategoryTiles } from "@/lib/mega-menu-category-tiles";
+import {
+  getTopPicks,
+  getTrendingByScore,
+} from "@/lib/data";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/explore", label: "Explore" },
-  { href: "/categories", label: "Categories" },
-  { href: "/categories/fetish", label: "Fetish" },
-  { href: "/blog", label: "Guides" },
-  { href: "/disclosure", label: "Disclosure" },
-];
+function toThumbRow(r: {
+  slug: string;
+  name: string;
+  image: string;
+  screenshot?: string;
+}): NavbarListingThumb {
+  return {
+    slug: r.slug,
+    name: r.name,
+    image: r.image,
+    screenshot: r.screenshot,
+  };
+}
 
 export function Navbar() {
+  const topPicks = getTopPicks(4).map(toThumbRow);
+  const popular = getTrendingByScore(4).map(toThumbRow);
+  const megaTiles = getMegaMenuCategoryTiles();
+
   return (
-    <header className="sticky top-0 z-[100] border-b border-white/[0.06] bg-[#0A0B10]/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-1.5 sm:px-4 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold tracking-tight text-white transition hover:text-highlight"
-        >
-          <span
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground"
-            aria-hidden
-          >
-            FL
-          </span>
-          <span className="text-sm sm:text-base">FansLocked</span>
-        </Link>
-        <nav
-          className="flex items-center gap-0.5 overflow-x-auto sm:gap-1"
-          aria-label="Primary"
-        >
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="whitespace-nowrap rounded-lg px-2 py-1.5 text-[11px] font-medium text-slate-400 transition hover:bg-white/[0.05] hover:text-white sm:px-3 sm:text-sm"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </header>
+    <NavbarClient
+      topPicks={topPicks}
+      popular={popular}
+      megaTiles={megaTiles}
+    />
   );
 }

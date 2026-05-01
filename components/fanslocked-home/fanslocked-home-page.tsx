@@ -17,6 +17,7 @@ import {
 } from "@/lib/home-intent";
 import { CATEGORIES } from "@/lib/categories";
 import { getCategoryBySlug, getListingsByCategorySlug } from "@/lib/data";
+import { getFlNavMegaMenuData } from "@/lib/fl-nav-mega-menu-data";
 import { FlNav } from "@/components/fanslocked-home/fl-nav";
 import { FlHero } from "@/components/fanslocked-home/fl-hero";
 import { FlCategoryStrip } from "@/components/fanslocked-home/fl-category-strip";
@@ -130,9 +131,11 @@ export function FanslockedHomePage() {
 
   const { slug, label, picks, empty } = sectionBlock;
 
+  const megaMenuData = useMemo(() => getFlNavMegaMenuData(), []);
+
   return (
     <div className="min-h-[100dvh] bg-[#0A0B10] text-white">
-      <FlNav scrolled={scrolled} />
+      <FlNav scrolled={scrolled} megaMenuData={megaMenuData} />
       <FlHero
         activeIntent={activeIntent}
         heroKeyword={heroKeyword}

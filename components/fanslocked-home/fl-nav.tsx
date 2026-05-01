@@ -1,22 +1,36 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
+import {
+  CategoriesMegaChevron,
+  CategoriesMegaMenuPanel,
+  useCategoriesMegaMenu,
+} from "@/components/layout/categories-mega-menu";
+import type { FlNavMegaMenuData } from "@/lib/fl-nav-mega-menu-data";
 import { cn } from "@/lib/utils";
 
-const center = [
-  { href: "/explore", label: "Explore" },
-  { href: "/categories", label: "Categories" },
-  { href: "/explore?sort=trending", label: "Trending" },
-];
+export type { FlNavMegaMenuData };
 
 /** Toggle account + overflow menu (login, submit site, ads, etc.). */
 const showUserControls = false;
 
-export function FlNav({ scrolled = false }: { scrolled?: boolean }) {
+export function FlNav({
+  scrolled = false,
+  megaMenuData,
+}: {
+  scrolled?: boolean;
+  megaMenuData: FlNavMegaMenuData;
+}) {
+  const headerRef = useRef<HTMLElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const mega = useCategoriesMegaMenu(headerRef, btnRef);
+
   return (
     <header
+      ref={headerRef}
       className={cn(
-        "sticky top-0 z-50 h-16 shrink-0 border-b border-[rgba(255,255,255,0.04)] bg-[#0A0B10] px-6 transition-[box-shadow,background-color] duration-300 ease-out",
+        "relative sticky top-0 z-50 h-16 shrink-0 border-b border-[rgba(255,255,255,0.04)] bg-[#0A0B10] px-6 transition-[box-shadow,background-color] duration-300 ease-out",
         scrolled &&
           "shadow-[0_10px_40px_-18px_rgba(0,0,0,0.85)] bg-[#0A0B10]/88 backdrop-blur-md",
       )}
@@ -39,15 +53,40 @@ export function FlNav({ scrolled = false }: { scrolled?: boolean }) {
           className="flex items-center justify-center gap-4 text-xs font-medium md:gap-8 md:text-sm"
           aria-label="Primary"
         >
-          {center.map((l) => (
-            <Link
-              key={l.label}
-              href={l.href}
-              className="whitespace-nowrap text-[#A0A6B1] transition-colors duration-200 hover:text-white"
-            >
-              {l.label}
-            </Link>
-          ))}
+          <Link
+            href="/explore"
+            className="whitespace-nowrap text-[#A0A6B1] transition-colors duration-200 hover:text-white"
+          >
+            Explore
+          </Link>
+          <button
+            id={mega.triggerId}
+            ref={btnRef}
+            type="button"
+            aria-expanded={mega.megaOpen}
+            aria-controls={mega.panelId}
+            aria-haspopup="menu"
+            onClick={(e) => {
+              e.preventDefault();
+              mega.toggleMegaMenu();
+            }}
+            onMouseEnter={mega.onTriggerMouseEnter}
+            onMouseLeave={mega.onTriggerMouseLeave}
+            onKeyDown={mega.onCategoriesKeyDown}
+            className={cn(
+              "inline-flex items-center gap-1 whitespace-nowrap text-[#A0A6B1] transition-colors duration-200 hover:text-white",
+              mega.megaOpen && "text-white",
+            )}
+          >
+            Categories
+            <CategoriesMegaChevron open={mega.megaOpen} />
+          </button>
+          <Link
+            href="/explore?sort=trending"
+            className="whitespace-nowrap text-[#A0A6B1] transition-colors duration-200 hover:text-white"
+          >
+            Trending
+          </Link>
         </nav>
 
         <div className="flex items-center justify-end gap-2">
@@ -84,6 +123,19 @@ export function FlNav({ scrolled = false }: { scrolled?: boolean }) {
           )}
         </div>
       </div>
+
+      <CategoriesMegaMenuPanel
+        megaOpen={mega.megaOpen}
+        panelId={mega.panelId}
+        triggerId={mega.triggerId}
+        panelRef={mega.panelRef}
+        topPicks={megaMenuData.topPicks}
+        popular={megaMenuData.popular}
+        megaTiles={megaMenuData.megaTiles}
+        closeMega={mega.closeMega}
+        cancelHoverClose={mega.cancelHoverClose}
+        scheduleHoverClose={mega.scheduleHoverClose}
+      />
     </header>
   );
 }

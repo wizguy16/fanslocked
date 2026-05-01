@@ -321,17 +321,32 @@ function buildListing(
   added_date: string,
 ): Listing {
   const description = clampTagline(row.preview, 160);
-  const review = `${row.name} is listed in our ${cat.label} set for CPA-friendly dating traffic: ${row.preview} (${row.type} · ${row.payout} · ${row.difficulty}).`;
-  const pros = [
-    "Strong CPA and trial funnels common on adult dating offers",
-    "Broad GEO coverage when creatives stay compliant and transparent",
-    "Fast signup flows that suit paid social and push-style traffic",
-  ];
-  const cons = [
-    "Program caps and scrub rules vary — verify network terms weekly",
-    "Disclosure and age-gating requirements are strict in many regions",
-    "Competitive placements — differentiate with angle-specific landers",
-  ];
+  const isTinder = row.slug === "tinder";
+  const review = isTinder
+    ? `Tinder has stayed dominant in casual dating by iterating on the interface and matching experience. The core swipe pattern is still one of the simplest ways to cycle through people quickly, and the free tier stays usable for light browsing. Paid tiers—Plus, Gold, and Platinum—mostly buy reach, control, and convenience rather than changing who is on the app.\n\nTechnically, the app is responsive and location-aware. The tradeoff is saturation: in big cities, a generic profile gets buried fast, so photos, prompts, and consistency matter more than newcomers expect.`
+    : `${row.name} is positioned in our ${cat.label.toLowerCase()} set for people who want ${row.type}-style connections. ${row.preview} Onboarding tends to feel ${row.difficulty.toLowerCase()}, but outcomes still hinge on your market, how often you use the product, and how clearly you signal intent.`;
+  const pros = isTinder
+    ? [
+        "Very large global audience, so new faces appear often",
+        "Polished mobile UX built around quick gestures and low friction",
+        "Includes safety-oriented tools such as photo verification (still use normal caution)",
+      ]
+    : [
+        "Typically large or active pools depending on the brand and region",
+        "Mobile-first flows that prioritize speed over long questionnaires",
+        "Worth comparing built-in safety and reporting before you invest time",
+      ];
+  const cons = isTinder
+    ? [
+        "Crowded feeds in major cities; free accounts can feel invisible without boosts",
+        "Engagement drops can quietly hurt how often you are shown",
+        "Depth-first daters will find filters and intent signals limited on the base plan",
+      ]
+    : [
+        "Attention is competitive; free tiers often throttle visibility or features",
+        "Match quality swings with local volume and how honestly people present themselves",
+        "Serious relationship seekers may outgrow the default matching style quickly",
+      ];
 
   return {
     id: `listing-hookup-${row.slug}`,

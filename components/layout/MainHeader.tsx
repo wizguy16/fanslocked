@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FetishLogoMark } from "@/components/fetish/fetish-logo-mark";
 
 const nav = [
-  { href: "/categories", label: "Rankings" },
+  { href: "/explore", label: "Rankings" },
   { href: "/categories/fetish", label: "Fetish" },
   { href: "/explore", label: "Explore" },
   { href: "/blog", label: "Articles" },
@@ -46,7 +46,7 @@ export function MainHeader() {
             Sign in
           </Link>
           <Link
-            href="/categories"
+            href="/explore"
             className="rounded-lg bg-[#d97706] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#0a0a0a] transition hover:bg-[#e88e12] md:px-5 md:text-[12px]"
           >
             Browse categories

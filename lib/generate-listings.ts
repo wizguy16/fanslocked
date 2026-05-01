@@ -133,7 +133,7 @@ const PROS_POOL = [
   "Strong mobile web experience",
   "Useful filters and saved searches",
   "Regular catalog updates",
-  "Transparent affiliate disclosures on-site",
+  "Clear sponsored-link labeling on-site",
   "Helpful onboarding and tooltips",
   "Multiple bitrate ladders for slower networks",
   "Optional downloads where licensing allows",
@@ -382,7 +382,7 @@ export function generateAllListings(): Listing[] {
       const name = `${PREFIX[Math.floor(rand() * PREFIX.length)]}${MID[Math.floor(rand() * MID.length)]}${SUFFIX[Math.floor(rand() * SUFFIX.length)]}`;
       const rating = Math.round((3.6 + rand() * 1.35) * 10) / 10;
       const popularity_score = Math.round(40 + rand() * 58);
-      const description = `Editor-tested ${cat.label.toLowerCase()} pick with strong UX, fair monetization, and reliable playback.`;
+      const description = `Editor-tested ${cat.label.toLowerCase()} pick with strong UX, straightforward billing, and reliable playback.`;
       const review = buildReview(name, cat.label, rand);
       const pros = pickUnique(rand, PROS_POOL, 3);
       const cons = pickUnique(rand, CONS_POOL, 3);

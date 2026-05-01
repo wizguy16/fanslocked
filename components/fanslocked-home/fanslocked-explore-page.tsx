@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 import type { Listing } from "@/types/listing";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { FlNav } from "@/components/fanslocked-home/fl-nav";
+import { getFlNavMegaMenuData } from "@/lib/fl-nav-mega-menu-data";
 import { FlDenseGrid } from "@/components/fanslocked-home/fl-dense-grid";
 
 type SortMode = "default" | "trending";
@@ -34,10 +36,11 @@ export function FanslockedExplorePage({
   nextHref,
 }: Props) {
   const trending = sortMode === "trending";
+  const megaMenuData = useMemo(() => getFlNavMegaMenuData(), []);
 
   return (
     <div className="min-h-[100dvh] overflow-x-hidden bg-[#0A0B10] text-white">
-      <FlNav />
+      <FlNav megaMenuData={megaMenuData} />
       <Breadcrumbs containerClassName="max-w-[1600px] px-6" />
 
       {/* Hero — matches reference: radial glow, watermark, centered stack */}
@@ -72,7 +75,7 @@ export function FanslockedExplorePage({
               Start Exploring
             </Link>
             <Link
-              href="/categories"
+              href="/explore"
               className="inline-flex w-full min-w-[200px] items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] px-10 py-4 text-base font-semibold text-white backdrop-blur-md transition hover:bg-white/10 sm:w-auto"
             >
               View All Platforms
