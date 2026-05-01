@@ -3,6 +3,7 @@ import { getMegaMenuCategoryTiles } from "@/lib/mega-menu-category-tiles";
 import {
   getTopPicks,
   getTrendingByScore,
+  listings,
 } from "@/lib/data";
 
 function toThumbRow(r: {
@@ -19,6 +20,12 @@ function toThumbRow(r: {
   };
 }
 
+const siteSearchListings = listings.map((l) => ({
+  name: l.name,
+  slug: l.slug,
+  category: l.categoryLabel,
+}));
+
 export function Navbar() {
   const topPicks = getTopPicks(4).map(toThumbRow);
   const popular = getTrendingByScore(4).map(toThumbRow);
@@ -29,6 +36,7 @@ export function Navbar() {
       topPicks={topPicks}
       popular={popular}
       megaTiles={megaTiles}
+      searchListings={siteSearchListings}
     />
   );
 }

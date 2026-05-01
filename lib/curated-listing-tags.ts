@@ -9,6 +9,7 @@ const KEY_TAGS: Record<string, string> = {
   "premium-porn::evil-angel": "Niche",
   "premium-porn::deeper": "Studio",
   "fan-subscription-platforms::manyvids": "Marketplace",
+  "fan-subscription-platforms::fanspicy": "Adult-friendly",
   "fan-subscription-platforms::fanvue": "AI tools",
   "amateur::manyvids": "Marketplace",
   "amateur::fansly": "Creator",
@@ -44,11 +45,13 @@ const KEY_TAGS: Record<string, string> = {
   "gaming::hentaiheroes": "RPG",
   "ai-generated::spicychat": "Community",
   "ai-generated::crushon-ai": "Community",
+  "ai-generated::goloveai": "Companion",
   "fetish-bdsm::kink": "Studio",
   "fetish-bdsm::clips4sale-fetish": "Clips",
   "male-companions::rentmen": "Directory",
   "escort-directories::massage-republic": "Directory",
   "escort-directories::slixa": "Premium",
+  "hentai-anime::hentai-xxx": "Streaming",
 };
 
 const DEFAULT_TAG: Record<string, string> = {

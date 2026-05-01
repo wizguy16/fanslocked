@@ -197,16 +197,17 @@ export const AI_GENERATED_GRID: CuratedAIGeneratedRow[] = [
       "LustGF AI offers strong engagement features that help convert and retain users.",
   },
   {
-    name: "FeelReal",
-    slug: "feelreal",
-    website: "https://feelreal.ai",
+    name: "GoLoveAI",
+    slug: "goloveai",
+    website: "https://goloveai.com",
     payout: "Recurring",
     difficulty: "Easy",
     type: "AI Companion",
     tier: 2,
-    description: "Immersive AI experience platform.",
+    description:
+      "Adult-oriented AI companion platform focused on immersive chat, customizable personalities, and intimate virtual interactions.",
     preview:
-      "FeelReal focuses on immersive interaction that increases user retention and spending.",
+      "GoLoveAI allows users to create and interact with AI companions tailored to specific preferences, including personality, tone, and engagement style. Designed for adult audiences, it emphasizes realism, emotional connection, and interactive experiences that go beyond basic chatbot functionality.",
   },
   {
     name: "Undress AI",

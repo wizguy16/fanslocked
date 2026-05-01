@@ -11,7 +11,10 @@ export const CATEGORY_SLUG_TO_SITES_FOLDER: Record<string, string> = {
   "fan-subscription-platforms": "creator",
   amateur: "amateur",
   "ai-generated": "ai",
+  /** Matches `public/images/sites/anime/` + manifest key `anime`. */
+  "hentai-anime": "anime",
   hookup: "hookup",
+  "fetish-bdsm": "fetish",
   "sex-chat": "sex-chat",
   gaming: "adultgames",
 };

@@ -107,15 +107,15 @@ export const HENTAI_FEATURED: CuratedHentaiRow[] = [
       "Hentaistream provides a wide range of anime porn series with easy browsing and streaming.",
   },
   {
-    name: "HentaiWorld",
-    slug: "hentaiworld",
-    website: "https://hentaiworld.tv",
+    name: "Hentia.xxx",
+    slug: "hentai-xxx",
+    website: "https://hentia.xxx",
     payout: "Medium",
     difficulty: "Easy",
     type: "streaming",
     tier: 2,
     preview:
-      "HentaiWorld offers categorized anime porn content with frequent updates and trending videos.",
+      "Adult anime content platform featuring curated releases, categorized scenes, and regularly updated hentai video collections. Hentia.xxx provides a wide range of animated adult content organized by categories, trends, and new releases. Built for users who want quick access to updated hentai videos, it emphasizes consistent uploads, easy browsing, and niche-specific discovery.",
   },
   {
     name: "E-Hentai",

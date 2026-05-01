@@ -14,8 +14,11 @@
     "ai": {
       "screenshot": {
         "candyai": "/images/sites/ai/candyai.png",
+        "goloveai": "/images/sites/ai/goloveai.png",
         "joiai": "/images/sites/ai/joiai.png",
         "juicychatai": "/images/sites/ai/juicychatai.png",
+        "lustgf-ai": "/images/sites/ai/lustgf-ai.png",
+        "nemora-ai": "/images/sites/ai/nemora-ai.png",
         "secretsai": "/images/sites/ai/secretsai.png",
         "trynectar": "/images/sites/ai/trynectar.png"
       },
@@ -33,11 +36,22 @@
       },
       "logo": {}
     },
+    "anime": {
+      "screenshot": {
+        "hentai-xxx": "/images/sites/anime/hentai-xxx.png",
+        "hentai2read": "/images/sites/anime/hentai2read.png",
+        "hentaifox": "/images/sites/anime/hentaifox.png",
+        "hentaistream": "/images/sites/anime/hentaistream.png",
+        "nhentai": "/images/sites/anime/nhentai.png"
+      },
+      "logo": {}
+    },
     "creator": {
       "screenshot": {
         "admireme": "/images/sites/creator/admireme.png",
         "fancentro": "/images/sites/creator/fancentro.png",
         "fansly": "/images/sites/creator/fansly.png",
+        "fanspicy": "/images/sites/creator/fanspicy.png",
         "justforfans": "/images/sites/creator/justforfans.png",
         "loyalfans": "/images/sites/creator/loyalfans.png"
       },
@@ -53,10 +67,13 @@
     "fetish": {
       "screenshot": {
         "alt": "/images/sites/fetish/alt.png",
+        "clips4sale-fetish": "/images/sites/fetish/clips4sale-fetish.png",
         "fetishnetwork": "/images/sites/fetish/fetishnetwork.png",
+        "iwantclips-fetish": "/images/sites/fetish/iwantclips-fetish.png",
         "kink": "/images/sites/fetish/kink.png",
         "loyalfans-fetish": "/images/sites/fetish/loyalfans-fetish.png",
         "loyalfans": "/images/sites/fetish/loyalfans.png",
+        "manyvids-fetish": "/images/sites/fetish/manyvids-fetish.png",
         "sexlikereal-fetish": "/images/sites/fetish/sexlikereal-fetish.png",
         "vrporn-fetish": "/images/sites/fetish/vrporn-fetish.png"
       },
@@ -112,10 +129,13 @@
     },
     "premium": {
       "screenshot": {
+        "adulttime": "/images/sites/premium/adulttime.png",
         "blacked": "/images/sites/premium/blacked.png",
+        "digital-playground": "/images/sites/premium/digital-playground.png",
         "mylf": "/images/sites/premium/mylf.png",
         "naughtyamerica": "/images/sites/premium/naughtyamerica.png",
         "realityking": "/images/sites/premium/realityking.png",
+        "teamskeet": "/images/sites/premium/teamskeet.png",
         "vixen": "/images/sites/premium/vixen.png"
       },
       "logo": {}
@@ -148,6 +168,7 @@
       "screenshot": {
         "badionk": "/images/sites/virtual/badionk.png",
         "naughtyamerica": "/images/sites/virtual/naughtyamerica.png",
+        "povr": "/images/sites/virtual/povr.png",
         "stripchat-vr": "/images/sites/virtual/stripchat-vr.png",
         "taboo": "/images/sites/virtual/taboo.png",
         "virtualreal": "/images/sites/virtual/virtualreal.png",

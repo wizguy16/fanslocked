@@ -10,6 +10,7 @@ import {
   type MegaMenuListingThumb,
 } from "@/components/layout/categories-mega-menu";
 import { cn } from "@/lib/utils";
+import SiteSearch from "@/components/search/site-search";
 
 export type NavbarListingThumb = MegaMenuListingThumb;
 
@@ -26,13 +27,25 @@ const NAV_ITEMS: NavItem[] = [
   { kind: "link", href: "/disclosure", label: "Disclosure" },
 ];
 
+type SearchListing = {
+  name: string;
+  slug: string;
+  category: string;
+};
+
 type Props = {
   topPicks: NavbarListingThumb[];
   popular: NavbarListingThumb[];
   megaTiles: MegaMenuCategoryTile[];
+  searchListings: SearchListing[];
 };
 
-export function NavbarClient({ topPicks, popular, megaTiles }: Props) {
+export function NavbarClient({
+  topPicks,
+  popular,
+  megaTiles,
+  searchListings,
+}: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
   const mega = useCategoriesMegaMenu(rootRef, btnRef);
@@ -49,7 +62,7 @@ export function NavbarClient({ topPicks, popular, megaTiles }: Props) {
         }}
         aria-hidden
       />
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-1.5 sm:px-4 md:px-6">
+      <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-1.5 sm:gap-3 sm:px-4 md:px-6">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2 font-semibold tracking-tight text-white transition hover:text-[#00bcd4]"
@@ -63,7 +76,11 @@ export function NavbarClient({ topPicks, popular, megaTiles }: Props) {
           <span className="text-sm sm:text-base">FansLocked</span>
         </Link>
 
-        <div className="relative flex min-w-0 flex-1 justify-end">
+        <div className="mx-auto hidden min-w-0 max-w-md flex-1 px-1 md:block">
+          <SiteSearch listings={searchListings} className="max-w-none" />
+        </div>
+
+        <div className="relative flex min-w-0 flex-1 justify-end md:flex-none">
           <nav
             className="flex items-center gap-0.5 overflow-x-auto sm:gap-1"
             aria-label="Primary"
@@ -120,6 +137,10 @@ export function NavbarClient({ topPicks, popular, megaTiles }: Props) {
             })}
           </nav>
         </div>
+      </div>
+
+      <div className="relative mx-auto max-w-7xl border-t border-white/[0.06] px-3 py-2 sm:px-4 md:hidden">
+        <SiteSearch listings={searchListings} className="max-w-none" />
       </div>
 
       <CategoriesMegaMenuPanel

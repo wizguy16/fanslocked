@@ -1,5 +1,6 @@
 import Link from "next/link";
 import StripchatWidget from "@/components/stripchat-widget";
+import { ListingLogo } from "@/components/shared/listing-logo";
 import { getListingsByCategorySlug } from "@/lib/data";
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
 
@@ -50,12 +51,14 @@ export function CategoryDirectoryWidget({ slug }: { slug: string }) {
               {...link}
               className="flex w-[72px] shrink-0 flex-col gap-1 rounded-md border border-white/10 bg-black/20 p-1.5 no-underline transition hover:border-sky-500/25 hover:bg-white/[0.03]"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- remote listing logos / favicons */}
-              <img
-                src={listing.logo}
-                alt=""
-                className="mx-auto h-6 w-6 rounded object-cover"
-              />
+              <span className="mx-auto flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded bg-black/30 ring-1 ring-white/[0.06]">
+                <ListingLogo
+                  listing={listing}
+                  fit="contain"
+                  screenshotFallback={false}
+                  className="h-6 w-6"
+                />
+              </span>
               <span className="line-clamp-2 text-center text-[8px] font-medium leading-tight text-slate-400">
                 {listing.name}
               </span>

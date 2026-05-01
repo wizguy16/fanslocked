@@ -115,15 +115,16 @@ export const CREATOR_PLATFORMS_FEATURED: CuratedFanSubscriptionRow[] = [
       "UK-based subscription platform with a focus on creator independence and simple fan engagement tools.",
   },
   {
-    name: "Patreon",
-    slug: "patreon",
-    website: "https://patreon.com",
-    payout: "Varies",
+    name: "Fanspicy",
+    slug: "fanspicy",
+    website: "https://fanspicy.com",
+    payout: "RevShare",
     difficulty: "Easy",
-    type: "Membership Platform",
-    description: "Mainstream creator subscription platform.",
+    type: "Subscription Platform",
+    description:
+      "Adult-friendly subscription platform focused on creator monetization, direct fan engagement, and flexible content control.",
     preview:
-      "Patreon allows creators to monetize exclusive content with a subscription-based model.",
+      "Fanspicy is built for adult creators looking to monetize their content through subscriptions, pay-per-view messaging, and exclusive drops. It emphasizes privacy, creator independence, and scalable earning tools without the heavy restrictions found on mainstream platforms.",
   },
   {
     name: "Ko-fi",
@@ -171,7 +172,7 @@ function buildListing(
   ];
   const cons = [
     "Payout rules and caps vary by geo — confirm current affiliate terms",
-    "NSFW policy shifts on mainstream rails (Patreon, Ko-fi) — qualify traffic",
+    "NSFW policy shifts on mainstream rails (Ko-fi and similar) — qualify traffic",
     "Competitive creator discovery — win with niche angles and disclosures",
   ];
 
