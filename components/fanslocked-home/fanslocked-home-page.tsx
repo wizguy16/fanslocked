@@ -23,6 +23,7 @@ import { FlHero } from "@/components/fanslocked-home/fl-hero";
 import { FlCategoryStrip } from "@/components/fanslocked-home/fl-category-strip";
 import { HomeLaneSpotlight } from "@/components/fanslocked-home/home-lane-spotlight";
 import { HomeTopPicksShowcase } from "@/components/fanslocked-home/home-top-picks-showcase";
+import { HomeTrendingStrip } from "@/components/fanslocked-home/home-trending-strip";
 import { useHomePageIntent } from "@/components/fanslocked-home/use-home-page-intent";
 
 const STRIP = CATEGORIES;
@@ -142,7 +143,8 @@ export function FanslockedHomePage() {
         onIntentChange={handleIntentChange}
       />
       <FlCategoryStrip categories={STRIP} scrolled={scrolled} />
-      
+      <HomeTrendingStrip />
+
       <div className="mx-auto max-w-[1600px] pb-16 pt-8">
         <div ref={contentSectionRef} className="relative z-0 isolate">
           <AnimatePresence mode="wait" initial={false}>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Listing } from "@/types/listing";
 import { cn } from "@/lib/utils";
+import { getAffiliateLink } from "@/lib/get-affiliate-link";
 import { SitePreview } from "@/components/shared/site-preview";
 
 type SiteCardProps = {
@@ -34,6 +35,12 @@ export function SiteCard({
   return (
     <Link
       href={href}
+      {...(process.env.NODE_ENV === "development"
+        ? {
+            "data-affiliate-exit":
+              getAffiliateLink(listing.slug) ?? listing.website_url,
+          }
+        : {})}
       className={cn(
         "group flex h-full min-h-0 flex-col rounded-2xl border border-white/[0.1] p-6 outline-none",
         "bg-[#1a1a1a] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import {
   getListingBySlug,
@@ -12,6 +13,7 @@ import { clampTagline, cn } from "@/lib/utils";
 import { getHeroCTA } from "@/lib/get-hero-cta";
 import { ListingLogo } from "@/components/shared/listing-logo";
 import { getUserSnapshotContent } from "@/lib/listing-user-snapshot";
+import { resolveAffiliateDestination } from "@/lib/get-affiliate-link";
 import {
   ArrowRight,
   CheckCircle,
@@ -141,6 +143,7 @@ function SnapshotBullets({
 export default function SitePage({ params }: Props) {
   const listing = getListingBySlug(params.slug);
   if (!listing) notFound();
+  const cookieHeader = headers().get("cookie");
   const similar = getSimilar(listing, 12);
   const heroCta = getHeroCTA(`/site/${listing.slug}`, {
     siteUrl: listing.affiliate_url,
@@ -196,7 +199,10 @@ export default function SitePage({ params }: Props) {
                   <ExternalLink className="h-4 w-4" aria-hidden />
                 </AffiliateLink>
                 <a
-                  href={listing.website_url}
+                  href={
+                    resolveAffiliateDestination(listing.slug, cookieHeader)?.trim() ||
+                    listing.website_url
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-lg border border-[#2c2c2e] px-8 py-4 text-sm font-bold text-white transition hover:bg-white/5 active:scale-95"
