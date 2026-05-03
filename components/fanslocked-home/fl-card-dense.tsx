@@ -28,19 +28,17 @@ export function FlCardDense({ listing, rank }: Props) {
       {...link}
       aria-label={`${listing.name}. Opens partner site.`}
       className={cn(
-        "group relative flex h-[132px] w-full items-center gap-4 overflow-hidden rounded-[16px] border border-[rgba(255,255,255,0.06)] bg-[var(--bg-card)] px-5 py-4 no-underline outline-none",
+        "group relative flex h-[132px] w-full items-center gap-4 overflow-hidden rounded-none border border-white/[0.09] bg-[#292929] px-5 py-4 no-underline outline-none",
         "shadow-[0_2px_12px_-8px_rgba(0,0,0,0.35)]",
-        "transition-[border-color] duration-200 ease-out",
-        !hasPreview &&
-          "hover:border-[rgba(255,122,0,0.7)] hover:bg-[var(--bg-elevated)]",
-        hasPreview && "group-hover:border-[rgba(255,255,255,0.08)]",
-        "focus-visible:ring-2 focus-visible:ring-[rgba(255,122,0,0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
+        "transition-colors duration-200 ease-out hover:border-primary/35",
+        hasPreview && "group-hover:border-white/[0.12]",
+        "focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
       )}
     >
       {rank != null ? (
         <>
           <span
-            className="pointer-events-none absolute left-4 top-3 z-[1] text-[13px] font-bold tabular-nums leading-none text-[#6B7280] transition-colors group-hover:text-[#FF7A00]/80"
+            className="pointer-events-none absolute left-4 top-3 z-[1] text-[13px] font-bold tabular-nums leading-none text-[#6B7280] transition-colors group-hover:text-primary"
             aria-hidden
           >
             #{rank}
@@ -54,13 +52,15 @@ export function FlCardDense({ listing, rank }: Props) {
           rank != null && "pt-4",
         )}
       >
-        <div className="relative isolate h-14 w-14 shrink-0 overflow-hidden rounded-[12px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
+        <div className="relative isolate h-14 w-14 shrink-0 overflow-hidden rounded-none bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
           <FlListingLogo
             slug={listing.slug}
             categorySlug={listing.categorySlug}
             websiteUrl={listing.website_url}
             fallbackLogo={listing.logo}
             heroImageUrl={listing.image}
+            fit="contain"
+            screenshotFallback={false}
           />
         </div>
 
@@ -80,18 +80,18 @@ export function FlCardDense({ listing, rank }: Props) {
 
       {hasPreview ? (
         <div
-          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-[16px] opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-none opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
           aria-hidden
         >
           <div
-            className="absolute inset-0 rounded-[16px] bg-[rgba(10,11,16,0.65)] backdrop-blur-xl"
+            className="absolute inset-0 rounded-none bg-[rgba(10,11,16,0.72)] backdrop-blur-xl"
             aria-hidden
           />
           <div className="relative z-[1] flex max-h-[calc(100%-1.25rem)] w-full flex-col items-center justify-center gap-2.5 overflow-y-auto px-4 text-center">
             <p className="text-[13px] leading-[1.5] text-[rgba(255,255,255,0.95)]">
               {p}
             </p>
-            <span className="shrink-0 text-[14px] font-medium text-[#C49A72]">
+            <span className="shrink-0 text-[14px] font-medium text-primary">
               Enter →
             </span>
           </div>
@@ -103,7 +103,7 @@ export function FlCardDense({ listing, rank }: Props) {
           aria-hidden
           className={cn(
             "pointer-events-none absolute bottom-3.5 right-4 inline-flex items-center gap-1.5 text-sm font-medium tabular-nums tracking-tight transition-[opacity,color] duration-200 ease-out",
-            "text-[#C49A72] group-hover:text-[#D4AA84]",
+            "text-primary/90 group-hover:text-primary",
             "opacity-100",
             "lg:opacity-0 lg:group-hover:opacity-100",
           )}

@@ -141,7 +141,7 @@ function CreatorValueExpandPill({
       initial={false}
       animate={{
         maxWidth: open ? 380 : 48,
-        borderColor: open ? "rgba(255,122,0,0.5)" : "rgba(255,255,255,0.1)",
+        borderColor: open ? "rgba(255,255,255,0.38)" : "rgba(255,255,255,0.1)",
         boxShadow: open
           ? "0 0 22px -6px rgba(255,77,128,0.45), inset 0 1px 0 rgba(255,255,255,0.07)"
           : "0 2px 12px -8px rgba(0,0,0,0.45)",
@@ -160,7 +160,7 @@ function CreatorValueExpandPill({
         className="flex h-10 w-12 shrink-0 items-center justify-center self-center rounded-full bg-white/[0.05] pl-0.5"
         aria-hidden
       >
-        <Icon className="h-4 w-4 text-[#FF7A00]" strokeWidth={2} />
+        <Icon className="h-4 w-4 text-white/75" strokeWidth={2} />
       </span>
       <motion.span
         className="min-w-0 whitespace-nowrap py-2 pr-4 text-left text-sm leading-snug text-neutral-200"
@@ -267,7 +267,7 @@ export function HomeLaneSpotlight({
   return (
     <section
       ref={sectionRef}
-      className="relative mt-6 outline-none sm:mt-8 focus-visible:ring-2 focus-visible:ring-[#ff4d80]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B10]"
+      className="relative mt-6 outline-none sm:mt-8 focus-visible:ring-2 focus-visible:ring-[#ff4d80]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1A]"
       aria-label={`${laneTitle} spotlight`}
       aria-describedby="home-lane-subtitle-live"
       onKeyDown={onKeyDown}
@@ -288,7 +288,7 @@ export function HomeLaneSpotlight({
       >
         <div
           className={cn(
-            "relative flex max-h-[min(92dvh,920px)] min-h-0 flex-col overflow-hidden rounded-[22px] border border-white/[0.07] bg-[#121318] shadow-inner",
+            "relative flex max-h-[min(92dvh,920px)] min-h-0 flex-col overflow-hidden rounded-[22px] border border-white/[0.07] bg-[#1A1A1A] shadow-inner",
             "p-4 sm:p-5 md:p-7 lg:p-8",
           )}
         >
@@ -387,8 +387,8 @@ export function HomeLaneSpotlight({
                 className={cn(
                   "pointer-events-auto group relative z-40 inline-flex max-w-[min(100%,17rem)] items-center justify-center gap-1.5 overflow-hidden rounded-full",
                   "bg-primary px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground",
-                  "shadow-[0_0_20px_-8px_rgba(255,45,85,0.45)] transition-[transform,box-shadow,background-color] duration-300 ease-out",
-                  "hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_0_24px_-6px_rgba(255,45,85,0.55)] active:translate-y-0 active:scale-[0.98]",
+                  "shadow-[0_0_20px_-8px_rgba(201,0,9,0.45)] transition-[transform,box-shadow,background-color] duration-300 ease-out",
+                  "hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_0_24px_-6px_rgba(201,0,9,0.55)] active:translate-y-0 active:scale-[0.98]",
                   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/70",
                 )}
               >

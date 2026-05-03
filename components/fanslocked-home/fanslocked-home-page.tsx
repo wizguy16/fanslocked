@@ -135,7 +135,7 @@ export function FanslockedHomePage() {
   const megaMenuData = useMemo(() => getFlNavMegaMenuData(), []);
 
   return (
-    <div className="min-h-[100dvh] bg-[#0A0B10] text-white">
+    <div className="min-h-[100dvh] bg-[#1A1A1A] text-white">
       <FlNav scrolled={scrolled} megaMenuData={megaMenuData} />
       <FlHero
         activeIntent={activeIntent}

@@ -28,6 +28,7 @@ import {
 import { outboundLinkProps } from "@/components/fanslocked-home/fl-outbound-link-props";
 import { listingScreenshotImageSrc } from "@/lib/listing-site-images";
 import { clampTagline, cn } from "@/lib/utils";
+import { BTN_SECONDARY_OUTLINE } from "@/components/category/sections/category-prestige-styles";
 
 type Props = {
   items: Listing[];
@@ -224,7 +225,7 @@ export function HomeTopPicksShowcase({
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto max-w-[1600px] px-6 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B10]"
+      className="relative mx-auto max-w-[1600px] px-6 outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1A]"
       aria-label="Top picks for this lane"
       aria-describedby="home-top-picks-subtitle"
       onKeyDown={onKeyDown}
@@ -264,7 +265,7 @@ export function HomeTopPicksShowcase({
         <div className="relative isolate lg:col-span-8">
           {/* Carousel shell: card + floating controls share one positioning context */}
           <div className="relative">
-            <div className="relative overflow-hidden rounded-xl border border-white/[0.09] bg-[#12141a] shadow-[0_24px_80px_-32px_rgba(0,0,0,0.9)]">
+            <div className="relative overflow-hidden rounded-none border border-white/[0.09] bg-[#292929] shadow-[0_24px_80px_-32px_rgba(0,0,0,0.9)]">
             {/* Pagination — top-center on the card, compact (matches reference) */}
             <div
               className="pointer-events-none absolute inset-x-0 top-0 z-30 flex justify-center px-3 pt-2"
@@ -317,7 +318,7 @@ export function HomeTopPicksShowcase({
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
                     <div
-                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0b10]/85 via-[#0a0b10]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-[#12141a]/95"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/85 via-[#1A1A1A]/20 to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-[#292929]/95"
                       aria-hidden
                     />
                     <div className="absolute left-3 top-9 z-10 flex flex-wrap gap-2 md:left-4 md:top-10">
@@ -350,7 +351,7 @@ export function HomeTopPicksShowcase({
                         {traits.map((t) => (
                           <span
                             key={t}
-                            className="rounded-md border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-neutral-300"
+                            className="rounded-none border border-white/10 bg-black/30 px-2.5 py-1 text-xs font-medium text-neutral-300"
                           >
                             {t}
                           </span>
@@ -363,8 +364,8 @@ export function HomeTopPicksShowcase({
                     <Link
                       href={`/site/${listing.slug}`}
                       className={cn(
-                        "inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/20 px-5 py-2.5 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white/90 transition-colors hover:border-white/35 hover:bg-white/[0.06]",
-                        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60",
+                        BTN_SECONDARY_OUTLINE,
+                        "inline-flex min-h-[44px] items-center justify-center px-5 py-2.5 text-center text-xs uppercase tracking-[0.14em]",
                       )}
                     >
                       View more
@@ -372,7 +373,7 @@ export function HomeTopPicksShowcase({
                     {link ? (
                       <a
                         {...link}
-                        className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-center text-xs font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-lg transition-[transform,background-color] hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98]"
+                        className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-primary px-6 py-2.5 text-center text-xs font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-lg transition-colors hover:bg-primary/90"
                       >
                         Visit
                       </a>
@@ -386,7 +387,7 @@ export function HomeTopPicksShowcase({
             <button
               type="button"
               onClick={() => go(-1)}
-              className="absolute left-3 top-1/2 z-40 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#1a1c24]/55 text-white shadow-md backdrop-blur-sm transition-[background-color,border-color,transform] hover:bg-[#1a1c24]/92 hover:border-white/35 md:h-9 md:w-9 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/50"
+              className="absolute left-3 top-1/2 z-40 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-[#292929]/90 text-white shadow-md backdrop-blur-sm transition-colors hover:bg-white hover:text-black md:h-9 md:w-9 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
               aria-label="Previous listing"
             >
               <ChevronLeft className="h-3.5 w-3.5 md:h-4 md:w-4" strokeWidth={2} />
@@ -394,7 +395,7 @@ export function HomeTopPicksShowcase({
             <button
               type="button"
               onClick={() => go(1)}
-              className="absolute right-3 top-1/2 z-40 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#1a1c24]/55 text-white shadow-md backdrop-blur-sm transition-[background-color,border-color,transform] hover:bg-[#1a1c24]/92 hover:border-white/35 md:h-9 md:w-9 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/50"
+              className="absolute right-3 top-1/2 z-40 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-[#292929]/90 text-white shadow-md backdrop-blur-sm transition-colors hover:bg-white hover:text-black md:h-9 md:w-9 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
               aria-label="Next listing"
             >
               <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4" strokeWidth={2} />
@@ -427,7 +428,7 @@ export function HomeTopPicksShowcase({
                 {link ? (
                   <a
                     {...link}
-                    className="group relative block overflow-hidden rounded-lg border border-white/[0.12] bg-[#121212] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.95)] outline-none transition-[transform,box-shadow,border-color] hover:border-primary/35 hover:shadow-[0_28px_60px_-24px_rgba(255,45,85,0.22)] focus-visible:ring-2 focus-visible:ring-primary/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B10]"
+                    className="group relative block overflow-hidden rounded-none border border-white/[0.12] bg-[#292929] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.95)] outline-none transition-[transform,box-shadow,border-color] hover:border-primary/35 hover:shadow-[0_28px_60px_-24px_rgba(201,0,9,0.22)] focus-visible:ring-2 focus-visible:ring-primary/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1A]"
                     aria-label={`Visit ${listing.name} — sponsored`}
                   >
                     <div className="relative aspect-[3/4] max-h-[min(72vw,340px)] w-full sm:aspect-[4/5] sm:max-h-[380px]">
@@ -466,7 +467,7 @@ export function HomeTopPicksShowcase({
                         <Link
                           key={`placeholder-${slot}`}
                           href={`/category/${listing.categorySlug}`}
-                          className="flex aspect-square flex-col justify-end rounded-lg border border-dashed border-white/18 bg-[#14151c] p-3 transition-colors hover:border-primary/35 hover:bg-[#181a22]"
+                          className="flex aspect-square flex-col justify-end rounded-none border border-dashed border-white/18 bg-[#292929] p-3 transition-colors hover:border-primary/35"
                         >
                           <span className="text-[11px] font-semibold text-white/90">
                             Explore lane
@@ -490,7 +491,7 @@ export function HomeTopPicksShowcase({
                       <a
                         key={sug.id}
                         {...sugLink}
-                        className="group relative aspect-square overflow-hidden rounded-lg border border-white/[0.1] bg-[#121212] outline-none transition-[transform,border-color] hover:z-[1] hover:-translate-y-0.5 hover:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary/50"
+                        className="group relative aspect-square overflow-hidden rounded-none border border-white/[0.1] bg-[#292929] outline-none transition-[transform,border-color] hover:z-[1] hover:-translate-y-0.5 hover:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary/50"
                         aria-label={`Visit ${sug.name}`}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -521,7 +522,7 @@ export function HomeTopPicksShowcase({
               </div>
 
               {/* Trending / monetization tail */}
-              <div className="rounded-xl border border-white/[0.08] bg-[#101118] p-4">
+              <div className="rounded-none border border-white/[0.08] bg-[#292929] p-4">
                 <SectionRailTitle>Trending now</SectionRailTitle>
                 <p className="mb-4 text-sm leading-relaxed text-neutral-400">
                   {valueStrip[2]}
@@ -529,7 +530,7 @@ export function HomeTopPicksShowcase({
                 {bottomAdListing ? (
                   <a
                     {...outboundLinkProps(bottomAdListing)}
-                    className="group relative mb-4 block overflow-hidden rounded-lg border border-white/10"
+                    className="group relative mb-4 block overflow-hidden rounded-none border border-white/10"
                   >
                     <div className="relative aspect-[21/9] w-full">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -559,7 +560,10 @@ export function HomeTopPicksShowcase({
                 ) : null}
                 <Link
                   href={`/category/${listing.categorySlug}`}
-                  className="flex w-full items-center justify-center rounded-full border border-white/25 bg-transparent py-3 text-center text-sm font-semibold text-white transition-colors hover:border-white/45 hover:bg-white/[0.06]"
+                  className={cn(
+                    BTN_SECONDARY_OUTLINE,
+                    "flex w-full items-center justify-center py-3 text-center text-sm font-semibold",
+                  )}
                 >
                   Browse all in {listing.categoryLabel}
                 </Link>

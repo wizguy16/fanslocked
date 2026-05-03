@@ -5,12 +5,14 @@ import { CategoryFinalCta } from "@/components/category/sections/category-final-
 import { CategoryPrestigeListings } from "@/components/category/category-prestige-listings";
 import { CategorySeoBlock } from "@/components/category/sections/category-seo-block";
 import type { CategoryPrestigeEditorial } from "@/lib/category-prestige-editorial";
+import { BTN_SECONDARY_OUTLINE } from "@/components/category/sections/category-prestige-styles";
 import { buildGamingPrestigeSlices } from "@/lib/gaming-prestige-slices";
 import { buildHookupPrestigeSlices } from "@/lib/hookup-prestige-slices";
 import { buildSexChatPrestigeSlices } from "@/lib/sex-chat-prestige-slices";
 import { getGuidePostForCategory } from "@/lib/blog-posts";
 import { selectCategoryTopPicks } from "@/lib/category-prestige-top-picks";
 import type { Listing } from "@/types/listing";
+import { cn } from "@/lib/utils";
 
 const QUICK = 4;
 const SHOWCASE = 5;
@@ -78,7 +80,7 @@ export function CategoryPrestigeShell({
   });
 
   return (
-    <div className="min-h-[100dvh] bg-[#121318] text-[#e3e1e9]">
+    <div className="min-h-[100dvh] bg-[#1A1A1A] text-[#e3e1e9]">
       <div className="py-10 pb-24 md:py-16">
         {/* Header band — max-w-[1100px] */}
         <div className="mx-auto max-w-[1100px] px-6">
@@ -86,7 +88,7 @@ export function CategoryPrestigeShell({
             className="mb-10 flex flex-wrap items-center gap-1.5 text-[11px] text-zinc-500"
             aria-label="Breadcrumb"
           >
-            <Link href="/categories" className="transition hover:text-[#ffb68d]">
+            <Link href="/categories" className="transition hover:text-primary">
               Categories
             </Link>
             <span className="text-zinc-700" aria-hidden>
@@ -97,14 +99,14 @@ export function CategoryPrestigeShell({
           </nav>
 
           {category.slug === "fetish-bdsm" ? (
-            <div className="mb-8 rounded-lg border border-[rgba(255,182,141,0.25)] bg-[#1a1b21] px-4 py-3 text-left md:mb-10">
+            <div className="mb-8 rounded-none border border-white/[0.08] bg-[#292929] px-4 py-3 text-left md:mb-10">
               <p className="text-sm font-medium text-[#e3e1e9]">
                 Looking for more specific fetish categories?
               </p>
               <p className="mt-1">
                 <Link
                   href="/categories/fetish"
-                  className="text-sm font-semibold text-[#ffb68d] underline-offset-2 transition hover:text-[#ffcba4] hover:underline"
+                  className="text-sm font-semibold text-primary underline-offset-2 transition hover:text-primary/90 hover:underline"
                 >
                   Explore our full fetish hub →
                 </Link>
@@ -123,7 +125,7 @@ export function CategoryPrestigeShell({
                 </>
               )}
             </h1>
-            <div className="mx-auto mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-[#ddc1b3]">
+            <div className="mx-auto mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-neutral-400">
               {editorial?.heroParagraphs?.length ? (
                 editorial.heroParagraphs.map((para, i) => (
                   <p key={i}>{para}</p>
@@ -135,13 +137,13 @@ export function CategoryPrestigeShell({
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <a
                 href={heroCta.primaryHref}
-                className="rounded-lg bg-[#ff8c42] px-6 py-3 text-sm font-bold uppercase tracking-wide text-[#331200] transition-colors hover:bg-[#ff9f5a]"
+                className="rounded-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-primary-foreground shadow-lg transition-colors hover:bg-primary/90"
               >
                 {heroCta.primary}
               </a>
               <Link
                 href={heroCta.secondaryHref}
-                className="rounded-lg border border-[#ff8c42] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-[#ffb68d] transition-colors hover:bg-[#ff8c42] hover:text-[#331200]"
+                className={cn(BTN_SECONDARY_OUTLINE, "px-6 py-3 text-sm uppercase tracking-wide")}
               >
                 {heroCta.secondary}
               </Link>
@@ -173,7 +175,7 @@ export function CategoryPrestigeShell({
           <div className="mt-10 flex justify-center md:mt-12">
             <a
               href="#category-listings"
-              className="rounded-lg border border-[#ff8c42] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-[#ffb68d] transition-colors hover:bg-[#ff8c42] hover:text-[#331200]"
+              className={cn(BTN_SECONDARY_OUTLINE, "px-6 py-3 text-sm font-semibold uppercase tracking-wide")}
             >
               Explore More Top Platforms
             </a>

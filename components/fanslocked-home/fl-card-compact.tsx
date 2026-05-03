@@ -38,22 +38,23 @@ export function FlCardCompact({
       {...link}
       aria-label={`${listing.name}. Opens partner site.`}
       className={cn(
-        "group relative flex min-h-[110px] w-full flex-col justify-between gap-1 overflow-hidden rounded-[14px]",
-        "border border-[rgba(255,255,255,0.06)] bg-[var(--bg-card)] p-4",
-        "transition-[border-color,background-color] duration-200 ease-out",
-        "hover:border-[rgba(255,122,0,0.7)] hover:bg-[var(--bg-elevated)]",
-        "focus-visible:ring-2 focus-visible:ring-[rgba(255,122,0,0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
+        "group relative flex min-h-[110px] w-full flex-col justify-between gap-1 overflow-hidden rounded-none",
+        "border border-white/[0.09] bg-[#292929] p-4",
+        "transition-colors duration-200 ease-out hover:border-primary/35",
+        "focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)]",
         className,
       )}
     >
       <div className="flex items-center justify-between">
-        <div className="relative isolate h-9 w-9 shrink-0 overflow-hidden rounded-[8px] bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
+        <div className="relative isolate h-9 w-9 shrink-0 overflow-hidden rounded-none bg-[var(--bg-elevated)] ring-1 ring-white/[0.06]">
           <FlListingLogo
             slug={listing.slug}
             categorySlug={listing.categorySlug}
             websiteUrl={listing.website_url}
             fallbackLogo={listing.logo}
             heroImageUrl={listing.image}
+            fit="contain"
+            screenshotFallback={false}
           />
         </div>
       </div>
@@ -67,7 +68,7 @@ export function FlCardCompact({
       </div>
 
       <div className="mt-2 flex w-full flex-col gap-1">
-        <span className="inline-flex max-w-full items-center justify-center self-start rounded-lg bg-[#ff8c42] px-3 py-2 text-[12px] font-bold text-[#331200] shadow-[inset_0_-1px_0_rgba(0,0,0,0.08)] transition-colors group-hover:bg-[#ff9f5a]">
+        <span className="inline-flex max-w-full items-center justify-center self-start rounded-full bg-primary px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-primary-foreground shadow-lg transition-colors group-hover:bg-primary/90">
           {ctaLabel}
         </span>
         {ctaMicro ? (

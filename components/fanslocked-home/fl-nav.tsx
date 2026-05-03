@@ -9,6 +9,7 @@ import {
 } from "@/components/layout/categories-mega-menu";
 import type { FlNavMegaMenuData } from "@/lib/fl-nav-mega-menu-data";
 import { cn } from "@/lib/utils";
+import { FansLockedLogoLink } from "@/components/branding/fanslocked-logo-link";
 
 export type { FlNavMegaMenuData };
 
@@ -30,24 +31,13 @@ export function FlNav({
     <header
       ref={headerRef}
       className={cn(
-        "relative sticky top-0 z-50 h-16 shrink-0 border-b border-[rgba(255,255,255,0.04)] bg-[#0A0B10] px-6 transition-[box-shadow,background-color] duration-300 ease-out",
+        "relative sticky top-0 z-50 h-16 shrink-0 border-b border-[rgba(255,255,255,0.04)] bg-[#1A1A1A] px-6 transition-[box-shadow,background-color] duration-300 ease-out",
         scrolled &&
-          "shadow-[0_10px_40px_-18px_rgba(0,0,0,0.85)] bg-[#0A0B10]/88 backdrop-blur-md",
+          "shadow-[0_10px_40px_-18px_rgba(0,0,0,0.85)] bg-[#1A1A1A]/88 backdrop-blur-md",
       )}
     >
       <div className="mx-auto grid h-full max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
-        <Link
-          href="/"
-          className="flex min-w-0 items-center gap-2 text-[14px] font-semibold tracking-tight text-white md:text-[15px]"
-        >
-          <span
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#11131A] text-[11px] font-bold text-[#FF7A00] ring-1 ring-[rgba(255,255,255,0.04)]"
-            aria-hidden
-          >
-            FL
-          </span>
-          <span className="truncate">FansLocked</span>
-        </Link>
+        <FansLockedLogoLink />
 
         <nav
           className="flex items-center justify-center gap-4 text-xs font-medium md:gap-8 md:text-sm"

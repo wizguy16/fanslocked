@@ -64,14 +64,14 @@ export function FlDenseGrid({
   return (
     <section aria-label="All listings" className="px-6">
       <div className="mx-auto max-w-[1600px]">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {shown.map((l, i) => (
             <Reveal
               key={l.id}
               delay={Math.min(i * 0.03, 0.45)}
               className={
                 highlightFirstRow && i < FIRST_ROW_COUNT
-                  ? "min-w-0 ring-1 ring-inset ring-[#FF7A00]/20 ring-offset-0 ring-offset-[#0A0B10] transition-shadow duration-500"
+                  ? "min-w-0 ring-1 ring-inset ring-primary/20 ring-offset-0 ring-offset-[#1A1A1A] transition-shadow duration-500"
                   : "min-w-0"
               }
             >

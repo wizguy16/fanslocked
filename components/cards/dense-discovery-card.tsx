@@ -42,21 +42,20 @@ export function DenseDiscoveryCard({
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       className={cn(
-        "group relative flex h-[92px] max-h-[100px] min-h-[80px] flex-row gap-2 overflow-hidden rounded-lg border border-white/[0.08] bg-[#12131a] p-3 transition-[border-color,box-shadow,background-color] duration-200",
-        "hover:border-[#FF7A00]/45 hover:bg-[#171821] hover:shadow-[0_0_28px_-8px_rgba(255,122,0,0.45),0_0_0_1px_rgba(255,122,0,0.12)]",
+        "group relative flex h-[92px] max-h-[100px] min-h-[80px] flex-row gap-2 overflow-hidden rounded-none border border-white/[0.09] bg-[#292929] p-3 transition-colors duration-200 hover:border-primary/35",
         highlight &&
-          "ring-2 ring-[#FF7A00]/70 ring-offset-2 ring-offset-[#0A0B10]",
+          "ring-2 ring-primary/40 ring-offset-2 ring-offset-[#1A1A1A]",
       )}
       style={{ transition: "transform 0.18s ease-out" }}
     >
-      <div className="relative isolate h-10 w-10 shrink-0 overflow-hidden rounded-md bg-white/5">
+      <div className="relative isolate h-10 w-10 shrink-0 overflow-hidden rounded-none bg-white/5">
         <ListingLogo listing={listing} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col justify-between">
         <div className="flex min-w-0 items-start justify-between gap-1">
           <Link
             href={`/site/${listing.slug}`}
-            className="min-w-0 truncate text-[12px] font-semibold leading-tight text-white hover:text-[#FF7A00]"
+            className="min-w-0 truncate text-[12px] font-semibold leading-tight text-white hover:text-primary"
           >
             {listing.name}
           </Link>
@@ -73,7 +72,7 @@ export function DenseDiscoveryCard({
             href={listing.affiliate_url}
             target="_blank"
             rel="sponsored noopener noreferrer"
-            className="inline-flex h-8 min-w-[76px] items-center justify-center rounded-lg bg-primary px-2.5 text-[11px] font-bold text-primary-foreground transition group-hover:scale-[1.04] group-hover:shadow-[0_0_18px_-3px_rgba(255,45,85,0.5)]"
+            className="inline-flex h-8 min-w-[76px] items-center justify-center rounded-lg bg-primary px-2.5 text-[11px] font-bold text-primary-foreground shadow-lg transition-colors group-hover:bg-primary/90"
           >
             Visit →
           </a>

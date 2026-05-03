@@ -32,7 +32,7 @@ export function CategoryMoreToExplore({
         >
           {heading}
         </h3>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 md:gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 md:gap-5">
           {limited.map((listing, i) => (
             <FlCardCompact
               key={listing.id}

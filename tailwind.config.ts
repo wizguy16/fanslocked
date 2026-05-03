@@ -14,15 +14,15 @@ const config: Config = {
         mono: ["ui-monospace", "monospace"],
       },
       colors: {
-        background: "#0A0B10",
+        background: "#1A1A1A",
         foreground: "#f8fafc",
         card: {
-          DEFAULT: "#111118",
-          alt: "#151520",
+          DEFAULT: "#292929",
+          alt: "#242424",
           hover: "rgba(255,255,255,0.05)",
         },
         primary: {
-          DEFAULT: "#FF2D55",
+          DEFAULT: "#C90009",
           foreground: "#ffffff",
         },
         highlight: "#FF7A00",
@@ -35,7 +35,7 @@ const config: Config = {
       boxShadow: {
         soft: "0 8px 30px -12px rgba(0, 0, 0, 0.75)",
         "soft-glow":
-          "0 0 36px -10px rgba(255, 45, 85, 0.35), 0 0 60px -24px rgba(124, 92, 255, 0.15)",
+          "0 0 36px -10px rgba(201, 0, 9, 0.35), 0 0 60px -24px rgba(124, 92, 255, 0.12)",
       },
       transitionDuration: {
         DEFAULT: "200ms",

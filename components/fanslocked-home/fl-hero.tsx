@@ -17,7 +17,7 @@ export function FlHero({ activeIntent, heroKeyword, onIntentChange }: Props) {
   return (
     <section className="relative overflow-hidden border-b border-[rgba(255,255,255,0.04)] px-6 pb-14 pt-10 md:pb-16 md:pt-14">
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_-15%,rgba(255,122,0,0.14),transparent_58%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_-15%,rgba(201,0,9,0.14),transparent_58%)]"
         aria-hidden
       />
       <div className="relative mx-auto max-w-3xl text-center">
@@ -37,13 +37,12 @@ export function FlHero({ activeIntent, heroKeyword, onIntentChange }: Props) {
             Pick your lane
           </p>
           <div
-            className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6 lg:gap-2.5"
+            className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6 lg:gap-3"
             role="group"
             aria-label="Filter homepage listings by lane"
           >
-            {HOME_INTENT_OPTIONS.map(({ id, label, tier }) => {
+            {HOME_INTENT_OPTIONS.map(({ id, label }) => {
               const isActive = activeIntent === id;
-              const revenue = tier === "revenue";
               return (
                 <motion.button
                   key={id}
@@ -52,32 +51,26 @@ export function FlHero({ activeIntent, heroKeyword, onIntentChange }: Props) {
                   aria-pressed={isActive}
                   whileTap={{ scale: 0.985 }}
                   animate={{
-                    scale: isActive ? 1.04 : 0.985,
-                    opacity: isActive ? 1 : 0.68,
+                    scale: isActive ? 1.03 : 1,
+                    opacity: isActive ? 1 : 0.72,
                     boxShadow: isActive
-                      ? "0 0 0 1px rgba(255,122,0,0.42), 0 10px 26px -12px rgba(255,122,0,0.72)"
-                      : "0 0 0 1px rgba(255,255,255,0.04), 0 2px 10px -8px rgba(0,0,0,0.55)",
+                      ? "0 0 0 2px rgba(255,255,255,0.42), 0 12px 28px -14px rgba(0,0,0,0.55)"
+                      : "0 0 0 1px rgba(255,255,255,0.08), 0 4px 14px -10px rgba(0,0,0,0.5)",
                   }}
                   transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                   className={cn(
-                    "relative rounded-xl border px-2.5 py-2.5 text-left text-xs font-semibold transition-[border-color,background-color,color,opacity] duration-200 sm:text-center md:py-3 md:text-[13px]",
-                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7A00]/65",
+                    "relative rounded-full border px-3 py-2.5 text-center text-xs font-semibold leading-snug transition-[border-color,background-color,color,opacity] duration-200 sm:text-[13px]",
+                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/70",
                     "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
-                    revenue &&
-                      !isActive &&
-                      "border-[#FF7A00]/12 bg-[rgba(255,122,0,0.04)]",
-                    !revenue &&
-                      !isActive &&
-                      "border-white/10 bg-white/[0.04]",
                     isActive
-                      ? "z-[1] border-[#FF7A00]/80 bg-[rgba(255,122,0,0.24)] text-white"
-                      : "text-[#E6E8ED] hover:border-[#FF7A00]/35 hover:bg-white/[0.07] hover:text-white",
+                      ? "z-[1] border-white/45 bg-white/[0.14] text-white"
+                      : "border-white/12 bg-white/[0.04] text-[#A0A6B1] hover:border-white/28 hover:bg-white/[0.09] hover:text-white",
                   )}
                 >
                   <span
                     aria-hidden
                     className={cn(
-                      "pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(95%_120%_at_50%_0%,rgba(255,122,0,0.28),transparent_72%)] transition-opacity duration-200",
+                      "pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(95%_120%_at_50%_0%,rgba(255,255,255,0.14),transparent_72%)] transition-opacity duration-200",
                       isActive ? "opacity-100" : "opacity-0",
                     )}
                   />

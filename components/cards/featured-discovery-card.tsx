@@ -48,24 +48,23 @@ export function FeaturedDiscoveryCard({
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       className={cn(
-        "group relative flex min-h-[140px] max-h-[160px] w-[min(100%,280px)] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-white/[0.08] bg-[#12131a] p-3 transition-[border-color,box-shadow,background-color] duration-200",
-        "hover:border-[#FF7A00]/45 hover:bg-[#16171f] hover:shadow-[0_0_0_1px_rgba(255,122,0,0.12)]",
+        "group relative flex min-h-[140px] max-h-[160px] w-[min(100%,280px)] shrink-0 snap-start flex-col overflow-hidden rounded-none border border-white/[0.09] bg-[#292929] p-3 transition-colors duration-200 hover:border-primary/35",
       )}
       style={{ transition: "transform 0.2s ease-out" }}
     >
-      <div className="pointer-events-none absolute left-2 top-2 flex items-center gap-1 rounded-md bg-black/50 px-1.5 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
+      <div className="pointer-events-none absolute left-2 top-2 flex items-center gap-1 rounded-none border border-white/10 bg-black/60 px-1.5 py-0.5 text-[10px] font-semibold text-white">
         <VisualBadgeIcon kind={hl.kind} className="h-3 w-3" />
         <span>{hl.label}</span>
       </div>
       <div className="mt-6 flex flex-1 gap-3">
-        <div className="relative isolate h-12 w-12 shrink-0 overflow-hidden rounded-md bg-white/5">
+        <div className="relative isolate h-12 w-12 shrink-0 overflow-hidden rounded-none bg-white/5">
           <ListingLogo listing={listing} />
         </div>
         <div className="flex min-w-0 flex-1 flex-col justify-between gap-1">
           <div>
             <Link
               href={`/site/${listing.slug}`}
-              className="line-clamp-1 text-sm font-semibold text-white hover:text-[#FF7A00]"
+              className="line-clamp-1 text-sm font-semibold text-white hover:text-primary"
             >
               {listing.name}
             </Link>
@@ -83,7 +82,7 @@ export function FeaturedDiscoveryCard({
               href={listing.affiliate_url}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              className="col-start-2 inline-flex h-8 min-w-[88px] shrink-0 items-center justify-center rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground transition hover:scale-[1.03] hover:shadow-[0_0_20px_-4px_rgba(255,45,85,0.55)]"
+              className="col-start-2 inline-flex h-8 min-w-[88px] shrink-0 items-center justify-center rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground shadow-lg transition-colors hover:bg-primary/90"
             >
               Visit →
             </a>

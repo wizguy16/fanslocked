@@ -21,9 +21,9 @@ export function FlCategoryStrip({
   return (
     <div
       className={cn(
-        "sticky top-16 z-30 border-b border-[rgba(255,255,255,0.04)] bg-[#0A0B10]/95 backdrop-blur-md transition-[box-shadow,background-color] duration-300 ease-out",
+        "sticky top-16 z-30 border-b border-[rgba(255,255,255,0.04)] bg-[#1A1A1A]/95 backdrop-blur-md transition-[box-shadow,background-color] duration-300 ease-out",
         scrolled &&
-          "shadow-[0_12px_36px_-20px_rgba(0,0,0,0.75)] bg-[#0A0B10]/82",
+          "shadow-[0_12px_36px_-20px_rgba(0,0,0,0.75)] bg-[#1A1A1A]/82",
       )}
     >
       <nav
@@ -37,8 +37,8 @@ export function FlCategoryStrip({
             data-category-pill={c.slug}
             className={cn(
               "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[rgba(255,255,255,0.05)] bg-transparent px-2.5 py-1.5 text-left text-[11px] font-medium leading-tight text-[#7B8190] transition-colors duration-200",
-              "hover:border-[rgba(255,255,255,0.1)] hover:text-[#A0A6B1]",
-              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7A00]",
+              "hover:border-[rgba(255,255,255,0.14)] hover:text-white",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60",
               "md:px-3 md:text-xs",
             )}
           >

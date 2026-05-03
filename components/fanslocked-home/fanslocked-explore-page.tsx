@@ -8,6 +8,8 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { FlNav } from "@/components/fanslocked-home/fl-nav";
 import { getFlNavMegaMenuData } from "@/lib/fl-nav-mega-menu-data";
 import { FlDenseGrid } from "@/components/fanslocked-home/fl-dense-grid";
+import { BTN_SECONDARY_OUTLINE } from "@/components/category/sections/category-prestige-styles";
+import { cn } from "@/lib/utils";
 
 type SortMode = "default" | "trending";
 
@@ -22,7 +24,7 @@ type Props = {
 };
 
 const btnBase =
-  "inline-flex items-center justify-center rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#11131A] px-4 py-2 text-sm font-medium text-[#A0A6B1] transition hover:border-[rgba(255,255,255,0.1)] hover:text-white";
+  "inline-flex items-center justify-center rounded-full border border-white/[0.09] bg-[#292929] px-4 py-2 text-sm font-medium text-[#A0A6B1] transition-colors hover:border-primary/35 hover:text-white";
 
 const btnDisabled = "pointer-events-none opacity-35";
 
@@ -39,14 +41,14 @@ export function FanslockedExplorePage({
   const megaMenuData = useMemo(() => getFlNavMegaMenuData(), []);
 
   return (
-    <div className="min-h-[100dvh] overflow-x-hidden bg-[#0A0B10] text-white">
+    <div className="min-h-[100dvh] overflow-x-hidden bg-[#1A1A1A] text-white">
       <FlNav megaMenuData={megaMenuData} />
       <Breadcrumbs containerClassName="max-w-[1600px] px-6" />
 
       {/* Hero — matches reference: radial glow, watermark, centered stack */}
       <header className="relative overflow-hidden px-6 pb-12 pt-10 md:pb-20 md:pt-14">
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[min(600px,90vw)] w-[min(600px,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[120px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[min(600px,90vw)] w-[min(600px,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]"
           aria-hidden
         />
         <div className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center overflow-hidden">
@@ -70,13 +72,16 @@ export function FanslockedExplorePage({
           <div className="mt-10 flex w-full max-w-xl flex-col items-center justify-center gap-4 sm:max-w-none sm:flex-row sm:gap-6">
             <Link
               href="/explore?sort=trending"
-              className="inline-flex w-full min-w-[200px] items-center justify-center rounded-lg bg-[#ff8c42] px-10 py-4 text-base font-bold text-[#331200] shadow-none transition hover:bg-[#ff9f5a] hover:shadow-[0_0_30px_rgba(255,140,0,0.25)] sm:w-auto"
+              className="inline-flex w-full min-w-[200px] items-center justify-center rounded-full bg-primary px-10 py-4 text-base font-bold text-primary-foreground shadow-lg transition-colors hover:bg-primary/90 sm:w-auto"
             >
               Start Exploring
             </Link>
             <Link
               href="/explore"
-              className="inline-flex w-full min-w-[200px] items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] px-10 py-4 text-base font-semibold text-white backdrop-blur-md transition hover:bg-white/10 sm:w-auto"
+              className={cn(
+                BTN_SECONDARY_OUTLINE,
+                "inline-flex w-full min-w-[200px] items-center justify-center px-10 py-4 text-base font-semibold sm:w-auto",
+              )}
             >
               View All Platforms
             </Link>
@@ -132,7 +137,7 @@ export function FanslockedExplorePage({
               {trending ? "Trending Platforms" : "All Platforms"}
             </motion.h2>
             {trending ? (
-              <span className="inline-flex items-center rounded-md border border-[#FF7A00]/35 bg-[#FF7A00]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#FF9F5A]">
+              <span className="inline-flex items-center rounded-md border border-primary/35 bg-[#292929] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
                 Trending
               </span>
             ) : null}
