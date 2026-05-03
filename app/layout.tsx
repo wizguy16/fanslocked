@@ -6,7 +6,7 @@ import { LayoutBreadcrumbs } from "@/components/navigation/breadcrumbs";
 import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
 import { ConditionalFooter } from "@/components/layout/conditional-footer";
 import { Newsletter } from "@/components/sections/newsletter";
-import { AgeGate } from "@/components/age-gate";
+// import { AgeGate } from "@/components/age-gate";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
 import { getSiteUrl } from "@/lib/site";
 
@@ -74,7 +74,7 @@ export default function RootLayout({
       >
         <PlausibleAnalytics />
         <AmbientPointer />
-        <AgeGate />
+        {/* <AgeGate /> */}
         <ConditionalNavbar />
         <main id="main-content" className="flex-1">
           <LayoutBreadcrumbs />
