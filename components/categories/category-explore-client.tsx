@@ -67,9 +67,9 @@ function CompactListingCard({ listing }: { listing: Listing }) {
     <Link
       href={`/site/${listing.slug}`}
       className={cn(
-        "group relative flex min-h-[72px] flex-col overflow-hidden rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#11131A] p-2 transition-all duration-200 ease-out",
-        "hover:z-10 hover:-translate-y-0.5 hover:border-[rgba(255,122,0,0.35)] hover:bg-[#151820] hover:shadow-[0_0_22px_-8px_rgba(255,122,0,0.42),0_8px_24px_-12px_rgba(0,0,0,0.65)]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7A00]/40",
+        "group relative flex min-h-[72px] flex-col overflow-hidden rounded-none border border-white/[0.09] bg-[#292929] p-2 transition-colors duration-200 ease-out",
+        "hover:z-10 hover:border-primary/35",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
       )}
     >
       {vb ? (
@@ -79,7 +79,7 @@ function CompactListingCard({ listing }: { listing: Listing }) {
         </span>
       ) : null}
       <div className={cn("flex gap-2", vb ? "pr-10" : undefined)}>
-        <div className="relative isolate h-9 w-9 shrink-0 overflow-hidden rounded-md bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.05)]">
+        <div className="relative isolate h-9 w-9 shrink-0 overflow-hidden rounded-none bg-[#1A1A1A] ring-1 ring-[rgba(255,255,255,0.05)]">
           <ListingLogo listing={listing} />
         </div>
         <div className="min-w-0 flex-1">
@@ -95,7 +95,7 @@ function CompactListingCard({ listing }: { listing: Listing }) {
         {clampTagline(listing.description, 96)}
       </p>
       <span
-        className="pointer-events-none absolute bottom-1.5 right-1.5 text-[10px] font-semibold text-[#FF7A00] opacity-0 transition-opacity group-hover:opacity-100"
+        className="pointer-events-none absolute bottom-1.5 right-1.5 text-[10px] font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100"
         aria-hidden
       >
         Visit →
@@ -109,7 +109,7 @@ function TopPickCard({ listing }: { listing: Listing }) {
     ? resolveVisualBadge(listing.id, 0, listing.badge)
     : null;
   return (
-    <div className="relative flex min-h-[100px] flex-col rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#12151c] p-3 transition hover:border-[rgba(255,122,0,0.25)]">
+    <div className="relative flex min-h-[100px] flex-col rounded-none border border-white/[0.09] bg-[#292929] p-3 transition-colors hover:border-primary/35">
       {vb ? (
         <span className="pointer-events-none absolute right-2 top-2 flex items-center gap-0.5 text-[9px] font-semibold text-[#6B7280]">
           <VisualBadgeIcon kind={vb.kind} className="h-2.5 w-2.5" />
@@ -117,13 +117,13 @@ function TopPickCard({ listing }: { listing: Listing }) {
         </span>
       ) : null}
       <div className={cn("flex flex-1 gap-3", vb ? "pr-12" : undefined)}>
-        <div className="relative isolate h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-[#0A0B10] ring-1 ring-[rgba(255,255,255,0.06)]">
+        <div className="relative isolate h-11 w-11 shrink-0 overflow-hidden rounded-none bg-[#1A1A1A] ring-1 ring-[rgba(255,255,255,0.06)]">
           <ListingLogo listing={listing} />
         </div>
         <div className="min-w-0 flex-1">
           <Link
             href={`/site/${listing.slug}`}
-            className="line-clamp-1 text-sm font-semibold text-white hover:text-[#FF7A00]"
+            className="line-clamp-1 text-sm font-semibold text-white hover:text-primary"
           >
             {listing.name}
           </Link>
@@ -138,7 +138,7 @@ function TopPickCard({ listing }: { listing: Listing }) {
               href={listing.affiliate_url}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              className="rounded-lg bg-primary px-2.5 py-1 text-[11px] font-bold text-primary-foreground transition hover:brightness-110"
+              className="rounded-none bg-primary px-2.5 py-1 text-[11px] font-bold text-primary-foreground transition hover:brightness-110"
               onClick={(e) => e.stopPropagation()}
             >
               Visit →
@@ -164,7 +164,7 @@ function BreakBand({
         className="col-span-full my-1 flex items-center gap-2 rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#0f1016] px-3 py-2.5"
         role="separator"
       >
-        <Flame className="h-4 w-4 shrink-0 text-[#FF7A00]" aria-hidden />
+        <Flame className="h-4 w-4 shrink-0 text-primary" aria-hidden />
         <p className="text-[11px] font-medium text-[#A0A6B1]">
           <span className="text-white">Trending now</span> in {categoryLabel}{" "}
           — fast movers readers are clicking this week.
@@ -303,13 +303,13 @@ export function CategoryExploreClient({ cat, categories, items }: Props) {
 
   const gridClass =
     gridMode === "compact"
-      ? "grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
-      : "grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5";
+      ? "grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+      : "grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5";
 
   return (
-    <div className="min-h-[100dvh] bg-[#0A0B10] text-white">
+    <div className="min-h-[100dvh] bg-[#1A1A1A] text-white">
       {/* Single sticky shell: toolbar + category pills share one opaque surface (no scroll seam). */}
-      <div className="sticky top-14 z-[90] border-b border-[rgba(255,255,255,0.08)] bg-[#0A0B10] shadow-[0_1px_0_rgba(0,0,0,0.4)]">
+      <div className="sticky top-14 z-[90] border-b border-[rgba(255,255,255,0.08)] bg-[#1A1A1A] shadow-[0_1px_0_rgba(0,0,0,0.4)]">
         <div className="mx-auto max-w-[1600px]">
           <div
             className="flex flex-col gap-2 border-b border-[rgba(255,255,255,0.06)] px-4 py-2.5 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-3 md:px-6"
@@ -351,8 +351,8 @@ export function CategoryExploreClient({ cat, categories, items }: Props) {
                       className={cn(
                         "h-9 rounded-lg border px-2.5 text-xs font-medium transition",
                         on
-                          ? "border-[rgba(255,122,0,0.35)] bg-[rgba(255,122,0,0.1)] text-[#FF7A00]"
-                          : "border-[rgba(255,255,255,0.08)] bg-[#11131A] text-[#A0A6B1] hover:border-[rgba(255,255,255,0.12)] hover:text-white",
+                          ? "border-primary/35 bg-[#292929] text-primary"
+                          : "border-white/[0.09] bg-[#292929] text-[#A0A6B1] hover:border-primary/25 hover:text-white",
                       )}
                     >
                       {f.label}
@@ -431,7 +431,7 @@ export function CategoryExploreClient({ cat, categories, items }: Props) {
 
       <div className="mx-auto max-w-[1600px] px-4 py-4 md:px-6 md:py-5">
         <div className="mb-3 flex flex-wrap items-center gap-1.5 text-[11px] text-[#6B7280]">
-          <Link href="/categories" className="hover:text-[#FF7A00]">
+          <Link href="/categories" className="hover:text-primary">
             Categories
           </Link>
           <span className="text-[#3d424c]">/</span>
@@ -459,10 +459,10 @@ export function CategoryExploreClient({ cat, categories, items }: Props) {
               id="top-picks-heading"
               className="mb-2 flex items-center gap-2 text-sm font-semibold text-white"
             >
-              <Flame className="h-4 w-4 text-[#FF7A00]" aria-hidden />
+              <Flame className="h-4 w-4 text-primary" aria-hidden />
               Top picks in {cat.label}
             </h2>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {topPicks.map((l) => (
                 <TopPickCard key={l.id} listing={l} />
               ))}

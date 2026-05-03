@@ -4,9 +4,9 @@
 
 :root {
     /* Backgrounds */
-    --bg-main: #0A0B10;
-    --bg-card: #11131A;
-    --bg-elevated: #161922;
+    --bg-main: #1A1A1A;
+    --bg-card: #292929;
+    --bg-elevated: #323232;
   
     /* Borders */
     --border-subtle: rgba(255, 255, 255, 0.06);
@@ -17,13 +17,14 @@
     --text-secondary: #A0A6B1;
     --text-muted: #6B7280;
   
-    /* Brand — primary CTA (red), highlight (orange), secondary (purple) */
-    --accent-primary: #FF2D55;
+    /* Brand — primary red (CTAs, ambient glow); orange = Trending / highlight accents only */
+    --accent-primary: #C90009;
     --accent-highlight: #FF7A00;
     --accent-secondary: #7C5CFF;
 
-    /* Effects */
-    --glow-red: 0 0 20px rgba(255, 45, 85, 0.35);
+    /* Effects — hero / buttons use red glow; orange glow reserved for trending-style badges */
+    --glow-red: 0 0 20px rgba(201, 0, 9, 0.35);
+    --glow-brand: var(--glow-red);
     --glow-orange: 0 0 20px rgba(255, 122, 0, 0.35);
     --glow-purple: 0 0 20px rgba(124, 92, 255, 0.35);
   
@@ -168,6 +169,10 @@
   
   .glow-red {
     box-shadow: var(--glow-red);
+  }
+
+  .glow-brand {
+    box-shadow: var(--glow-brand);
   }
 
   .glow-orange {

@@ -279,7 +279,7 @@ export function CategoriesMegaMenuPanel({
                     {
                       "--mega-glow": tile.accentRgb
                         ? `rgba(${tile.accentRgb},0.42)`
-                        : "rgba(255,45,85,0.38)",
+                        : "rgba(201,0,9,0.38)",
                     } as CSSProperties
                   }
                   onClick={closeMega}

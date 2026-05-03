@@ -71,7 +71,7 @@ export function SpinToPick({ pool }: { pool: Listing[] }) {
           if (open) setOpen(false);
           else run();
         }}
-        className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#0A0B10]/95 px-3 py-1.5 text-[11px] font-semibold text-slate-200 shadow-md backdrop-blur-sm transition hover:border-[#FF7A00]/40 hover:text-white disabled:opacity-40"
+        className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#1A1A1A]/95 px-3 py-1.5 text-[11px] font-semibold text-slate-200 shadow-md backdrop-blur-sm transition hover:border-[#FF7A00]/40 hover:text-white disabled:opacity-40"
       >
         <span
           className="h-2.5 w-2.5 shrink-0 rounded-full border-2 border-dashed border-[#FF7A00]"

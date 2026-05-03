@@ -11,7 +11,7 @@ const variants: Record<Variant, string> = {
   ghost:
     "bg-transparent text-slate-200 hover:bg-card-hover hover:text-white",
   outline:
-    "border border-white/10 bg-card/40 text-slate-100 hover:border-primary/40 hover:text-white",
+    "border border-white bg-transparent font-semibold text-white hover:bg-white hover:text-black active:scale-[0.98]",
 };
 
 export function Button({
@@ -27,7 +27,7 @@ export function Button({
     <button
       type="button"
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm transition-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm transition-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-50",
         variants[variant],
         className,
       )}

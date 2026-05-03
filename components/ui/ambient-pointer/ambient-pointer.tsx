@@ -1,8 +1,7 @@
 "use client";
 
 /**
- * Orange cursor halo + hover ping. Client-only (see root `dynamic(..., { ssr: false })`) so
- * `document`/`window` are always available — no `mounted` gating or `return null` for hydration.
+ * Subtle brand-red cursor ring (low-opacity fill + stroke, no box-shadow). Client-only — see root `dynamic(..., { ssr: false })`.
  * When pointer mode is off, the node stays in the tree with opacity 0.
  */
 
@@ -206,10 +205,10 @@ export function AmbientPointer() {
   return createPortal(
     <div
       ref={dotRef}
-      className="pointer-events-none fixed left-0 top-0 z-[9998] h-12 w-12 rounded-full border-2 border-[#FF7A00]/55 bg-[#FF7A00]/[0.22] shadow-[0_0_32px_-4px_rgba(255,122,0,0.45)] will-change-transform"
+      className="pointer-events-none fixed left-0 top-0 z-[9998] h-12 w-12 rounded-full border border-primary/35 bg-primary/[0.07] will-change-transform [box-shadow:none]"
       style={{
         pointerEvents: "none",
-        opacity: active ? 1 : 0,
+        opacity: active ? 0.5 : 0,
         visibility: active ? "visible" : "hidden",
       }}
       aria-hidden

@@ -12,7 +12,6 @@ const KEY_TAGS: Record<string, string> = {
   "fan-subscription-platforms::fanspicy": "Adult-friendly",
   "fan-subscription-platforms::fanvue": "AI tools",
   "amateur::manyvids": "Marketplace",
-  "amateur::fansly": "Creator",
   "amateur::fancentro": "Creator",
   "amateur::loyalfans": "Independent",
   "amateur::clips4sale": "Clips",

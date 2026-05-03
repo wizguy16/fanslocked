@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import {
   getListingBySlug,
@@ -13,7 +12,6 @@ import { clampTagline, cn } from "@/lib/utils";
 import { getHeroCTA } from "@/lib/get-hero-cta";
 import { ListingLogo } from "@/components/shared/listing-logo";
 import { getUserSnapshotContent } from "@/lib/listing-user-snapshot";
-import { resolveAffiliateDestination } from "@/lib/get-affiliate-link";
 import {
   ArrowRight,
   CheckCircle,
@@ -55,7 +53,7 @@ function SiteJsonLd({
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: listing.name,
-    url: listing.website_url,
+    url: `${base}${listing.affiliate_url}`,
     description: clampTagline(listing.review, 240),
     publisher: {
       "@type": "Organization",
@@ -143,7 +141,6 @@ function SnapshotBullets({
 export default function SitePage({ params }: Props) {
   const listing = getListingBySlug(params.slug);
   if (!listing) notFound();
-  const cookieHeader = headers().get("cookie");
   const similar = getSimilar(listing, 12);
   const heroCta = getHeroCTA(`/site/${listing.slug}`, {
     siteUrl: listing.affiliate_url,
@@ -167,7 +164,7 @@ export default function SitePage({ params }: Props) {
 
           {/* Hero */}
           <section className="mb-16 mt-6 grid items-center gap-6 md:mb-20 md:grid-cols-12 md:gap-6">
-            <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-[#2c2c2e] bg-[#121212] p-8 md:col-span-4 md:p-12">
+            <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-none border border-[#2c2c2e] bg-[#292929] p-8 md:col-span-4 md:p-12">
               <ListingLogo
                 listing={listing}
                 fit="contain"
@@ -193,25 +190,21 @@ export default function SitePage({ params }: Props) {
               <div className="mt-2 flex flex-wrap gap-4">
                 <AffiliateLink
                   href={listing.affiliate_url}
-                  className="flex items-center gap-2 rounded-lg bg-[#ff2d55] px-8 py-4 text-sm font-bold text-white shadow-xl shadow-[#ff2d55]/30 transition hover:scale-[1.02] active:scale-95"
+                  className="flex items-center gap-2 rounded-none bg-[#ff2d55] px-8 py-4 text-sm font-bold text-white shadow-xl shadow-[#ff2d55]/30 transition hover:scale-[1.02] active:scale-95"
                 >
                   Visit Platform
                   <ExternalLink className="h-4 w-4" aria-hidden />
                 </AffiliateLink>
-                <a
-                  href={
-                    resolveAffiliateDestination(listing.slug, cookieHeader)?.trim() ||
-                    listing.website_url
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg border border-[#2c2c2e] px-8 py-4 text-sm font-bold text-white transition hover:bg-white/5 active:scale-95"
+                <Link
+                  href={listing.affiliate_url}
+                  rel="sponsored noreferrer"
+                  className="rounded-none border border-[#2c2c2e] px-8 py-4 text-sm font-bold text-white transition hover:bg-white/5 active:scale-95"
                 >
                   Official Website
-                </a>
+                </Link>
                 <Link
                   href={`/categories/${listing.categorySlug}`}
-                  className="rounded-lg border border-[#2c2c2e] px-8 py-4 text-sm font-bold text-[#e2e2e9]/60 transition hover:text-white"
+                  className="rounded-none border border-[#2c2c2e] px-8 py-4 text-sm font-bold text-[#e2e2e9]/60 transition hover:text-white"
                 >
                   {listing.categoryLabel}
                 </Link>
@@ -232,7 +225,7 @@ export default function SitePage({ params }: Props) {
               </div>
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6">
-                <div className="rounded-xl border border-[#2c2c2e] bg-[#121212] p-6">
+                <div className="rounded-none border border-[#2c2c2e] bg-[#292929] p-6">
                   <div className="mb-6 flex items-center gap-2">
                     <CheckCircle className="h-6 w-6 text-green-500" aria-hidden />
                     <h3 className="font-display text-2xl font-semibold text-white">
@@ -248,7 +241,7 @@ export default function SitePage({ params }: Props) {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-[#2c2c2e] bg-[#121212] p-6">
+                <div className="rounded-none border border-[#2c2c2e] bg-[#292929] p-6">
                   <div className="mb-6 flex items-center gap-2">
                     <XCircle className="h-6 w-6 text-red-500" aria-hidden />
                     <h3 className="font-display text-2xl font-semibold text-white">
@@ -268,7 +261,7 @@ export default function SitePage({ params }: Props) {
             </div>
 
             <div className="md:col-span-5">
-              <div className="sticky top-28 rounded-xl border border-[#2c2c2e] bg-[#121212] p-8">
+              <div className="sticky top-28 rounded-none border border-[#2c2c2e] bg-[#292929] p-8">
                 <h3 className="mb-6 font-display text-2xl font-semibold text-white">
                   User Snapshot
                 </h3>
@@ -312,7 +305,7 @@ export default function SitePage({ params }: Props) {
                 <div className="mt-8">
                   <AffiliateLink
                     href={listing.affiliate_url}
-                    className="w-full justify-center rounded-lg bg-[#ff2d55] py-4 text-sm font-bold text-white shadow-lg shadow-[#ff2d55]/20 transition hover:scale-[1.01] active:scale-[0.98]"
+                    className="w-full justify-center rounded-none bg-[#ff2d55] py-4 text-sm font-bold text-white shadow-lg shadow-[#ff2d55]/20 transition hover:scale-[1.01] active:scale-[0.98]"
                   >
                     Visit Platform
                   </AffiliateLink>
@@ -345,13 +338,13 @@ export default function SitePage({ params }: Props) {
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-5">
                 {similarShowcase.map((l) => {
                   const img = l.screenshot || l.image || l.logo;
                   return (
                     <div
                       key={l.slug}
-                      className="group overflow-hidden rounded-xl border border-[#2c2c2e] bg-[#121212] transition-all duration-300 hover:border-[#ff2d55]/50"
+                      className="group overflow-hidden rounded-none border border-[#2c2c2e] bg-[#292929] transition-all duration-300 hover:border-[#ff2d55]/50"
                     >
                       <div className="h-48 overflow-hidden bg-[#1c1c1e]">
                         {/* eslint-disable-next-line @next/next/no-img-element -- remote listing art */}
@@ -375,7 +368,7 @@ export default function SitePage({ params }: Props) {
                         </p>
                         <AffiliateLink
                           href={l.affiliate_url}
-                          className="w-full justify-center rounded-lg border border-[#2c2c2e] bg-transparent py-3 text-sm font-bold text-white shadow-none transition-all hover:border-[#ff2d55] hover:bg-[#ff2d55] hover:text-white"
+                          className="w-full justify-center rounded-none border border-[#2c2c2e] bg-transparent py-3 text-sm font-bold text-white shadow-none transition-all hover:border-[#ff2d55] hover:bg-[#ff2d55] hover:text-white"
                         >
                           Visit Platform
                         </AffiliateLink>
@@ -395,14 +388,14 @@ export default function SitePage({ params }: Props) {
               >
                 More in this category
               </h2>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {restSimilar.map((l) => (
                   <div
                     key={l.id}
-                    className="group rounded-xl border border-[#2c2c2e] bg-[#121212] p-3 transition-all duration-300 hover:border-[#ff2d55]/50"
+                    className="group rounded-none border border-[#2c2c2e] bg-[#292929] p-3 transition-all duration-300 hover:border-[#ff2d55]/50"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="relative isolate h-11 w-11 shrink-0 overflow-hidden rounded-md border border-[#2c2c2e] bg-[#1c1c1e]">
+                      <div className="relative isolate h-11 w-11 shrink-0 overflow-hidden rounded-none border border-[#2c2c2e] bg-[#1c1c1e]">
                         <ListingLogo listing={l} fit="cover" />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -421,7 +414,7 @@ export default function SitePage({ params }: Props) {
                     </div>
                     <AffiliateLink
                       href={l.affiliate_url}
-                      className="mt-3 h-9 w-full justify-center rounded-lg border border-[#2c2c2e] bg-transparent px-3 text-xs font-bold text-white shadow-none transition-all hover:border-[#ff2d55] hover:bg-[#ff2d55] hover:text-white"
+                      className="mt-3 h-9 w-full justify-center rounded-none border border-[#2c2c2e] bg-transparent px-3 text-xs font-bold text-white shadow-none transition-all hover:border-[#ff2d55] hover:bg-[#ff2d55] hover:text-white"
                     >
                       Visit Platform
                     </AffiliateLink>

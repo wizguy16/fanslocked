@@ -40,7 +40,7 @@ export function CategoryDirectorySpotlight({
   return (
     <article
       className={cn(
-        "flex h-full flex-col overflow-hidden rounded-lg border border-white/[0.09] bg-gradient-to-b from-slate-900/90 to-[#0a0b10]",
+        "flex h-full flex-col overflow-hidden rounded-lg border border-white/[0.09] bg-gradient-to-b from-slate-900/90 to-[#1A1A1A]",
         "shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition hover:border-sky-500/25",
       )}
     >

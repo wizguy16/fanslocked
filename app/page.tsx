@@ -9,7 +9,7 @@ export default function Home() {
       <Suspense
         fallback={
           <div
-            className="min-h-[100dvh] bg-[#0A0B10]"
+            className="min-h-[100dvh] bg-[#1A1A1A]"
             aria-hidden
           />
         }

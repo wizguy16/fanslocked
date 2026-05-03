@@ -51,7 +51,7 @@ export function AgeGate() {
     <AnimatePresence>
       {open ? (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#050508]/95 p-4 backdrop-blur-xl"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-background/95 p-4 backdrop-blur-md"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -65,9 +65,9 @@ export function AgeGate() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.98, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
-            className="max-w-lg rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_0_80px_-20px_rgba(255,122,0,0.28)] sm:p-8"
+            className="max-w-lg rounded-2xl border border-white/[0.06] bg-card p-6 shadow-soft sm:p-8"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#FF7A00]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-highlight">
               Adults only (18+)
             </p>
             <h2
@@ -95,14 +95,14 @@ export function AgeGate() {
               <button
                 type="button"
                 onClick={exit}
-                className="rounded-2xl border border-white/10 px-4 py-2.5 text-sm font-medium text-slate-300 transition hover:border-white/20 hover:text-white"
+                className="rounded-xl border border-white/[0.08] bg-card-alt/50 px-4 py-2.5 text-sm font-medium text-slate-300 transition hover:border-white/15 hover:bg-card-hover hover:text-white"
               >
                 I am under 18 — Exit
               </button>
               <button
                 type="button"
                 onClick={confirm}
-                className="rounded-2xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_-6px_rgba(255,45,85,0.5)] transition hover:brightness-110 active:scale-[0.98]"
+                className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft transition hover:bg-primary/90 active:scale-[0.98]"
               >
                 I am 18 or older — Enter
               </button>

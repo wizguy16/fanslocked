@@ -58,16 +58,6 @@ export const AMATEUR_FEATURED: CuratedAmateurRow[] = [
       "Well-established clip platform known for niche categories and consistent creator uploads. Easy to browse and discover specific interests.",
   },
   {
-    name: "Fansly",
-    slug: "fansly",
-    website: "https://fansly.com",
-    payout: "High",
-    difficulty: "Easy",
-    type: "subscription",
-    preview:
-      "Fansly allows creators to monetize amateur content through subscriptions, messages, and exclusive uploads.",
-  },
-  {
     name: "FanCentro",
     slug: "fancentro",
     website: "https://www.fancentro.com",

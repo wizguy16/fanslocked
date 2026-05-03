@@ -11,6 +11,7 @@ import {
 } from "@/components/layout/categories-mega-menu";
 import { cn } from "@/lib/utils";
 import SiteSearch from "@/components/search/site-search";
+import { FansLockedLogoLink } from "@/components/branding/fanslocked-logo-link";
 
 export type NavbarListingThumb = MegaMenuListingThumb;
 
@@ -63,18 +64,7 @@ export function NavbarClient({
         aria-hidden
       />
       <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-1.5 sm:gap-3 sm:px-4 md:px-6">
-        <Link
-          href="/"
-          className="flex shrink-0 items-center gap-2 font-semibold tracking-tight text-white transition hover:text-[#00bcd4]"
-        >
-          <span
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#00bcd4] text-xs font-bold text-[#0a0b10]"
-            aria-hidden
-          >
-            FL
-          </span>
-          <span className="text-sm sm:text-base">FansLocked</span>
-        </Link>
+        <FansLockedLogoLink className="shrink-0 text-sm sm:text-[15px]" />
 
         <div className="mx-auto hidden min-w-0 max-w-md flex-1 px-1 md:block">
           <SiteSearch listings={searchListings} className="max-w-none" />

@@ -39,7 +39,7 @@ export function SectionHeader({
           <p className="mt-5">
             <Link
               href={viewAllHref}
-              className="text-sm font-medium text-[#FF7A00] transition hover:text-[#FFA04D]"
+              className="text-sm font-medium text-primary transition hover:text-primary/85"
             >
               {viewAllLabel} <span aria-hidden>→</span>
             </Link>
@@ -69,7 +69,7 @@ export function SectionHeader({
       {viewAllHref ? (
         <Link
           href={viewAllHref}
-          className="shrink-0 text-sm font-medium text-[#6B7280] transition hover:text-[#FF7A00]"
+          className="shrink-0 text-sm font-medium text-[#6B7280] transition hover:text-primary"
         >
           {viewAllLabel} <span aria-hidden>→</span>
         </Link>

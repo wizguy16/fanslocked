@@ -61,7 +61,7 @@ export function HomePageClient({
             {listings.length}+ listings ·{" "}
             <a
               href="/explore"
-              className="font-medium text-[#FF7A00]/90 hover:text-[#ff9333]"
+              className="font-medium text-primary/90 hover:text-primary"
             >
               Full index
             </a>{" "}

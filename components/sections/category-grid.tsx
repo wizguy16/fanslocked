@@ -23,17 +23,17 @@ export function CategoryGrid() {
           </h2>
           <Link
             href="/categories"
-            className="text-[10px] font-medium text-[#FF7A00]/90 hover:text-[#ff9333]"
+            className="text-[10px] font-medium text-primary/90 hover:text-primary"
           >
             All →
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {CATEGORIES.map((c) => (
             <Link
               key={c.slug}
               href={`/categories/${c.slug}`}
-              className="group flex h-[100px] max-h-[100px] flex-col justify-between overflow-hidden rounded-md border border-white/[0.08] bg-[#12131a] p-1.5 transition hover:border-[#FF7A00]/35 hover:bg-[#16171f]"
+              className="group flex h-[100px] max-h-[100px] flex-col justify-between overflow-hidden rounded-none border border-white/[0.09] bg-[#292929] p-1.5 transition-colors hover:border-primary/35"
             >
               <div className="flex items-start justify-between gap-1">
                 <span
