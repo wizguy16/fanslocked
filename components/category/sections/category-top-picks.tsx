@@ -183,7 +183,7 @@ export function CategoryTopPicks({ categorySlug, items, rankOffset, blurbs }: Pr
 
                     <p className="max-w-lg text-sm text-neutral-400">
                       Try a specialized platform with faster access and more focused content.
-                      Best when you already know what you're looking for.
+                      Best when you already know what you&apos;re looking for.
                     </p>
                   </div>
 
